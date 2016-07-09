@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // FIREBASE STARTUP
+        FIRApp.configure()
+        
+        let e = Event(name: "First iOS event", description: "This is an iOS-generated event",
+                      creatorID: "1196215920412322", startTime: 69, endTime: 420)
+        e.pushToFirebase();
+        
         return true
     }
 
