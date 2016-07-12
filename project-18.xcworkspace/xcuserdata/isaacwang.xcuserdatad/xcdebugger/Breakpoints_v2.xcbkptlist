@@ -6,7 +6,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "project-18/User.swift"
@@ -17,12 +17,44 @@
             endingLineNumber = "10"
             landmarkName = "User"
             landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "project_18.User.__deallocating_deinit"
+                  moduleName = "project-18"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/isaacwang/Desktop/STAZO_iOS/project-18/project-18/User.swift"
+                  timestampString = "490054632.76355"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "project_18.User.deinit"
+                  moduleName = "project-18"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/isaacwang/Desktop/STAZO_iOS/project-18/project-18/User.swift"
+                  timestampString = "490054632.763819"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "4">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "project-18/User.swift"
@@ -33,12 +65,44 @@
             endingLineNumber = "15"
             landmarkName = "User"
             landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "project_18.User.init (userID : Swift.String, userName : Swift.String) -&gt; project_18.User"
+                  moduleName = "project-18"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/isaacwang/Desktop/STAZO_iOS/project-18/project-18/User.swift"
+                  timestampString = "490054424.973658"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "154">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "project_18.User.DEFAULT_BIO.getter : Swift.String"
+                  moduleName = "project-18"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/isaacwang/Desktop/STAZO_iOS/project-18/project-18/User.swift"
+                  timestampString = "490054424.974057"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "41">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "project-18/User.swift"
@@ -49,6 +113,69 @@
             endingLineNumber = "19"
             landmarkName = "User"
             landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "project_18.User.init (userID : Swift.String, userName : Swift.String) -&gt; project_18.User"
+                  moduleName = "project-18"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/isaacwang/Desktop/STAZO_iOS/project-18/project-18/User.swift"
+                  timestampString = "490054567.511615"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "307">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "project_18.User.userName.getter : Swift.Optional&lt;Swift.String&gt;"
+                  moduleName = "project-18"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/isaacwang/Desktop/STAZO_iOS/project-18/project-18/User.swift"
+                  timestampString = "490054567.51197"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "70">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "project_18.User.userName.setter : Swift.Optional&lt;Swift.String&gt;"
+                  moduleName = "project-18"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/isaacwang/Desktop/STAZO_iOS/project-18/project-18/User.swift"
+                  timestampString = "490054567.512141"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "158">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "project-18/User.swift"
+            timestampString = "490055965.228855"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "init(userDict:)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
