@@ -18,6 +18,8 @@
 		288EF16F1D3050C9001FBE63 /* project_18UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288EF16E1D3050C9001FBE63 /* project_18UITests.swift */; };
 		288EF17D1D305B4F001FBE63 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288EF17C1D305B4F001FBE63 /* Event.swift */; };
 		288EF17F1D306FF5001FBE63 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 288EF17E1D306FF5001FBE63 /* GoogleService-Info.plist */; };
+		28A542F41D344CB600BE90E0 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A542F31D344CB600BE90E0 /* Globals.swift */; };
+		28A542F61D3455E600BE90E0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A542F51D3455E600BE90E0 /* User.swift */; };
 		BAFD470730C7EC4C8483A9A6 /* Pods_project_18.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63E2A126951744DF6EEF42C7 /* Pods_project_18.framework */; };
 		E4335D284C29DFE8F42F1501 /* Pods_project_18Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92CD78F47B1A3330F98C392D /* Pods_project_18Tests.framework */; };
 /* End PBXBuildFile section */
@@ -59,6 +61,8 @@
 		288EF1701D3050C9001FBE63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		288EF17C1D305B4F001FBE63 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		288EF17E1D306FF5001FBE63 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		28A542F31D344CB600BE90E0 /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
+		28A542F51D3455E600BE90E0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		3B28B73C796451B5DFA2AD62 /* Pods_project_18UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_project_18UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		602A1B38D6BA55985B35BF5B /* Pods-project-18.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-project-18.debug.xcconfig"; path = "Pods/Target Support Files/Pods-project-18/Pods-project-18.debug.xcconfig"; sourceTree = "<group>"; };
 		63E2A126951744DF6EEF42C7 /* Pods_project_18.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_project_18.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				288EF14C1D3050C9001FBE63 /* AppDelegate.swift */,
+				28A542F31D344CB600BE90E0 /* Globals.swift */,
 				288EF14E1D3050C9001FBE63 /* FirstViewController.swift */,
 				288EF1501D3050C9001FBE63 /* SecondViewController.swift */,
 				288EF1521D3050C9001FBE63 /* Main.storyboard */,
@@ -128,6 +133,7 @@
 				288EF1571D3050C9001FBE63 /* LaunchScreen.storyboard */,
 				288EF15A1D3050C9001FBE63 /* Info.plist */,
 				288EF17C1D305B4F001FBE63 /* Event.swift */,
+				28A542F51D3455E600BE90E0 /* User.swift */,
 				288EF17E1D306FF5001FBE63 /* GoogleService-Info.plist */,
 			);
 			path = "project-18";
@@ -439,7 +445,9 @@
 			files = (
 				288EF17D1D305B4F001FBE63 /* Event.swift in Sources */,
 				288EF1511D3050C9001FBE63 /* SecondViewController.swift in Sources */,
+				28A542F61D3455E600BE90E0 /* User.swift in Sources */,
 				288EF14D1D3050C9001FBE63 /* AppDelegate.swift in Sources */,
+				28A542F41D344CB600BE90E0 /* Globals.swift in Sources */,
 				288EF14F1D3050C9001FBE63 /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

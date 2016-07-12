@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,9 +22,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // FIREBASE STARTUP
         FIRApp.configure()
         
+        
+        // TESTING
         let e = Event(name: "First iOS event", description: "This is an iOS-generated event",
                       creatorID: "1196215920412322", startTime: 69, endTime: 420)
-        e.pushToFirebase();
+        //e.pushToFirebase();
+        e.toString()
+        
+        Globals.fb.child("Events").child("yooDOUXCTVRGU").observeEventType(FIRDataEventType.Value, withBlock: { (snapshot) in
+            let eventDict:NSDictionary = snapshot.value as! [String : AnyObject]
+            let pulledEvent:Event = Event(eventDict: eventDict)
+            pulledEvent.toString()
+        })
         
         return true
     }
