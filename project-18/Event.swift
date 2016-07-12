@@ -7,14 +7,12 @@
 //
 
 import Foundation
-import Firebase
-import FirebaseDatabase
 
 
 class Event {
     
     // Constants
-    let fb = FIRDatabase.database().reference()    // Reference to the database
+    let fb = Globals.fb
     let EVENT_ID_LEN : Int = 10;                    // Length of an Event ID
     
     // Variables
@@ -49,8 +47,22 @@ class Event {
         self.endTime = endTime
     }
     
+    // FIREBASE PULL CONSTRUCTOR
+    // - Takes in a json object (snapshot) and constructs
+    //   an event out of it.
+    // - TODO add in location
+    init(eventDict: NSDictionary) {
+        self.name = eventDict.valueForKey("name") as! String?
+        self.description = eventDict.valueForKey("description") as! String?
+        self.creatorID = eventDict.valueForKey("creator_id") as! String?
+        self.endTime = (eventDict.valueForKey("endTime") as! NSNumber).unsignedLongLongValue
+        self.eventID = eventDict.valueForKey("event_id") as! String?
+        self.popularity = eventDict.valueForKey("popularity") as! UInt
+        self.reports = eventDict.valueForKey("reports") as! UInt
+        self.startTime = (eventDict.valueForKey("startTime") as! NSNumber).unsignedLongLongValue
+    }
+    
     // TODO location constructor
-    // TODO Firebase-pull constructor
     
     // PUSH TO FIREBASE
     // - Finalizes the event by setting the ID and pushes it to Firebase
@@ -70,6 +82,7 @@ class Event {
     
     // CONVERT TO DICTIONARY
     // - Helper function for pushToFirebase, converts event into dictionary
+    // - TODO add in location
     func convertToDictionary() -> NSDictionary {
         return [
         "name" : name!,
@@ -115,6 +128,13 @@ class Event {
     
     // TODO getAddress
     
+    
+    // TOSTRING METHOD
+    // - Just for checking that the event has the right info
+    func toString() {
+        print(name, "\n", description, "\n", creatorID, "\n", endTime, "\n",
+              eventID, "\n", popularity, "\n", reports, "\n", startTime)
+    }
     
     
     
