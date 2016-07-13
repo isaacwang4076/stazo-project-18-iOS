@@ -85,7 +85,7 @@ class User {
         // Update database
         fb.child("Users").child(userID!).child("userTrails").setValue(userTrails)
         
-        // addToFollowers(newTrail, userID)
+        addToFollowers(newTrail, givingFollowID: userID!)
         
         // TODO NotificationNewFollow
         
@@ -108,7 +108,7 @@ class User {
             // Update Databse
             fb.child("Users").child(userID!).child("userTrails").setValue(userTrails)
             
-            // removeFromFollowers(removeTrail, userID)
+            removeFromFollowers(removeTrail, givingFollowID: userID!)
             
             // Trail successfully removed
             print("\nremoveTrail in User: successfully removed trail ", removeTrail)
@@ -118,6 +118,13 @@ class User {
             print("\nremoveTrail in User: userTrails does not contain ", removeTrail)
             return false
         }
+    }
+    
+    func addToFollowers(receivingFollowID: String, givingFollowID: String) {
+        fb.child("Users").child(receivingFollowID).child("userFollowers").child(givingFollowID).setValue(true)
+    }
+    func removeFromFollowers(receivingFollowID: String, givingFollowID: String) {
+        fb.child("Users").child(receivingFollowID).child("userFollowers").child(givingFollowID).setValue(nil)
     }
     
     // TOSTRING METHOD
