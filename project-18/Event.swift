@@ -60,6 +60,7 @@ class Event {
         self.popularity = eventDict.valueForKey("popularity") as! UInt
         self.reports = eventDict.valueForKey("reports") as! UInt
         self.startTime = (eventDict.valueForKey("startTime") as! NSNumber).unsignedLongLongValue
+        self.attendees = (eventDict.valueForKey("attendees") as! NSDictionary).allValues as? [String]
     }
     
     // TODO location constructor
@@ -132,8 +133,10 @@ class Event {
     // TOSTRING METHOD
     // - Just for checking that the event has the right info
     func toString() {
-        print(name, "\n", description, "\n", creatorID, "\n", endTime, "\n",
-              eventID, "\n", popularity, "\n", reports, "\n", startTime)
+        print("\nEvent toString()\n\nname is: ", name, "\ndescription is: ", description, "\ncreatorID is: ", creatorID,
+              "\nendTime is: ", endTime, "\neventID is: ", eventID, "\npopularity is: ",
+              popularity, "\nreports is: ", reports, "\nstartTime is: ", startTime, "\nattendees is: ",
+              attendees)
     }
     
     

@@ -22,17 +22,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // FIREBASE STARTUP
         FIRApp.configure()
         
-        
-        // TESTING
-        let e = Event(name: "First iOS event", description: "This is an iOS-generated event",
-                      creatorID: "1196215920412322", startTime: 69, endTime: 420) //eric approves
+        // TEST EVENT PUSH
+        //let e = Event(name: "First iOS event", description: "This is an iOS-generated event",
+                      //creatorID: "1196215920412322", startTime: 69, endTime: 420)
         //e.pushToFirebase();
-        e.toString()
         
-        Globals.fb.child("Events").child("yooDOUXCTVRGU").observeEventType(FIRDataEventType.Value, withBlock: { (snapshot) in
+        // TEST EVENT PULL
+        Globals.fb.child("Events").child("yooUPKNKMOWSR").observeEventType(FIRDataEventType.Value, withBlock: { (snapshot) in
             let eventDict:NSDictionary = snapshot.value as! [String : AnyObject]
             let pulledEvent:Event = Event(eventDict: eventDict)
             pulledEvent.toString()
+        })
+        
+        // TEST USER PUSH
+        //let u = User(userID: "123", userName: "Test")
+        //u.pushToFirebase()
+        
+        // TEST USER PULL
+        Globals.fb.child("Users").child("1196215920412322").observeEventType(FIRDataEventType.Value, withBlock: { (snapshot) in
+            let userDict:NSDictionary = snapshot.value as! [String : AnyObject]
+            let pulledUser:User = User(userDict: userDict)
+            pulledUser.toString()
         })
         
         return true
