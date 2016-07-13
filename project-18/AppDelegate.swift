@@ -44,7 +44,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let userDict:NSDictionary = snapshot.value as! [String : AnyObject]
             let pulledUser:User = User(userDict: userDict)
             pulledUser.toString()
-            pulledUser.removeTrail("abc")
+            
+            // TEST USER ADD/REMOVE TRAIL
+            pulledUser.addTrail("abc")
+            //pulledUser.removeTrail("abc")
         })
         
         return true

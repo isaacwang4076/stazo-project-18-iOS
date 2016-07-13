@@ -94,7 +94,7 @@ class User {
         return true
     }
     
-    // Remove USER TRAIL
+    // REMOVE USER TRAIL
     // - Remove a userID from userTrails
     // - removeTrail -> userID of user that we are unfollowing
     // - True -> Trail was removed
@@ -120,9 +120,16 @@ class User {
         }
     }
     
+    // ADD USER FOLLOWER
+    // - Helper function for addTrail
+    // - Adds the follower's userID to the followed's userFollowers
     func addToFollowers(receivingFollowID: String, givingFollowID: String) {
         fb.child("Users").child(receivingFollowID).child("userFollowers").child(givingFollowID).setValue(true)
     }
+    
+    // REMOVE USER FOLLOWER
+    // - Helper function for removeTrail
+    // - Removes the follower's userID from the followed's userFollowers
     func removeFromFollowers(receivingFollowID: String, givingFollowID: String) {
         fb.child("Users").child(receivingFollowID).child("userFollowers").child(givingFollowID).setValue(nil)
     }
