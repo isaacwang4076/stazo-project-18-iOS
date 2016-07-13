@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import FirebaseDatabase
 
 class User {
     
@@ -141,7 +142,7 @@ class User {
     // - False -> Event was not joined (already joined)
     func attendEvent(eventID: String, eventName: String, creatorID: String) -> Bool {
         
-        // If user is already following newTrail, return false
+        // If user is already attending the event, return false
         if (attendingEvents!.contains(eventID)) {
             print("\nattendEvent in User: already attending event with ID ", eventID)
             return false
@@ -170,9 +171,68 @@ class User {
         
         // TODO NotificationJoinedEvent
         
-        // Trail successfully added
+        // Event successfully attended
         print("\nattendEvent in User: now attending event with ID ", eventID)
+        return true;
+    }
+    
+    // UNATTEND EVENT
+    // - Handles a user "un-joining" an event
+    // - True -> Event was unjoined
+    // - False -> Event was not unjoined (not joined to begin with)
+    func unattendEvent(eventID: String) -> Bool {
         
+        // If user is already attending the event, return false
+        if (attendingEvents!.contains(eventID) == false) {
+            print("\nunattendEvent in User: not yet attending event with ID ", eventID)
+            return false
+        }
+        
+        // ---- Update Event Information ------------------------------------------------------
+        
+        // Remove the user's userID from attendees on the database
+        
+        // Listener for event's attendees snapshot
+        fb.child("Events").child(eventID).child("attendees").observeSingleEventOfType(FIRDataEventType.Value, withBlock: { (snapshot) in
+            
+            for attendeeSnapshot in snapshot.children {
+                if attendeeSnapshot.value == self.userID! {
+                    attendeeSnapshot.ref.setValue(nil)
+                    break
+                }
+            }
+            
+            })
+
+        
+        // TODO popularity increment
+        
+        // ------------------------------------------------------------------------------------
+        
+        
+        
+        // ---- Update User Information -------------------------------------------------------
+        
+        // Remove the eventID from attendingEvents locally (for the current session)
+        attendingEvents?.removeAtIndex(attendingEvents!.indexOf(eventID)!)
+        
+        // Remove the eventID from attendingEvents on the database (for future sessions)
+        // Listener for user's attendingEvents snapshot
+        fb.child("Users").child(userID!).child("attendingEvents").observeSingleEventOfType(FIRDataEventType.Value, withBlock: { (snapshot) in
+            
+            for eventSnapshot in snapshot.children {
+                if eventSnapshot.value == eventID {
+                    eventSnapshot.ref.setValue(nil)
+                    break
+                }
+            }
+            
+        })
+        // ------------------------------------------------------------------------------------
+        
+        
+        // Event successfully attended
+        print("\nunattendEvent in User: no longer attending event with ID ", eventID)
         return true;
     }
     
