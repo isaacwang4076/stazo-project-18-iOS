@@ -66,6 +66,60 @@ class User {
         "userTrails": userTrails!]
     }
     
+    // ADD USER TRAIL
+    // - Add a userID to userTrails
+    // - newTrail -> userID of user that we are following
+    // - True -> Trail was added
+    // - False -> Trail was not added
+    func addTrail(newTrail: String) -> Bool {
+        
+        // If user is already following newTrail, return false
+        if (userTrails!.contains(newTrail)) {
+            print("\naddTrail in User: userTrails already contains ", newTrail)
+            return false
+        }
+        
+        // Add the trail
+        userTrails?.append(newTrail)
+        
+        // Update database
+        fb.child("Users").child(userID!).child("userTrails").setValue(userTrails)
+        
+        // addToFollowers(newTrail, userID)
+        
+        // TODO NotificationNewFollow
+        
+        // Trail successfully added
+        print("\naddTrail in User: successfully added trail ", newTrail)
+        return true
+    }
+    
+    // Remove USER TRAIL
+    // - Remove a userID from userTrails
+    // - removeTrail -> userID of user that we are unfollowing
+    // - True -> Trail was removed
+    // - False -> Trail was not removed
+    func removeTrail(removeTrail: String) -> Bool {
+        
+        if let index = userTrails!.indexOf(removeTrail) {
+            // Remove the trail
+            userTrails!.removeAtIndex(index)
+            
+            // Update Databse
+            fb.child("Users").child(userID!).child("userTrails").setValue(userTrails)
+            
+            // removeFromFollowers(removeTrail, userID)
+            
+            // Trail successfully removed
+            print("\nremoveTrail in User: successfully removed trail ", removeTrail)
+            return true
+        } else {
+            // If user is not following removeTrail, return false
+            print("\nremoveTrail in User: userTrails does not contain ", removeTrail)
+            return false
+        }
+    }
+    
     // TOSTRING METHOD
     // - Just for checking that the user has the right info
     func toString() {
