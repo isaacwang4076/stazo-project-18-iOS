@@ -319,6 +319,9 @@
                                                 <include reference="15r-pD-Ue6"/>
                                             </mask>
                                         </variation>
+                                        <connections>
+                                            <action selector="showMore:" destination="zC7-TW-ZJg" eventType="touchUpInside" id="NPE-Ic-iF5"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -580,6 +583,11 @@
                         </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="List" id="P2t-Lj-Sil"/>
+                    <connections>
+                        <outlet property="laterTableView" destination="ylA-rK-gV4" id="BUd-2N-8hK"/>
+                        <outlet property="popularTableView" destination="p1A-2l-tVd" id="tNo-2d-7JB"/>
+                        <outlet property="todayTableView" destination="YUd-EZ-SCe" id="upX-Yd-2tB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Arv-3T-bIt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

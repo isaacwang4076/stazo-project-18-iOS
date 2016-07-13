@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // TESTING
         let e = Event(name: "First iOS event", description: "This is an iOS-generated event",
-                      creatorID: "1196215920412322", startTime: 69, endTime: 420)
+                      creatorID: "1196215920412322", startTime: 69, endTime: 420) //eric approves
         //e.pushToFirebase();
         e.toString()
         

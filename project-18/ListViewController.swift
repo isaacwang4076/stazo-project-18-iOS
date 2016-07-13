@@ -11,13 +11,24 @@ import Firebase
 
 class ListViewController: UIViewController {
     
+    @IBOutlet var laterTableView: UITableView!
+    @IBOutlet var todayTableView: UITableView!
+    @IBOutlet var popularTableView: UITableView!
+    @IBAction func showMore(sender: AnyObject) {
+        NSLog("show more!");
+    }
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        let fb = FIRDatabase.database().reference();
-        fb.child("Event").observeSingleEventOfType(.Value, withBlock: {
+        
+        let fb = Globals.fb;
+        var eventArray = [Event]();
+        
+        fb.child("Events").observeSingleEventOfType(.Value, withBlock: {
             snapshot in
-            print("\(snapshot.key) -> \(snapshot.value)");
+            eventArray.append(Event.init(eventDict: snapshot.value!.dictionaryWithValuesForKeys(Globals.eventFirebaseKeys)));
+            NSLog("Loaded one event");
         });
         
         updateTableViews();

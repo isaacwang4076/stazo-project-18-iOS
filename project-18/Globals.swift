@@ -12,4 +12,5 @@ import FirebaseDatabase
 
 struct Globals {
     static let fb = FIRDatabase.database().reference()    // Reference to the database
+    static let eventFirebaseKeys = ["name", "description", "creator_id", "endTime", "event_id", "popularity", "reports", "startTime"]
 }

@@ -17,11 +17,12 @@
 		288EF1641D3050C9001FBE63 /* project_18Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288EF1631D3050C9001FBE63 /* project_18Tests.swift */; };
 		288EF16F1D3050C9001FBE63 /* project_18UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288EF16E1D3050C9001FBE63 /* project_18UITests.swift */; };
 		288EF17D1D305B4F001FBE63 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288EF17C1D305B4F001FBE63 /* Event.swift */; };
-		288EF17F1D306FF5001FBE63 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 288EF17E1D306FF5001FBE63 /* GoogleService-Info.plist */; };
 		28A542F41D344CB600BE90E0 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A542F31D344CB600BE90E0 /* Globals.swift */; };
 		28A542F61D3455E600BE90E0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A542F51D3455E600BE90E0 /* User.swift */; };
 		BAFD470730C7EC4C8483A9A6 /* Pods_project_18.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63E2A126951744DF6EEF42C7 /* Pods_project_18.framework */; };
 		E4335D284C29DFE8F42F1501 /* Pods_project_18Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92CD78F47B1A3330F98C392D /* Pods_project_18Tests.framework */; };
+		F61209F01D352E5000E5C715 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61209EF1D352E5000E5C715 /* ListViewController.swift */; };
+		F61209F21D352FE600E5C715 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F61209F11D352FE600E5C715 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +61,6 @@
 		288EF16E1D3050C9001FBE63 /* project_18UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = project_18UITests.swift; sourceTree = "<group>"; };
 		288EF1701D3050C9001FBE63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		288EF17C1D305B4F001FBE63 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
-		288EF17E1D306FF5001FBE63 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		28A542F31D344CB600BE90E0 /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		28A542F51D3455E600BE90E0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		3B28B73C796451B5DFA2AD62 /* Pods_project_18UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_project_18UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -69,6 +69,8 @@
 		6B6B6BBC099CAAFE2DC3AD55 /* Pods-project-18UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-project-18UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-project-18UITests/Pods-project-18UITests.release.xcconfig"; sourceTree = "<group>"; };
 		79DC39A9D2A3A3B040816EE4 /* Pods-project-18Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-project-18Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-project-18Tests/Pods-project-18Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		92CD78F47B1A3330F98C392D /* Pods_project_18Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_project_18Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F61209EF1D352E5000E5C715 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		F61209F11D352FE600E5C715 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,13 +130,14 @@
 				28A542F31D344CB600BE90E0 /* Globals.swift */,
 				288EF14E1D3050C9001FBE63 /* FirstViewController.swift */,
 				288EF1501D3050C9001FBE63 /* SecondViewController.swift */,
+				F61209EF1D352E5000E5C715 /* ListViewController.swift */,
 				288EF1521D3050C9001FBE63 /* Main.storyboard */,
 				288EF1551D3050C9001FBE63 /* Assets.xcassets */,
 				288EF1571D3050C9001FBE63 /* LaunchScreen.storyboard */,
 				288EF15A1D3050C9001FBE63 /* Info.plist */,
 				288EF17C1D305B4F001FBE63 /* Event.swift */,
 				28A542F51D3455E600BE90E0 /* User.swift */,
-				288EF17E1D306FF5001FBE63 /* GoogleService-Info.plist */,
+				F61209F11D352FE600E5C715 /* GoogleService-Info.plist */,
 			);
 			path = "project-18";
 			sourceTree = "<group>";
@@ -293,7 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				288EF1591D3050C9001FBE63 /* LaunchScreen.storyboard in Resources */,
-				288EF17F1D306FF5001FBE63 /* GoogleService-Info.plist in Resources */,
+				F61209F21D352FE600E5C715 /* GoogleService-Info.plist in Resources */,
 				288EF1561D3050C9001FBE63 /* Assets.xcassets in Resources */,
 				288EF1541D3050C9001FBE63 /* Main.storyboard in Resources */,
 			);
@@ -449,6 +452,7 @@
 				288EF14D1D3050C9001FBE63 /* AppDelegate.swift in Sources */,
 				28A542F41D344CB600BE90E0 /* Globals.swift in Sources */,
 				288EF14F1D3050C9001FBE63 /* FirstViewController.swift in Sources */,
+				F61209F01D352E5000E5C715 /* ListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
