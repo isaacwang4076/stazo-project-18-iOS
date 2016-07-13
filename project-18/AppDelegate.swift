@@ -40,14 +40,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //u.pushToFirebase()
         
         // TEST USER PULL
-        Globals.fb.child("Users").child("1196215920412322").observeEventType(FIRDataEventType.Value, withBlock: { (snapshot) in
+        Globals.fb.child("Users").child("1196215920412322").observeSingleEventOfType(FIRDataEventType.Value, withBlock: { (snapshot) in
             let userDict:NSDictionary = snapshot.value as! [String : AnyObject]
             let pulledUser:User = User(userDict: userDict)
             pulledUser.toString()
             
             // TEST USER ADD/REMOVE TRAIL
-            pulledUser.addTrail("abc")
+            //pulledUser.addTrail("abc")
             //pulledUser.removeTrail("abc")
+            
+            // TEST USER ATTEND/UNATTEND EVENT
+            pulledUser.attendEvent("yooDOUXCTVRGU", eventName: "pls2", creatorID: "1196215920412322")
         })
         
         return true

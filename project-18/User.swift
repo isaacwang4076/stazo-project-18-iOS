@@ -134,6 +134,48 @@ class User {
         fb.child("Users").child(receivingFollowID).child("userFollowers").child(givingFollowID).setValue(nil)
     }
     
+    
+    // ATTEND EVENT
+    // - Handles a user "joining" an event
+    // - True -> Event was joined
+    // - False -> Event was not joined (already joined)
+    func attendEvent(eventID: String, eventName: String, creatorID: String) -> Bool {
+        
+        // If user is already following newTrail, return false
+        if (attendingEvents!.contains(eventID)) {
+            print("\nattendEvent in User: already attending event with ID ", eventID)
+            return false
+        }
+        
+        // ---- Update Event Information ------------------------------------------------------
+        
+        // Add the user's userID to attendees on the database
+        fb.child("Events").child(eventID).child("attendees").childByAutoId().setValue(userID!)
+        
+        // TODO popularity increment
+        
+        // ------------------------------------------------------------------------------------
+
+        
+        
+        // ---- Update User Information -------------------------------------------------------
+        
+        // Add the eventID to attendingEvents locally (for the current session)
+        attendingEvents?.append(eventID)
+        
+        // Add the eventID to attendingEvents on the database (for future sessions)
+        fb.child("Users").child(userID!).child("attendingEvents").childByAutoId().setValue(eventID)
+        
+        // ------------------------------------------------------------------------------------
+        
+        // TODO NotificationJoinedEvent
+        
+        // Trail successfully added
+        print("\nattendEvent in User: now attending event with ID ", eventID)
+        
+        return true;
+    }
+    
     // TOSTRING METHOD
     // - Just for checking that the user has the right info
     func toString() {
