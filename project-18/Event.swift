@@ -9,11 +9,13 @@
 import Foundation
 
 
+/* Representation of an Event for the app */
+
 class Event {
     
     // Constants
-    let fb = Globals.fb
-    let EVENT_ID_LEN : Int = 10;                    // Length of an Event ID
+    let fb = Globals.fb                             // Reference to the app's database
+    let EVENT_ID_LEN : Int = 10;                    // Length of an eventID
     
     // Variables
     var name: String?           // The name of the event e.g. Bake Sale

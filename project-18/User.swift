@@ -9,22 +9,24 @@
 import Foundation
 import FirebaseDatabase
 
+/* Representation of a User of the app */
+
 class User {
     
     // Constants
-    let fb = Globals.fb
-    let DEFAULT_BIO = "This user does not have a bio."
+    let fb = Globals.fb                                 // Reference to the app's database
+    let DEFAULT_BIO = "This user does not have a bio."  // Used if the user does not have a bio
     
     // Variables
-    var userID: String?
-    var userName: String?
-    var bio: String?
-    var myEvents: [String]? = []
-    var attendingEvents: [String]? = []
-    var reportedEvents: [String]? = []
-    var userTrails: [String]? = []
-    var userFollowers: [String]? = []
-    var friends = [String: String]()
+    var userID: String?                 // Unique user identification
+    var userName: String?               // User's name
+    var bio: String?                    // User's bio
+    var myEvents: [String]? = []        // A list of eventID's that this user has created
+    var attendingEvents: [String]? = [] // A list of eventID's that this user has joined
+    var reportedEvents: [String]? = []  // A list of eventID's that this user has reported
+    var userTrails: [String]? = []      // A list of userID's that this user has followed
+    var userFollowers: [String]? = []   // A list of userID's that are following this user
+    var friends = [String: String]()    // A Hashmap of userName to userID for this user's fb friends
     
     
     // BASIC CONSTRUCTOR
@@ -243,5 +245,10 @@ class User {
               "\nuserID is : ", userID, "\nmyEvents is: ",
               myEvents, "\nuserFollowers is : ", userFollowers, "\nuserTrails is : ", userTrails)
     }
+    
+    // TODO
+    // - Getters and setters
+    // - Facebook friend handling
+    // - Bio filtering
     
 }

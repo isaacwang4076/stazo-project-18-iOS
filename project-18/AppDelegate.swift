@@ -50,8 +50,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //pulledUser.removeTrail("abc")
             
             // TEST USER ATTEND/UNATTEND EVENT
-            //pulledUser.attendEvent("yooDOUXCTVRGU", eventName: "pls2", creatorID: "1196215920412322")
-            pulledUser.unattendEvent("yooDOUXCTVRGU")
+            pulledUser.attendEvent("yooDOUXCTVRGU", eventName: "pls2", creatorID: "1196215920412322")
+            //pulledUser.unattendEvent("yooDOUXCTVRGU")
         })
         
         return true
