@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Globals.fb.child("Events").child("yooUPKNKMOWSR").observeEventType(FIRDataEventType.Value, withBlock: { (snapshot) in
             let eventDict:NSDictionary = snapshot.value as! [String : AnyObject]
             let pulledEvent:Event = Event(eventDict: eventDict)
-            pulledEvent.toString()
+            //pulledEvent.toString()
         })
         
         // TEST USER PUSH
@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Globals.fb.child("Users").child("1196215920412322").observeEventType(FIRDataEventType.Value, withBlock: { (snapshot) in
             let userDict:NSDictionary = snapshot.value as! [String : AnyObject]
             let pulledUser:User = User(userDict: userDict)
-            pulledUser.toString()
+            //pulledUser.toString()
         })
         
         return true
