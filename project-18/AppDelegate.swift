@@ -22,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // FIREBASE STARTUP
         FIRApp.configure()
         
+        let fb = Globals.fb
+        
         
         // TEST EVENT PUSH
         //let e = Event(name: "First iOS event", description: "This is an iOS-generated event",
@@ -29,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //e.pushToFirebase();
         
         // TEST EVENT PULL
-        /*Globals.fb.child("Events").child("yooUPKNKMOWSR").observeEventType(FIRDataEventType.Value, withBlock: { (snapshot) in
+        /*fb.child("Events").child("yooUPKNKMOWSR").observeEventType(FIRDataEventType.Value, withBlock: { (snapshot) in
             let eventDict:NSDictionary = snapshot.value as! [String : AnyObject]
             let pulledEvent:Event = Event(eventDict: eventDict)
             pulledEvent.toString()
@@ -40,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //u.pushToFirebase()
         
         // TEST USER PULL
-        Globals.fb.child("Users").child("1196215920412322").observeSingleEventOfType(FIRDataEventType.Value, withBlock: { (snapshot) in
+        /*fb.child("Users").child("1196215920412322").observeSingleEventOfType(FIRDataEventType.Value, withBlock: { (snapshot) in
             let userDict:NSDictionary = snapshot.value as! [String : AnyObject]
             let pulledUser:User = User(userDict: userDict)
             //pulledUser.toString()
@@ -52,6 +54,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // TEST USER ATTEND/UNATTEND EVENT
             pulledUser.attendEvent("yooDOUXCTVRGU", eventName: "pls2", creatorID: "1196215920412322")
             //pulledUser.unattendEvent("yooDOUXCTVRGU")
+        })*/
+        
+        // TEST NOTIFICATION PUSH
+        let n: Notification = NotificationNewFollow(type: Globals.TYPE_NEW_FOLLOW, followerName: "Jim the Follower", followerID: "yeet")
+        n.pushToFirebase(["1196215920412322"])
+        
+        // TEST NOTIFICATION PULL
+        fb.child("NotifDatabase").child("1196215920412322").observeSingleEventOfType(FIRDataEventType.Value, withBlock: {
+            (userNotifs) in
+            for notifSnapshot in userNotifs.children {
+                let notifDict:NSDictionary = (notifSnapshot as! FIRDataSnapshot).value as! NSDictionary
+                if notifDict.valueForKey("type") as! Int == Globals.TYPE_NEW_FOLLOW {
+                    let nnf: NotificationNewFollow = NotificationNewFollow(notifDict: notifDict)
+                    print("\nNotificationNewFollow:\n", nnf.generateMessage())
+                }
+            }
         })
         
         return true
