@@ -18,17 +18,16 @@ class Event {
     let EVENT_ID_LEN : Int = 10;                    // Length of an eventID
     
     // Variables
-    var name: String?           // The name of the event e.g. Bake Sale
-    var description: String?    // The description of the event
-    var creatorID: String?      // The ID of the User who created the event
-    var eventID: String?        // The ID of this Event
-    var startTime: UInt64?      // The start time of the event, an epoch-based long
-    var endTime: UInt64?        // The end time of the event, an epoch-based long
+    private var name: String?           // The name of the event e.g. Bake Sale
+    private var description: String?    // The description of the event
+    private var creatorID: String?      // The ID of the User who created the event
+    private var eventID: String?        // The ID of this Event
+    private var startTime: UInt64?      // The start time of the event, an epoch-based long
+    private var endTime: UInt64?        // The end time of the event, an epoch-based long
     // TODO location            // The location of the event (coordinates)
-    var attendees = [String]?() // A list of User ID's for Users who have joined this event
-    
-    var popularity: UInt = 0    // How popular the event is (equal to attendees size)
-    var reports: UInt = 0       // Number of reports the event has
+    private var attendees = [String]?() // A list of User ID's for Users who have joined this event
+    private var popularity: UInt = 0    // How popular the event is (equal to attendees size)
+    private var reports: UInt = 0       // Number of reports the event has
     
     
     
@@ -62,7 +61,8 @@ class Event {
         self.popularity = eventDict.valueForKey("popularity") as! UInt
         self.reports = eventDict.valueForKey("reports") as! UInt
         self.startTime = (eventDict.valueForKey("startTime") as! NSNumber).unsignedLongLongValue
-        self.attendees = (eventDict.valueForKey("attendees") as! NSDictionary).allValues as? [String]
+        //self.attendees = (eventDict.valueForKey("attendees") as! NSDictionary).allValues as? [String]
+        //smth breaks when attendees itself is pulled as a json object
     }
     
     // TODO location constructor

@@ -23,8 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRApp.configure()
         
         let fb = Globals.fb
-        
-        
         // TEST EVENT PUSH
         //let e = Event(name: "First iOS event", description: "This is an iOS-generated event",
                       //creatorID: "1196215920412322", startTime: 69, endTime: 420)
@@ -33,9 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // TEST EVENT PULL
         /*fb.child("Events").child("yooUPKNKMOWSR").observeEventType(FIRDataEventType.Value, withBlock: { (snapshot) in
             let eventDict:NSDictionary = snapshot.value as! [String : AnyObject]
-            let pulledEvent:Event = Event(eventDict: eventDict)
-            pulledEvent.toString()
-        })*/
+            let pulledEvent:Event = Event(eventDict: eventDict)})*/
         
         // TEST USER PUSH
         //let u = User(userID: "123", userName: "Test")
@@ -46,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let userDict:NSDictionary = snapshot.value as! [String : AnyObject]
             let pulledUser:User = User(userDict: userDict)
             //pulledUser.toString()
-            
+ 
             // TEST USER ADD/REMOVE TRAIL
             //pulledUser.addTrail("abc")
             //pulledUser.removeTrail("abc")
