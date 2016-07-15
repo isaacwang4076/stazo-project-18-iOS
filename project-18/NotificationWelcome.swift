@@ -1,33 +1,31 @@
 //
-//  NotificationNewFollow.swift
+//  NotificationWelcome.swift
 //  project-18
 //
-//  Created by Isaac Wang on 7/13/16.
+//  Created by Isaac Wang on 7/14/16.
 //  Copyright © 2016 stazo. All rights reserved.
 //
 
 import Foundation
 import FirebaseDatabase
 
-/* Notification for when a user follows another user */
+/* Notification for when you start using the app */
 
-class NotificationNewFollow: Notification {
+class NotificationWelcome: Notification {
     
     // Variables (unique to NewFollow)
     
-    var followerID: String?
-    var followerName: String?
+    var userName: String?
     
     // NEW NOTIFICATION CONSTRUCTOR
     // - Sets all variables and generates new notifID
-    init(type: Int, followerID: String, followerName: String) {
+    init(type: Int, userName: String) {
         
         // Superclass constructor
-        super.init(type: type, pictureID: followerID)
+        super.init(type: type, pictureID: "0")
         
         // Unique variables instantiation
-        self.followerID = followerID
-        self.followerName = followerName
+        self.userName = userName
     }
     
     // EXISTING NOTIFICATION CONSTRUCTOR
@@ -38,8 +36,7 @@ class NotificationNewFollow: Notification {
         super.init(type: notifDict.valueForKey("type") as! Int, pictureID: notifDict.valueForKey("pictureId") as! String, notifID: notifDict.valueForKey("notifID") as! String)
         
         // Unique variables instantiation
-        self.followerID = notifDict.valueForKey("followerId") as? String
-        self.followerName = notifDict.valueForKey("followerName") as? String
+        self.userName = notifDict.valueForKey("name") as? String
         self.viewed = notifDict.valueForKey("viewed") as! Bool
     }
     
@@ -48,7 +45,7 @@ class NotificationNewFollow: Notification {
     override func convertToDictionary(notif: Notification) -> NSDictionary {
         
         // Store unique variables
-        let notifDict: NSMutableDictionary = ["followerId": (notif as! NotificationNewFollow).followerID!, "followerName": (notif as! NotificationNewFollow).followerName!]
+        let notifDict: NSMutableDictionary = ["name": (notif as! NotificationWelcome).userName!]
         
         // Store common variables
         notifDict.addEntriesFromDictionary(super.convertToDictionary(notif) as [NSObject : AnyObject])
@@ -57,31 +54,14 @@ class NotificationNewFollow: Notification {
     }
     
     override func hasConflict(userNotifs: FIRDataSnapshot) -> (FIRDataSnapshot, FIRDatabaseReference)? {
-        
-        // Iterate through the user's Notifications
-        for notifSnap in userNotifs.children {
-            let notifMap: NSDictionary = (notifSnap as! FIRDataSnapshot).value as! NSDictionary
-            
-            // Check Notification type
-            if (notifMap.valueForKey("type") as! Int != Globals.TYPE_NEW_FOLLOW) {
-                continue
-            }
-            
-            // Check followerID
-            let nnf: NotificationNewFollow =  NotificationNewFollow(notifDict: notifMap)
-            if (nnf.followerID == self.followerID) {
-                
-                // Conflict found
-                return (notifSnap as! FIRDataSnapshot, notifSnap.ref)
-            }
-        }
-        
-        // No conflicts found
+    
+        // No conflicts possible
         return nil
     }
     
     override func handleConflict(snapToBase: (FIRDataSnapshot, FIRDatabaseReference)) -> Notification? {
-        // Not conflict-accepting -> do nothing in the case of a conflict
+        
+        // No conflicts possible
         return nil
     }
     
@@ -90,14 +70,14 @@ class NotificationNewFollow: Notification {
     // IMPLEMENT PROTOCOL METHODS -----------------------------------------------------------------------------
     
     override func onNotificationClicked() {
-        // TODO go to the profile of the user
+        // TODO do something
         self.viewed = true
     }
     
     override func generateMessage() -> String {
-        let firstName = followerName!.characters.split{$0 == " "}.map(String.init)[0]
-        return firstName + " is now following you."
+        let firstName = userName!.characters.split{$0 == " "}.map(String.init)[0]
+        return "Welcome to Campus, " + firstName + "!"
     }
     // --------------------------------------------------------------------------------------------------------
-
+    
 }

@@ -75,16 +75,16 @@ class Notification {
                 //   with an already existing Notification in 
                 //   the user's NotifDatabase
                 if (stb != nil) {
-                    print("/npushToFirebase in Notification: Notification with ID ", self.notifID, " reached conflict")
+                    print("\npushToFirebase() in Notification: Notification with ID ", self.notifID!, " reached conflict")
                     if let resolved: Notification = self.handleConflict(stb!) {
-                        print("/npushToFirebase in Notification: resolved conflict and pushing Notification with ID ", self.notifID)
+                        print("/npushToFirebase() in Notification: resolved conflict and pushing Notification with ID ", self.notifID!)
                         self.fb.child("NotifDatabase").child(id).childByAutoId().setValue(self.convertToDictionary(resolved))
                     }
                 }
                 // No conflict case
                 else {
                     // Simply add this notification as you would expect
-                    print("/npushToFirebase in Notification: pushing Notification with ID ", self.notifID, " without conflict")
+                    print("/npushToFirebase() in Notification: pushing Notification with ID ", self.notifID!, " without conflict")
                     self.fb.child("NotifDatabase").child(id).childByAutoId().setValue(self.convertToDictionary(self))
                 }
             })
@@ -94,40 +94,50 @@ class Notification {
     // CONVERT TO DICTIONARY
     // - Helper function for pushToFirebase (either self or resolved conflict)
     // - Converts given Notification into Dictionary form
-    // - Will be Overriden by all subclasses to include additional variables,
-    //   however they will all implement the superclass's version as well
-    //   to append the common variables
+    // - Will be Overriden by all subclasses to include unique variables.
+    //   However, all will call the superclass's version as well to append
+    //   the common variables
     func convertToDictionary(notif: Notification) -> NSDictionary {
-        return ["notifID": notifID!, "viewed": viewed, "type": type!, "pictureId": pictureID!]
+        return ["notifID": notif.notifID!, "viewed": notif.viewed, "type": notif.type!, "pictureId": notif.pictureID!]
     }
     
-    // "ABSTRACT" METHODS, ALL SUB-CLASSES SHOULD OVERRIDE --------------------------------s
+    // "ABSTRACT" METHODS, ALL SUB-CLASSES SHOULD OVERRIDE --------------------------------
     // - Included in this class and not in protocol because
     //   they are needed for the pushToFirebase() function
     
+    // HANDLE CLICK
+    // - Defines what happens when the user taps the
+    //   Notification in the Notifications View
+    func onNotificationClicked() {}
+    
+    // GENERATE MESSAGE
+    // - Defines what message will be displayed for
+    //   this Notificaiton in the Notificaitons View
+    func generateMessage() -> String {return ""}
+    
     // FIND CONFLICT
-    // - Given a reference to a user's Notifications,
+    // - Given a reference to a user's Notifications snapshot,
     //   determines whether there is a conflict with this
-    //   one (meaning this Notification should be combined 
-    //   with an already existing Notification
-    // - Returns nil if there is no conflict
-    // - Returns a Tuple containing a Snapshot of the conflicting
-    //   Notification, as well as a reference to its location in
-    //   the user's Notifications
+    //   Notification (meaning this Notification should be
+    //   combined with an already existing Notification)
+    // - If there is no conflict, returns nil
+    // - If there is a conflict, returns a Tuple containing a 
+    //   Snapshot of the conflicting Notification, as well as 
+    //   a reference to its location in the user's Notifications
     func hasConflict(userNotifs: FIRDataSnapshot) -> (FIRDataSnapshot, FIRDatabaseReference)? {return nil}
     
     // HANDLE CONFLICT
-    // - Given a Snapshot of a conflicting Notification and
-    //   a reference to its location in a user's Notification,
-    //   resolves the conflict (varies depending on type)
-    // - If the type is conflict-sensitive, will remove the
+    // - Given a Snapshot of a conflicting Notification and a
+    //   reference to its location in a user's Notifications
+    //   snapshot, resolves the conflict (dependent on type)
+    // - If the type is conflict-accepting, will remove the
     //   previously existing Notification and return a new
     //   combined Notification. For example, instead of getting
     //   100 Notifications for each of the 100 users who commented
     //   on your event, you'll instead get one Notification that
     //   100 users commented on your event.
-    // - If the type is not conflict-sensitive, simply returns
-    //   null (meaning pushToFirebase will do nothing). This
+    // - If the type is not conflict-accepting, simply returns
+    //   nil (meaning pushToFirebase will do nothing). This
     //   removes potential spam of follow/unfollow or join/unjoin
     //   by one user clogging another user's Notifications
     func handleConflict(snapToBase: (FIRDataSnapshot, FIRDatabaseReference)) -> Notification? {return nil}
@@ -135,21 +145,5 @@ class Notification {
     
     // ------------------------------------------------------------------------------------
 
-}
-
-// INTERFACE FOR NOTIFICATIONS
-// - More "abstract" methods for all notifications
-// - Every notification will implement differently
-protocol ActsLikeNotification {
-    
-    // HANDLE CLICK
-    // - Defines what happens when the user taps the
-    //   Notification in the Notifications View
-    func onNotificationClicked()
-    
-    // GENERATE MESSAGE
-    // - Defines what message will be displayed for
-    //   this Notificaiton in the Notificaitons View
-    func generateMessage() -> String
 }
 

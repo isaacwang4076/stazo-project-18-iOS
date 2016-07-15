@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -12,7 +13,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="Cell" tableViewCell="98s-wg-Xcd" id="22t-P7-1Hz">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ujR-tb-36v">
@@ -99,19 +100,19 @@
                         <exclude reference="Dg2-4B-gU5"/>
                     </mask>
                     <mask key="constraints">
-                        <exclude reference="K8E-yb-4PA"/>
-                        <exclude reference="U6c-mk-fZi"/>
                         <exclude reference="UDA-fZ-dvb"/>
                         <exclude reference="Zf7-6Y-AqH"/>
                         <exclude reference="nJR-8y-UoQ"/>
+                        <exclude reference="PuD-sb-Fs3"/>
+                        <exclude reference="Smy-Dc-lvf"/>
+                        <exclude reference="V1Z-bC-BkZ"/>
+                        <exclude reference="K8E-yb-4PA"/>
+                        <exclude reference="U6c-mk-fZi"/>
                         <exclude reference="NW4-hw-L9l"/>
                         <exclude reference="ac1-hw-j15"/>
                         <exclude reference="lT3-Y8-dof"/>
                         <exclude reference="sYF-4k-cyt"/>
                         <exclude reference="vzw-c8-UqJ"/>
-                        <exclude reference="PuD-sb-Fs3"/>
-                        <exclude reference="Smy-Dc-lvf"/>
-                        <exclude reference="V1Z-bC-BkZ"/>
                     </mask>
                 </variation>
                 <variation key="heightClass=compact">
@@ -122,19 +123,19 @@
                         <include reference="Dg2-4B-gU5"/>
                     </mask>
                     <mask key="constraints">
-                        <include reference="K8E-yb-4PA"/>
-                        <include reference="U6c-mk-fZi"/>
                         <include reference="UDA-fZ-dvb"/>
                         <include reference="Zf7-6Y-AqH"/>
                         <include reference="nJR-8y-UoQ"/>
+                        <include reference="PuD-sb-Fs3"/>
+                        <include reference="Smy-Dc-lvf"/>
+                        <include reference="V1Z-bC-BkZ"/>
+                        <include reference="K8E-yb-4PA"/>
+                        <include reference="U6c-mk-fZi"/>
                         <include reference="NW4-hw-L9l"/>
                         <include reference="ac1-hw-j15"/>
                         <include reference="lT3-Y8-dof"/>
                         <include reference="sYF-4k-cyt"/>
                         <include reference="vzw-c8-UqJ"/>
-                        <include reference="PuD-sb-Fs3"/>
-                        <include reference="Smy-Dc-lvf"/>
-                        <include reference="V1Z-bC-BkZ"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>

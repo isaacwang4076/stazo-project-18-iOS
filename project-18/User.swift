@@ -78,7 +78,7 @@ class User {
         
         // If user is already following newTrail, return false
         if (userTrails!.contains(newTrail)) {
-            print("\naddTrail in User: userTrails already contains ", newTrail)
+            print("\naddTrail() in User: userTrails already contains ", newTrail)
             return false
         }
         
@@ -93,7 +93,7 @@ class User {
         // TODO NotificationNewFollow
         
         // Trail successfully added
-        print("\naddTrail in User: successfully added trail ", newTrail)
+        print("\naddTrail() in User: successfully added trail ", newTrail)
         return true
     }
     
@@ -114,11 +114,11 @@ class User {
             removeFromFollowers(removeTrail, givingFollowID: userID!)
             
             // Trail successfully removed
-            print("\nremoveTrail in User: successfully removed trail ", removeTrail)
+            print("\nremoveTrail() in User: successfully removed trail ", removeTrail)
             return true
         } else {
             // If user is not following removeTrail, return false
-            print("\nremoveTrail in User: userTrails does not contain ", removeTrail)
+            print("\nremoveTrail() in User: userTrails does not contain ", removeTrail)
             return false
         }
     }
@@ -146,7 +146,7 @@ class User {
         
         // If user is already attending the event, return false
         if (attendingEvents!.contains(eventID)) {
-            print("\nattendEvent in User: already attending event with ID ", eventID)
+            print("\nattendEvent() in User: already attending event with ID ", eventID)
             return false
         }
         
@@ -174,7 +174,7 @@ class User {
         // TODO NotificationJoinedEvent
         
         // Event successfully attended
-        print("\nattendEvent in User: now attending event with ID ", eventID)
+        print("\nattendEvent() in User: now attending event with ID ", eventID)
         return true;
     }
     
@@ -186,7 +186,7 @@ class User {
         
         // If user is already attending the event, return false
         if (attendingEvents!.contains(eventID) == false) {
-            print("\nunattendEvent in User: not yet attending event with ID ", eventID)
+            print("\nunattendEvent() in User: not yet attending event with ID ", eventID)
             return false
         }
         
@@ -234,7 +234,7 @@ class User {
         
         
         // Event successfully attended
-        print("\nunattendEvent in User: no longer attending event with ID ", eventID)
+        print("\nunattendEvent() in User: no longer attending event with ID ", eventID)
         return true;
     }
     

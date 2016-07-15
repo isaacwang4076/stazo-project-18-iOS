@@ -1,33 +1,37 @@
 //
-//  NotificationNewFollow.swift
+//  NotificationFriendHost.swift
 //  project-18
 //
-//  Created by Isaac Wang on 7/13/16.
+//  Created by Isaac Wang on 7/14/16.
 //  Copyright © 2016 stazo. All rights reserved.
 //
 
 import Foundation
 import FirebaseDatabase
 
-/* Notification for when a user follows another user */
+/* Notification for when a user you are following is hosting an event */
 
-class NotificationNewFollow: Notification {
+class NotificationFriendHost: Notification {
     
     // Variables (unique to NewFollow)
     
-    var followerID: String?
-    var followerName: String?
+    var hostName: String?
+    var eventID: String?
+    var eventName: String?
+    var timeString: String?
     
     // NEW NOTIFICATION CONSTRUCTOR
     // - Sets all variables and generates new notifID
-    init(type: Int, followerID: String, followerName: String) {
+    init(type: Int, pictureID: String, hostName: String, eventID: String, eventName: String, timeString: String) {
         
         // Superclass constructor
-        super.init(type: type, pictureID: followerID)
+        super.init(type: type, pictureID: pictureID)
         
         // Unique variables instantiation
-        self.followerID = followerID
-        self.followerName = followerName
+        self.hostName = hostName
+        self.eventID = eventID
+        self.eventName = eventName
+        self.timeString = timeString
     }
     
     // EXISTING NOTIFICATION CONSTRUCTOR
@@ -38,17 +42,20 @@ class NotificationNewFollow: Notification {
         super.init(type: notifDict.valueForKey("type") as! Int, pictureID: notifDict.valueForKey("pictureId") as! String, notifID: notifDict.valueForKey("notifID") as! String)
         
         // Unique variables instantiation
-        self.followerID = notifDict.valueForKey("followerId") as? String
-        self.followerName = notifDict.valueForKey("followerName") as? String
+        self.hostName = notifDict.valueForKey("hostName") as? String
+        self.eventID = notifDict.valueForKey("eventId") as? String
+        self.eventName = notifDict.valueForKey("eventName") as? String
+        self.timeString = notifDict.valueForKey("timeString") as? String
         self.viewed = notifDict.valueForKey("viewed") as! Bool
     }
     
     // OVERRIDE SUPERCLASS METHODS ----------------------------------------------------------------------
     
+    
     override func convertToDictionary(notif: Notification) -> NSDictionary {
         
         // Store unique variables
-        let notifDict: NSMutableDictionary = ["followerId": (notif as! NotificationNewFollow).followerID!, "followerName": (notif as! NotificationNewFollow).followerName!]
+        let notifDict: NSMutableDictionary = ["hostName": (notif as! NotificationFriendHost).hostName!, "eventId": (notif as! NotificationFriendHost).eventID!, "eventName": (notif as! NotificationFriendHost).eventName!, "timeString": (notif as! NotificationFriendHost).timeString!]
         
         // Store common variables
         notifDict.addEntriesFromDictionary(super.convertToDictionary(notif) as [NSObject : AnyObject])
@@ -58,30 +65,13 @@ class NotificationNewFollow: Notification {
     
     override func hasConflict(userNotifs: FIRDataSnapshot) -> (FIRDataSnapshot, FIRDatabaseReference)? {
         
-        // Iterate through the user's Notifications
-        for notifSnap in userNotifs.children {
-            let notifMap: NSDictionary = (notifSnap as! FIRDataSnapshot).value as! NSDictionary
-            
-            // Check Notification type
-            if (notifMap.valueForKey("type") as! Int != Globals.TYPE_NEW_FOLLOW) {
-                continue
-            }
-            
-            // Check followerID
-            let nnf: NotificationNewFollow =  NotificationNewFollow(notifDict: notifMap)
-            if (nnf.followerID == self.followerID) {
-                
-                // Conflict found
-                return (notifSnap as! FIRDataSnapshot, notifSnap.ref)
-            }
-        }
-        
-        // No conflicts found
+        // No conflict possible
         return nil
     }
     
     override func handleConflict(snapToBase: (FIRDataSnapshot, FIRDatabaseReference)) -> Notification? {
-        // Not conflict-accepting -> do nothing in the case of a conflict
+        
+        // No conflict possible
         return nil
     }
     
@@ -90,14 +80,14 @@ class NotificationNewFollow: Notification {
     // IMPLEMENT PROTOCOL METHODS -----------------------------------------------------------------------------
     
     override func onNotificationClicked() {
-        // TODO go to the profile of the user
+        // TODO go to event info for event with id eventID
         self.viewed = true
     }
     
     override func generateMessage() -> String {
-        let firstName = followerName!.characters.split{$0 == " "}.map(String.init)[0]
-        return firstName + " is now following you."
+        let firstName = hostName!.characters.split{$0 == " "}.map(String.init)[0]
+        return firstName + " is hosting " + eventName! + " " + timeString! + "."
     }
     // --------------------------------------------------------------------------------------------------------
-
+    
 }

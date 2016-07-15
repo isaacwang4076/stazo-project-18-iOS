@@ -1,33 +1,35 @@
 //
-//  NotificationNewFollow.swift
+//  NotificationInviteEvent.swift
 //  project-18
 //
-//  Created by Isaac Wang on 7/13/16.
+//  Created by Isaac Wang on 7/14/16.
 //  Copyright © 2016 stazo. All rights reserved.
 //
 
 import Foundation
 import FirebaseDatabase
 
-/* Notification for when a user follows another user */
+/* Notification for when a user is invited to an event (almost identical to NotificationCommentEvent) */
 
-class NotificationNewFollow: Notification {
+class NotificationInviteEvent: Notification {
     
     // Variables (unique to NewFollow)
     
-    var followerID: String?
-    var followerName: String?
+    var eventID: String?
+    var eventName: String?
+    var userNames: [String]?
     
     // NEW NOTIFICATION CONSTRUCTOR
     // - Sets all variables and generates new notifID
-    init(type: Int, followerID: String, followerName: String) {
+    init(type: Int, pictureID: String, eventID: String, eventName: String, userNames: [String]) {
         
         // Superclass constructor
-        super.init(type: type, pictureID: followerID)
+        super.init(type: type, pictureID: pictureID)
         
         // Unique variables instantiation
-        self.followerID = followerID
-        self.followerName = followerName
+        self.eventID = eventID
+        self.eventName = eventName
+        self.userNames = userNames
     }
     
     // EXISTING NOTIFICATION CONSTRUCTOR
@@ -38,17 +40,19 @@ class NotificationNewFollow: Notification {
         super.init(type: notifDict.valueForKey("type") as! Int, pictureID: notifDict.valueForKey("pictureId") as! String, notifID: notifDict.valueForKey("notifID") as! String)
         
         // Unique variables instantiation
-        self.followerID = notifDict.valueForKey("followerId") as? String
-        self.followerName = notifDict.valueForKey("followerName") as? String
+        self.eventID = notifDict.valueForKey("eventId") as? String
+        self.eventName = notifDict.valueForKey("eventName") as? String
+        self.userNames = notifDict.valueForKey("userNames") as? [String]
         self.viewed = notifDict.valueForKey("viewed") as! Bool
     }
     
     // OVERRIDE SUPERCLASS METHODS ----------------------------------------------------------------------
     
+    
     override func convertToDictionary(notif: Notification) -> NSDictionary {
         
         // Store unique variables
-        let notifDict: NSMutableDictionary = ["followerId": (notif as! NotificationNewFollow).followerID!, "followerName": (notif as! NotificationNewFollow).followerName!]
+        let notifDict: NSMutableDictionary = ["eventId": (notif as! NotificationInviteEvent).eventID!, "eventName": (notif as! NotificationInviteEvent).eventName!, "userNames": (notif as! NotificationInviteEvent).userNames!]
         
         // Store common variables
         notifDict.addEntriesFromDictionary(super.convertToDictionary(notif) as [NSObject : AnyObject])
@@ -63,13 +67,13 @@ class NotificationNewFollow: Notification {
             let notifMap: NSDictionary = (notifSnap as! FIRDataSnapshot).value as! NSDictionary
             
             // Check Notification type
-            if (notifMap.valueForKey("type") as! Int != Globals.TYPE_NEW_FOLLOW) {
+            if (notifMap.valueForKey("type") as! Int != Globals.TYPE_INVITE_EVENT) {
                 continue
             }
             
-            // Check followerID
-            let nnf: NotificationNewFollow =  NotificationNewFollow(notifDict: notifMap)
-            if (nnf.followerID == self.followerID) {
+            // Check eventID
+            let nie: NotificationInviteEvent =  NotificationInviteEvent(notifDict: notifMap)
+            if (nie.eventID == self.eventID) {
                 
                 // Conflict found
                 return (notifSnap as! FIRDataSnapshot, notifSnap.ref)
@@ -81,8 +85,22 @@ class NotificationNewFollow: Notification {
     }
     
     override func handleConflict(snapToBase: (FIRDataSnapshot, FIRDatabaseReference)) -> Notification? {
-        // Not conflict-accepting -> do nothing in the case of a conflict
-        return nil
+        
+        // Get a copy of the old Notification
+        let conflictNotif: NotificationInviteEvent = NotificationInviteEvent(notifDict: snapToBase.0.value as! NSDictionary)
+        
+        // Update the new Notification (this one) by appending the old userNames
+        for name in conflictNotif.userNames! {
+            if (userNames?.contains(name) == false) {
+                userNames?.append(name)
+            }
+        }
+        
+        // Remove the old conflicting Notification
+        snapToBase.1.setValue(nil)
+        
+        // Do nothing in the case of a conflict
+        return self
     }
     
     // --------------------------------------------------------------------------------------------------------
@@ -90,14 +108,21 @@ class NotificationNewFollow: Notification {
     // IMPLEMENT PROTOCOL METHODS -----------------------------------------------------------------------------
     
     override func onNotificationClicked() {
-        // TODO go to the profile of the user
+        // TODO go to event info for event with id eventID
         self.viewed = true
     }
     
     override func generateMessage() -> String {
-        let firstName = followerName!.characters.split{$0 == " "}.map(String.init)[0]
-        return firstName + " is now following you."
+        var message = userNames![0].characters.split{$0 == " "}.map(String.init)[0]
+        if (userNames?.endIndex > 1) {
+            message += " and " + String(userNames!.endIndex - 1) + " other"  // e.g. James and 1 other
+        }
+        if (userNames?.endIndex > 2) {
+            message += "s"                                                   // e.g. James and 2 others
+        }
+        message += " invited you to \"" + eventName! + "\"."                 // e.g. James and 2 others invited you to "Bake Sale".
+        return message
     }
     // --------------------------------------------------------------------------------------------------------
-
+    
 }

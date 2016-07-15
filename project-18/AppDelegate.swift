@@ -53,18 +53,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })*/
         
         // TEST NOTIFICATION PUSH
-        let n: Notification = NotificationNewFollow(type: Globals.TYPE_NEW_FOLLOW, followerName: "Jim the Follower", followerID: "yeet")
-        n.pushToFirebase(["1196215920412322"])
+        //let nnf: Notification = NotificationNewFollow(type: Globals.TYPE_NEW_FOLLOW, followerID: "yeet", followerName: "Jim the Follower")
+        //nnf.pushToFirebase(["1196215920412322"])
+        //let nce: Notification = NotificationCommentEvent(type: Globals.TYPE_COMMENT_EVENT, pictureID: "ayy lmao", eventID: "event id tho", eventName: "dank memes rank streams", userNames: ["Sean the Third Commenter"])
+        //nce.pushToFirebase(["1196215920412322"])
+        //let nfh: Notification = NotificationFriendHost(type: Globals.TYPE_FRIEND_HOST, pictureID: "pic ID", hostName: "hostName", eventID: "eventId tho2", eventName: "yeet event name2", timeString: "Tuesday at 69:69 PM")
+        //nfh.pushToFirebase(["1196215920412322"])
+        //let nfh: Notification = NotificationJoinedEvent(type: Globals.TYPE_JOINED_EVENT, pictureID: "picIDTHO", joinedUserName: "James the event joiner", eventID: "lit eventid", eventName: "lit event yo")
+        //nfh.pushToFirebase(["1196215920412322"])
+        //let nie: Notification = NotificationInviteEvent(type: Globals.TYPE_INVITE_EVENT, pictureID: "picIDFAM", eventID: "event id fam", eventName: "litter lit lit", userNames: ["Ling lo"])
+        //nie.pushToFirebase(["1196215920412322"])
+        //let nw: Notification = NotificationWelcome(type: Globals.TYPE_WELCOME, userName: "I-Money$$$")
+        //nw.pushToFirebase(["1196215920412322"])
         
         // TEST NOTIFICATION PULL
         fb.child("NotifDatabase").child("1196215920412322").observeSingleEventOfType(FIRDataEventType.Value, withBlock: {
             (userNotifs) in
             for notifSnapshot in userNotifs.children {
+                var notif: Notification? = nil
                 let notifDict:NSDictionary = (notifSnapshot as! FIRDataSnapshot).value as! NSDictionary
                 if notifDict.valueForKey("type") as! Int == Globals.TYPE_NEW_FOLLOW {
-                    let nnf: NotificationNewFollow = NotificationNewFollow(notifDict: notifDict)
-                    print("\nNotificationNewFollow:\n", nnf.generateMessage())
+                    notif = NotificationNewFollow(notifDict: notifDict)
                 }
+                else if notifDict.valueForKey("type") as! Int == Globals.TYPE_COMMENT_EVENT {
+                    notif = NotificationCommentEvent(notifDict: notifDict)
+                }
+                else if notifDict.valueForKey("type") as! Int == Globals.TYPE_FRIEND_HOST {
+                    notif = NotificationFriendHost(notifDict: notifDict)
+                }
+                else if notifDict.valueForKey("type") as! Int == Globals.TYPE_JOINED_EVENT {
+                    notif = NotificationJoinedEvent(notifDict: notifDict)
+                }
+                else if notifDict.valueForKey("type") as! Int == Globals.TYPE_INVITE_EVENT {
+                    notif = NotificationInviteEvent(notifDict: notifDict)
+                }
+                else if notifDict.valueForKey("type") as! Int == Globals.TYPE_WELCOME {
+                    notif = NotificationWelcome(notifDict: notifDict)
+                }
+                
+                print("\nNotification:\n", notif!.generateMessage())
+
             }
         })
         
