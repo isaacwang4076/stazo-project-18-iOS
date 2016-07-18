@@ -42,4 +42,5 @@ class Comment {
     func getEventID() -> String {
         return self.eventID!;
     }
+
 }

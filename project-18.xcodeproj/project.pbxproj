@@ -14,8 +14,6 @@
 		2880FEA31D389029009BD67B /* NotificationJoinedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2880FEA21D389029009BD67B /* NotificationJoinedEvent.swift */; };
 		2880FEA51D3892C2009BD67B /* NotificationWelcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2880FEA41D3892C2009BD67B /* NotificationWelcome.swift */; };
 		288EF14D1D3050C9001FBE63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288EF14C1D3050C9001FBE63 /* AppDelegate.swift */; };
-		288EF14F1D3050C9001FBE63 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288EF14E1D3050C9001FBE63 /* FirstViewController.swift */; };
-		288EF1511D3050C9001FBE63 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288EF1501D3050C9001FBE63 /* SecondViewController.swift */; };
 		288EF1541D3050C9001FBE63 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 288EF1521D3050C9001FBE63 /* Main.storyboard */; };
 		288EF1561D3050C9001FBE63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 288EF1551D3050C9001FBE63 /* Assets.xcassets */; };
 		288EF1591D3050C9001FBE63 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 288EF1571D3050C9001FBE63 /* LaunchScreen.storyboard */; };
@@ -34,6 +32,9 @@
 		F60AB8141D3694570092AB38 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60AB8131D3694570092AB38 /* Comment.swift */; };
 		F61209F01D352E5000E5C715 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61209EF1D352E5000E5C715 /* ListViewController.swift */; };
 		F61209F21D352FE600E5C715 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F61209F11D352FE600E5C715 /* GoogleService-Info.plist */; };
+		F61945451D3CE056006BB981 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61945441D3CE056006BB981 /* ProfileViewController.swift */; };
+		F61945471D3CE08C006BB981 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61945461D3CE08C006BB981 /* MapViewController.swift */; };
+		F619454D1D3D03EE006BB981 /* EventInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F619454C1D3D03EE006BB981 /* EventInfoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,8 +65,6 @@
 		2880FEA41D3892C2009BD67B /* NotificationWelcome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationWelcome.swift; sourceTree = "<group>"; };
 		288EF1491D3050C9001FBE63 /* project-18.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "project-18.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		288EF14C1D3050C9001FBE63 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		288EF14E1D3050C9001FBE63 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		288EF1501D3050C9001FBE63 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		288EF1531D3050C9001FBE63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		288EF1551D3050C9001FBE63 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		288EF1581D3050C9001FBE63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -93,6 +92,9 @@
 		F60AB8131D3694570092AB38 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		F61209EF1D352E5000E5C715 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		F61209F11D352FE600E5C715 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F61945441D3CE056006BB981 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		F61945461D3CE08C006BB981 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		F619454C1D3D03EE006BB981 /* EventInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventInfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,11 +152,12 @@
 			children = (
 				288EF14C1D3050C9001FBE63 /* AppDelegate.swift */,
 				28A542F31D344CB600BE90E0 /* Globals.swift */,
-				288EF14E1D3050C9001FBE63 /* FirstViewController.swift */,
-				288EF1501D3050C9001FBE63 /* SecondViewController.swift */,
 				F60AB8091D3631770092AB38 /* ListTableViewCell.swift */,
+				F61945441D3CE056006BB981 /* ProfileViewController.swift */,
 				F61209EF1D352E5000E5C715 /* ListViewController.swift */,
+				F61945461D3CE08C006BB981 /* MapViewController.swift */,
 				F60AB80D1D3631E20092AB38 /* ViewController.swift */,
+				F619454C1D3D03EE006BB981 /* EventInfoViewController.swift */,
 				288EF1521D3050C9001FBE63 /* Main.storyboard */,
 				288EF1551D3050C9001FBE63 /* Assets.xcassets */,
 				288EF1571D3050C9001FBE63 /* LaunchScreen.storyboard */,
@@ -487,19 +490,20 @@
 				2880FE9F1D388949009BD67B /* NotificationFriendHost.swift in Sources */,
 				F60AB80E1D3631E20092AB38 /* ViewController.swift in Sources */,
 				288EF17D1D305B4F001FBE63 /* Event.swift in Sources */,
-				288EF1511D3050C9001FBE63 /* SecondViewController.swift in Sources */,
 				28B57FF71D374B8F00CE430C /* NotificationNewFollow.swift in Sources */,
 				28A542F61D3455E600BE90E0 /* User.swift in Sources */,
 				28B57FF51D37455B00CE430C /* Notification.swift in Sources */,
+				F61945471D3CE08C006BB981 /* MapViewController.swift in Sources */,
 				288EF14D1D3050C9001FBE63 /* AppDelegate.swift in Sources */,
 				F60AB80A1D3631770092AB38 /* ListTableViewCell.swift in Sources */,
+				F619454D1D3D03EE006BB981 /* EventInfoViewController.swift in Sources */,
+				F61945451D3CE056006BB981 /* ProfileViewController.swift in Sources */,
 				2880FEA51D3892C2009BD67B /* NotificationWelcome.swift in Sources */,
 				28A542F41D344CB600BE90E0 /* Globals.swift in Sources */,
 				2880FEA31D389029009BD67B /* NotificationJoinedEvent.swift in Sources */,
 				2880FEA11D388E5C009BD67B /* NotificationInviteEvent.swift in Sources */,
 				F60AB8141D3694570092AB38 /* Comment.swift in Sources */,
 				2802BB621D384725006EBD15 /* NotificationCommentEvent.swift in Sources */,
-				288EF14F1D3050C9001FBE63 /* FirstViewController.swift in Sources */,
 				F61209F01D352E5000E5C715 /* ListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
