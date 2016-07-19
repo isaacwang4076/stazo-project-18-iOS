@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Map-->
+        <!--Map View Controller-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
                 <viewController id="9pv-A4-QxB" customClass="MapViewController" customModule="project_18" customModuleProvider="target" sceneMemberID="viewController">
@@ -47,13 +47,13 @@
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="jjU-KU-FpA" secondAttribute="bottom" constant="126" id="buh-DY-mgA"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Map" image="first" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="" image="ic_actionbar_map2.png" selectedImage="ic_actionbar_map2.png" id="acW-dT-cKf"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-583" y="-692"/>
         </scene>
-        <!--Profile-->
+        <!--Profile View Controller-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
                 <viewController id="8rJ-Kc-sve" customClass="ProfileViewController" customModule="project_18" customModuleProvider="target" sceneMemberID="viewController">
@@ -79,13 +79,13 @@
                             <constraint firstAttribute="centerY" secondItem="zEq-FU-wV5" secondAttribute="centerY" id="qzY-Ky-pLD"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Profile" image="second" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="" image="ic_actionbar_head.png" selectedImage="ic_actionbar_head.png" id="cPa-gy-q4n"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-511" y="817"/>
         </scene>
-        <!--List-->
+        <!--List View Controller-->
         <scene sceneID="wnw-Yw-5Wg">
             <objects>
                 <viewController id="zC7-TW-ZJg" customClass="ListViewController" customModule="project_18" customModuleProvider="target" sceneMemberID="viewController">
@@ -383,7 +383,7 @@
                             <constraint firstItem="sce-6a-ds1" firstAttribute="top" secondItem="bK3-fR-8Yu" secondAttribute="top" id="hAJ-H2-X45"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="List" id="P2t-Lj-Sil"/>
+                    <tabBarItem key="tabBarItem" title="" image="ic_actionbar_browse2.png" selectedImage="ic_actionbar_browse2.png" id="P2t-Lj-Sil"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="1000"/>
                     <connections>
@@ -765,7 +765,7 @@
             </objects>
             <point key="canvasLocation" x="-1335" y="1218"/>
         </scene>
-        <!--Notifications-->
+        <!--View Controller-->
         <scene sceneID="InO-xu-Ldo">
             <objects>
                 <viewController id="TGV-4b-Wbw" sceneMemberID="viewController">
@@ -778,7 +778,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Notifications" id="JRP-Uu-hqI"/>
+                    <tabBarItem key="tabBarItem" title="" image="ic_actionbar_notif.png" selectedImage="ic_actionbar_notif.png" id="JRP-Uu-hqI"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0PR-o5-64V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -786,7 +786,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="30" height="30"/>
-        <image name="second" width="30" height="30"/>
+        <image name="ic_actionbar_browse2.png" width="36" height="36"/>
+        <image name="ic_actionbar_head.png" width="36" height="36"/>
+        <image name="ic_actionbar_map2.png" width="36" height="36"/>
+        <image name="ic_actionbar_notif.png" width="36" height="36"/>
     </resources>
 </document>

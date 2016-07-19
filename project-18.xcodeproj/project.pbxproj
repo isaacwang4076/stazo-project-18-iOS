@@ -35,6 +35,10 @@
 		F61945451D3CE056006BB981 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61945441D3CE056006BB981 /* ProfileViewController.swift */; };
 		F61945471D3CE08C006BB981 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61945461D3CE08C006BB981 /* MapViewController.swift */; };
 		F619454D1D3D03EE006BB981 /* EventInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F619454C1D3D03EE006BB981 /* EventInfoViewController.swift */; };
+		F625A3F91D3DF7C6006AA3F2 /* ic_actionbar_notif.png in Resources */ = {isa = PBXBuildFile; fileRef = F625A3F51D3DF7C6006AA3F2 /* ic_actionbar_notif.png */; };
+		F625A3FA1D3DF7C6006AA3F2 /* ic_actionbar_head.png in Resources */ = {isa = PBXBuildFile; fileRef = F625A3F61D3DF7C6006AA3F2 /* ic_actionbar_head.png */; };
+		F625A3FB1D3DF7C6006AA3F2 /* ic_actionbar_browse2.png in Resources */ = {isa = PBXBuildFile; fileRef = F625A3F71D3DF7C6006AA3F2 /* ic_actionbar_browse2.png */; };
+		F625A3FC1D3DF7C6006AA3F2 /* ic_actionbar_map2.png in Resources */ = {isa = PBXBuildFile; fileRef = F625A3F81D3DF7C6006AA3F2 /* ic_actionbar_map2.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +99,10 @@
 		F61945441D3CE056006BB981 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		F61945461D3CE08C006BB981 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		F619454C1D3D03EE006BB981 /* EventInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventInfoViewController.swift; sourceTree = "<group>"; };
+		F625A3F51D3DF7C6006AA3F2 /* ic_actionbar_notif.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_actionbar_notif.png; sourceTree = "<group>"; };
+		F625A3F61D3DF7C6006AA3F2 /* ic_actionbar_head.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_actionbar_head.png; sourceTree = "<group>"; };
+		F625A3F71D3DF7C6006AA3F2 /* ic_actionbar_browse2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_actionbar_browse2.png; sourceTree = "<group>"; };
+		F625A3F81D3DF7C6006AA3F2 /* ic_actionbar_map2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_actionbar_map2.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +136,7 @@
 		288EF1401D3050C9001FBE63 = {
 			isa = PBXGroup;
 			children = (
+				F625A3F41D3DF79B006AA3F2 /* Images */,
 				288EF14B1D3050C9001FBE63 /* project-18 */,
 				288EF1621D3050C9001FBE63 /* project-18Tests */,
 				288EF16D1D3050C9001FBE63 /* project-18UITests */,
@@ -217,6 +226,17 @@
 				6B6B6BBC099CAAFE2DC3AD55 /* Pods-project-18UITests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		F625A3F41D3DF79B006AA3F2 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				F625A3F51D3DF7C6006AA3F2 /* ic_actionbar_notif.png */,
+				F625A3F61D3DF7C6006AA3F2 /* ic_actionbar_head.png */,
+				F625A3F71D3DF7C6006AA3F2 /* ic_actionbar_browse2.png */,
+				F625A3F81D3DF7C6006AA3F2 /* ic_actionbar_map2.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -337,6 +357,10 @@
 			files = (
 				288EF1591D3050C9001FBE63 /* LaunchScreen.storyboard in Resources */,
 				F61209F21D352FE600E5C715 /* GoogleService-Info.plist in Resources */,
+				F625A3F91D3DF7C6006AA3F2 /* ic_actionbar_notif.png in Resources */,
+				F625A3FC1D3DF7C6006AA3F2 /* ic_actionbar_map2.png in Resources */,
+				F625A3FA1D3DF7C6006AA3F2 /* ic_actionbar_head.png in Resources */,
+				F625A3FB1D3DF7C6006AA3F2 /* ic_actionbar_browse2.png in Resources */,
 				288EF1561D3050C9001FBE63 /* Assets.xcassets in Resources */,
 				288EF1541D3050C9001FBE63 /* Main.storyboard in Resources */,
 				F60AB8081D362D360092AB38 /* ListTableViewCell.xib in Resources */,
