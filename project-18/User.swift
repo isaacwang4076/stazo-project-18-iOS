@@ -38,7 +38,7 @@ class User {
     }
     
     // FIREBASE PULL CONSTRUCTOR
-    // - Takes in a json object (snapshot) and constructs
+    // - Takes in a json object (NSDictionary) and constructs
     //   a user out of it.
     init(userDict: NSDictionary) {
         self.attendingEvents = (userDict.valueForKey("attendingEvents") as? NSDictionary)?.allValues as! [String]?

@@ -24,16 +24,10 @@ class Event {
     private var eventID: String?        // The ID of this Event
     private var startTime: UInt64?      // The start time of the event, an epoch-based long
     private var endTime: UInt64?        // The end time of the event, an epoch-based long
-    // TODO location            // The location of the event (coordinates)
+    // TODO location                    // The location of the event (coordinates)
     private var attendees = [String]?() // A list of User ID's for Users who have joined this event
     private var popularity: UInt = 0    // How popular the event is (equal to attendees size)
     private var reports: UInt = 0       // Number of reports the event has
-    
-    
-    
-    // DEFAULT CONSTRUCTOR
-    // - Required by Firebase, not used in our code
-    init() {}
     
     // NO LOCATION CONSTRUCTOR
     // - Used in CreateEventAct pre-location selection
