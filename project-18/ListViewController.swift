@@ -42,7 +42,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             (snapshot) in
             for eachEvent in snapshot.children.allObjects as! [FIRDataSnapshot] {
                 let eventDictionary = eachEvent.value as! [String:AnyObject];
-                let x:Event = Event.init(eventDict: eventDictionary);
+                let x = Event.init(eventDict: eventDictionary);
                 print("eventname: \(x.getName())");
                 self.eventArray.append(Event.init(eventDict: eventDictionary));
             }
@@ -66,6 +66,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 //        
 //        self.popularTableView.setNeedsLayout()
 //        self.popularTableView.layoutIfNeeded()
+        
+        //TODO: Add logic for sorting popular and upcoming events, add see more logic, add variable row height logic if necessary
+        
         
     }
     
