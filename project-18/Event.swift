@@ -61,7 +61,7 @@ class Event {
         self.popularity = eventDict.valueForKey("popularity") as! UInt
         self.reports = eventDict.valueForKey("reports") as! UInt
         self.startTime = (eventDict.valueForKey("startTime") as! NSNumber).unsignedLongLongValue
-        //self.attendees = (eventDict.valueForKey("attendees") as! NSDictionary).allValues as? [String]
+//        self.attendees = (eventDict.valueForKey("attendees") as! NSDictionary).allValues as? [String]
         //smth breaks when attendees itself is pulled as a json object
     }
     

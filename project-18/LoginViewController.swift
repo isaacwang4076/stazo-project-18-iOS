@@ -14,8 +14,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         super.viewDidLoad()
     }
     
+    //Check if user is logged in, if logged in then push next view, otherwise show login button
     override func viewDidAppear(animated: Bool) {
-        if let _ = FBSDKAccessToken.currentAccessToken() {
+        if (Globals.me != nil) {
             self.performSegueWithIdentifier("mainSegue", sender: self)
         }
         else {
@@ -32,6 +33,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    /* Delegate methods for login button */
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
         
     }
@@ -40,9 +43,11 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         return true
     }
     
+    //Go to next view upon successful login
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
-        print(FBSDKAccessToken.currentAccessToken().userID);
-        self.performSegueWithIdentifier("mainSegue", sender: self);
+        if (Globals.me != nil) {
+            self.performSegueWithIdentifier("mainSegue", sender: self)
+        }
     }
 
     

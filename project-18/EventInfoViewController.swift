@@ -62,25 +62,29 @@ class EventInfoViewController: UIViewController {
                 //name
                 self.eventNameLabel.text = self.event.getName();
                 
-                /*
-                //start date STILL NEEDS FIXING
-                let date = NSDate(timeIntervalSince1970: NSTimeInterval(self.event.getStartTime()));
+                //start date
+                print("start time: \(self.event.getStartTime())");
+                let date = NSDate(timeIntervalSince1970: NSTimeInterval(self.event.getStartTime())/1000);
                 let formatter = NSDateFormatter();
-                formatter.dateFormat = NSDateFormatter.dateFormatFromTemplate("MMM dd HH:mm a YYYY", options: 0, locale: NSLocale(localeIdentifier: "en-US"));
-                self.startTimeLabel.text = formatter.stringFromDate(date);
+                formatter.dateFormat = "MMM dd HH:mm a";
+                let startTimeString = formatter.stringFromDate(date);
+                //substringing to add "at"
+                self.startTimeLabel.text = startTimeString.substringToIndex(startTimeString.startIndex.advancedBy(6)) + " at" + (startTimeString.substringFromIndex(startTimeString.startIndex.advancedBy(6)));
                 
-                //TODO: time logic for start time and duration/end time
+                
+                //TODO: time logic for duration/end time and location
                 //self.lengthLabel.text = self.event.getEndTime();
                 //location
                 //self.locationLabel.text = self.event.getLocation();
                 
-                //description CHECK IF LENGTH FUCKS IT UP
+                
+                //description with auto-resize to fit text
                 self.descriptionLabel.text = self.event.getDescription();
+                self.descriptionLabel.sizeToFit();
                 
                 //creator REPLACE WITH NAME INSTEAD OF ID
-                self.creatorNameLabel.text = self.event.getCreatorID();
-                */
-                
+                self.creatorNameLabel.text = "Whoever " + self.event.getCreatorID() + " is";
+                self.creatorNameLabel.sizeToFit();                
                 
             });
         }

@@ -38,6 +38,7 @@
 		F625A3FA1D3DF7C6006AA3F2 /* ic_actionbar_head.png in Resources */ = {isa = PBXBuildFile; fileRef = F625A3F61D3DF7C6006AA3F2 /* ic_actionbar_head.png */; };
 		F625A3FB1D3DF7C6006AA3F2 /* ic_actionbar_browse2.png in Resources */ = {isa = PBXBuildFile; fileRef = F625A3F71D3DF7C6006AA3F2 /* ic_actionbar_browse2.png */; };
 		F625A3FC1D3DF7C6006AA3F2 /* ic_actionbar_map2.png in Resources */ = {isa = PBXBuildFile; fileRef = F625A3F81D3DF7C6006AA3F2 /* ic_actionbar_map2.png */; };
+		F63B3E3A1D44A45F00672EC9 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63B3E391D44A45F00672EC9 /* CreateEventViewController.swift */; };
 		F6E0D4CD1D4110A300ECF637 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6E0D4CA1D4110A200ECF637 /* FBSDKCoreKit.framework */; };
 		F6E0D4CE1D4110A300ECF637 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6E0D4CB1D4110A200ECF637 /* FBSDKLoginKit.framework */; };
 		F6E0D4CF1D4110A300ECF637 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6E0D4CC1D4110A200ECF637 /* FBSDKShareKit.framework */; };
@@ -107,6 +108,7 @@
 		F625A3F61D3DF7C6006AA3F2 /* ic_actionbar_head.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_actionbar_head.png; sourceTree = "<group>"; };
 		F625A3F71D3DF7C6006AA3F2 /* ic_actionbar_browse2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_actionbar_browse2.png; sourceTree = "<group>"; };
 		F625A3F81D3DF7C6006AA3F2 /* ic_actionbar_map2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_actionbar_map2.png; sourceTree = "<group>"; };
+		F63B3E391D44A45F00672EC9 /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
 		F659BD991D41089200A08679 /* project-18-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "project-18-Bridging-Header.h"; sourceTree = "<group>"; };
 		F6E0D4CA1D4110A200ECF637 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		F6E0D4CB1D4110A200ECF637 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				F6E0D4DF1D411E4400ECF637 /* LoginViewController.swift */,
 				F619454C1D3D03EE006BB981 /* EventInfoViewController.swift */,
 				288EF1521D3050C9001FBE63 /* Main.storyboard */,
+				F63B3E391D44A45F00672EC9 /* CreateEventViewController.swift */,
 				288EF1551D3050C9001FBE63 /* Assets.xcassets */,
 				288EF1571D3050C9001FBE63 /* LaunchScreen.storyboard */,
 				288EF15A1D3050C9001FBE63 /* Info.plist */,
@@ -539,6 +542,7 @@
 				F6E0D4E01D411E4400ECF637 /* LoginViewController.swift in Sources */,
 				28A542F61D3455E600BE90E0 /* User.swift in Sources */,
 				28B57FF51D37455B00CE430C /* Notification.swift in Sources */,
+				F63B3E3A1D44A45F00672EC9 /* CreateEventViewController.swift in Sources */,
 				F61945471D3CE08C006BB981 /* MapViewController.swift in Sources */,
 				288EF14D1D3050C9001FBE63 /* AppDelegate.swift in Sources */,
 				F60AB80A1D3631770092AB38 /* ListTableViewCell.swift in Sources */,
