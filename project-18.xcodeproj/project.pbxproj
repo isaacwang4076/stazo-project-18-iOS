@@ -30,7 +30,6 @@
 		F60AB80A1D3631770092AB38 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60AB8091D3631770092AB38 /* ListTableViewCell.swift */; };
 		F60AB80E1D3631E20092AB38 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60AB80D1D3631E20092AB38 /* ViewController.swift */; };
 		F60AB8141D3694570092AB38 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60AB8131D3694570092AB38 /* Comment.swift */; };
-		F61209F01D352E5000E5C715 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61209EF1D352E5000E5C715 /* ListViewController.swift */; };
 		F61209F21D352FE600E5C715 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F61209F11D352FE600E5C715 /* GoogleService-Info.plist */; };
 		F61945451D3CE056006BB981 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61945441D3CE056006BB981 /* ProfileViewController.swift */; };
 		F61945471D3CE08C006BB981 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61945461D3CE08C006BB981 /* MapViewController.swift */; };
@@ -39,6 +38,13 @@
 		F625A3FA1D3DF7C6006AA3F2 /* ic_actionbar_head.png in Resources */ = {isa = PBXBuildFile; fileRef = F625A3F61D3DF7C6006AA3F2 /* ic_actionbar_head.png */; };
 		F625A3FB1D3DF7C6006AA3F2 /* ic_actionbar_browse2.png in Resources */ = {isa = PBXBuildFile; fileRef = F625A3F71D3DF7C6006AA3F2 /* ic_actionbar_browse2.png */; };
 		F625A3FC1D3DF7C6006AA3F2 /* ic_actionbar_map2.png in Resources */ = {isa = PBXBuildFile; fileRef = F625A3F81D3DF7C6006AA3F2 /* ic_actionbar_map2.png */; };
+		F63B3E3A1D44A45F00672EC9 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63B3E391D44A45F00672EC9 /* CreateEventViewController.swift */; };
+		F6E0D4CD1D4110A300ECF637 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6E0D4CA1D4110A200ECF637 /* FBSDKCoreKit.framework */; };
+		F6E0D4CE1D4110A300ECF637 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6E0D4CB1D4110A200ECF637 /* FBSDKLoginKit.framework */; };
+		F6E0D4CF1D4110A300ECF637 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6E0D4CC1D4110A200ECF637 /* FBSDKShareKit.framework */; };
+		F6E0D4D11D41111400ECF637 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6E0D4D01D41111400ECF637 /* Bolts.framework */; };
+		F6E0D4D91D411D5300ECF637 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E0D4D81D411D5300ECF637 /* ListViewController.swift */; };
+		F6E0D4E01D411E4400ECF637 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E0D4DF1D411E4400ECF637 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,7 +100,6 @@
 		F60AB8091D3631770092AB38 /* ListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		F60AB80D1D3631E20092AB38 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F60AB8131D3694570092AB38 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
-		F61209EF1D352E5000E5C715 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		F61209F11D352FE600E5C715 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F61945441D3CE056006BB981 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		F61945461D3CE08C006BB981 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +108,14 @@
 		F625A3F61D3DF7C6006AA3F2 /* ic_actionbar_head.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_actionbar_head.png; sourceTree = "<group>"; };
 		F625A3F71D3DF7C6006AA3F2 /* ic_actionbar_browse2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_actionbar_browse2.png; sourceTree = "<group>"; };
 		F625A3F81D3DF7C6006AA3F2 /* ic_actionbar_map2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_actionbar_map2.png; sourceTree = "<group>"; };
+		F63B3E391D44A45F00672EC9 /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
+		F659BD991D41089200A08679 /* project-18-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "project-18-Bridging-Header.h"; sourceTree = "<group>"; };
+		F6E0D4CA1D4110A200ECF637 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		F6E0D4CB1D4110A200ECF637 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		F6E0D4CC1D4110A200ECF637 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		F6E0D4D01D41111400ECF637 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		F6E0D4D81D411D5300ECF637 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		F6E0D4DF1D411E4400ECF637 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,7 +123,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6E0D4D11D41111400ECF637 /* Bolts.framework in Frameworks */,
+				F6E0D4CF1D4110A300ECF637 /* FBSDKShareKit.framework in Frameworks */,
 				BAFD470730C7EC4C8483A9A6 /* Pods_project_18.framework in Frameworks */,
+				F6E0D4CD1D4110A300ECF637 /* FBSDKCoreKit.framework in Frameworks */,
+				F6E0D4CE1D4110A300ECF637 /* FBSDKLoginKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,11 +180,13 @@
 				28A542F31D344CB600BE90E0 /* Globals.swift */,
 				F60AB8091D3631770092AB38 /* ListTableViewCell.swift */,
 				F61945441D3CE056006BB981 /* ProfileViewController.swift */,
-				F61209EF1D352E5000E5C715 /* ListViewController.swift */,
 				F61945461D3CE08C006BB981 /* MapViewController.swift */,
 				F60AB80D1D3631E20092AB38 /* ViewController.swift */,
+				F6E0D4D81D411D5300ECF637 /* ListViewController.swift */,
+				F6E0D4DF1D411E4400ECF637 /* LoginViewController.swift */,
 				F619454C1D3D03EE006BB981 /* EventInfoViewController.swift */,
 				288EF1521D3050C9001FBE63 /* Main.storyboard */,
+				F63B3E391D44A45F00672EC9 /* CreateEventViewController.swift */,
 				288EF1551D3050C9001FBE63 /* Assets.xcassets */,
 				288EF1571D3050C9001FBE63 /* LaunchScreen.storyboard */,
 				288EF15A1D3050C9001FBE63 /* Info.plist */,
@@ -183,6 +202,7 @@
 				2880FE9E1D388949009BD67B /* NotificationFriendHost.swift */,
 				2802BB611D384725006EBD15 /* NotificationCommentEvent.swift */,
 				F61209F11D352FE600E5C715 /* GoogleService-Info.plist */,
+				F659BD991D41089200A08679 /* project-18-Bridging-Header.h */,
 			);
 			path = "project-18";
 			sourceTree = "<group>";
@@ -208,6 +228,10 @@
 		46506CBBCABF08008790F99B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F6E0D4D01D41111400ECF637 /* Bolts.framework */,
+				F6E0D4CA1D4110A200ECF637 /* FBSDKCoreKit.framework */,
+				F6E0D4CB1D4110A200ECF637 /* FBSDKLoginKit.framework */,
+				F6E0D4CC1D4110A200ECF637 /* FBSDKShareKit.framework */,
 				63E2A126951744DF6EEF42C7 /* Pods_project_18.framework */,
 				92CD78F47B1A3330F98C392D /* Pods_project_18Tests.framework */,
 				3B28B73C796451B5DFA2AD62 /* Pods_project_18UITests.framework */,
@@ -515,8 +539,10 @@
 				F60AB80E1D3631E20092AB38 /* ViewController.swift in Sources */,
 				288EF17D1D305B4F001FBE63 /* Event.swift in Sources */,
 				28B57FF71D374B8F00CE430C /* NotificationNewFollow.swift in Sources */,
+				F6E0D4E01D411E4400ECF637 /* LoginViewController.swift in Sources */,
 				28A542F61D3455E600BE90E0 /* User.swift in Sources */,
 				28B57FF51D37455B00CE430C /* Notification.swift in Sources */,
+				F63B3E3A1D44A45F00672EC9 /* CreateEventViewController.swift in Sources */,
 				F61945471D3CE08C006BB981 /* MapViewController.swift in Sources */,
 				288EF14D1D3050C9001FBE63 /* AppDelegate.swift in Sources */,
 				F60AB80A1D3631770092AB38 /* ListTableViewCell.swift in Sources */,
@@ -525,10 +551,10 @@
 				2880FEA51D3892C2009BD67B /* NotificationWelcome.swift in Sources */,
 				28A542F41D344CB600BE90E0 /* Globals.swift in Sources */,
 				2880FEA31D389029009BD67B /* NotificationJoinedEvent.swift in Sources */,
+				F6E0D4D91D411D5300ECF637 /* ListViewController.swift in Sources */,
 				2880FEA11D388E5C009BD67B /* NotificationInviteEvent.swift in Sources */,
 				F60AB8141D3694570092AB38 /* Comment.swift in Sources */,
 				2802BB621D384725006EBD15 /* NotificationCommentEvent.swift in Sources */,
-				F61209F01D352E5000E5C715 /* ListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -672,11 +698,23 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 602A1B38D6BA55985B35BF5B /* Pods-project-18.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Pods",
+				);
 				INFOPLIST_FILE = "project-18/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "stazo.project-18";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "project-18/project-18-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -684,11 +722,22 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1F601368BE812AE1B3D4FF6E /* Pods-project-18.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Pods",
+				);
 				INFOPLIST_FILE = "project-18/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "stazo.project-18";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "project-18/project-18-Bridging-Header.h";
 			};
 			name = Release;
 		};

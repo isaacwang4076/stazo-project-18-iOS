@@ -21,4 +21,7 @@ struct Globals {
     static let TYPE_JOINED_EVENT: Int = 3
     static let TYPE_INVITE_EVENT: Int = 4
     static let TYPE_WELCOME: Int = 5
+    
+    //FB USER ID
+    static let me = FBSDKAccessToken.currentAccessToken()?.userID;
 }

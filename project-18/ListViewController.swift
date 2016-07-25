@@ -16,9 +16,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet var popularTableView: UITableView!
     @IBOutlet var todayTableView: UITableView!
     @IBOutlet var laterTableView: UITableView!
-
+    
     //Show more button
-
+    
     //Array list of events
     var eventArray = [Event]();
     var popularEventArray = [Event]();
@@ -32,7 +32,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     //vars
     var ready:Bool = false;
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let fb = Globals.fb;
@@ -43,7 +43,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             for eachEvent in snapshot.children.allObjects as! [FIRDataSnapshot] {
                 let eventDictionary = eachEvent.value as! [String:AnyObject];
                 let x = Event.init(eventDict: eventDictionary);
-                print("eventname: \(x.getName())");
+                print("Pulled event: \(x.getName())");
                 self.eventArray.append(Event.init(eventDict: eventDictionary));
             }
             //process the events into table view categories
@@ -61,11 +61,11 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.updateTableViews();
         });
         
-//        self.popularTableView.estimatedRowHeight = 80
-//        self.popularTableView.rowHeight = UITableViewAutomaticDimension
-//        
-//        self.popularTableView.setNeedsLayout()
-//        self.popularTableView.layoutIfNeeded()
+        //        self.popularTableView.estimatedRowHeight = 80
+        //        self.popularTableView.rowHeight = UITableViewAutomaticDimension
+        //
+        //        self.popularTableView.setNeedsLayout()
+        //        self.popularTableView.layoutIfNeeded()
         
         //TODO: Add logic for sorting popular and upcoming events, add see more logic, add variable row height logic if necessary
         
@@ -109,21 +109,17 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        NSLog("one");
         let cell:ListTableViewCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ListTableViewCell;
         if (self.ready == true) {
             if (tableView == self.popularTableView) {
-                print(indexPath.item);
                 cell.eventName.text = popularEventArray[indexPath.item].getName();
                 cell.eventTime.text = "some time";
             }
             if (tableView == self.todayTableView) {
-                print(indexPath.item);
                 cell.eventName.text = todayEventArray[indexPath.item].getName();
                 cell.eventTime.text = "some time";
             }
             if (tableView == self.laterTableView) {
-                print(indexPath.item);
                 cell.eventName.text = laterEventArray[indexPath.item].getName();
                 cell.eventTime.text = "some time";
             }
