@@ -71,6 +71,8 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchR
     // TABLE VIEW ------------------------------------------------------------------------------------
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("/n filteredEventIDs.count is ", self.filteredEventIDs.count)
+
         return self.filteredEventIDs.count;
     }
     
@@ -78,7 +80,8 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchR
         
         let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
         
-        cell.textLabel?.text = self.filteredEventIDs[indexPath.row]
+        //cell.textLabel?.text = self.filteredEventIDs[indexPath.row]
+        cell.textLabel?.text = "yeet"
         
         return cell
     }

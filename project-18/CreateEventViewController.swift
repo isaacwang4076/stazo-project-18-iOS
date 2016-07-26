@@ -38,7 +38,7 @@ class CreateEventViewController: UIViewController {
      * Pops up a message if fields are wrong/empty and returns false. Returns true if event is made and can proceed.
      */
     func createEvent() -> Bool {
-        var newEvent = Event.init();
+        /*var newEvent = Event.init();
         
         if (self.eventNameTextView.text != nil) {
             newEvent.setName(self.eventNameTextView.text!);
@@ -49,7 +49,7 @@ class CreateEventViewController: UIViewController {
         
         if (self.descriptionTextView.text != nil) {
             newEvent.setDescription(self.descriptionTextView.text!);
-        }
+        }*/
         
         
         return true;
