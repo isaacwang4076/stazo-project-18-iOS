@@ -26,23 +26,18 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchR
         // SEARCH STUFF
         
         self.searchController = UISearchController(searchResultsController:  nil)
-        
         self.searchController.searchResultsUpdater = self
         self.searchController.delegate = self
         self.searchController.searchBar.delegate = self
-        
         self.searchController.hidesNavigationBarDuringPresentation = false
         self.searchController.dimsBackgroundDuringPresentation = true
-        
         self.navigationItem.titleView = searchController.searchBar
-        
         self.definesPresentationContext = true
         
         
         // CELL STUFF
-        self.tableView = UITableView()
         //tableView.tableHeaderView = searchController.searchBar
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+//        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
     override func didReceiveMemoryWarning() {
@@ -60,6 +55,7 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchR
         filteredEventIDs = allEventIDs.filter { event in
             return event.lowercaseString.containsString(searchText.lowercaseString)
         }
+        print("Filtered event IDs:")
         print(filteredEventIDs)
         tableView.reloadData()
     }
@@ -76,12 +72,16 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchR
         return self.filteredEventIDs.count;
     }
     
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
         
-        //cell.textLabel?.text = self.filteredEventIDs[indexPath.row]
-        cell.textLabel?.text = "yeet"
+        cell.textLabel?.text = self.filteredEventIDs[indexPath.row]
+//        cell.textLabel?.text = "yeet"
         
         return cell
     }
