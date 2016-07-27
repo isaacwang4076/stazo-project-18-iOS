@@ -26,6 +26,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
         let fb = Globals.fb
+        
+        
+        // PULL ALL EVENTS
+        fb.child("Events").observeEventType(FIRDataEventType.Value, withBlock: { (allEventsSnapshot) in
+            for eventSnapshot in allEventsSnapshot.children.allObjects as! [FIRDataSnapshot] {
+                let eventDict:NSDictionary = eventSnapshot.value as! [String : AnyObject]
+                Globals.eventsNameToID[eventDict.valueForKeyPath("name") as! String] = eventDict.valueForKeyPath("event_id") as? String
+            }
+        })
+        
+        
         // TEST EVENT PUSH
         //let e = Event(name: "First iOS event", description: "This is an iOS-generated event",
                       //creatorID: "1196215920412322", startTime: 69, endTime: 420)

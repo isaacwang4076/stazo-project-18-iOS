@@ -7,16 +7,18 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 class MapViewController: UIViewController, UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate,
  UITableViewDelegate, UITableViewDataSource {
-
+    
     var searchController : UISearchController!
     
     @IBOutlet var tableView: UITableView!
 
-    var allEventIDs =   ["abc", "abcd", "helloWorld", "IsaacWang"]
-    var filteredEventIDs = [String]()
+    var filteredEventNames = [String]()
+    //var allEvents:Dictionary<String, Event> = [:]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,10 +36,6 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchR
         self.navigationItem.titleView = searchController.searchBar
         self.definesPresentationContext = true
         
-        
-        // CELL STUFF
-        //tableView.tableHeaderView = searchController.searchBar
-//        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
     override func didReceiveMemoryWarning() {
@@ -52,11 +50,11 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchR
     }
     
     func filterContentForSearchText(searchText: String, scope: String = "All") {
-        filteredEventIDs = allEventIDs.filter { event in
+        filteredEventNames = Globals.eventsNameToID.keys.filter { event in
             return event.lowercaseString.containsString(searchText.lowercaseString)
         }
         print("Filtered event IDs:")
-        print(filteredEventIDs)
+        print(filteredEventNames)
         tableView.reloadData()
     }
     
@@ -67,9 +65,13 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchR
     // TABLE VIEW ------------------------------------------------------------------------------------
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("/n filteredEventIDs.count is ", self.filteredEventIDs.count)
-
-        return self.filteredEventIDs.count;
+        print("/n filteredEventIDs.count is ", self.filteredEventNames.count)
+        if self.filteredEventNames.count == 0 {
+            tableView.hidden = true
+        } else {
+            tableView.hidden = false
+        }
+        return self.filteredEventNames.count;
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -80,14 +82,17 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchR
         
         let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
         
-        cell.textLabel?.text = self.filteredEventIDs[indexPath.row]
+        cell.textLabel?.text = self.filteredEventNames[indexPath.row]
 //        cell.textLabel?.text = "yeet"
+        //cell.backgroundColor = UIColor.whiteColor()
+        self.view.bringSubviewToFront(tableView)
         
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        let eventName = (tableView.cellForRowAtIndexPath(indexPath) as! EventCell).eventName.text!
+        print("\nEvent with name: ", eventName, " and id: ", Globals.eventsNameToID[eventName], " pressed.")
     }
     
     // -----------------------------------------------------------------------------------------------

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		054655B4BCA5A854AF24F2FD /* Pods_project_18UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B28B73C796451B5DFA2AD62 /* Pods_project_18UITests.framework */; };
 		2802BB621D384725006EBD15 /* NotificationCommentEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2802BB611D384725006EBD15 /* NotificationCommentEvent.swift */; };
+		287AEA071D486633006289AC /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287AEA061D486633006289AC /* EventCell.swift */; };
 		2880FE9F1D388949009BD67B /* NotificationFriendHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2880FE9E1D388949009BD67B /* NotificationFriendHost.swift */; };
 		2880FEA11D388E5C009BD67B /* NotificationInviteEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2880FEA01D388E5C009BD67B /* NotificationInviteEvent.swift */; };
 		2880FEA31D389029009BD67B /* NotificationJoinedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2880FEA21D389029009BD67B /* NotificationJoinedEvent.swift */; };
@@ -69,6 +70,7 @@
 		0C6DC42C570E0D10BC06FF44 /* Pods-project-18UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-project-18UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-project-18UITests/Pods-project-18UITests.debug.xcconfig"; sourceTree = "<group>"; };
 		1F601368BE812AE1B3D4FF6E /* Pods-project-18.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-project-18.release.xcconfig"; path = "Pods/Target Support Files/Pods-project-18/Pods-project-18.release.xcconfig"; sourceTree = "<group>"; };
 		2802BB611D384725006EBD15 /* NotificationCommentEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCommentEvent.swift; sourceTree = "<group>"; };
+		287AEA061D486633006289AC /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		2880FE9E1D388949009BD67B /* NotificationFriendHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationFriendHost.swift; sourceTree = "<group>"; };
 		2880FEA01D388E5C009BD67B /* NotificationInviteEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationInviteEvent.swift; sourceTree = "<group>"; };
 		2880FEA21D389029009BD67B /* NotificationJoinedEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationJoinedEvent.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 				F6E0D4DF1D411E4400ECF637 /* LoginViewController.swift */,
 				F619454C1D3D03EE006BB981 /* EventInfoViewController.swift */,
 				288EF1521D3050C9001FBE63 /* Main.storyboard */,
+				287AEA061D486633006289AC /* EventCell.swift */,
 				F63B3E391D44A45F00672EC9 /* CreateEventViewController.swift */,
 				288EF1551D3050C9001FBE63 /* Assets.xcassets */,
 				288EF1571D3050C9001FBE63 /* LaunchScreen.storyboard */,
@@ -548,6 +551,7 @@
 				F60AB80A1D3631770092AB38 /* ListTableViewCell.swift in Sources */,
 				F619454D1D3D03EE006BB981 /* EventInfoViewController.swift in Sources */,
 				F61945451D3CE056006BB981 /* ProfileViewController.swift in Sources */,
+				287AEA071D486633006289AC /* EventCell.swift in Sources */,
 				2880FEA51D3892C2009BD67B /* NotificationWelcome.swift in Sources */,
 				28A542F41D344CB600BE90E0 /* Globals.swift in Sources */,
 				2880FEA31D389029009BD67B /* NotificationJoinedEvent.swift in Sources */,
