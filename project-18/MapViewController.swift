@@ -20,6 +20,9 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchR
 
     override func viewDidLoad() {
         super.viewDidLoad()
+//        self.tabBarController?.tabBar.translucent = false
+        self.tabBarController?.tabBar.barTintColor = UIColor.whiteColor()
+        self.tabBarController?.tabBar.tintColor = UIColor.blueColor()
 
         // Do any additional setup after loading the view.
         
@@ -30,14 +33,16 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchR
         self.searchController.delegate = self
         self.searchController.searchBar.delegate = self
         self.searchController.hidesNavigationBarDuringPresentation = false
-        self.searchController.dimsBackgroundDuringPresentation = true
+        self.searchController.dimsBackgroundDuringPresentation = false
         self.navigationItem.titleView = searchController.searchBar
         self.definesPresentationContext = true
         
         
         // CELL STUFF
         //tableView.tableHeaderView = searchController.searchBar
-//        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+//        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+    
+        
     }
     
     override func didReceiveMemoryWarning() {

@@ -17,6 +17,10 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet var todayTableView: UITableView!
     @IBOutlet var laterTableView: UITableView!
     
+    @IBOutlet var popularTableHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var todayTableHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var laterTableHeightConstraint: NSLayoutConstraint!
+    
     //Show more button
     
     //Array list of events
@@ -32,10 +36,17 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     //vars
     var ready:Bool = false;
+    var selectedEventID:String = "";
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let fb = Globals.fb;
+        
+        //Register table view cell nib
+        self.popularTableView.registerNib(UINib(nibName: "EventCell", bundle: nil), forCellReuseIdentifier: "Cell");
+        self.todayTableView.registerNib(UINib(nibName: "EventCell", bundle: nil), forCellReuseIdentifier: "Cell");
+        self.laterTableView.registerNib(UINib(nibName: "EventCell", bundle: nil), forCellReuseIdentifier: "Cell");
+
         
         //Pull list of events and add to eventArray
         fb.child("Events").observeSingleEventOfType(.Value, withBlock: {
@@ -46,6 +57,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                 print("Pulled event: \(x.getName())");
                 self.eventArray.append(Event.init(eventDict: eventDictionary));
             }
+            
+            
             //process the events into table view categories
             //temp popularity sort lmao
             print("event array count \(self.eventArray.count)");
@@ -55,17 +68,14 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             for i in 0 ..< self.eventArray.count {
                 self.todayEventArray.append(self.eventArray[i]);
             }
+            for i in 0 ..< self.eventArray.count {
+                self.laterEventArray.append(self.eventArray[i]);
+            }
             
             //update table view accordingly
-            self.laterEventArray = self.eventArray;
             self.updateTableViews();
         });
         
-        //        self.popularTableView.estimatedRowHeight = 80
-        //        self.popularTableView.rowHeight = UITableViewAutomaticDimension
-        //
-        //        self.popularTableView.setNeedsLayout()
-        //        self.popularTableView.layoutIfNeeded()
         
         //TODO: Add logic for sorting popular and upcoming events, add see more logic, add variable row height logic if necessary
         
@@ -75,9 +85,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func updateTableViews() {
         self.ready = true;
-        popularTableView.reloadData();
-        todayTableView.reloadData();
-        laterTableView.reloadData();
+        self.popularTableView.reloadData();
+        self.todayTableView.reloadData();
+        self.laterTableView.reloadData();
     }
     
     override func didReceiveMemoryWarning() {
@@ -85,6 +95,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Dispose of any resources that can be recreated.
     }
     
+    /* Table view data source and delegates -------------------------------------------- */
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -108,8 +119,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell;
     }
     
+    //cofigure each tableviewcell with event info
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell:ListTableViewCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ListTableViewCell;
+        let cell:EventTableViewCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! EventTableViewCell;
         if (self.ready == true) {
             if (tableView == self.popularTableView) {
                 cell.eventName.text = popularEventArray[indexPath.item].getName();
@@ -127,5 +139,33 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell;
     }
     
+    //when a tableviewcell in any of the three tables is selected
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        //get eventID from respective event array based off of category and row selected
+        if (tableView == self.popularTableView) {
+            self.selectedEventID = self.popularEventArray[indexPath.row].getEventID();
+            self.performSegueWithIdentifier("openEventInfo2", sender: self);
+            print("event: \(self.popularEventArray[indexPath.row].getName())");
+        }
+        if (tableView == self.todayTableView) {
+            self.selectedEventID = self.todayEventArray[indexPath.row].getEventID();
+            self.performSegueWithIdentifier("openEventInfo2", sender: self);
+            print("event: \(self.todayEventArray[indexPath.row].getName())");
+        }
+        if (tableView == self.laterTableView) {
+            self.selectedEventID = self.laterEventArray[indexPath.row].getEventID();
+            self.performSegueWithIdentifier("openEventInfo2", sender: self);
+            print("event: \(self.laterEventArray[indexPath.row].getName())");
+        }
+    }
+    /* ----------------------------------------------------------------------------*/
+    
+    
+    //when preparing to open eventinfo, set eventID to load
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "openEventInfo2") {
+            (segue.destinationViewController as! EventInfoViewController).setEventID(self.selectedEventID);
+        }
+    }
     
 }
