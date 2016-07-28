@@ -21,6 +21,18 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet var todayTableHeightConstraint: NSLayoutConstraint!
     @IBOutlet var laterTableHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet var seeMoreTodayButton: UIButton!
+    @IBAction func seeMoreTodayClick(sender: AnyObject) {
+        self.showAllToday = true;
+        self.seeMoreTodayButton.hidden = true;
+        self.todayTableView.reloadData();
+    }
+    @IBOutlet var seeMoreLaterButton: UIButton!
+    @IBAction func seeMoreLaterClick(sender: AnyObject) {
+        self.showAllLater = true;
+        self.seeMoreLaterButton.hidden = true;
+        self.laterTableView.reloadData();
+    }
     //Show more button
     
     //Array list of events
@@ -29,14 +41,17 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     var todayEventArray = [Event]();
     var laterEventArray = [Event]();
     
-    //constants
+    //constants for initial max number of cells in each table
     let NUM_POPULAR = 2;
     let NUM_TODAY = 4;
     let NUM_LATER = 4;
+    let POPULAR_THRESHOLD = 1;
     
     //vars
     var ready:Bool = false;
     var selectedEventID:String = "";
+    var showAllToday:Bool = false;
+    var showAllLater:Bool = false;
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,11 +75,13 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             
             //process the events into table view categories
-            //temp popularity sort lmao
             print("event array count \(self.eventArray.count)");
             for i in 0 ..< self.eventArray.count {
-                self.popularEventArray.append(self.eventArray[i]);
+                if (self.eventArray[i].getPopularity() >= UInt(self.POPULAR_THRESHOLD)) {
+                    self.popularEventArray.append(self.eventArray[i]);
+                }
             }
+            //TODO: TODAY AND LATER SORT
             for i in 0 ..< self.eventArray.count {
                 self.todayEventArray.append(self.eventArray[i]);
             }
@@ -77,11 +94,10 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         });
         
         
-        //TODO: Add logic for sorting popular and upcoming events, add see more logic, add variable row height logic if necessary
+        //TODO: Add see more logic and "No events are popular/today/later" signs
         
         
     }
-    
     
     func updateTableViews() {
         self.ready = true;
@@ -95,22 +111,63 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Dispose of any resources that can be recreated.
     }
     
+    
+    
     /* Table view data source and delegates -------------------------------------------- */
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
+    //assign number of rows based off of count up until NUM_<CATEGORY>, also resize constraints
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (!self.ready) {return 1}
         if (tableView == self.popularTableView) {
-            return 2
+            if (self.popularEventArray.count < self.NUM_POPULAR) {
+                self.popularTableHeightConstraint.constant = CGFloat(self.popularEventArray.count)*70;
+                return self.popularEventArray.count;
+            }
+            self.popularTableHeightConstraint.constant = CGFloat(self.NUM_POPULAR)*70;
+            return self.NUM_POPULAR;
         }
         if (tableView == self.todayTableView) {
-            return 2
+            if (self.todayEventArray.count <= self.NUM_TODAY) {
+                self.todayTableHeightConstraint.constant = CGFloat(self.todayEventArray.count)*70;
+                return self.todayEventArray.count;
+            }
+            else {
+                //more than NUM_TODAY so add see more button if not yet tapped
+                if (!self.showAllToday) {
+                    self.todayTableHeightConstraint.constant = CGFloat(self.NUM_TODAY)*70 + 30;
+                    self.seeMoreTodayButton.hidden = false;
+                    return self.NUM_TODAY;
+                }
+                //show everything if see more tapped
+                else {
+                    self.todayTableHeightConstraint.constant = CGFloat(self.todayEventArray.count)*70;
+                    return self.todayEventArray.count;
+                }
+            }
         }
         if (tableView == self.laterTableView) {
-            return 4
+            if (self.laterEventArray.count <= self.NUM_LATER) {
+                self.laterTableHeightConstraint.constant = CGFloat(self.laterEventArray.count)*70;
+                return self.laterEventArray.count;
+            }
+            else {
+                //more than NUM_LATER so add see more button if not yet tapped
+                if (!self.showAllLater) {
+                    self.laterTableHeightConstraint.constant = CGFloat(self.NUM_LATER)*70 + 30;
+                    self.seeMoreLaterButton.hidden = false;
+                    return self.NUM_LATER;
+                }
+                //show everything if see more tapped
+                else {
+                    self.laterTableHeightConstraint.constant = CGFloat(self.laterEventArray.count)*70;
+                    return self.laterEventArray.count;
+                }
+            }
         }
-        return 1
+        return 0;
     }
     
     func createTableViewCellFromEvent(event: Event) -> UITableViewCell {
@@ -119,22 +176,34 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell;
     }
     
-    //cofigure each tableviewcell with event info
+    //configure each tableviewcell with event info
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:EventTableViewCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! EventTableViewCell;
+        
+        //callback var set to true only after firebase is done loading, recalled with updateTableView()
         if (self.ready == true) {
+            //grab event from respective array
+            var eventToShow:Event;
             if (tableView == self.popularTableView) {
-                cell.eventName.text = popularEventArray[indexPath.item].getName();
-                cell.eventTime.text = "some time";
+                eventToShow = self.popularEventArray[indexPath.item];
             }
-            if (tableView == self.todayTableView) {
-                cell.eventName.text = todayEventArray[indexPath.item].getName();
-                cell.eventTime.text = "some time";
+            else if (tableView == self.todayTableView) {
+                eventToShow = self.todayEventArray[indexPath.item];
             }
-            if (tableView == self.laterTableView) {
-                cell.eventName.text = laterEventArray[indexPath.item].getName();
-                cell.eventTime.text = "some time";
+            else {
+                eventToShow = self.laterEventArray[indexPath.item];
             }
+            
+            cell.eventName.text = eventToShow.getName();
+            cell.numGoing.text = "\(eventToShow.getPopularity())";
+            
+            //start date TODO:correct date formatting? I think the android one is inconsistent
+            let date = NSDate(timeIntervalSince1970: NSTimeInterval(eventToShow.getStartTime())/1000);
+            let formatter = NSDateFormatter();
+            formatter.dateFormat = "MMM dd HH:mm a";
+            let startTimeString = formatter.stringFromDate(date);
+            //substringing to add "at"
+            cell.eventTime.text = startTimeString.substringToIndex(startTimeString.startIndex.advancedBy(6)) + " at" + (startTimeString.substringFromIndex(startTimeString.startIndex.advancedBy(6)));
         }
         return cell;
     }

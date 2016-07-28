@@ -55,8 +55,7 @@ class Event {
         self.popularity = eventDict.valueForKey("popularity") as! UInt
         self.reports = eventDict.valueForKey("reports") as! UInt
         self.startTime = (eventDict.valueForKey("startTime") as! NSNumber).unsignedLongLongValue
-//        self.attendees = (eventDict.valueForKey("attendees") as! NSDictionary).allValues as? [String]
-        //smth breaks when attendees itself is pulled as a json object
+        self.attendees = (eventDict.valueForKey("attendees") as? NSDictionary)?.allValues as? [String];
     }
     
     // TODO location constructor
@@ -185,7 +184,7 @@ class Event {
         return popularity
     }
     func setPopularity(popularity: UInt) {
-        self.popularity = reports
+        self.popularity = popularity
     }
     func getReports() -> UInt {
         return reports

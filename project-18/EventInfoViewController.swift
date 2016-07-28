@@ -63,7 +63,6 @@ class EventInfoViewController: UIViewController {
                 self.eventNameLabel.text = self.event.getName();
                 
                 //start date
-                print("start time: \(self.event.getStartTime())");
                 let date = NSDate(timeIntervalSince1970: NSTimeInterval(self.event.getStartTime())/1000);
                 let formatter = NSDateFormatter();
                 formatter.dateFormat = "MMM dd HH:mm a";
