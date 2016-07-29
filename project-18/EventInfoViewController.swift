@@ -55,7 +55,7 @@ class EventInfoViewController: UIViewController {
     func pullAndShowEvent() {
         if (eventID != nil) {
             Globals.fb.child("Events").child(self.eventID!).observeSingleEventOfType(.Value, withBlock: {
-                (snapshot) in
+                snapshot in
                 self.event = Event.init(eventDict: snapshot.value as! NSDictionary);
                 
                 //update the view with event info
@@ -81,9 +81,33 @@ class EventInfoViewController: UIViewController {
                 self.descriptionLabel.text = self.event.getDescription();
                 self.descriptionLabel.sizeToFit();
                 
-                //creator REPLACE WITH NAME INSTEAD OF ID
-                self.creatorNameLabel.text = "Whoever " + self.event.getCreatorID() + " is";
-                self.creatorNameLabel.sizeToFit();                
+                //creator name with another fb pull, non-null guarentee
+                Globals.fb.child("Users").child(self.event.getCreatorID()).child("name").observeSingleEventOfType(.Value, withBlock: {
+                    snapshot in
+                    self.creatorNameLabel.text = String(snapshot.value!);
+                });
+                self.creatorNameLabel.sizeToFit();
+                
+                //creator image with URL request
+                let width = "250";
+                let urlString = "https://graph.facebook.com/" + self.event.getCreatorID()
+                    + "/picture?width=" + width;
+                let url = NSURL(string: urlString);
+                print(url!.absoluteURL);
+                //send request to get image
+                let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {
+                    (data, response, error) in
+                    //update image if data isn't null in main thread
+                    print("grabbed");
+                    if (data != nil) {
+                        dispatch_async(dispatch_get_main_queue(), {
+                            self.creatorImageView.image = UIImage(data: data!)?.rounded;
+                        });
+                    }
+                };
+                task.resume();
+                //btw this is the one-line grab for small url data
+//                self.creatorImageView.image = UIImage(data: NSData(contentsOfURL: NSURL(string: urlString)!)!);
                 
             });
         }
@@ -91,6 +115,8 @@ class EventInfoViewController: UIViewController {
             print("eventID is null WHY IS IT NULL");
         }
     }
+    
+    
     
     func setEventID(eventID: String) {
         self.eventID = eventID;
@@ -106,4 +132,33 @@ class EventInfoViewController: UIViewController {
     }
     */
 
+}
+
+//some nigga is a g and did this for lols, two methods to round or circle images
+extension UIImage {
+    var rounded: UIImage? {
+        let imageView = UIImageView(image: self)
+        imageView.layer.cornerRadius = min(size.height/4, size.width/4)
+        imageView.layer.masksToBounds = true
+        UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, false, scale)
+        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+        imageView.layer.renderInContext(context)
+        let result = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return result
+    }
+    var circle: UIImage? {
+        let square = CGSize(width: min(size.width, size.height), height: min(size.width, size.height))
+        let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: square))
+        imageView.contentMode = .ScaleAspectFill
+        imageView.image = self
+        imageView.layer.cornerRadius = square.width/2
+        imageView.layer.masksToBounds = true
+        UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, false, scale)
+        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+        imageView.layer.renderInContext(context)
+        let result = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return result
+    }
 }
