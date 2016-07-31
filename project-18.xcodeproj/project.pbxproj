@@ -38,6 +38,8 @@
 		F63B3E3A1D44A45F00672EC9 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63B3E391D44A45F00672EC9 /* CreateEventViewController.swift */; };
 		F646A70E1D4A3860008A21DA /* EventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F646A70D1D4A3860008A21DA /* EventCell.xib */; };
 		F646A7121D4A3965008A21DA /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F646A7111D4A3965008A21DA /* EventTableViewCell.swift */; };
+		F6C4478A1D4C907100B1D12C /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6C447891D4C907100B1D12C /* CommentCell.xib */; };
+		F6C4478C1D4C915400B1D12C /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C4478B1D4C915400B1D12C /* CommentTableViewCell.swift */; };
 		F6E0D4CD1D4110A300ECF637 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6E0D4CA1D4110A200ECF637 /* FBSDKCoreKit.framework */; };
 		F6E0D4CE1D4110A300ECF637 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6E0D4CB1D4110A200ECF637 /* FBSDKLoginKit.framework */; };
 		F6E0D4CF1D4110A300ECF637 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6E0D4CC1D4110A200ECF637 /* FBSDKShareKit.framework */; };
@@ -108,6 +110,8 @@
 		F646A70D1D4A3860008A21DA /* EventCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventCell.xib; sourceTree = "<group>"; };
 		F646A7111D4A3965008A21DA /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		F659BD991D41089200A08679 /* project-18-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "project-18-Bridging-Header.h"; sourceTree = "<group>"; };
+		F6C447891D4C907100B1D12C /* CommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentCell.xib; sourceTree = "<group>"; };
+		F6C4478B1D4C915400B1D12C /* CommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		F6E0D4CA1D4110A200ECF637 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		F6E0D4CB1D4110A200ECF637 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		F6E0D4CC1D4110A200ECF637 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
@@ -182,6 +186,8 @@
 				F646A7111D4A3965008A21DA /* EventTableViewCell.swift */,
 				F6E0D4DF1D411E4400ECF637 /* LoginViewController.swift */,
 				F619454C1D3D03EE006BB981 /* EventInfoViewController.swift */,
+				F6C447891D4C907100B1D12C /* CommentCell.xib */,
+				F6C4478B1D4C915400B1D12C /* CommentTableViewCell.swift */,
 				F646A70D1D4A3860008A21DA /* EventCell.xib */,
 				288EF1521D3050C9001FBE63 /* Main.storyboard */,
 				F63B3E391D44A45F00672EC9 /* CreateEventViewController.swift */,
@@ -381,6 +387,7 @@
 				F625A3F91D3DF7C6006AA3F2 /* ic_actionbar_notif.png in Resources */,
 				F625A3FC1D3DF7C6006AA3F2 /* ic_actionbar_map2.png in Resources */,
 				F625A3FA1D3DF7C6006AA3F2 /* ic_actionbar_head.png in Resources */,
+				F6C4478A1D4C907100B1D12C /* CommentCell.xib in Resources */,
 				F625A3FB1D3DF7C6006AA3F2 /* ic_actionbar_browse2.png in Resources */,
 				288EF1561D3050C9001FBE63 /* Assets.xcassets in Resources */,
 				F646A70E1D4A3860008A21DA /* EventCell.xib in Resources */,
@@ -539,6 +546,7 @@
 				28A542F61D3455E600BE90E0 /* User.swift in Sources */,
 				28B57FF51D37455B00CE430C /* Notification.swift in Sources */,
 				F63B3E3A1D44A45F00672EC9 /* CreateEventViewController.swift in Sources */,
+				F6C4478C1D4C915400B1D12C /* CommentTableViewCell.swift in Sources */,
 				F61945471D3CE08C006BB981 /* MapViewController.swift in Sources */,
 				F646A7121D4A3965008A21DA /* EventTableViewCell.swift in Sources */,
 				288EF14D1D3050C9001FBE63 /* AppDelegate.swift in Sources */,

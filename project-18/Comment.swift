@@ -21,6 +21,11 @@ class Comment {
         self.userID = userID;
         self.eventID = eventID;
     }
+    init (dictionary:NSDictionary) {
+        self.comment = dictionary.valueForKey("comment") as? String;
+        self.eventID = dictionary.valueForKey("event_ID") as? String;
+        self.userID = dictionary.valueForKey("user_ID") as? String;
+    }
     
     //push dat shit
     func pushToFirebase() {

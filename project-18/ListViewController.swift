@@ -12,15 +12,16 @@ import FirebaseDatabase
 
 class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    /* UI STUFF ----------------------------------------------------*/
     //The three table views
     @IBOutlet var popularTableView: UITableView!
     @IBOutlet var todayTableView: UITableView!
     @IBOutlet var laterTableView: UITableView!
-    
     @IBOutlet var popularTableHeightConstraint: NSLayoutConstraint!
     @IBOutlet var todayTableHeightConstraint: NSLayoutConstraint!
     @IBOutlet var laterTableHeightConstraint: NSLayoutConstraint!
     
+    //Two see more buttons
     @IBOutlet var seeMoreTodayButton: UIButton!
     @IBAction func seeMoreTodayClick(sender: AnyObject) {
         self.showAllToday = true;
@@ -33,29 +34,31 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.seeMoreLaterButton.hidden = true;
         self.laterTableView.reloadData();
     }
-    //Show more button
+    /*--------------------------------------------------------------*/
+    
     
     //Array list of events
-    var eventArray = [Event]();
-    var popularEventArray = [Event]();
-    var todayEventArray = [Event]();
-    var laterEventArray = [Event]();
+    private var eventArray:[Event] = [];
+    private var popularEventArray:[Event] = [];
+    private var todayEventArray:[Event] = [];
+    private var laterEventArray:[Event] = [];
     
     //constants for initial max number of cells in each table
-    let NUM_POPULAR = 2;
-    let NUM_TODAY = 4;
-    let NUM_LATER = 4;
-    let POPULAR_THRESHOLD = 1;
+    private let NUM_POPULAR = 2;
+    private let NUM_TODAY = 4;
+    private let NUM_LATER = 4;
+    private let POPULAR_THRESHOLD = 1;
     
     //vars
-    var ready:Bool = false;
-    var selectedEventID:String = "";
-    var showAllToday:Bool = false;
-    var showAllLater:Bool = false;
+    private var ready:Bool = false;
+    private var selectedEventID:String = "";
+    private var showAllToday:Bool = false;
+    private var showAllLater:Bool = false;
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let fb = Globals.fb;
+        self.navigationController?.navigationBarHidden = true;
         
         //Register table view cell nib
         self.popularTableView.registerNib(UINib(nibName: "EventCell", bundle: nil), forCellReuseIdentifier: "Cell");
@@ -94,9 +97,14 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         });
         
         
-        //TODO: Add see more logic and "No events are popular/today/later" signs
+        //TODO: Add "No events are popular/today/later" signs
         
         
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated);
+        self.navigationController?.navigationBarHidden = true;
     }
     
     func updateTableViews() {
@@ -210,7 +218,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     //when a tableviewcell in any of the three tables is selected
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //get eventID from respective event array based off of category and row selected
+        //get eventID from respective event array based off of category and row selected and segue to eventInfo
         if (tableView == self.popularTableView) {
             self.selectedEventID = self.popularEventArray[indexPath.row].getEventID();
             self.performSegueWithIdentifier("openEventInfo2", sender: self);
@@ -226,6 +234,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.performSegueWithIdentifier("openEventInfo2", sender: self);
             print("event: \(self.laterEventArray[indexPath.row].getName())");
         }
+        //get rid of the highlighting
+        tableView.deselectRowAtIndexPath(indexPath, animated: true);
     }
     /* ----------------------------------------------------------------------------*/
     
