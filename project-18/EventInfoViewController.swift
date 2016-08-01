@@ -16,7 +16,21 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
     //Event name and join button (reference and action func)
     @IBOutlet var eventNameLabel: UILabel!
     @IBOutlet var joinButton: UIButton!
-    @IBAction func joinClick(sender: AnyObject) {}
+    @IBAction func joinClick(sender: AnyObject) {
+        self.userHasJoined = !self.userHasJoined;
+        if (self.userHasJoined) {
+            self.joinButton.setTitle("Joined", forState: UIControlState.Normal);
+            self.joinButton.backgroundColor = UIColor.redColor();
+            //push userID to attendees list
+            
+        }
+        else {
+            self.joinButton.setTitle("Join", forState: UIControlState.Normal);
+            self.joinButton.backgroundColor = UIColor.yellowColor();
+            //remove userID from attendees list
+            
+        }
+    }
     
     //Event info labels
     @IBOutlet var startTimeLabel: UILabel!
@@ -43,7 +57,8 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
     
     private var eventID:String? //will null check before pulling
     private var event:Event! //guarenteed non-null from pull
-    private var comments:[Comment] = []
+    private var comments:[Comment] = [] //list of comments
+    private var userHasJoined:Bool = false;
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,6 +92,20 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
             //update the view with event info
             //name
             self.eventNameLabel.text = self.event.getName();
+            
+            //update joined bool and join button
+            if self.event.getAttendees() != nil {
+                self.userHasJoined = (self.event.getAttendees()!.contains(Globals.me.userID));
+                self.joinedLabel.text = "Joined (\(self.event.getAttendees()!.count))";
+            }
+            if (self.userHasJoined) {
+                self.joinButton.setTitle("Joined", forState: UIControlState.Normal);
+                self.joinButton.backgroundColor = UIColor.redColor();
+            }
+            else {
+                self.joinButton.setTitle("Join", forState: UIControlState.Normal);
+                self.joinButton.backgroundColor = UIColor.yellowColor();
+            }
             
             //start date
             let date = NSDate(timeIntervalSince1970: NSTimeInterval(self.event.getStartTime())/1000);

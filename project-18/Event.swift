@@ -174,8 +174,8 @@ class Event {
         self.endTime = endTime
     }
     // TODO location getter/setter
-    func getAttendees() -> [String] {
-        return attendees!
+    func getAttendees() -> [String]? {
+        return attendees
     }
     func setAttendees(attendees: [String]) {
         self.attendees = attendees

@@ -72,13 +72,12 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             for eachEvent in snapshot.children.allObjects as! [FIRDataSnapshot] {
                 let eventDictionary = eachEvent.value as! [String:AnyObject];
                 let x = Event.init(eventDict: eventDictionary);
-                print("Pulled event: \(x.getName())");
                 self.eventArray.append(Event.init(eventDict: eventDictionary));
             }
             
             
             //process the events into table view categories
-            print("event array count \(self.eventArray.count)");
+            print("Number of events: \(self.eventArray.count)");
             for i in 0 ..< self.eventArray.count {
                 if (self.eventArray[i].getPopularity() >= UInt(self.POPULAR_THRESHOLD)) {
                     self.popularEventArray.append(self.eventArray[i]);

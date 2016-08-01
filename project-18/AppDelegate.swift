@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRApp.configure()
         
         // F4C3B00K ST4RTUP
+        FBSDKProfile.enableUpdatesOnAccessTokenChange(true);
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
         let fb = Globals.fb
@@ -106,7 +107,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //fb stuff
         return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
     }
-    
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

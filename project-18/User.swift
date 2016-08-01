@@ -11,16 +11,16 @@ import FirebaseDatabase
 
 /* Representation of a User of the app */
 
-class User {
+class User: NSObject, NSCoding {
     
     // Constants
     let fb = Globals.fb                                 // Reference to the app's database
     let DEFAULT_BIO = "This user does not have a bio."  // Used if the user does not have a bio
     
     // Variables
-    var userID: String?                 // Unique user identification
-    var userName: String?               // User's name
-    var bio: String?                    // User's bio
+    var userID: String                 // Unique user identification, non-null
+    var userName: String               // User's name, non-null
+    var bio: String                    // User's bio, non-null
     var myEvents: [String]? = []        // A list of eventID's that this user has created
     var attendingEvents: [String]? = [] // A list of eventID's that this user has joined
     var reportedEvents: [String]? = []  // A list of eventID's that this user has reported
@@ -42,10 +42,10 @@ class User {
     //   a user out of it.
     init(userDict: NSDictionary) {
         self.attendingEvents = (userDict.valueForKey("attendingEvents") as? NSDictionary)?.allValues as! [String]?
-        self.bio = userDict.valueForKey("bio") as! String?
-        self.userID = userDict.valueForKey("id") as! String?
+        self.bio = userDict.valueForKey("bio") as! String
+        self.userID = userDict.valueForKey("id") as! String
         self.myEvents = (userDict.valueForKey("myEvents") as? NSDictionary)?.allValues as! [String]?
-        self.userName = userDict.valueForKey("name") as! String?
+        self.userName = userDict.valueForKey("name") as! String
         self.userFollowers = userDict.valueForKey("userFollowers") as? [String]
         self.userTrails = userDict.valueForKey("userTrails") as? [String]
     }
@@ -53,7 +53,7 @@ class User {
     // PUSH TO FIREBASE
     // - Add this user to firebase "Users" section
     func pushToFirebase() {
-        fb.child("Users").child(userID!).setValue(convertToDictionary())
+        fb.child("Users").child(userID).setValue(convertToDictionary())
     }
     
     // CONVERT TO DICTIONARY
@@ -61,10 +61,10 @@ class User {
     func convertToDictionary() -> NSDictionary {
         return [
         "attendingEvents": attendingEvents!,
-        "bio": bio!,
-        "id": userID!,
+        "bio": bio,
+        "id": userID,
         "myEvents": myEvents!,
-        "name": userName!,
+        "name": userName,
         "userFollowers": userFollowers!,
         "userTrails": userTrails!]
     }
@@ -86,9 +86,9 @@ class User {
         userTrails?.append(newTrail)
         
         // Update database
-        fb.child("Users").child(userID!).child("userTrails").setValue(userTrails)
+        fb.child("Users").child(userID).child("userTrails").setValue(userTrails)
         
-        addToFollowers(newTrail, givingFollowID: userID!)
+        addToFollowers(newTrail, givingFollowID: userID)
         
         // TODO NotificationNewFollow
         
@@ -109,9 +109,9 @@ class User {
             userTrails!.removeAtIndex(index)
             
             // Update Databse
-            fb.child("Users").child(userID!).child("userTrails").setValue(userTrails)
+            fb.child("Users").child(userID).child("userTrails").setValue(userTrails)
             
-            removeFromFollowers(removeTrail, givingFollowID: userID!)
+            removeFromFollowers(removeTrail, givingFollowID: userID)
             
             // Trail successfully removed
             print("\nremoveTrail() in User: successfully removed trail ", removeTrail)
@@ -153,7 +153,7 @@ class User {
         // ---- Update Event Information ------------------------------------------------------
         
         // Add the user's userID to attendees on the database
-        fb.child("Events").child(eventID).child("attendees").childByAutoId().setValue(userID!)
+        fb.child("Events").child(eventID).child("attendees").childByAutoId().setValue(userID)
         
         // TODO popularity increment
         
@@ -167,7 +167,7 @@ class User {
         attendingEvents?.append(eventID)
         
         // Add the eventID to attendingEvents on the database (for future sessions)
-        fb.child("Users").child(userID!).child("attendingEvents").childByAutoId().setValue(eventID)
+        fb.child("Users").child(userID).child("attendingEvents").childByAutoId().setValue(eventID)
         
         // ------------------------------------------------------------------------------------
         
@@ -198,7 +198,7 @@ class User {
         fb.child("Events").child(eventID).child("attendees").observeSingleEventOfType(FIRDataEventType.Value, withBlock: { (snapshot) in
             
             for attendeeSnapshot in snapshot.children {
-                if attendeeSnapshot.value == self.userID! {
+                if attendeeSnapshot.value == self.userID {
                     attendeeSnapshot.ref.setValue(nil)
                     break
                 }
@@ -220,7 +220,7 @@ class User {
         
         // Remove the eventID from attendingEvents on the database (for future sessions)
         // Listener for user's attendingEvents snapshot
-        fb.child("Users").child(userID!).child("attendingEvents").observeSingleEventOfType(FIRDataEventType.Value, withBlock: { (snapshot) in
+        fb.child("Users").child(userID).child("attendingEvents").observeSingleEventOfType(FIRDataEventType.Value, withBlock: { (snapshot) in
             
             for eventSnapshot in snapshot.children {
                 if eventSnapshot.value == eventID {
@@ -244,6 +244,28 @@ class User {
         print("\nUser toString()\n\nuserName is : ", userName, "\nattendingEvents is: ", attendingEvents, "\nbio is: ", bio,
               "\nuserID is : ", userID, "\nmyEvents is: ",
               myEvents, "\nuserFollowers is : ", userFollowers, "\nuserTrails is : ", userTrails)
+    }
+    
+    //ENCODER METHODS FOR SAVING USER OBJECT TO SHARED PREFERENCES
+    required init (coder decoder:NSCoder) {
+        self.userID = decoder.decodeObjectForKey("userID") as! String;
+        self.userName = decoder.decodeObjectForKey("userName") as! String;
+        self.bio = decoder.decodeObjectForKey("bio") as! String;
+        self.myEvents = decoder.decodeObjectForKey("myEvents") as? [String];
+        self.attendingEvents = decoder.decodeObjectForKey("attendingEvents") as? [String];
+        self.reportedEvents = decoder.decodeObjectForKey("reportedEvents") as? [String];
+        self.userTrails = decoder.decodeObjectForKey("userTrails") as? [String];
+        self.userFollowers = decoder.decodeObjectForKey("userFollowers") as? [String];
+    }
+    
+    func encodeWithCoder(coder: NSCoder) {
+        coder.encodeObject(self.userID, forKey: "userID");
+        coder.encodeObject(self.userName, forKey: "userName");
+        coder.encodeObject(self.bio, forKey: "bio");
+        coder.encodeObject(self.myEvents, forKey: "myEvents");
+        coder.encodeObject(self.attendingEvents, forKey: "attendingEvents");
+        coder.encodeObject(self.userTrails, forKey: "userTrails");
+        coder.encodeObject(self.userFollowers, forKey: "userFollowers");
     }
     
     // TODO
