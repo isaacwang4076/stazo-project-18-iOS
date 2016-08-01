@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true);
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        let fb = Globals.fb
+//        let fb = Globals.fb
         // TEST EVENT PUSH
         //let e = Event(name: "First iOS event", description: "This is an iOS-generated event",
                       //creatorID: "1196215920412322", startTime: 69, endTime: 420)
@@ -71,34 +71,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //nw.pushToFirebase(["1196215920412322"])
         
         // TEST NOTIFICATION PULL
-        fb.child("NotifDatabase").child("1196215920412322").observeSingleEventOfType(FIRDataEventType.Value, withBlock: {
-            (userNotifs) in
-            for notifSnapshot in userNotifs.children {
-                var notif: Notification? = nil
-                let notifDict:NSDictionary = (notifSnapshot as! FIRDataSnapshot).value as! NSDictionary
-                if notifDict.valueForKey("type") as! Int == Globals.TYPE_NEW_FOLLOW {
-                    notif = NotificationNewFollow(notifDict: notifDict)
-                }
-                else if notifDict.valueForKey("type") as! Int == Globals.TYPE_COMMENT_EVENT {
-                    notif = NotificationCommentEvent(notifDict: notifDict)
-                }
-                else if notifDict.valueForKey("type") as! Int == Globals.TYPE_FRIEND_HOST {
-                    notif = NotificationFriendHost(notifDict: notifDict)
-                }
-                else if notifDict.valueForKey("type") as! Int == Globals.TYPE_JOINED_EVENT {
-                    notif = NotificationJoinedEvent(notifDict: notifDict)
-                }
-                else if notifDict.valueForKey("type") as! Int == Globals.TYPE_INVITE_EVENT {
-                    notif = NotificationInviteEvent(notifDict: notifDict)
-                }
-                else if notifDict.valueForKey("type") as! Int == Globals.TYPE_WELCOME {
-                    notif = NotificationWelcome(notifDict: notifDict)
-                }
-                
-                print("\nNotification:\n", notif!.generateMessage())
-
-            }
-        })
+//        fb.child("NotifDatabase").child("1196215920412322").observeSingleEventOfType(FIRDataEventType.Value, withBlock: {
+//            (userNotifs) in
+//            for notifSnapshot in userNotifs.children {
+//                var notif: Notification? = nil
+//                let notifDict:NSDictionary = (notifSnapshot as! FIRDataSnapshot).value as! NSDictionary
+//                if notifDict.valueForKey("type") as! Int == Globals.TYPE_NEW_FOLLOW {
+//                    notif = NotificationNewFollow(notifDict: notifDict)
+//                }
+//                else if notifDict.valueForKey("type") as! Int == Globals.TYPE_COMMENT_EVENT {
+//                    notif = NotificationCommentEvent(notifDict: notifDict)
+//                }
+//                else if notifDict.valueForKey("type") as! Int == Globals.TYPE_FRIEND_HOST {
+//                    notif = NotificationFriendHost(notifDict: notifDict)
+//                }
+//                else if notifDict.valueForKey("type") as! Int == Globals.TYPE_JOINED_EVENT {
+//                    notif = NotificationJoinedEvent(notifDict: notifDict)
+//                }
+//                else if notifDict.valueForKey("type") as! Int == Globals.TYPE_INVITE_EVENT {
+//                    notif = NotificationInviteEvent(notifDict: notifDict)
+//                }
+//                else if notifDict.valueForKey("type") as! Int == Globals.TYPE_WELCOME {
+//                    notif = NotificationWelcome(notifDict: notifDict)
+//                }
+//                
+//                print("\nNotification:\n", notif!.generateMessage())
+//
+//            }
+//        })
         
         return true
     }

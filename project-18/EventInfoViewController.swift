@@ -21,14 +21,14 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
         if (self.userHasJoined) {
             self.joinButton.setTitle("Joined", forState: UIControlState.Normal);
             self.joinButton.backgroundColor = UIColor.redColor();
-            //push userID to attendees list
-            
+            //handle user attend
+            Globals.me.attendEvent(self.event.getEventID(), eventName: self.event.getName(), creatorID: self.event.getCreatorID());
         }
         else {
             self.joinButton.setTitle("Join", forState: UIControlState.Normal);
             self.joinButton.backgroundColor = UIColor.yellowColor();
-            //remove userID from attendees list
-            
+            //handle user unattend
+            Globals.me.unattendEvent(self.event.getEventID());
         }
     }
     
@@ -62,9 +62,9 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBarHidden = false;
+        
         if (eventID != nil) {
-            pullAndShowEvent();
+            pullAndShowEvent(); //TODO:Hide or set everything to initial state before showing with info
             pullAndShowComments();
         }
         else {
@@ -76,6 +76,11 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
         swipeDown.direction = UISwipeGestureRecognizerDirection.Down
         self.view.addGestureRecognizer(swipeDown)
 //        swipeDown.delegate = self;
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated);
+        self.navigationController?.navigationBarHidden = false;
     }
 
     override func didReceiveMemoryWarning() {

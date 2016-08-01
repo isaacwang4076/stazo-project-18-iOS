@@ -57,7 +57,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let fb = Globals.fb;
+        //MOVE TO EVENT INFO VIEWWILLDISAPPEAR LATER TODO
         self.navigationController?.navigationBarHidden = true;
         
         //Register table view cell nib
@@ -66,12 +66,30 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.laterTableView.registerNib(UINib(nibName: "EventCell", bundle: nil), forCellReuseIdentifier: "Cell");
 
         
+        
+        //TODO: Add "No events are popular/today/later" signs
+        
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated);
+        self.navigationController?.navigationBarHidden = true;
+        pullAndDisplayEvents()
+    }
+    
+    func pullAndDisplayEvents() {
+        //Clear the 4 event arrays
+        self.eventArray = [];
+        self.popularEventArray = [];
+        self.todayEventArray = [];
+        self.laterEventArray = [];
+        
         //Pull list of events and add to eventArray
-        fb.child("Events").observeSingleEventOfType(.Value, withBlock: {
+        Globals.fb.child("Events").observeSingleEventOfType(.Value, withBlock: {
             (snapshot) in
             for eachEvent in snapshot.children.allObjects as! [FIRDataSnapshot] {
                 let eventDictionary = eachEvent.value as! [String:AnyObject];
-                let x = Event.init(eventDict: eventDictionary);
                 self.eventArray.append(Event.init(eventDict: eventDictionary));
             }
             
@@ -94,16 +112,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             //update table view accordingly
             self.updateTableViews();
         });
-        
-        
-        //TODO: Add "No events are popular/today/later" signs
-        
-        
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated);
-        self.navigationController?.navigationBarHidden = true;
+
     }
     
     func updateTableViews() {
@@ -242,6 +251,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     //when preparing to open eventinfo, set eventID to load
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "openEventInfo2") {
+            (segue.destinationViewController as! EventInfoViewController).hidesBottomBarWhenPushed = true;
             (segue.destinationViewController as! EventInfoViewController).setEventID(self.selectedEventID);
         }
     }

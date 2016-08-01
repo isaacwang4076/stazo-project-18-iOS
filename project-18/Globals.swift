@@ -22,11 +22,13 @@ struct Globals {
     static let TYPE_INVITE_EVENT: Int = 4
     static let TYPE_WELCOME: Int = 5
     
-    //FB user ID
-    static var currentFacebookToken = FBSDKAccessToken.currentAccessToken();
+    //FB Token FROM LAST SESSION
+    static var lastFBToken = FBSDKAccessToken.currentAccessToken();
     
     //Current user, will crash if null, but should always be non-null after login screen
-    static var me = NSKeyedUnarchiver.unarchiveObjectWithData(
-        NSUserDefaults.standardUserDefaults().objectForKey("CurrentUser") as! NSData
-    ) as! User;
+    static var me:User = User(userID: "69", userName: "eric");
+//        NSKeyedUnarchiver.unarchiveObjectWithData(
+//        NSUserDefaults.standardUserDefaults().objectForKey("CurrentUser") as! NSData
+//    ) as! User;
+//    
 }

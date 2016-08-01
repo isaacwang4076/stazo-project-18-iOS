@@ -14,15 +14,14 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         super.viewDidLoad()
     }
     
-    //Check if user is logged in, if logged in then push next view, otherwise show login button
+    //Check if user is logged in, if logged in then pull user and push next view, otherwise show login button
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated);
-        if (Globals.currentFacebookToken != nil) {
-            print("User logged in as: \(Globals.currentFacebookToken.userID)");
-            self.performSegueWithIdentifier("mainSegue", sender: self);
+        if (FBSDKAccessToken.currentAccessToken() != nil) {
+            print("User logged in");
+            handleLogin();
         }
         else {
-            print("User not logged in");
             let loginButton = FBSDKLoginButton();
             loginButton.readPermissions = ["email"]; //lol wut else do we want
             loginButton.center = self.view.center;
@@ -48,29 +47,29 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     //Go to next view upon successful login
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
-        print("fb login success");
+        print("Login successful");
         
-        if result.token != nil {
-            Globals.currentFacebookToken = result.token;
-        
-            ("fb token received");
+    }
+    
+    func handleLogin() {
+        if FBSDKAccessToken.currentAccessToken() != nil {
+            
+            print("checking firebase for user");
             //check if user already exists on our database
             Globals.fb.child("Users").observeSingleEventOfType(.Value, withBlock: {
                 snapshot in
-                print("checking firebase for user");
                 
                 //if user already exists, pull user and store in app
-                if (snapshot.hasChild(Globals.currentFacebookToken.userID)) {
+                if (snapshot.hasChild(FBSDKAccessToken.currentAccessToken().userID)) {
                     print("user exists");
-                    let pulledUserDict = snapshot.childSnapshotForPath(Globals.currentFacebookToken.userID).value as! NSDictionary;
+                    let pulledUserDict = snapshot.childSnapshotForPath(FBSDKAccessToken.currentAccessToken().userID).value as! NSDictionary;
                     let me = User(userDict: pulledUserDict);
-                    let preferences = NSUserDefaults.standardUserDefaults()
-                    preferences.setObject(NSKeyedArchiver.archivedDataWithRootObject(me), forKey: "CurrentUser");
-                    preferences.synchronize();
-                    print(Globals.me.userName);
+                    Globals.me = me;
+                    Globals.me.printUserInfo();
                     self.performSegueWithIdentifier("mainSegue", sender: self);
                 }
                     
+                    //TODO: TEST THIS
                 else {
                     print("user doesn't exist");
                     //if user doesn't exist on out database, make a new one from fb info, store in app, push to database
@@ -81,11 +80,10 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                             
                             //Create user, save to app info, push to our database, and segue to main view
                             let me = User(userID: result["id"] as! String, userName: result["name"] as! String);
-                            let preferences = NSUserDefaults.standardUserDefaults()
-                            preferences.setObject(me, forKey: "CurrentUser");
-                            preferences.synchronize();
+                            Globals.me = me;
+                            print("New user----");
+                            Globals.me.printUserInfo();
                             me.pushToFirebase();
-                            
                             self.performSegueWithIdentifier("mainSegue", sender: self);
                         }
                     });
@@ -93,11 +91,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 
             });
             
-//            self.performSegueWithIdentifier("mainSegue", sender: self);
-            
         }
     }
-
     
     // MARK: - Navigation
 

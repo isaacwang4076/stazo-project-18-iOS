@@ -60,8 +60,8 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchR
         filteredEventIDs = allEventIDs.filter { event in
             return event.lowercaseString.containsString(searchText.lowercaseString)
         }
-        print("Filtered event IDs:")
-        print(filteredEventIDs)
+//        print("Filtered event IDs:")
+//        print(filteredEventIDs)
         tableView.reloadData()
     }
     
@@ -72,7 +72,7 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchR
     // TABLE VIEW ------------------------------------------------------------------------------------
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("/n filteredEventIDs.count is ", self.filteredEventIDs.count)
+//        print("/n filteredEventIDs.count is ", self.filteredEventIDs.count)
 
         return self.filteredEventIDs.count;
     }
