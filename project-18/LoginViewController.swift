@@ -10,19 +10,25 @@ import UIKit
 
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 
-    //Check if user is logged in, if logged in then push next view, otherwise show login button
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    //Check if user is logged in, if logged in then push next view, otherwise show login button
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated);
         if (Globals.currentFacebookToken != nil) {
             print("User logged in as: \(Globals.currentFacebookToken.userID)");
             self.performSegueWithIdentifier("mainSegue", sender: self);
         }
-        
-        let loginButton = FBSDKLoginButton();
-        loginButton.readPermissions = ["email"]; //lol wut else do we want
-        loginButton.center = self.view.center;
-        loginButton.delegate = self;
-        view.addSubview(loginButton); //ignore warnings
+        else {
+            print("User not logged in");
+            let loginButton = FBSDKLoginButton();
+            loginButton.readPermissions = ["email"]; //lol wut else do we want
+            loginButton.center = self.view.center;
+            loginButton.delegate = self;
+            view.addSubview(loginButton); //ignore warnings
+        }
     }
 
     override func didReceiveMemoryWarning() {
