@@ -210,16 +210,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                 eventToShow = self.laterEventArray[indexPath.item];
             }
             
-            cell.eventName.text = eventToShow.getName();
-            cell.numGoing.text = "\(eventToShow.getPopularity())";
-            
-            //start date TODO:correct date formatting? I think the android one is inconsistent
-            let date = NSDate(timeIntervalSince1970: NSTimeInterval(eventToShow.getStartTime())/1000);
-            let formatter = NSDateFormatter();
-            formatter.dateFormat = "MMM dd HH:mm a";
-            let startTimeString = formatter.stringFromDate(date);
-            //substringing to add "at"
-            cell.eventTime.text = startTimeString.substringToIndex(startTimeString.startIndex.advancedBy(6)) + " at" + (startTimeString.substringFromIndex(startTimeString.startIndex.advancedBy(6)));
+            populateCell(cell, eventToShow: eventToShow)
         }
         return cell;
     }

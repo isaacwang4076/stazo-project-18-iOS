@@ -34,6 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             for eventSnapshot in allEventsSnapshot.children.allObjects as! [FIRDataSnapshot] {
                 let eventDict:NSDictionary = eventSnapshot.value as! [String : AnyObject]
                 Globals.eventsNameToID[eventDict.valueForKeyPath("name") as! String] = eventDict.valueForKeyPath("event_id") as? String
+                Globals.eventsIDToEvent[eventDict.valueForKeyPath("event_id") as! String] = Event(eventDict: eventDict)
             }
         })
         

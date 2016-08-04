@@ -43,6 +43,8 @@ class MapViewController: UIViewController, UISearchBarDelegate,
         self.definesPresentationContext = true*/
         
         mapSearchBar.delegate = self
+        self.tableView.registerNib(UINib(nibName: "EventCell", bundle: nil), forCellReuseIdentifier: "Cell");
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -91,12 +93,16 @@ class MapViewController: UIViewController, UISearchBarDelegate,
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+        let cell:EventTableViewCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! EventTableViewCell;
         
-        cell.textLabel?.text = self.filteredEventNames[indexPath.row]
+        /*cell.textLabel?.text = self.filteredEventNames[indexPath.row]
 //        cell.textLabel?.text = "yeet"
         //cell.backgroundColor = UIColor.whiteColor()
-        self.view.bringSubviewToFront(tableView)
+        self.view.bringSubviewToFront(tableView)*/
+        
+        let eventToShow:Event = Globals.eventsIDToEvent[Globals.eventsNameToID[self.filteredEventNames[indexPath.row]]!]!
+        
+        populateCell(cell, eventToShow: eventToShow)
         
         return cell
     }
