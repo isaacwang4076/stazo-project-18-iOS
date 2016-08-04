@@ -14,10 +14,12 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         super.viewDidLoad()
     }
     
-    //Check if user is logged in, if logged in then push next view, otherwise show login button
+    //Check if user is logged in, if logged in then pull user and push next view, otherwise show login button
     override func viewDidAppear(animated: Bool) {
-        if (Globals.me != nil) {
-            self.performSegueWithIdentifier("mainSegue", sender: self)
+        super.viewDidAppear(animated);
+        if (FBSDKAccessToken.currentAccessToken() != nil) {
+            print("User logged in");
+            handleLogin();
         }
         else {
             let loginButton = FBSDKLoginButton();
@@ -45,11 +47,52 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     //Go to next view upon successful login
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
-        if (Globals.me != nil) {
-            self.performSegueWithIdentifier("mainSegue", sender: self)
+        print("Login successful");
+        
+    }
+    
+    func handleLogin() {
+        if FBSDKAccessToken.currentAccessToken() != nil {
+            
+            print("checking firebase for user");
+            //check if user already exists on our database
+            Globals.fb.child("Users").observeSingleEventOfType(.Value, withBlock: {
+                snapshot in
+                
+                //if user already exists, pull user and store in app
+                if (snapshot.hasChild(FBSDKAccessToken.currentAccessToken().userID)) {
+                    print("user exists");
+                    let pulledUserDict = snapshot.childSnapshotForPath(FBSDKAccessToken.currentAccessToken().userID).value as! NSDictionary;
+                    let me = User(userDict: pulledUserDict);
+                    Globals.me = me;
+                    Globals.me.printUserInfo();
+                    self.performSegueWithIdentifier("mainSegue", sender: self);
+                }
+                    
+                    //TODO: TEST THIS
+                else {
+                    print("user doesn't exist");
+                    //if user doesn't exist on out database, make a new one from fb info, store in app, push to database
+                    FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name"]).startWithCompletionHandler({
+                        (connection, result, error) -> Void in
+                        if (error == nil) {
+                            print(result["name"]);
+                            
+                            //Create user, save to app info, push to our database, and segue to main view
+                            let me = User(userID: result["id"] as! String, userName: result["name"] as! String);
+                            Globals.me = me;
+                            print("New user----");
+                            Globals.me.printUserInfo();
+                            me.pushToFirebase();
+                            self.performSegueWithIdentifier("mainSegue", sender: self);
+                        }
+                    });
+                }
+                
+            });
+            
         }
     }
-
     
     // MARK: - Navigation
 

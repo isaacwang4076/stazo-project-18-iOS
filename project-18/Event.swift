@@ -52,11 +52,10 @@ class Event {
         self.creatorID = eventDict.valueForKey("creator_id") as! String?
         self.endTime = (eventDict.valueForKey("endTime") as! NSNumber).unsignedLongLongValue
         self.eventID = eventDict.valueForKey("event_id") as! String?
-        self.popularity = eventDict.valueForKey("popularity") as! UInt
+        self.popularity = eventDict.valueForKey("popularity") as! UInt //crashes when transactions are still going through from inc/dec
         self.reports = eventDict.valueForKey("reports") as! UInt
         self.startTime = (eventDict.valueForKey("startTime") as! NSNumber).unsignedLongLongValue
-//        self.attendees = (eventDict.valueForKey("attendees") as! NSDictionary).allValues as? [String]
-        //smth breaks when attendees itself is pulled as a json object
+        self.attendees = (eventDict.valueForKey("attendees") as? NSDictionary)?.allValues as? [String];
     }
     
     // TODO location constructor
@@ -175,8 +174,8 @@ class Event {
         self.endTime = endTime
     }
     // TODO location getter/setter
-    func getAttendees() -> [String] {
-        return attendees!
+    func getAttendees() -> [String]? {
+        return attendees
     }
     func setAttendees(attendees: [String]) {
         self.attendees = attendees
@@ -185,7 +184,7 @@ class Event {
         return popularity
     }
     func setPopularity(popularity: UInt) {
-        self.popularity = reports
+        self.popularity = popularity
     }
     func getReports() -> UInt {
         return reports

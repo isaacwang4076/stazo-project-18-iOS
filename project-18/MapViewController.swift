@@ -26,6 +26,9 @@ class MapViewController: UIViewController, UISearchBarDelegate,
 
     override func viewDidLoad() {
         super.viewDidLoad()
+//        self.tabBarController?.tabBar.translucent = false
+        self.tabBarController?.tabBar.barTintColor = UIColor.whiteColor()
+        self.tabBarController?.tabBar.tintColor = UIColor.blueColor()
 
         // Do any additional setup after loading the view.
         
@@ -40,7 +43,6 @@ class MapViewController: UIViewController, UISearchBarDelegate,
         self.definesPresentationContext = true*/
         
         mapSearchBar.delegate = self
-
     }
     
     override func didReceiveMemoryWarning() {
@@ -62,8 +64,8 @@ class MapViewController: UIViewController, UISearchBarDelegate,
         filteredEventNames = Globals.eventsNameToID.keys.filter { event in
             return event.lowercaseString.containsString(searchText.lowercaseString)
         }
-        print("Filtered event IDs:")
-        print(filteredEventNames)
+//        print("Filtered event IDs:")
+//        print(filteredEventIDs)
         tableView.reloadData()
     }
     
@@ -74,7 +76,7 @@ class MapViewController: UIViewController, UISearchBarDelegate,
     // TABLE VIEW ------------------------------------------------------------------------------------
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("/n filteredEventIDs.count is ", self.filteredEventNames.count)
+        //print("/n filteredEventIDs.count is ", self.filteredEventNames.count)
         if self.filteredEventNames.count == 0 {
             tableView.hidden = true
         } else {
