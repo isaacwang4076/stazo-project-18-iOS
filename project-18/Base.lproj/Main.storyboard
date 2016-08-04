@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Map View Controller-->
+        <!--Item-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
                 <viewController id="9pv-A4-QxB" customClass="MapViewController" customModule="project_18" customModuleProvider="target" sceneMemberID="viewController">
@@ -75,25 +75,42 @@
                                     <outlet property="delegate" destination="9pv-A4-QxB" id="WzN-by-n9T"/>
                                 </connections>
                             </tableView>
+                            <searchBar contentMode="redraw" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SrR-RA-gSJ">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="KQZ-1w-vlD" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="Anv-mc-hzm"/>
+                            <constraint firstItem="SrR-RA-gSJ" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" id="Odc-CU-qXz"/>
+                            <constraint firstItem="SrR-RA-gSJ" firstAttribute="width" secondItem="tsR-hK-woN" secondAttribute="width" id="Vnb-X5-zDx"/>
                             <constraint firstItem="mwK-Ds-Ihn" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="Xkt-jz-9wS"/>
                             <constraint firstItem="jjU-KU-FpA" firstAttribute="top" secondItem="KQZ-1w-vlD" secondAttribute="bottom" constant="98" id="ZFj-NZ-Atw"/>
                             <constraint firstItem="KQZ-1w-vlD" firstAttribute="centerX" secondItem="jjU-KU-FpA" secondAttribute="centerX" id="ZT2-Vp-hyo"/>
+                            <constraint firstItem="mwK-Ds-Ihn" firstAttribute="top" secondItem="SrR-RA-gSJ" secondAttribute="bottom" id="aOq-TP-QYb"/>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="jjU-KU-FpA" secondAttribute="bottom" constant="126" id="buh-DY-mgA"/>
                             <constraint firstAttribute="trailingMargin" secondItem="mwK-Ds-Ihn" secondAttribute="trailing" constant="-20" id="hrD-a6-tvK"/>
-                            <constraint firstItem="mwK-Ds-Ihn" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" id="neT-GD-s4U"/>
                             <constraint firstItem="mwK-Ds-Ihn" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="-20" id="ryj-Tf-DU7"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="KYf-0D-YbG"/>
+                    <tabBarItem key="tabBarItem" title="Item" id="pP4-GY-OGz"/>
+                    <navigationItem key="navigationItem" id="o0a-0j-kzJ"/>
                     <connections>
+                        <outlet property="mapSearchBar" destination="SrR-RA-gSJ" id="Nce-vc-nAe"/>
+                        <outlet property="searchDisplayController" destination="Kx4-qQ-1zR" id="1MY-8g-dLg"/>
                         <outlet property="tableView" destination="mwK-Ds-Ihn" id="eJd-bO-PWd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="Kx4-qQ-1zR">
+                    <connections>
+                        <outlet property="delegate" destination="9pv-A4-QxB" id="y8Q-FV-Kgp"/>
+                        <outlet property="searchContentsController" destination="9pv-A4-QxB" id="cJr-eh-5m0"/>
+                        <outlet property="searchResultsDataSource" destination="9pv-A4-QxB" id="OaS-UJ-a1S"/>
+                        <outlet property="searchResultsDelegate" destination="9pv-A4-QxB" id="GZR-po-EMv"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="229" y="-692"/>
         </scene>
@@ -558,10 +575,10 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="kgO-wp-QcL" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
                         <segue destination="zC7-TW-ZJg" kind="relationship" relationship="viewControllers" id="mH6-EL-fYj"/>
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
                         <segue destination="TGV-4b-Wbw" kind="relationship" relationship="viewControllers" id="zhW-9a-wHy"/>
+                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="Xni-vR-b1P"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
@@ -958,30 +975,10 @@
             </objects>
             <point key="canvasLocation" x="596" y="817"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="uf5-IT-Tpt">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kgO-wp-QcL" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="ic_actionbar_map2.png" selectedImage="ic_actionbar_map2.png" id="acW-dT-cKf"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cdD-Ag-0wv">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="rootViewController" id="fa3-VX-2SA"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="q2Z-Te-K91" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-615" y="-676"/>
-        </scene>
     </scenes>
     <resources>
         <image name="ic_actionbar_browse2.png" width="36" height="36"/>
         <image name="ic_actionbar_head.png" width="36" height="36"/>
-        <image name="ic_actionbar_map2.png" width="36" height="36"/>
         <image name="ic_actionbar_notif.png" width="30" height="30"/>
     </resources>
 </document>

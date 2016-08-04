@@ -10,13 +10,17 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
-class MapViewController: UIViewController, UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate,
+class MapViewController: UIViewController, UISearchBarDelegate,
  UITableViewDelegate, UITableViewDataSource {
     
-    var searchController : UISearchController!
+    //var searchController : UISearchController!
     
     @IBOutlet var tableView: UITableView!
-
+    //@IBOutlet weak var mapSearchBar: UISearchBar!
+    @IBOutlet weak var mapSearchBar: UISearchBar!
+    
+    var searchController: UISearchController!
+    
     var filteredEventNames = [String]()
     //var allEvents:Dictionary<String, Event> = [:]
 
@@ -27,15 +31,16 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchR
         
         // SEARCH STUFF
         
-        self.searchController = UISearchController(searchResultsController:  nil)
+        /*self.searchController = UISearchController(searchResultsController:  nil)
         self.searchController.searchResultsUpdater = self
         self.searchController.delegate = self
         self.searchController.searchBar.delegate = self
         self.searchController.hidesNavigationBarDuringPresentation = false
         self.searchController.dimsBackgroundDuringPresentation = true
-        self.navigationItem.titleView = searchController.searchBar
-        self.definesPresentationContext = true
+        self.definesPresentationContext = true*/
         
+        mapSearchBar.delegate = self
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -44,10 +49,14 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchR
     }
     
     // SEARCH ----------------------------------------------------------------------------------------
-
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
-        filterContentForSearchText(searchController.searchBar.text!)
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        filterContentForSearchText(searchText)
     }
+
+    /*func updateSearchResultsForSearchController(searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }*/
     
     func filterContentForSearchText(searchText: String, scope: String = "All") {
         filteredEventNames = Globals.eventsNameToID.keys.filter { event in
@@ -91,8 +100,9 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchR
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let eventName = (tableView.cellForRowAtIndexPath(indexPath) as! EventCell).eventName.text!
-        print("\nEvent with name: ", eventName, " and id: ", Globals.eventsNameToID[eventName], " pressed.")
+        //let eventName = (tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! EventCell).eventName.text!
+        
+        //print("\nEvent with name: ", eventName, " and id: ", Globals.eventsNameToID[eventName], " pressed.")
     }
     
     // -----------------------------------------------------------------------------------------------
