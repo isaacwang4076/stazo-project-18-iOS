@@ -15,6 +15,7 @@ class MapViewController: UIViewController, UISearchBarDelegate,
     
     @IBOutlet var tableView: UITableView!           // The table view for search results
     @IBOutlet weak var mapSearchBar: UISearchBar!   // The search bar
+    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     
     var searchController: UISearchController!       // Search bar controller
     var filteredEventNames = [String]()             // Event names that fit the query
@@ -68,6 +69,9 @@ class MapViewController: UIViewController, UISearchBarDelegate,
         } else {
             tableView.hidden = false
         }
+        
+        self.tableViewHeightConstraint.constant = CGFloat(self.filteredEventNames.count) * 70;
+
         
         // Return number of matching queries
         return self.filteredEventNames.count;

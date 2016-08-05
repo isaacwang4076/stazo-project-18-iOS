@@ -14,8 +14,11 @@ class NotificationViewController: UIViewController {
     
     let fb = Globals.fb
     
+    @IBOutlet weak var notificationTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        pullAndDisplayNotifications()
     }
     
     func pullAndDisplayNotifications() {
@@ -43,7 +46,7 @@ class NotificationViewController: UIViewController {
                                 notif = NotificationWelcome(notifDict: notifDict)
                             }
                            
-                            print("\nNotification:\n", notif!.generateMessage())
+                            //print("\nNotification:\n", notif!.generateMessage())
             
                         }
                     })
