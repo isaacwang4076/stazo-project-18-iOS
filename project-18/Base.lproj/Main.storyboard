@@ -993,10 +993,10 @@
             </objects>
             <point key="canvasLocation" x="-1335" y="1218"/>
         </scene>
-        <!--View Controller-->
+        <!--Notification View Controller-->
         <scene sceneID="InO-xu-Ldo">
             <objects>
-                <viewController id="TGV-4b-Wbw" sceneMemberID="viewController">
+                <viewController id="TGV-4b-Wbw" customClass="NotificationViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Uc2-1L-ddK"/>
                         <viewControllerLayoutGuide type="bottom" id="QRb-20-Zf0"/>
