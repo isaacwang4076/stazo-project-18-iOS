@@ -22,13 +22,14 @@ class MapViewController: UIViewController, UISearchBarDelegate,
     var searchController: UISearchController!
     
     var filteredEventNames = [String]()
-    //var allEvents:Dictionary<String, Event> = [:]
+    var selectedEventID: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 //        self.tabBarController?.tabBar.translucent = false
         self.tabBarController?.tabBar.barTintColor = UIColor.whiteColor()
         self.tabBarController?.tabBar.tintColor = UIColor.blueColor()
+        self.navigationController?.navigationBarHidden = true;
 
         // Do any additional setup after loading the view.
         
@@ -111,6 +112,8 @@ class MapViewController: UIViewController, UISearchBarDelegate,
         //let eventName = (tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! EventCell).eventName.text!
         
         //print("\nEvent with name: ", eventName, " and id: ", Globals.eventsNameToID[eventName], " pressed.")
+        self.selectedEventID = Globals.eventsNameToID[self.filteredEventNames[indexPath.row]];
+        self.performSegueWithIdentifier("openEventInfo", sender: self);
     }
     
     // -----------------------------------------------------------------------------------------------
@@ -124,7 +127,8 @@ class MapViewController: UIViewController, UISearchBarDelegate,
         
         //if it's the eventinfo segue, set the event id
         if (segue.identifier == "openEventInfo") {
-            (segue.destinationViewController as! EventInfoViewController).setEventID("yooYSUWICTOWW");
+            (segue.destinationViewController as! EventInfoViewController).hidesBottomBarWhenPushed = true;
+            (segue.destinationViewController as! EventInfoViewController).setEventID(self.selectedEventID!);
         }
         // Pass the selected object to the new view controller.
     }
