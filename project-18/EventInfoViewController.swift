@@ -191,12 +191,12 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
         return true
     }
     
-//    override func viewWillDisappear(animated: Bool) {
-//        super.viewWillDisappear(animated);
-//        if ((self.navigationController) != nil) {
-//            self.navigationController?.navigationBarHidden = true;
-//        }
-//    }
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated);
+        if ((self.navigationController) != nil) {
+            self.navigationController?.navigationBarHidden = true;
+        }
+    }
     
     /* Comment table data source and delegates ---------------------------------------*/
     

@@ -57,8 +57,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //MOVE TO EVENT INFO VIEWWILLDISAPPEAR LATER TODO
-        self.navigationController?.navigationBarHidden = true;
         
         //Register table view cell nib
         self.popularTableView.registerNib(UINib(nibName: "EventCell", bundle: nil), forCellReuseIdentifier: "Cell");
