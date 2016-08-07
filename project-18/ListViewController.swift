@@ -67,7 +67,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         //TODO: Add "No events are popular/today/later" signs
         
-        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -218,19 +217,18 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         //get eventID from respective event array based off of category and row selected and segue to eventInfo
         if (tableView == self.popularTableView) {
             self.selectedEventID = self.popularEventArray[indexPath.row].getEventID();
-            self.performSegueWithIdentifier("openEventInfo2", sender: self);
             print("event: \(self.popularEventArray[indexPath.row].getName())");
         }
         if (tableView == self.todayTableView) {
             self.selectedEventID = self.todayEventArray[indexPath.row].getEventID();
-            self.performSegueWithIdentifier("openEventInfo2", sender: self);
             print("event: \(self.todayEventArray[indexPath.row].getName())");
         }
         if (tableView == self.laterTableView) {
             self.selectedEventID = self.laterEventArray[indexPath.row].getEventID();
-            self.performSegueWithIdentifier("openEventInfo2", sender: self);
             print("event: \(self.laterEventArray[indexPath.row].getName())");
         }
+        
+        self.performSegueWithIdentifier("openEventInfo2", sender: self);
         //get rid of the highlighting
         tableView.deselectRowAtIndexPath(indexPath, animated: true);
     }

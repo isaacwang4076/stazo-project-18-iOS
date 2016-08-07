@@ -9,8 +9,9 @@
 import UIKit
 import FirebaseDatabase
 
+//Current bug: only allow back button after transaction completes, if user goes super fast, it will crash
 
-class EventInfoViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class EventInfoViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
 
     /* UI STUFF ----------------------------------------------------*/
     //Event name and join button (reference and action func)
@@ -22,13 +23,13 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
             self.joinButton.setTitle("Joined", forState: UIControlState.Normal);
             self.joinButton.backgroundColor = UIColor.redColor();
             //handle user attend
-            Globals.me.attendEvent(self.event.getEventID(), eventName: self.event.getName(), creatorID: self.event.getCreatorID());
+            Globals.me.attendEvent(self.event!.getEventID(), eventName: self.event!.getName(), creatorID: self.event!.getCreatorID());
         }
         else {
             self.joinButton.setTitle("Join", forState: UIControlState.Normal);
             self.joinButton.backgroundColor = UIColor.yellowColor();
             //handle user unattend
-            Globals.me.unattendEvent(self.event.getEventID());
+            Globals.me.unattendEvent(self.event!.getEventID());
         }
     }
     
@@ -45,6 +46,7 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
     @IBOutlet var joinedLabel: UILabel!
     @IBAction func inviteClick(sender: AnyObject) {}
     @IBOutlet var joinedView: UIView!
+    @IBOutlet var joinedCollectionView: UICollectionView!
     
     
     //Photo and comment views and buttons
@@ -56,9 +58,10 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
     
     
     private var eventID:String? //will null check before pulling
-    private var event:Event! //guarenteed non-null from pull
+    private var event:Event? //guarenteed non-null after pull
     private var comments:[Comment] = [] //list of comments
     private var userHasJoined:Bool = false;
+    private var joinedImages:[UIImage?] = []; //images of ppl who joined to be show in joinedcollectionview
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,12 +99,14 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
             
             //update the view with event info
             //name
-            self.eventNameLabel.text = self.event.getName();
+            self.eventNameLabel.text = self.event!.getName();
             
-            //update joined bool and join button
-            if self.event.getAttendees() != nil {
-                self.userHasJoined = (self.event.getAttendees()!.contains(Globals.me.userID));
-                self.joinedLabel.text = "Joined (\(self.event.getAttendees()!.count))";
+            //update joined bool, joined button, joined label, joined collection view
+            if self.event!.getAttendees() != nil {
+                self.userHasJoined = (self.event!.getAttendees()!.contains(Globals.me.userID));
+                self.joinedLabel.text = "Joined (\(self.event!.getAttendees()!.count))";
+                self.joinedImages = [UIImage?](count: self.event!.getAttendees()!.count, repeatedValue: nil);
+                self.updateJoinedImages();
             }
             if (self.userHasJoined) {
                 self.joinButton.setTitle("Joined", forState: UIControlState.Normal);
@@ -112,8 +117,8 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
                 self.joinButton.backgroundColor = UIColor.yellowColor();
             }
             
-            //start date
-            let date = NSDate(timeIntervalSince1970: NSTimeInterval(self.event.getStartTime())/1000);
+            //start date TODO: Add "today"?
+            let date = NSDate(timeIntervalSince1970: NSTimeInterval(self.event!.getStartTime())/1000);
             let formatter = NSDateFormatter();
             formatter.dateFormat = "MMM dd HH:mm a";
             let startTimeString = formatter.stringFromDate(date);
@@ -128,11 +133,11 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
             
             
             //description with auto-resize to fit text
-            self.descriptionLabel.text = self.event.getDescription();
+            self.descriptionLabel.text = self.event!.getDescription();
             self.descriptionLabel.sizeToFit();
             
             //creator name with another fb pull, non-null guarentee
-            Globals.fb.child("Users").child(self.event.getCreatorID()).child("name").observeSingleEventOfType(.Value, withBlock: {
+            Globals.fb.child("Users").child(self.event!.getCreatorID()).child("name").observeSingleEventOfType(.Value, withBlock: {
                 snapshot in
                 self.creatorNameLabel.text = String(snapshot.value!);
             });
@@ -140,7 +145,7 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
             
             //creator image with URL request
             let width = "250";
-            let urlString = "https://graph.facebook.com/" + self.event.getCreatorID()
+            let urlString = "https://graph.facebook.com/" + self.event!.getCreatorID()
                 + "/picture?width=" + width;
             let url = NSURL(string: urlString);
             //send request to get image
@@ -158,6 +163,27 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
 //          self.creatorImageView.image = UIImage(data: NSData(contentsOfURL: NSURL(string: urlString)!)!);
             
         });
+    }
+    
+    func updateJoinedImages() {
+        for i in 0 ..< self.joinedImages.count {
+            let width = "50";
+            let urlString = "https://graph.facebook.com/" + self.event!.getAttendees()![i]
+                + "/picture?width=" + width;
+            let url = NSURL(string: urlString);
+            //send request to get image
+            let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {
+                (data, response, error) in
+                //if data grabbed, updated image if in main thread
+                if (data != nil) {
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.joinedImages[i] = UIImage(data: data!);
+                        self.joinedCollectionView.reloadData();
+                    });
+                }
+            };
+            task.resume();
+        }
     }
     
     func pullAndShowComments() {
@@ -223,6 +249,34 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     /*--------------------------------------------------------------------------------*/
+    
+    
+    
+    /* Joined collection table data source and delegates -----------------------------*/
+    
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1;
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if (self.event != nil) {
+            return (self.event!.getAttendees()?.count)!;
+        }
+        return 0;
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! JoinedCell;
+        cell.backgroundColor = UIColor.whiteColor();
+        if (self.joinedImages[indexPath.item] != nil) {
+            cell.imageView.image = self.joinedImages[indexPath.item];
+        }
+        return cell;
+    }
+    
+    
+    /*--------------------------------------------------------------------------------*/
+    
     
     func setEventID(eventID: String) {
         self.eventID = eventID;

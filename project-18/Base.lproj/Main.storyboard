@@ -635,9 +635,54 @@
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pmW-UI-reg">
                                                 <rect key="frame" x="20" y="479" width="560" height="81"/>
+                                                <subviews>
+                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="JM9-yl-MzE">
+                                                        <rect key="frame" x="0.0" y="0.0" width="560" height="81"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bHZ-vQ-q4c">
+                                                            <size key="itemSize" width="50" height="50"/>
+                                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                        </collectionViewFlowLayout>
+                                                        <cells>
+                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="7Ao-pG-mfc" customClass="JoinedCell" customModule="project_18" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                    <subviews>
+                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ntF-fZ-BW5">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                        </imageView>
+                                                                    </subviews>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                </view>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="trailingMargin" secondItem="ntF-fZ-BW5" secondAttribute="trailing" constant="-8" id="CDM-5r-11M"/>
+                                                                    <constraint firstItem="ntF-fZ-BW5" firstAttribute="top" secondItem="7Ao-pG-mfc" secondAttribute="topMargin" constant="-8" id="EZa-IL-D7i"/>
+                                                                    <constraint firstAttribute="bottomMargin" secondItem="ntF-fZ-BW5" secondAttribute="bottom" constant="-8" id="Plf-xj-M2U"/>
+                                                                    <constraint firstItem="ntF-fZ-BW5" firstAttribute="leading" secondItem="7Ao-pG-mfc" secondAttribute="leadingMargin" constant="-8" id="Wv4-Hl-h2e"/>
+                                                                </constraints>
+                                                                <connections>
+                                                                    <outlet property="imageView" destination="ntF-fZ-BW5" id="8id-Ti-viS"/>
+                                                                </connections>
+                                                            </collectionViewCell>
+                                                        </cells>
+                                                        <connections>
+                                                            <outlet property="dataSource" destination="Yjn-ES-LFB" id="c6S-Ow-0Zu"/>
+                                                            <outlet property="delegate" destination="Yjn-ES-LFB" id="oS9-5Y-sUX"/>
+                                                        </connections>
+                                                    </collectionView>
+                                                </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
+                                                    <constraint firstItem="JM9-yl-MzE" firstAttribute="top" secondItem="pmW-UI-reg" secondAttribute="top" id="1Ca-u5-Si1"/>
                                                     <constraint firstAttribute="width" constant="560" id="BNE-lV-C5D"/>
+                                                    <constraint firstAttribute="trailing" secondItem="JM9-yl-MzE" secondAttribute="trailing" id="O0R-J5-ZZq"/>
+                                                    <constraint firstItem="JM9-yl-MzE" firstAttribute="leading" secondItem="pmW-UI-reg" secondAttribute="leading" id="SNf-cc-eWA"/>
+                                                    <constraint firstAttribute="bottom" secondItem="JM9-yl-MzE" secondAttribute="bottom" id="U0Y-sb-2Cd"/>
                                                     <constraint firstAttribute="height" constant="81" id="epW-CE-ANU"/>
                                                 </constraints>
                                                 <variation key="default">
@@ -800,6 +845,7 @@
                         <outlet property="descriptionLabel" destination="pTH-CP-lYf" id="CqW-ew-xxL"/>
                         <outlet property="eventNameLabel" destination="fKC-tl-ZlC" id="qsv-Jc-iWD"/>
                         <outlet property="joinButton" destination="gEz-rH-N2Z" id="JB5-km-XNu"/>
+                        <outlet property="joinedCollectionView" destination="JM9-yl-MzE" id="VBO-r5-qt3"/>
                         <outlet property="joinedLabel" destination="cWR-XC-nnc" id="hES-xt-W26"/>
                         <outlet property="joinedView" destination="pmW-UI-reg" id="mTy-p8-uj9"/>
                         <outlet property="lengthLabel" destination="VxG-dz-db9" id="pDu-RQ-H4e"/>
