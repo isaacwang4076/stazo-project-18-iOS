@@ -47,7 +47,7 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
     @IBAction func inviteClick(sender: AnyObject) {}
     @IBOutlet var joinedView: UIView!
     @IBOutlet var joinedCollectionView: UICollectionView!
-    
+    @IBOutlet var joinedCollectionViewHeightConstraint: NSLayoutConstraint!
     
     //Photo and comment views and buttons
     @IBAction func viewPhotoClick(sender: AnyObject) {}
@@ -260,6 +260,11 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if (self.event != nil) {
+            var height = (self.event?.getAttendees()?.count)! / 5;
+            if ((self.event?.getAttendees()?.count)! % 5 != 0) {
+                height += 1;
+            }
+            self.joinedCollectionViewHeightConstraint.constant = CGFloat(height*50 + (height-1)*10);
             return (self.event!.getAttendees()?.count)!;
         }
         return 0;

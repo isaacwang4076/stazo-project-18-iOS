@@ -92,7 +92,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             
             //process the events into table view categories
-            print("Number of events: \(self.eventArray.count)");
             for i in 0 ..< self.eventArray.count {
                 if (self.eventArray[i].getPopularity() >= UInt(self.POPULAR_THRESHOLD)) {
                     self.popularEventArray.append(self.eventArray[i]);
@@ -217,15 +216,12 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         //get eventID from respective event array based off of category and row selected and segue to eventInfo
         if (tableView == self.popularTableView) {
             self.selectedEventID = self.popularEventArray[indexPath.row].getEventID();
-            print("event: \(self.popularEventArray[indexPath.row].getName())");
         }
         if (tableView == self.todayTableView) {
             self.selectedEventID = self.todayEventArray[indexPath.row].getEventID();
-            print("event: \(self.todayEventArray[indexPath.row].getName())");
         }
         if (tableView == self.laterTableView) {
             self.selectedEventID = self.laterEventArray[indexPath.row].getEventID();
-            print("event: \(self.laterEventArray[indexPath.row].getName())");
         }
         
         self.performSegueWithIdentifier("openEventInfo2", sender: self);
