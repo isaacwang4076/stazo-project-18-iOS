@@ -9,10 +9,8 @@
 import UIKit
 
 class CreateEventViewController: UIViewController {
-
-    @IBOutlet var eventNameTextView: UITextField!
-    @IBOutlet var descriptionTextView: UITextField!
-
+    
+    var createEventTable:CreateEventTable?;
     
     @IBAction func addImageClick(sender: AnyObject) {
     }
@@ -25,7 +23,7 @@ class CreateEventViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.navigationBarHidden = false;
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,31 +36,45 @@ class CreateEventViewController: UIViewController {
      * Pops up a message if fields are wrong/empty and returns false. Returns true if event is made and can proceed.
      */
     func createEvent() -> Bool {
-        /*var newEvent = Event.init();
         
-        if (self.eventNameTextView.text != nil) {
-            newEvent.setName(self.eventNameTextView.text!);
+        //take out leading and trailing whitespace and check if event name is empty
+        let eventName = self.createEventTable!.eventName.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet());
+        let eventDescription = self.createEventTable!.eventDescription.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet());
+        if (!eventName.isEmpty) {
+            print(self.createEventTable!.eventName.text!);
+            if (self.createEventTable!.tempStart != 0) {
+                if (self.createEventTable!.tempEnd != 0) {
+                    Event.init(name: eventName, description: eventDescription, creatorID: Globals.me.userID , startTime: UInt64(self.createEventTable!.tempStart), endTime: UInt64(self.createEventTable!.tempEnd));
+                    print("made event");
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+            else {
+                return false;
+            }
+            
         }
         else {
-            print("no event name message");
+            print("please enter name");
+            return false;
         }
         
-        if (self.descriptionTextView.text != nil) {
-            newEvent.setDescription(self.descriptionTextView.text!);
-        }*/
         
-        
-        return true;
+//        return true;
     }
 
-    /*
+    
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    // Subview access
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if (segue.identifier == "showCreateEventTable") {
+            self.createEventTable = segue.destinationViewController as! CreateEventTable;
+        }
     }
-    */
+ 
 
 }

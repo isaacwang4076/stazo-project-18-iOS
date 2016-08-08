@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Firebase
 import FirebaseDatabase
 
 class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -58,7 +57,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Register table view cell nib
+        //Register table view cell nibs
         self.popularTableView.registerNib(UINib(nibName: "EventCell", bundle: nil), forCellReuseIdentifier: "Cell");
         self.todayTableView.registerNib(UINib(nibName: "EventCell", bundle: nil), forCellReuseIdentifier: "Cell");
         self.laterTableView.registerNib(UINib(nibName: "EventCell", bundle: nil), forCellReuseIdentifier: "Cell");
@@ -75,6 +74,11 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         pullAndDisplayEvents()
     }
     
+    /*
+     * Pulls events in order they were created, then sorts based off of popularity threshold, and makes a list of
+     * events happening today and later. Displays events on the three list views by calling self.updateTableViews() after
+     * everything is pulled
+     */
     func pullAndDisplayEvents() {
         //Clear the 4 event arrays
         self.eventArray = [];
@@ -97,6 +101,12 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                     self.popularEventArray.append(self.eventArray[i]);
                 }
             }
+            func sortBasedOnPopularity(event1: Event, event2: Event) -> Bool{
+                if (event1.getAttendees()?.count > event2.getAttendees()?.count) {return true;}
+                else {return false;}
+            }
+            self.popularEventArray.sortInPlace(sortBasedOnPopularity);
+            
             //TODO: TODAY AND LATER SORT
             for i in 0 ..< self.eventArray.count {
                 self.todayEventArray.append(self.eventArray[i]);
@@ -111,6 +121,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     }
     
+    // sets the ready boolean to true (which cellForRow checks to make sure data is ready) and calls reload data
     func updateTableViews() {
         self.ready = true;
         self.popularTableView.reloadData();

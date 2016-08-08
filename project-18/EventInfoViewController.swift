@@ -91,14 +91,16 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
         // Dispose of any resources that can be recreated.
     }
     
-    //Gets the event from the passed in eventID and updates view with event info
+    /*
+     * Pulls event from passed in event ID and updates view with data from event
+     */
     func pullAndShowEvent() {
         Globals.fb.child("Events").child(self.eventID!).observeSingleEventOfType(.Value, withBlock: {
             snapshot in
             self.event = Event.init(eventDict: snapshot.value as! NSDictionary);
             
-            //update the view with event info
-            //name
+            //update the view with event info -------------------------------------
+            //NAME
             self.eventNameLabel.text = self.event!.getName();
             
             //update joined bool, joined button, joined label, joined collection view
@@ -117,7 +119,7 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
                 self.joinButton.backgroundColor = UIColor.yellowColor();
             }
             
-            //start date TODO: Add "today"?
+            //START DATE TODO: Add "today"?
             let date = NSDate(timeIntervalSince1970: NSTimeInterval(self.event!.getStartTime())/1000);
             let formatter = NSDateFormatter();
             formatter.dateFormat = "MMM dd HH:mm a";
@@ -132,18 +134,18 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
             //self.locationLabel.text = self.event.getLocation();
             
             
-            //description with auto-resize to fit text
+            //DESCRIPTION with auto-resize to fit text
             self.descriptionLabel.text = self.event!.getDescription();
             self.descriptionLabel.sizeToFit();
             
-            //creator name with another fb pull, non-null guarentee
+            //CREATOR NAME with another fb pull, non-null guarentee
             Globals.fb.child("Users").child(self.event!.getCreatorID()).child("name").observeSingleEventOfType(.Value, withBlock: {
                 snapshot in
                 self.creatorNameLabel.text = String(snapshot.value!);
             });
             self.creatorNameLabel.sizeToFit();
             
-            //creator image with URL request
+            //CREATOR IMAGE with URL request
             let width = "250";
             let urlString = "https://graph.facebook.com/" + self.event!.getCreatorID()
                 + "/picture?width=" + width;
@@ -151,7 +153,7 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
             //send request to get image
             let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {
                 (data, response, error) in
-                //if data grabbed, update image if in main thread
+                //if data grabbed, update image in main thread
                 if (data != nil) {
                     dispatch_async(dispatch_get_main_queue(), {
                         self.creatorImageView.image = UIImage(data: data!)?.rounded;
@@ -159,12 +161,15 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
                 }
             };
             task.resume();
-            //btw this is the one-line grab for small url data
-//          self.creatorImageView.image = UIImage(data: NSData(contentsOfURL: NSURL(string: urlString)!)!);
             
         });
     }
     
+    /* 
+     * Updates the images shown in the joined collection view. Calls the facebook graph url to pull image
+     * based off of user ID and updates the array and collection view each time a photo is received from the 
+     * url request. 
+     */
     func updateJoinedImages() {
         for i in 0 ..< self.joinedImages.count {
             let width = "50";
