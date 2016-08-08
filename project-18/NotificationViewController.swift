@@ -14,7 +14,10 @@ class NotificationViewController: UIViewController {
     
     let fb = Globals.fb
     
+    var notifs: [Notification] = [Notification]()
+    
     @IBOutlet weak var notificationTableView: UITableView!
+    @IBOutlet weak var notificationTableViewHeightConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,35 +25,85 @@ class NotificationViewController: UIViewController {
     }
     
     func pullAndDisplayNotifications() {
+        
+        // PULL: Store all the user's Notifications in the notifs array
         fb.child("NotifDatabase").child("1196215920412322").observeSingleEventOfType(FIRDataEventType.Value, withBlock: {
-                        (userNotifs) in
-                        for notifSnapshot in userNotifs.children {
-                            var notif: Notification? = nil
-                            let notifDict:NSDictionary = (notifSnapshot as! FIRDataSnapshot).value as! NSDictionary
-                            if notifDict.valueForKey("type") as! Int == Globals.TYPE_NEW_FOLLOW {
-                                notif = NotificationNewFollow(notifDict: notifDict)
-                            }
-                            else if notifDict.valueForKey("type") as! Int == Globals.TYPE_COMMENT_EVENT {
-                                notif = NotificationCommentEvent(notifDict: notifDict)
-                            }
-                            else if notifDict.valueForKey("type") as! Int == Globals.TYPE_FRIEND_HOST {
-                                notif = NotificationFriendHost(notifDict: notifDict)
-                            }
-                            else if notifDict.valueForKey("type") as! Int == Globals.TYPE_JOINED_EVENT {
-                                notif = NotificationJoinedEvent(notifDict: notifDict)
-                            }
-                            else if notifDict.valueForKey("type") as! Int == Globals.TYPE_INVITE_EVENT {
-                                notif = NotificationInviteEvent(notifDict: notifDict)
-                            }
-                            else if notifDict.valueForKey("type") as! Int == Globals.TYPE_WELCOME {
-                                notif = NotificationWelcome(notifDict: notifDict)
-                            }
-                           
-                            //print("\nNotification:\n", notif!.generateMessage())
+            (userNotifs) in
+            for notifSnapshot in userNotifs.children {
+                var notif: Notification? = nil
+                let notifDict:NSDictionary = (notifSnapshot as! FIRDataSnapshot).value as! NSDictionary
+                
+                if notifDict.valueForKey("type") as! Int == Globals.TYPE_NEW_FOLLOW {
+                    notif = NotificationNewFollow(notifDict: notifDict)
+                }
+                else if notifDict.valueForKey("type") as! Int == Globals.TYPE_COMMENT_EVENT {
+                    notif = NotificationCommentEvent(notifDict: notifDict)
+                }
+                else if notifDict.valueForKey("type") as! Int == Globals.TYPE_FRIEND_HOST {
+                    notif = NotificationFriendHost(notifDict: notifDict)
+                }
+                else if notifDict.valueForKey("type") as! Int == Globals.TYPE_JOINED_EVENT {
+                    notif = NotificationJoinedEvent(notifDict: notifDict)
+                }
+                else if notifDict.valueForKey("type") as! Int == Globals.TYPE_INVITE_EVENT {
+                    notif = NotificationInviteEvent(notifDict: notifDict)
+                }
+                else if notifDict.valueForKey("type") as! Int == Globals.TYPE_WELCOME {
+                    notif = NotificationWelcome(notifDict: notifDict)
+                }
+                
+                self.notifs.append(notif!)
+            }
             
-                        }
-                    })
-
+            // DISPLAY: Once all the Notifications have been pulled, reload the table view
+            self.notificationTableView.reloadData()
+        })
+        
     }
+    
+    // TABLE VIEW ------------------------------------------------------------------------------------
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        self.notificationTableViewHeightConstraint.constant = CGFloat(self.notifs.count) * 70;
+        
+        // Return number of notifications
+        print("\n", self.notifs.count, " Notifications counted.")
+        return self.notifs.count;
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        // Only one section
+        return 1
+    }
+    
+    // CELL CREATION
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        // Create cell
+        let cell:NotificationTableViewCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! NotificationTableViewCell;
+        
+        // Grab Event to base cell off of
+        let notifToShow:Notification = notifs[indexPath.row]
+        
+        // Populate cell based on the Event's info
+        populateCell(cell, notifToShow: notifToShow)
+        
+        return cell
+    }
+    
+    func populateCell(cell: NotificationTableViewCell, notifToShow: Notification) {
+        cell.message.text = notifToShow.generateMessage()
+    }
+    
+    
+    // HANDLE CELL CLICK
+    // - Go to corresponding event info page
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        //self.selectedEventID = Globals.eventsNameToID[self.filteredEventNames[indexPath.row]];
+        //self.performSegueWithIdentifier("openEventInfo", sender: self);
+    }
+    
+    
     
 }

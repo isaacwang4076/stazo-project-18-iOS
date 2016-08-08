@@ -14,7 +14,7 @@ struct Globals {
     static let fb = FIRDatabase.database().reference()    // Reference to the database
     static let eventFirebaseKeys = ["name", "description", "creator_id", "endTime", "event_id", "popularity", "reports", "startTime"]
     static var eventsNameToID: Dictionary<String, String> = [:] // HashMap from event name to event id (used for search)
-    static var eventsIDToEvent: Dictionary<String, Event> = [:]       // HashMap from event id to Event (used for grabbing events)
+    static var eventsIDToEvent: Dictionary<String, Event> = [:] // HashMap from event id to Event (used for grabbing events)
     
     // Notification types
     static let TYPE_COMMENT_EVENT: Int = 0
@@ -50,4 +50,3 @@ func populateCell(cell: EventTableViewCell, eventToShow: Event) {
     //substringing to add "at"
     cell.eventTime.text = startTimeString.substringToIndex(startTimeString.startIndex.advancedBy(6)) + " at" + (startTimeString.substringFromIndex(startTimeString.startIndex.advancedBy(6)));
 }
-

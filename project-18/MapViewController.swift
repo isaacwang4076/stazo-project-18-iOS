@@ -62,13 +62,6 @@ class MapViewController: UIViewController, UISearchBarDelegate,
     // TABLE VIEW ------------------------------------------------------------------------------------
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        // Handle no-results case
-        if self.filteredEventNames.count == 0 {
-            tableView.hidden = true
-        } else {
-            tableView.hidden = false
-        }
         
         self.tableViewHeightConstraint.constant = CGFloat(self.filteredEventNames.count) * 70;
 
