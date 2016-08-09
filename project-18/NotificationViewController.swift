@@ -21,6 +21,9 @@ class NotificationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.notificationTableView.registerNib(UINib(nibName: "NotificationCell", bundle: nil), forCellReuseIdentifier: "NotificationCell");
+        
         pullAndDisplayNotifications()
     }
     
@@ -53,6 +56,10 @@ class NotificationViewController: UIViewController {
                 }
                 
                 self.notifs.append(notif!)
+                self.notifs.append(notif!)
+                self.notifs.append(notif!)
+
+
             }
             
             // DISPLAY: Once all the Notifications have been pulled, reload the table view
@@ -81,7 +88,7 @@ class NotificationViewController: UIViewController {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         // Create cell
-        let cell:NotificationTableViewCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! NotificationTableViewCell;
+        let cell:NotificationTableViewCell = tableView.dequeueReusableCellWithIdentifier("NotificationCell", forIndexPath: indexPath) as! NotificationTableViewCell;
         
         // Grab Event to base cell off of
         let notifToShow:Notification = notifs[indexPath.row]
