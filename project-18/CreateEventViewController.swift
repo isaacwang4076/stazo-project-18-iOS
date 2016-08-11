@@ -20,6 +20,7 @@ class CreateEventViewController: UIViewController {
         }
     }
     @IBAction func cancelClick(sender: AnyObject) {
+        self.navigationController?.popViewControllerAnimated(true);
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +73,7 @@ class CreateEventViewController: UIViewController {
     // Subview access
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "showCreateEventTable") {
-            self.createEventTable = segue.destinationViewController as! CreateEventTable;
+            self.createEventTable = segue.destinationViewController as? CreateEventTable;
         }
     }
  
