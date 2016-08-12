@@ -8,13 +8,17 @@
 
 import UIKit
 
+protocol CreateEventTableProtocol {
+    func openStartDatePicker();
+    func openEndDatePicker();
+}
+
 class CreateEventTable: UITableViewController {
 
     @IBOutlet var eventName: UITextField!
     @IBOutlet var eventDescription: UITextField!
     
-    var tempStart = 30;
-    var tempEnd = 40;
+    var delegate: CreateEventTableProtocol?; //to register date picker clicks to parent vc
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +33,25 @@ class CreateEventTable: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        //selected start date picker
+        if (indexPath.item == 2) {
+            self.delegate?.openStartDatePicker();
+        }
+        //selected end date picker
+        if (indexPath.item == 3) {
+            self.delegate?.openEndDatePicker();
+        }
+    }
+    
+    func updateStartDate(dateText: String) {
+        self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0))!.detailTextLabel!.text = dateText;
+    }
+    
+    func updateEndDate(dateText: String) {
+        self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 3, inSection: 0))!.detailTextLabel!.text = dateText;
     }
 
     

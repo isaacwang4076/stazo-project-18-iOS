@@ -50,3 +50,11 @@ func populateCell(cell: EventTableViewCell, eventToShow: Event) {
     //substringing to add "at"
     cell.eventTime.text = startTimeString.substringToIndex(startTimeString.startIndex.advancedBy(6)) + " at" + (startTimeString.substringFromIndex(startTimeString.startIndex.advancedBy(6)));
 }
+
+func stringFromDate(date: NSDate) -> String{ //TODO: Add today check and maybe tomorrow check?
+    let formatter = NSDateFormatter();
+    formatter.dateFormat = "MMM dd HH:mm a";
+    let startTimeString = formatter.stringFromDate(date);
+    //substringing to add "at"
+    return startTimeString.substringToIndex(startTimeString.startIndex.advancedBy(6)) + " at" + (startTimeString.substringFromIndex(startTimeString.startIndex.advancedBy(6)));
+}

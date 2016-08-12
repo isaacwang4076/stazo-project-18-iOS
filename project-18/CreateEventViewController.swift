@@ -8,7 +8,10 @@
 
 import UIKit
 
-class CreateEventViewController: UIViewController {
+class CreateEventViewController: UIViewController, CreateEventTableProtocol {
+    
+    @IBOutlet var datePicker: UIDatePicker!
+    @IBOutlet var datePickerToolbar: UIToolbar!
     
     var createEventTable:CreateEventTable?;
     
@@ -22,9 +25,20 @@ class CreateEventViewController: UIViewController {
     @IBAction func cancelClick(sender: AnyObject) {
         self.navigationController?.popViewControllerAnimated(true);
     }
+    
+    
+    var startDate:NSDate?;
+    var endDate:NSDate?;
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBarHidden = false;
+        self.title = "Create Event";
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated);
+        self.navigationController?.navigationBarHidden = true;
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,18 +56,30 @@ class CreateEventViewController: UIViewController {
         let eventName = self.createEventTable!.eventName.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet());
         let eventDescription = self.createEventTable!.eventDescription.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet());
         if (!eventName.isEmpty) {
-            print(self.createEventTable!.eventName.text!);
-            if (self.createEventTable!.tempStart != 0) {
-                if (self.createEventTable!.tempEnd != 0) {
-                    Event.init(name: eventName, description: eventDescription, creatorID: Globals.me.userID , startTime: UInt64(self.createEventTable!.tempStart), endTime: UInt64(self.createEventTable!.tempEnd));
-                    print("made event");
-                    return true;
+            if (self.startDate != nil) {
+                if (self.endDate != nil) {
+                    
+                    let startDateInt:UInt64 = UInt64(self.startDate!.timeIntervalSince1970) * 1000;
+                    let endDateInt:UInt64 = UInt64(self.endDate!.timeIntervalSince1970) * 1000;
+                    if (startDateInt < endDateInt) {
+                        print(startDateInt);
+                        print(endDateInt);
+                        Event.init(name: eventName, description: eventDescription, creatorID: Globals.me.userID , startTime: startDateInt, endTime: endDateInt);
+                        return true;
+                    }
+                    else {
+                        print("Silly you! The end date is earlier than the start date!");
+                        return false;
+                    }
+    
                 }
                 else {
+                    print("please enter end");
                     return false;
-                }
+                } //TODO: ALERTS
             }
             else {
+                print("please enter start");
                 return false;
             }
             
@@ -63,10 +89,76 @@ class CreateEventViewController: UIViewController {
             return false;
         }
         
-        
-//        return true;
     }
 
+    func openStartDatePicker() {
+        self.datePicker.hidden = false;
+        if (self.startDate != nil) { //wau, eric zhang w the small ux bopper
+            self.datePicker.date = self.startDate!;
+        }
+        self.datePickerToolbar.hidden = false;
+        self.datePicker.backgroundColor = UIColor.lightGrayColor();
+        self.datePicker.removeTarget(self, action: #selector(CreateEventViewController.updateEndDate),
+                                     forControlEvents: UIControlEvents.ValueChanged);
+        self.datePicker.addTarget(self, action: #selector(CreateEventViewController.updateStartDate),
+                                  forControlEvents: UIControlEvents.ValueChanged);
+        self.datePickerToolbar.items?.first?.target = self;
+        let space = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil);
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self,
+                                         action: #selector(CreateEventViewController.hideStartDatePicker));
+        self.datePickerToolbar.items = [space, doneButton];
+    }
+    
+    func openEndDatePicker() {
+        self.datePicker.hidden = false;
+        if (self.endDate != nil) { //wau, eric zhang w the small ux bopper
+            self.datePicker.date = self.endDate!;
+        }
+        self.datePickerToolbar.hidden = false;
+        self.datePicker.backgroundColor = UIColor.lightGrayColor();
+        self.datePicker.removeTarget(self, action: #selector(CreateEventViewController.updateStartDate),
+                                     forControlEvents: UIControlEvents.ValueChanged);
+        self.datePicker.addTarget(self, action: #selector(CreateEventViewController.updateEndDate),
+                                  forControlEvents: UIControlEvents.ValueChanged);
+        self.datePickerToolbar.items?.first?.target = self;
+        let space = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil);
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self,
+                                         action: #selector(CreateEventViewController.hideEndDatePicker));
+        self.datePickerToolbar.items = [space, doneButton];
+    }
+    
+    func updateStartDate() {
+        print("one");
+        self.startDate = self.datePicker.date;
+        self.createEventTable?.updateStartDate(stringFromDate(startDate!));
+    }
+    
+    func updateEndDate() {
+        print("two");
+        self.endDate = self.datePicker.date;
+        self.createEventTable?.updateEndDate(stringFromDate(endDate!));
+    }
+    
+    func hideStartDatePicker() {
+        self.datePicker.hidden = true;
+        self.datePickerToolbar.hidden = true;
+        if (self.startDate == nil) {
+            self.updateStartDate();
+        }
+        self.datePicker.removeTarget(self, action: #selector(CreateEventViewController.updateStartDate),
+                                     forControlEvents: UIControlEvents.ValueChanged);
+    }
+    
+    func hideEndDatePicker() {
+        self.datePicker.hidden = true;
+        self.datePickerToolbar.hidden = true;
+        if (self.endDate == nil) {
+            self.updateEndDate();
+        }
+        self.datePicker.removeTarget(self, action: #selector(CreateEventViewController.updateEndDate),
+                                     forControlEvents: UIControlEvents.ValueChanged);
+    }
+    
     
     // MARK: - Navigation
 
@@ -74,8 +166,10 @@ class CreateEventViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "showCreateEventTable") {
             self.createEventTable = segue.destinationViewController as? CreateEventTable;
+            self.createEventTable?.delegate = self;
         }
     }
  
 
 }
+

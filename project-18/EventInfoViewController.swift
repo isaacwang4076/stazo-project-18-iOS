@@ -121,11 +121,7 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
             
             //START DATE TODO: Add "today"?
             let date = NSDate(timeIntervalSince1970: NSTimeInterval(self.event!.getStartTime())/1000);
-            let formatter = NSDateFormatter();
-            formatter.dateFormat = "MMM dd HH:mm a";
-            let startTimeString = formatter.stringFromDate(date);
-            //substringing to add "at"
-            self.startTimeLabel.text = startTimeString.substringToIndex(startTimeString.startIndex.advancedBy(6)) + " at" + (startTimeString.substringFromIndex(startTimeString.startIndex.advancedBy(6)));
+            self.startTimeLabel.text = stringFromDate(date);
             
             
             //TODO: time logic for duration/end time and location

@@ -477,13 +477,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Event" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F5g-EA-dgz">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event info" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F5g-EA-dgz">
                                 <rect key="frame" x="251" y="48" width="99" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="FHc-K8-3YL"/>
                                     <constraint firstAttribute="width" constant="99" id="fnG-Cl-UWQ"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -529,32 +529,60 @@
                                     <segue destination="Y2P-vQ-xue" kind="embed" identifier="showCreateEventTable" id="DoR-Y7-6G3"/>
                                 </connections>
                             </containerView>
+                            <datePicker hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Oz4-L1-pAh">
+                                <rect key="frame" x="0.0" y="411" width="600" height="140"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="140" id="F1X-Gz-Iny"/>
+                                </constraints>
+                                <date key="date" timeIntervalSinceReferenceDate="492709955.17637998">
+                                    <!--2016-08-12 15:52:35 +0000-->
+                                </date>
+                            </datePicker>
+                            <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yJD-E1-dD5">
+                                <rect key="frame" x="0.0" y="367" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="WLL-3W-ZVz"/>
+                                </constraints>
+                                <items/>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="FPl-qw-zef" firstAttribute="top" secondItem="Gx5-Rx-oj0" secondAttribute="bottom" constant="20" id="0i1-Jq-bwB"/>
                             <constraint firstItem="fuM-ge-ege" firstAttribute="centerX" secondItem="Ycd-v6-rX0" secondAttribute="centerX" constant="97" id="3YO-DR-lo0"/>
                             <constraint firstItem="F5g-EA-dgz" firstAttribute="top" secondItem="Ndb-HS-dXv" secondAttribute="bottom" constant="28" id="6EI-ok-htv"/>
+                            <constraint firstItem="yJD-E1-dD5" firstAttribute="leading" secondItem="Ycd-v6-rX0" secondAttribute="leading" id="8Ew-Ov-ZxB"/>
                             <constraint firstItem="Gx5-Rx-oj0" firstAttribute="top" secondItem="F5g-EA-dgz" secondAttribute="bottom" constant="30" id="9YK-r6-LNo"/>
+                            <constraint firstItem="Oz4-L1-pAh" firstAttribute="leading" secondItem="Ycd-v6-rX0" secondAttribute="leading" id="FYW-eT-nD8"/>
                             <constraint firstItem="FPl-qw-zef" firstAttribute="centerX" secondItem="Ycd-v6-rX0" secondAttribute="centerX" constant="-113" id="GFo-Zs-uMN"/>
                             <constraint firstItem="ByZ-Ft-SYa" firstAttribute="top" secondItem="FPl-qw-zef" secondAttribute="bottom" constant="8" id="HK8-ul-UpE"/>
+                            <constraint firstAttribute="trailing" secondItem="Oz4-L1-pAh" secondAttribute="trailing" id="Ivy-IX-D10"/>
+                            <constraint firstItem="Oz4-L1-pAh" firstAttribute="top" secondItem="Gx5-Rx-oj0" secondAttribute="bottom" id="LDh-5n-HYU"/>
                             <constraint firstItem="ByZ-Ft-SYa" firstAttribute="top" secondItem="Gx5-Rx-oj0" secondAttribute="top" constant="380" id="MZd-rI-Qwv"/>
                             <constraint firstItem="ByZ-Ft-SYa" firstAttribute="top" secondItem="fuM-ge-ege" secondAttribute="bottom" constant="8" id="NfQ-lb-kx0"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Gx5-Rx-oj0" secondAttribute="trailing" id="Nnj-uT-GJt"/>
+                            <constraint firstItem="Dw6-Bx-QSu" firstAttribute="top" secondItem="Oz4-L1-pAh" secondAttribute="bottom" id="Qn3-6b-DYg"/>
                             <constraint firstItem="Gx5-Rx-oj0" firstAttribute="leading" secondItem="Ycd-v6-rX0" secondAttribute="leading" id="VaL-Ct-VI3"/>
                             <constraint firstAttribute="trailing" secondItem="Gx5-Rx-oj0" secondAttribute="trailing" id="bJL-11-qSp"/>
+                            <constraint firstAttribute="trailing" secondItem="yJD-E1-dD5" secondAttribute="trailing" id="ekL-Z1-kiO"/>
                             <constraint firstItem="F5g-EA-dgz" firstAttribute="centerX" secondItem="Ycd-v6-rX0" secondAttribute="centerX" id="eqQ-ln-ZSX"/>
                             <constraint firstItem="Gx5-Rx-oj0" firstAttribute="leading" secondItem="Ycd-v6-rX0" secondAttribute="leadingMargin" id="lkq-jH-AXD"/>
+                            <constraint firstItem="Oz4-L1-pAh" firstAttribute="top" secondItem="yJD-E1-dD5" secondAttribute="bottom" id="xXk-vM-HmT"/>
                             <constraint firstItem="ByZ-Ft-SYa" firstAttribute="centerX" secondItem="Ycd-v6-rX0" secondAttribute="centerX" id="yCN-Zw-Dw9"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="Nnj-uT-GJt"/>
                                 <exclude reference="lkq-jH-AXD"/>
+                                <exclude reference="LDh-5n-HYU"/>
                                 <exclude reference="0i1-Jq-bwB"/>
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="datePicker" destination="Oz4-L1-pAh" id="tW8-jh-lKp"/>
+                        <outlet property="datePickerToolbar" destination="yJD-E1-dD5" id="Kvl-zT-NXR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ijI-xe-fI6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
