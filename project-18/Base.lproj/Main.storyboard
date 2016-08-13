@@ -362,7 +362,7 @@
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="What is your event called?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x9v-mU-6nF">
                                                     <rect key="frame" x="16" y="8" width="568" height="27"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -389,7 +389,7 @@
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Describe your event (optional)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fLP-mh-1cc">
                                                     <rect key="frame" x="16" y="8" width="568" height="94"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -488,7 +488,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fuM-ge-ege">
-                                <rect key="frame" x="344" y="441" width="106" height="30"/>
+                                <rect key="frame" x="247" y="416" width="106" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="106" id="mo7-yp-JyW"/>
                                     <constraint firstAttribute="height" constant="30" id="tNC-fT-jZD"/>
@@ -507,17 +507,6 @@
                                 <state key="normal" title="Cancel"/>
                                 <connections>
                                     <action selector="cancelClick:" destination="s5d-TJ-JUr" eventType="touchUpInside" id="iDB-lf-NNS"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FPl-qw-zef">
-                                <rect key="frame" x="150" y="441" width="74" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="AEc-z5-4MH"/>
-                                    <constraint firstAttribute="width" constant="74" id="l7n-03-kei"/>
-                                </constraints>
-                                <state key="normal" title="Add Image"/>
-                                <connections>
-                                    <action selector="addImageClick:" destination="s5d-TJ-JUr" eventType="touchUpInside" id="LfK-G8-Ze8"/>
                                 </connections>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gx5-Rx-oj0">
@@ -548,18 +537,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="FPl-qw-zef" firstAttribute="top" secondItem="Gx5-Rx-oj0" secondAttribute="bottom" constant="20" id="0i1-Jq-bwB"/>
-                            <constraint firstItem="fuM-ge-ege" firstAttribute="centerX" secondItem="Ycd-v6-rX0" secondAttribute="centerX" constant="97" id="3YO-DR-lo0"/>
+                            <constraint firstItem="fuM-ge-ege" firstAttribute="centerX" secondItem="Ycd-v6-rX0" secondAttribute="centerX" id="3YO-DR-lo0"/>
                             <constraint firstItem="F5g-EA-dgz" firstAttribute="top" secondItem="Ndb-HS-dXv" secondAttribute="bottom" constant="28" id="6EI-ok-htv"/>
                             <constraint firstItem="yJD-E1-dD5" firstAttribute="leading" secondItem="Ycd-v6-rX0" secondAttribute="leading" id="8Ew-Ov-ZxB"/>
                             <constraint firstItem="Gx5-Rx-oj0" firstAttribute="top" secondItem="F5g-EA-dgz" secondAttribute="bottom" constant="30" id="9YK-r6-LNo"/>
                             <constraint firstItem="Oz4-L1-pAh" firstAttribute="leading" secondItem="Ycd-v6-rX0" secondAttribute="leading" id="FYW-eT-nD8"/>
-                            <constraint firstItem="FPl-qw-zef" firstAttribute="centerX" secondItem="Ycd-v6-rX0" secondAttribute="centerX" constant="-113" id="GFo-Zs-uMN"/>
-                            <constraint firstItem="ByZ-Ft-SYa" firstAttribute="top" secondItem="FPl-qw-zef" secondAttribute="bottom" constant="8" id="HK8-ul-UpE"/>
                             <constraint firstAttribute="trailing" secondItem="Oz4-L1-pAh" secondAttribute="trailing" id="Ivy-IX-D10"/>
                             <constraint firstItem="Oz4-L1-pAh" firstAttribute="top" secondItem="Gx5-Rx-oj0" secondAttribute="bottom" id="LDh-5n-HYU"/>
                             <constraint firstItem="ByZ-Ft-SYa" firstAttribute="top" secondItem="Gx5-Rx-oj0" secondAttribute="top" constant="380" id="MZd-rI-Qwv"/>
-                            <constraint firstItem="ByZ-Ft-SYa" firstAttribute="top" secondItem="fuM-ge-ege" secondAttribute="bottom" constant="8" id="NfQ-lb-kx0"/>
+                            <constraint firstItem="ByZ-Ft-SYa" firstAttribute="top" secondItem="fuM-ge-ege" secondAttribute="bottom" constant="33" id="NfQ-lb-kx0"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Gx5-Rx-oj0" secondAttribute="trailing" id="Nnj-uT-GJt"/>
                             <constraint firstItem="Dw6-Bx-QSu" firstAttribute="top" secondItem="Oz4-L1-pAh" secondAttribute="bottom" id="Qn3-6b-DYg"/>
                             <constraint firstItem="Gx5-Rx-oj0" firstAttribute="leading" secondItem="Ycd-v6-rX0" secondAttribute="leading" id="VaL-Ct-VI3"/>
@@ -575,7 +561,6 @@
                                 <exclude reference="Nnj-uT-GJt"/>
                                 <exclude reference="lkq-jH-AXD"/>
                                 <exclude reference="LDh-5n-HYU"/>
-                                <exclude reference="0i1-Jq-bwB"/>
                             </mask>
                         </variation>
                     </view>

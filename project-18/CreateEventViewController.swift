@@ -13,10 +13,6 @@ class CreateEventViewController: UIViewController, CreateEventTableProtocol {
     @IBOutlet var datePicker: UIDatePicker!
     @IBOutlet var datePickerToolbar: UIToolbar!
     
-    var createEventTable:CreateEventTable?;
-    
-    @IBAction func addImageClick(sender: AnyObject) {
-    }
     @IBAction func selectLocationClick(sender: AnyObject) {
         if (createEvent()) {
             //call segue to location select
@@ -26,14 +22,21 @@ class CreateEventViewController: UIViewController, CreateEventTableProtocol {
         self.navigationController?.popViewControllerAnimated(true);
     }
     
-    
+    var createEventTable:CreateEventTable?;
     var startDate:NSDate?;
     var endDate:NSDate?;
     
+    //small setups for nav bar, date picker
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBarHidden = false;
         self.title = "Create Event";
+        
+        self.datePicker.backgroundColor = UIColor.lightGrayColor();
+        let today = NSDate();
+        self.datePicker.minimumDate = today;
+        self.datePicker.maximumDate = NSCalendar.currentCalendar()
+            .dateByAddingUnit(.Day, value: 7, toDate: today, options: []);
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -43,7 +46,6 @@ class CreateEventViewController: UIViewController, CreateEventTableProtocol {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     /*
@@ -56,90 +58,110 @@ class CreateEventViewController: UIViewController, CreateEventTableProtocol {
         let eventName = self.createEventTable!.eventName.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet());
         let eventDescription = self.createEventTable!.eventDescription.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet());
         if (!eventName.isEmpty) {
+            //check if start date empty
             if (self.startDate != nil) {
+                //check if end date empty
                 if (self.endDate != nil) {
-                    
+                    //check if start date < end date
                     let startDateInt:UInt64 = UInt64(self.startDate!.timeIntervalSince1970) * 1000;
                     let endDateInt:UInt64 = UInt64(self.endDate!.timeIntervalSince1970) * 1000;
                     if (startDateInt < endDateInt) {
-                        print(startDateInt);
-                        print(endDateInt);
-                        Event.init(name: eventName, description: eventDescription, creatorID: Globals.me.userID , startTime: startDateInt, endTime: endDateInt);
+                        Event.init(name: eventName,
+                                   description: eventDescription,
+                                   creatorID: Globals.me.userID ,
+                                   startTime: startDateInt,
+                                   endTime: endDateInt);
+                        let alert = UIAlertController(title: "Yay!",
+                                                      message: "Event successfully made!", preferredStyle: .Alert);
+                        alert.addAction(UIAlertAction(title: "Swag", style: .Default , handler: nil));
+                        self.presentViewController(alert, animated: true, completion: nil);
                         return true;
                     }
+                        
+                    //RESPECTIVE ALERTS
                     else {
-                        print("Silly you! The end date is earlier than the start date!");
+                        let alert = UIAlertController(title: "Silly you!",
+                                                      message: "The end date needs to be after the start date!", preferredStyle: .Alert);
+                        alert.addAction(UIAlertAction(title: "OK", style: .Default , handler: nil));
+                        self.presentViewController(alert, animated: true, completion: nil);
                         return false;
                     }
     
                 }
                 else {
-                    print("please enter end");
+                    let alert = UIAlertController(title: "Oops!",
+                                                  message: "Please enter an end time for the event.", preferredStyle: .Alert);
+                    alert.addAction(UIAlertAction(title: "OK", style: .Default , handler: nil));
+                    self.presentViewController(alert, animated: true, completion: nil);
                     return false;
-                } //TODO: ALERTS
+                }
             }
             else {
-                print("please enter start");
+                let alert = UIAlertController(title: "Oops!",
+                                              message: "Please enter a start time for the event.", preferredStyle: .Alert);
+                alert.addAction(UIAlertAction(title: "OK", style: .Default , handler: nil));
+                self.presentViewController(alert, animated: true, completion: nil);
                 return false;
             }
             
         }
         else {
-            print("please enter name");
+            let alert = UIAlertController(title: "Oops!",
+                                          message: "Please enter a name for the event.", preferredStyle: .Alert);
+            alert.addAction(UIAlertAction(title: "OK", style: .Default , handler: nil));
+            self.presentViewController(alert, animated: true, completion: nil);
             return false;
         }
-        
     }
 
-    func openStartDatePicker() {
+    /* Date picker methods -------------------------------------------------------------------*/
+    func openStartDatePicker() { //called on start date tableviewcell click
         self.datePicker.hidden = false;
         if (self.startDate != nil) { //wau, eric zhang w the small ux bopper
             self.datePicker.date = self.startDate!;
         }
+        self.createEventTable?.eventName.resignFirstResponder();
+        self.createEventTable?.eventDescription.resignFirstResponder();
         self.datePickerToolbar.hidden = false;
-        self.datePicker.backgroundColor = UIColor.lightGrayColor();
         self.datePicker.removeTarget(self, action: #selector(CreateEventViewController.updateEndDate),
                                      forControlEvents: UIControlEvents.ValueChanged);
         self.datePicker.addTarget(self, action: #selector(CreateEventViewController.updateStartDate),
                                   forControlEvents: UIControlEvents.ValueChanged);
-        self.datePickerToolbar.items?.first?.target = self;
         let space = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil);
         let doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self,
                                          action: #selector(CreateEventViewController.hideStartDatePicker));
         self.datePickerToolbar.items = [space, doneButton];
     }
     
-    func openEndDatePicker() {
+    func openEndDatePicker() { //called on end date tableviewcell click
         self.datePicker.hidden = false;
         if (self.endDate != nil) { //wau, eric zhang w the small ux bopper
             self.datePicker.date = self.endDate!;
         }
+        self.createEventTable?.eventName.resignFirstResponder();
+        self.createEventTable?.eventDescription.resignFirstResponder();
         self.datePickerToolbar.hidden = false;
-        self.datePicker.backgroundColor = UIColor.lightGrayColor();
         self.datePicker.removeTarget(self, action: #selector(CreateEventViewController.updateStartDate),
                                      forControlEvents: UIControlEvents.ValueChanged);
         self.datePicker.addTarget(self, action: #selector(CreateEventViewController.updateEndDate),
                                   forControlEvents: UIControlEvents.ValueChanged);
-        self.datePickerToolbar.items?.first?.target = self;
         let space = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil);
         let doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self,
                                          action: #selector(CreateEventViewController.hideEndDatePicker));
         self.datePickerToolbar.items = [space, doneButton];
     }
     
-    func updateStartDate() {
-        print("one");
+    func updateStartDate() { //callback on update
         self.startDate = self.datePicker.date;
         self.createEventTable?.updateStartDate(stringFromDate(startDate!));
     }
     
-    func updateEndDate() {
-        print("two");
+    func updateEndDate() { //callback on update
         self.endDate = self.datePicker.date;
         self.createEventTable?.updateEndDate(stringFromDate(endDate!));
     }
     
-    func hideStartDatePicker() {
+    func hideStartDatePicker() { //callback on done
         self.datePicker.hidden = true;
         self.datePickerToolbar.hidden = true;
         if (self.startDate == nil) {
@@ -147,9 +169,10 @@ class CreateEventViewController: UIViewController, CreateEventTableProtocol {
         }
         self.datePicker.removeTarget(self, action: #selector(CreateEventViewController.updateStartDate),
                                      forControlEvents: UIControlEvents.ValueChanged);
+        self.createEventTable?.tableView.deselectRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0), animated: true);
     }
     
-    func hideEndDatePicker() {
+    func hideEndDatePicker() { //callback on done
         self.datePicker.hidden = true;
         self.datePickerToolbar.hidden = true;
         if (self.endDate == nil) {
@@ -157,11 +180,11 @@ class CreateEventViewController: UIViewController, CreateEventTableProtocol {
         }
         self.datePicker.removeTarget(self, action: #selector(CreateEventViewController.updateEndDate),
                                      forControlEvents: UIControlEvents.ValueChanged);
+        self.createEventTable?.tableView.deselectRowAtIndexPath(NSIndexPath(forRow: 3, inSection: 0), animated: true);
     }
-    
-    
-    // MARK: - Navigation
+    /* ---------------------------------------------------------------------------------------*/
 
+    
     // Subview access
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "showCreateEventTable") {
