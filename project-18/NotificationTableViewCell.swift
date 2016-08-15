@@ -10,9 +10,11 @@ class NotificationTableViewCell: UITableViewCell {
     
     @IBOutlet weak var message: UILabel!
     
+    @IBOutlet weak var notifImage: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+         // Initialization code
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
