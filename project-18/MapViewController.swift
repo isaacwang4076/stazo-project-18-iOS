@@ -52,18 +52,21 @@ class MapViewController: UIViewController, UISearchBarDelegate,
             return event.lowercaseString.containsString(searchText.lowercaseString)
         }
         
+        // Make search smarter
         sortFilteredEventNames(searchText)
         
         // Update search table view
         tableView.reloadData()
     }
     
+    // Updates the order of filteredEventNames using prefixCompare
     func sortFilteredEventNames(searchText: String) {
         self.searchText = searchText
-        filteredEventNames = filteredEventNames.sort(prefixSort)
+        filteredEventNames = filteredEventNames.sort(prefixCompare)
     }
     
-    func prefixSort(eventName1: String, eventName2: String) -> Bool {
+    // For query "fu", prioritizes "Fundraiser" over "KungFu"
+    func prefixCompare(eventName1: String, eventName2: String) -> Bool {
         return eventName1.lowercaseString.hasPrefix(self.searchText!.lowercaseString)
     }
     
