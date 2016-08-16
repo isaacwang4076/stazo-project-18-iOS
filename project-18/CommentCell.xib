@@ -16,20 +16,20 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aee-Yr-qwQ">
-                        <rect key="frame" x="8" y="7" width="65" height="65"/>
+                        <rect key="frame" x="8" y="8" width="63" height="63"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="65" id="Y0j-z4-ygS"/>
-                            <constraint firstAttribute="height" constant="65" id="fxm-Mi-JA7"/>
+                            <constraint firstAttribute="width" constant="63" id="Y0j-z4-ygS"/>
+                            <constraint firstAttribute="height" constant="63" id="fxm-Mi-JA7"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comment" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nYU-ZN-qdG">
-                        <rect key="frame" x="90" y="36" width="302" height="17"/>
+                        <rect key="frame" x="88" y="31" width="304" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mKf-Mf-6lL">
-                        <rect key="frame" x="90" y="8" width="302" height="20"/>
+                        <rect key="frame" x="88" y="8" width="304" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="3hz-5L-hFm"/>
                             <constraint firstAttribute="height" constant="20" id="8ZC-Ia-z4G"/>
@@ -46,18 +46,20 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="mKf-Mf-6lL" firstAttribute="top" secondItem="eTR-pS-guT" secondAttribute="topMargin" id="9iM-p1-mbU"/>
-                    <constraint firstItem="aee-Yr-qwQ" firstAttribute="top" secondItem="eTR-pS-guT" secondAttribute="topMargin" constant="-1" id="IMB-Jg-Zpw"/>
-                    <constraint firstItem="nYU-ZN-qdG" firstAttribute="top" secondItem="mKf-Mf-6lL" secondAttribute="bottom" constant="8" id="Jg8-tc-Q4G"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="aee-Yr-qwQ" secondAttribute="bottom" constant="8" id="DHl-i7-YZK"/>
+                    <constraint firstItem="aee-Yr-qwQ" firstAttribute="top" secondItem="eTR-pS-guT" secondAttribute="topMargin" id="IMB-Jg-Zpw"/>
+                    <constraint firstItem="nYU-ZN-qdG" firstAttribute="top" secondItem="mKf-Mf-6lL" secondAttribute="bottom" constant="3" id="Jg8-tc-Q4G"/>
                     <constraint firstItem="mKf-Mf-6lL" firstAttribute="leading" secondItem="aee-Yr-qwQ" secondAttribute="trailing" constant="17" id="KFi-8i-1Lj"/>
                     <constraint firstItem="mKf-Mf-6lL" firstAttribute="trailing" secondItem="eTR-pS-guT" secondAttribute="trailingMargin" id="gzj-JU-Cv9"/>
                     <constraint firstItem="nYU-ZN-qdG" firstAttribute="trailing" secondItem="eTR-pS-guT" secondAttribute="trailingMargin" id="hO3-fn-XLR"/>
+                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="nYU-ZN-qdG" secondAttribute="bottom" id="ntd-jS-jks"/>
                     <constraint firstItem="nYU-ZN-qdG" firstAttribute="leading" secondItem="aee-Yr-qwQ" secondAttribute="trailing" constant="17" id="ozx-rf-Wmi"/>
                     <constraint firstItem="aee-Yr-qwQ" firstAttribute="leading" secondItem="eTR-pS-guT" secondAttribute="leadingMargin" id="pml-Dc-0PL"/>
                 </constraints>
+                <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
             </tableViewCellContentView>
-            <constraints>
-                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="nYU-ZN-qdG" secondAttribute="bottom" constant="8" id="hre-V4-pEJ"/>
-            </constraints>
+            <edgeInsets key="layoutMargins" top="8" left="0.0" bottom="8" right="8"/>
+            <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="commentImage" destination="aee-Yr-qwQ" id="dST-pf-irY"/>
                 <outlet property="commentName" destination="mKf-Mf-6lL" id="CiI-dj-CIw"/>
