@@ -45,13 +45,13 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
     //Joined view and invite button
     @IBOutlet var joinedLabel: UILabel!
     @IBAction func inviteClick(sender: AnyObject) {}
-    @IBOutlet var joinedView: UIView!
     @IBOutlet var joinedCollectionView: UICollectionView!
     @IBOutlet var joinedCollectionViewHeightConstraint: NSLayoutConstraint!
     
     //Photo and comment views and buttons
     @IBAction func viewPhotoClick(sender: AnyObject) {}
     @IBOutlet var uploadImageView: UIImageView!
+    @IBOutlet var noCommentLabel: UILabel!
     @IBOutlet var commentTableView: UITableView!
     @IBOutlet var commentTableHeightConstraint: NSLayoutConstraint!
     /*--------------------------------------------------------------*/
@@ -143,8 +143,7 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
             
             //CREATOR IMAGE with URL request
             let width = "250";
-            let urlString = "https://graph.facebook.com/" + self.event!.getCreatorID()
-                + "/picture?width=" + width;
+            let urlString = "https://graph.facebook.com/\(self.event!.getCreatorID())/picture?width=\(width)";
             let url = NSURL(string: urlString);
             //send request to get image
             let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {
@@ -168,9 +167,8 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
      */
     func updateJoinedImages() {
         for i in 0 ..< self.joinedImages.count {
-            let width = "50";
-            let urlString = "https://graph.facebook.com/" + self.event!.getAttendees()![i]
-                + "/picture?width=" + width;
+            let width = "150";
+            let urlString = "https://graph.facebook.com/\(self.event!.getAttendees()![i])/picture?width=\(width)";
             let url = NSURL(string: urlString);
             //send request to get image
             let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {
@@ -188,23 +186,26 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func pullAndShowComments() {
-        Globals.fb.child("Comments").child(self.eventID!).observeSingleEventOfType(.Value, withBlock: {
+        Globals.fb.child("CommentDatabase").child(self.eventID!).child("comments").observeSingleEventOfType(.Value, withBlock: {
             snapshot in
             let eventComments:[FIRDataSnapshot]? = snapshot.children.allObjects as? [FIRDataSnapshot];
             
             //only if comments exist
-            if (eventComments != nil) {
+            if (eventComments != nil && eventComments?.count != 0) {
+                print("comments exist");
                 //iterate through all snapshots and convert each .value -> dictionary -> comment and add to comments array
-                for eachComment in  eventComments!{
+                for eachComment in eventComments!{
+                    print("one");
                     self.comments.append(Comment.init(dictionary:eachComment.value as! [String:AnyObject]));
                 }
                 //display comments in tableview
-                
+                print("num comments: \(self.comments.count)");
+                self.commentTableView.reloadData();
             }
                 
-            //no comments so show "No comments"
+            //no comments so show no comments label
             else {
-                
+                self.noCommentLabel.hidden = false;
             }
         });
     }
@@ -228,11 +229,19 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
     /* Comment table data source and delegates ---------------------------------------*/
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 0;
-    }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1;
     }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (self.comments.count > 0) { //has comments
+            return self.comments.count;
+        }
+        else { //no comments
+            return 0;
+        }
+    }
+    
+    //cells only made if there are comments
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:CommentTableViewCell? = tableView.dequeueReusableCellWithIdentifier("Cell") as? CommentTableViewCell;
         //if not registered yet, then register first
@@ -241,12 +250,48 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
             cell = (tableView.dequeueReusableCellWithIdentifier("Cell") as! CommentTableViewCell);
         }
         
-        cell!.commentName.text = "Name";
-        cell!.commentText.text = "alskdjfasdf\nasdfa\nasdfas\nasdfad\nasdfadsf\nasdf";
-//        cell!.commentText.sizeToFit();
-        self.commentTableHeightConstraint.constant = 200;
+        let commentUserID = self.comments[indexPath.item].getUserID();
         
+        //commentName from users database
+        Globals.fb.child("Users").child(commentUserID).child("name").observeSingleEventOfType(.Value, withBlock: {
+            snapshot in
+            cell!.commentName.text = String(snapshot.value!);
+        });
+
+        //comment text
+        cell!.commentText.text = self.comments[indexPath.item].getComment();
+        
+        //commentImage
+        let width = "150";
+        let urlString = "https://graph.facebook.com/\(commentUserID)/picture?width=\(width)";
+        let url = NSURL(string: urlString);
+        //send request to get image
+        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {
+            (data, response, error) in
+            //if data grabbed, update image in main thread
+            if (data != nil) {
+                dispatch_async(dispatch_get_main_queue(), {
+                    cell!.commentImage.image = UIImage(data: data!);
+                });
+            }
+        };
+        task.resume();
+    
         return cell!;
+    }
+    
+    //auto-resizing of table view cells based on comment length
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension;
+    }
+    
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 80;
+    }
+    
+    //set comment table height at each cell load
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        self.commentTableHeightConstraint.constant = self.commentTableView.contentSize.height;
     }
     
     /*--------------------------------------------------------------------------------*/
@@ -261,6 +306,7 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if (self.event != nil) {
+            //set height of collection view based on number of images
             var height = (self.event?.getAttendees()?.count)! / 5;
             if ((self.event?.getAttendees()?.count)! % 5 != 0) {
                 height += 1;
