@@ -120,7 +120,6 @@ class MapViewController: UIViewController, UISearchBarDelegate,
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
         //if it's the eventinfo segue, set the event id
         if (segue.identifier == "openEventInfo") {
             (segue.destinationViewController as! EventInfoViewController).hidesBottomBarWhenPushed = true;

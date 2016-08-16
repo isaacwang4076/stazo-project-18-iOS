@@ -10,6 +10,7 @@ import Foundation
 import FirebaseDatabase
 
 /* Notification for when a user follows another user */
+/* NO LONGER USED, FOLLOW SYSTEM ROLLED BACK */
 
 class NotificationNewFollow: Notification {
     
@@ -89,7 +90,7 @@ class NotificationNewFollow: Notification {
     
     // IMPLEMENT PROTOCOL METHODS -----------------------------------------------------------------------------
     
-    override func onNotificationClicked() {
+    override func onNotificationClicked(controller: NotificationViewController, userID: String) {
         // TODO go to the profile of the user
         self.viewed = true
     }

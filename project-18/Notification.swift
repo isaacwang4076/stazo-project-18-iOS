@@ -25,7 +25,7 @@ class Notification {
     var viewed: Bool = false        // Whether this notification has been viewed
     var type: Int?                  // The type of this notification
     var pictureID: String?          //A string value (usually a userID) that indicates what
-                                    //   image should be displayed in the Notification screen.
+    //   image should be displayed in the Notification screen.
     
     
     // NEW NOTIF INITIALIZATION
@@ -64,7 +64,6 @@ class Notification {
         notifID = newID
     }
     
-    // TODO pushToFirebase
     func pushToFirebase(usersWhoCare: [String]) {
         for id in usersWhoCare {
             fb.child("NotifDatabase").child(id).observeSingleEventOfType(FIRDataEventType.Value, withBlock: { (userNotifs) in
@@ -72,7 +71,7 @@ class Notification {
                 
                 // Conflict case
                 // - Means this Notification should be combined
-                //   with an already existing Notification in 
+                //   with an already existing Notification in
                 //   the user's NotifDatabase
                 if (stb != nil) {
                     print("\npushToFirebase() in Notification: Notification with ID ", self.notifID!, " reached conflict")
@@ -81,7 +80,7 @@ class Notification {
                         self.fb.child("NotifDatabase").child(id).childByAutoId().setValue(self.convertToDictionary(resolved))
                     }
                 }
-                // No conflict case
+                    // No conflict case
                 else {
                     // Simply add this notification as you would expect
                     print("/npushToFirebase() in Notification: pushing Notification with ID ", self.notifID!, " without conflict")
@@ -89,6 +88,19 @@ class Notification {
                 }
             })
         }
+    }
+    
+    // Sets the viewed property for this Notification in the NotifDatabase for user with ID userID to true
+    func setToViewed(userID: String) {
+        fb.child("NotifDatabase").child(userID).observeSingleEventOfType(FIRDataEventType.Value, withBlock: {
+            (userNotifs) in
+            for notifSnapshot in userNotifs.children {
+                let notifDict:NSDictionary = (notifSnapshot as! FIRDataSnapshot).value as! NSDictionary
+                if (notifDict.valueForKey("notifID") as? String == self.notifID) {
+                    notifSnapshot.ref.child("viewed").setValue(true)
+                }
+            }
+        })
     }
     
     // CONVERT TO DICTIONARY
@@ -108,7 +120,7 @@ class Notification {
     // HANDLE CLICK
     // - Defines what happens when the user taps the
     //   Notification in the Notifications View
-    func onNotificationClicked() {}
+    func onNotificationClicked(controller: NotificationViewController, userID: String) {}
     
     // GENERATE MESSAGE
     // - Defines what message will be displayed for
@@ -121,8 +133,8 @@ class Notification {
     //   Notification (meaning this Notification should be
     //   combined with an already existing Notification)
     // - If there is no conflict, returns nil
-    // - If there is a conflict, returns a Tuple containing a 
-    //   Snapshot of the conflicting Notification, as well as 
+    // - If there is a conflict, returns a Tuple containing a
+    //   Snapshot of the conflicting Notification, as well as
     //   a reference to its location in the user's Notifications
     func hasConflict(userNotifs: FIRDataSnapshot) -> (FIRDataSnapshot, FIRDatabaseReference)? {return nil}
     
@@ -144,6 +156,6 @@ class Notification {
     
     
     // ------------------------------------------------------------------------------------
-
+    
 }
 

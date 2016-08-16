@@ -15,12 +15,16 @@ class NotificationViewController: UIViewController {
     let fb = Globals.fb
     
     var notifs: [Notification] = [Notification]()
+    var selectedEventID: String?
     
     @IBOutlet weak var notificationTableView: UITableView!
     @IBOutlet weak var notificationTableViewHeightConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Hide the navigation bar (included for back-navigation on segue to EventInfo)
+        self.navigationController?.navigationBarHidden = true;
         
         self.notificationTableView.registerNib(UINib(nibName: "NotificationCell", bundle: nil), forCellReuseIdentifier: "NotificationCell");
         
@@ -122,9 +126,20 @@ class NotificationViewController: UIViewController {
     // - Go to corresponding event info page
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //self.selectedEventID = Globals.eventsNameToID[self.filteredEventNames[indexPath.row]];
-        //self.performSegueWithIdentifier("openEventInfo", sender: self);
+        notifs[indexPath.row].onNotificationClicked(self, userID: Globals.me.userID)
     }
     
+    // -----------------------------------------------------------------------------------------------
     
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        //if it's the eventinfo segue, set the event id
+        if (segue.identifier == "openEventInfo") {
+            (segue.destinationViewController as! EventInfoViewController).hidesBottomBarWhenPushed = true;
+            (segue.destinationViewController as! EventInfoViewController).setEventID(self.selectedEventID!);
+        }
+    }
     
 }
