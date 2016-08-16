@@ -56,9 +56,6 @@ class NotificationViewController: UIViewController {
                 }
                 
                 self.notifs.append(notif!)
-                self.notifs.append(notif!)
-                self.notifs.append(notif!)
-
 
             }
             
@@ -101,6 +98,23 @@ class NotificationViewController: UIViewController {
     
     func populateCell(cell: NotificationTableViewCell, notifToShow: Notification) {
         cell.message.text = notifToShow.generateMessage()
+        
+        //CREATOR IMAGE with URL request
+        let width = "250";
+        let urlString = "https://graph.facebook.com/" + notifToShow.pictureID!
+            + "/picture?width=" + width;
+        let url = NSURL(string: urlString);
+        //send request to get image
+        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {
+            (data, response, error) in
+            //if data grabbed, update image in main thread
+            if (data != nil) {
+                dispatch_async(dispatch_get_main_queue(), {
+                    cell.notifImage.image = UIImage(data: data!)?.rounded;
+                });
+            }
+        };
+        task.resume();
     }
     
     

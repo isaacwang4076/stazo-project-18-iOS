@@ -7,28 +7,38 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="DyV-pc-Wjg" customClass="NotificationTableViewCell" customModule="project_18" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="100" id="DyV-pc-Wjg" customClass="NotificationTableViewCell" customModule="project_18" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="318" height="100"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DyV-pc-Wjg" id="pw6-es-T39">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="318" height="99.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mLE-dB-wE0">
-                        <rect key="frame" x="38" y="14" width="42" height="21.5"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="srV-jT-2de">
+                        <rect key="frame" x="8" y="9" width="114" height="79.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="90" id="5qN-c5-rSJ"/>
+                            <constraint firstAttribute="width" constant="90" id="AsV-Hq-FlE"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mLE-dB-wE0">
+                        <rect key="frame" x="130" y="38" width="42" height="21.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="mLE-dB-wE0" firstAttribute="centerX" secondItem="pw6-es-T39" secondAttribute="centerX" id="GAP-b6-EHc"/>
+                    <constraint firstItem="srV-jT-2de" firstAttribute="centerY" secondItem="pw6-es-T39" secondAttribute="centerY" id="Ehp-Mx-2h2"/>
                     <constraint firstItem="mLE-dB-wE0" firstAttribute="centerY" secondItem="pw6-es-T39" secondAttribute="centerY" id="MmX-r5-z22"/>
+                    <constraint firstItem="mLE-dB-wE0" firstAttribute="leading" secondItem="srV-jT-2de" secondAttribute="trailing" constant="8" symbolic="YES" id="ZVI-jR-TWN"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="message" destination="mLE-dB-wE0" id="9M1-WI-1SM"/>
+                <outlet property="notifImage" destination="srV-jT-2de" id="rF0-ZQ-LPK"/>
             </connections>
+            <point key="canvasLocation" x="242" y="187"/>
         </tableViewCell>
     </objects>
 </document>
