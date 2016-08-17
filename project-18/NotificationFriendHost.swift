@@ -79,9 +79,17 @@ class NotificationFriendHost: Notification {
     
     // IMPLEMENT PROTOCOL METHODS -----------------------------------------------------------------------------
     
-    override func onNotificationClicked() {
-        // TODO go to event info for event with id eventID
+    override func onNotificationClicked(controller: NotificationViewController, userID: String) {
+        
+        // Set the local Notification to viewed
         self.viewed = true
+        
+        // Set the Notification on the database to viewed
+        setToViewed(userID)
+        
+        // Navigate to EventInfo for event
+        controller.selectedEventID = eventID
+        controller.performSegueWithIdentifier("openEventInfo", sender: controller);
     }
     
     override func generateMessage() -> String {

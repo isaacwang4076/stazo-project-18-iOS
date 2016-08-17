@@ -69,7 +69,7 @@ class NotificationWelcome: Notification {
     
     // IMPLEMENT PROTOCOL METHODS -----------------------------------------------------------------------------
     
-    override func onNotificationClicked() {
+    override func onNotificationClicked(controller: NotificationViewController, userID: String) {
         // TODO do something
         self.viewed = true
     }

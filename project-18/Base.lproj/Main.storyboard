@@ -587,7 +587,7 @@
                         <segue destination="5L5-qz-Qce" kind="relationship" relationship="viewControllers" id="MGV-7v-6gV"/>
                         <segue destination="cRl-If-U33" kind="relationship" relationship="viewControllers" id="mH6-EL-fYj"/>
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
-                        <segue destination="TGV-4b-Wbw" kind="relationship" relationship="viewControllers" id="zhW-9a-wHy"/>
+                        <segue destination="b18-6n-maD" kind="relationship" relationship="viewControllers" id="zhW-9a-wHy"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
@@ -978,6 +978,7 @@
                             <constraint firstItem="vUJ-DA-YOw" firstAttribute="width" secondItem="eo3-N9-agn" secondAttribute="width" id="Wyo-Jd-FBn"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="aVx-fl-dY5"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="760"/>
@@ -1036,15 +1037,16 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
-                    <tabBarItem key="tabBarItem" title="" image="ic_actionbar_notif.png" id="JRP-Uu-hqI"/>
+                    <navigationItem key="navigationItem" id="W8b-dd-GJV"/>
                     <connections>
                         <outlet property="notificationTableView" destination="nNF-G4-bL5" id="JKT-Mr-HPk"/>
                         <outlet property="notificationTableViewHeightConstraint" destination="zHv-E9-MX9" id="ufi-Vx-ojY"/>
+                        <segue destination="Yjn-ES-LFB" kind="show" identifier="openEventInfo" id="XS4-OO-xqs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0PR-o5-64V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="596" y="817"/>
+            <point key="canvasLocation" x="1408" y="817"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ZbH-4q-nwj">
@@ -1084,6 +1086,25 @@
             </objects>
             <point key="canvasLocation" x="229" y="-692"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="D3B-Xv-CCl">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="b18-6n-maD" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="ic_actionbar_notif.png" id="JRP-Uu-hqI"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Lti-DN-vrc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="TGV-4b-Wbw" kind="relationship" relationship="rootViewController" id="Al9-Bl-qJj"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Sey-a6-oMD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="596" y="817"/>
+        </scene>
     </scenes>
     <resources>
         <image name="ic_actionbar_browse2.png" width="36" height="36"/>
@@ -1092,6 +1113,6 @@
         <image name="ic_actionbar_notif.png" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="r8t-zn-fa4"/>
+        <segue reference="XS4-OO-xqs"/>
     </inferredMetricsTieBreakers>
 </document>
