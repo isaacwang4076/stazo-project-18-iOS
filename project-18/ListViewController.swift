@@ -102,7 +102,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                 }
             }
             func sortBasedOnPopularity(event1: Event, event2: Event) -> Bool{
-                if (event1.getAttendees()?.count > event2.getAttendees()?.count) {return true;}
+                if (event1.getAttendees().count > event2.getAttendees().count) {return true;}
                 else {return false;}
             }
             self.popularEventArray.sortInPlace(sortBasedOnPopularity);

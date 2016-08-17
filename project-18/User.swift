@@ -210,18 +210,15 @@ class User: NSObject, NSCoding {
         // ---- Update Event Information ------------------------------------------------------
         
         // Remove the user's userID from attendees on the database
-        
         // Listener for event's attendees snapshot
         fb.child("Events").child(eventID).child("attendees").observeSingleEventOfType(FIRDataEventType.Value, withBlock: { (snapshot) in
-            
             for attendeeSnapshot in snapshot.children {
                 if attendeeSnapshot.value == self.userID {
                     attendeeSnapshot.ref.setValue(nil)
                     break
                 }
             }
-            
-            })
+        })
 
         
         // popularity decrement
@@ -246,14 +243,12 @@ class User: NSObject, NSCoding {
         // Remove the eventID from attendingEvents on the database (for future sessions)
         // Listener for user's attendingEvents snapshot
         fb.child("Users").child(userID).child("attendingEvents").observeSingleEventOfType(FIRDataEventType.Value, withBlock: { (snapshot) in
-            
             for eventSnapshot in snapshot.children {
                 if eventSnapshot.value == eventID {
                     eventSnapshot.ref.setValue(nil)
                     break
                 }
             }
-            
         })
         // ------------------------------------------------------------------------------------
         
@@ -294,7 +289,7 @@ class User: NSObject, NSCoding {
     
     //debugging
     func printUserInfo() {
-        print("USER INFO -----------------------");
+        print("USER INFO ----------------------------");
         print("User id: " + Globals.me.userID);
         print("User name: " + Globals.me.userName);
         print("Bio: " + Globals.me.bio);

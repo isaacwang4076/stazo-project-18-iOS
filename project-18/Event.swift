@@ -25,7 +25,8 @@ class Event {
     private var startTime: UInt64?      // The start time of the event, an epoch-based long
     private var endTime: UInt64?        // The end time of the event, an epoch-based long
     // TODO location                    // The location of the event (coordinates)
-    private var attendees = [String]?() // A list of User ID's for Users who have joined this event
+    //guarenteed NON-NULL
+    private var attendees:[String] = [] // A list of User ID's for Users who have joined this event
     private var popularity: UInt = 0    // How popular the event is (equal to attendees size)
     private var reports: UInt = 0       // Number of reports the event has
     
@@ -55,7 +56,10 @@ class Event {
         self.popularity = eventDict.valueForKey("popularity") as! UInt //crashes when transactions are still going through from inc/dec
         self.reports = eventDict.valueForKey("reports") as! UInt
         self.startTime = (eventDict.valueForKey("startTime") as! NSNumber).unsignedLongLongValue
-        self.attendees = (eventDict.valueForKey("attendees") as? NSDictionary)?.allValues as? [String];
+        //only set attendees if it exists
+        if (((eventDict.valueForKey("attendees") as? NSDictionary)?.allValues as? [String]) != nil ){
+            self.attendees = (eventDict.valueForKey("attendees") as? NSDictionary)?.allValues as! [String];
+        }
     }
     
     // TODO location constructor
@@ -174,7 +178,7 @@ class Event {
         self.endTime = endTime
     }
     // TODO location getter/setter
-    func getAttendees() -> [String]? {
+    func getAttendees() -> [String] {
         return attendees
     }
     func setAttendees(attendees: [String]) {

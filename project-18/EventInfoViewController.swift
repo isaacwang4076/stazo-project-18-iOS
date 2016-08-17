@@ -18,18 +18,35 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
     @IBOutlet var eventNameLabel: UILabel!
     @IBOutlet var joinButton: UIButton!
     @IBAction func joinClick(sender: AnyObject) {
-        self.userHasJoined = !self.userHasJoined;
-        if (self.userHasJoined) {
-            self.joinButton.setTitle("Joined", forState: UIControlState.Normal);
-            self.joinButton.backgroundColor = UIColor.redColor();
-            //handle user attend
-            Globals.me.attendEvent(self.event!.getEventID(), eventName: self.event!.getName(), creatorID: self.event!.getCreatorID());
-        }
-        else {
-            self.joinButton.setTitle("Join", forState: UIControlState.Normal);
-            self.joinButton.backgroundColor = UIColor.yellowColor();
-            //handle user unattend
-            Globals.me.unattendEvent(self.event!.getEventID());
+        if (self.event != nil) { //check just in case event takes a while to load
+            //Reverse joined boolean
+            self.userHasJoined = !self.userHasJoined;
+            
+            //if user is now joined, change button UI, handle user attend, and upate joined view
+            if (self.userHasJoined) {
+                self.joinButton.setTitle("Joined", forState: UIControlState.Normal);
+                self.joinButton.backgroundColor = UIColor.redColor();
+                Globals.me.attendEvent(self.event!.getEventID(), eventName: self.event!.getName(), creatorID: self.event!.getCreatorID());
+                
+                var newAttendees = self.event!.getAttendees();
+                newAttendees.append(Globals.me.userID);
+                self.event!.setAttendees(newAttendees);
+                self.updateJoinedView();
+            }
+                
+            //if user is now unjoined, change button UI, handle user unattend, and update joined view
+            else {
+                self.joinButton.setTitle("Join", forState: UIControlState.Normal);
+                self.joinButton.backgroundColor = UIColor.yellowColor();
+                Globals.me.unattendEvent(self.event!.getEventID());
+                
+                var newAttendees = self.event!.getAttendees();
+                let index = self.event!.getAttendees().indexOf(Globals.me.userID);
+                newAttendees.removeAtIndex((newAttendees.startIndex.distanceTo(index!)));
+                self.event!.setAttendees(newAttendees);
+                self.updateJoinedView();
+            }
+            
         }
     }
     
@@ -104,12 +121,8 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
             self.eventNameLabel.text = self.event!.getName();
             
             //update joined bool, joined button, joined label, joined collection view
-            if self.event!.getAttendees() != nil {
-                self.userHasJoined = (self.event!.getAttendees()!.contains(Globals.me.userID));
-                self.joinedLabel.text = "Joined (\(self.event!.getAttendees()!.count))";
-                self.joinedImages = [UIImage?](count: self.event!.getAttendees()!.count, repeatedValue: nil);
-                self.updateJoinedImages();
-            }
+            self.userHasJoined = (self.event!.getAttendees().contains(Globals.me.userID));
+            self.updateJoinedView();
             if (self.userHasJoined) {
                 self.joinButton.setTitle("Joined", forState: UIControlState.Normal);
                 self.joinButton.backgroundColor = UIColor.redColor();
@@ -163,15 +176,17 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
     /* 
      * Updates the images shown in the joined collection view. Calls the facebook graph url to pull image
      * based off of user ID and updates the array and collection view each time a photo is received from the 
-     * url request. 
+     * url request. Also updates the Joined(x) label.
      */
-    func updateJoinedImages() {
+    func updateJoinedView() {
+        self.joinedLabel.text = "Joined (\(self.event!.getAttendees().count))";
+        self.joinedImages = [UIImage?](count: self.event!.getAttendees().count, repeatedValue: nil);
         for i in 0 ..< self.joinedImages.count {
             let width = "150";
-            let urlString = "https://graph.facebook.com/\(self.event!.getAttendees()![i])/picture?width=\(width)";
+            let urlString = "https://graph.facebook.com/\(self.event!.getAttendees()[i])/picture?width=\(width)";
             let url = NSURL(string: urlString);
             //send request to get image
-            let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {
+            let task = NSURLSession.sharedSession().dataTaskWithURL(url!) { //TODO: fix some wierd thread thing
                 (data, response, error) in
                 //if data grabbed, updated image if in main thread
                 if (data != nil) {
@@ -183,6 +198,7 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
             };
             task.resume();
         }
+        self.joinedCollectionView.reloadData();
     }
     
     func pullAndShowComments() {
@@ -191,7 +207,7 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
             let eventComments:[FIRDataSnapshot]? = snapshot.children.allObjects as? [FIRDataSnapshot];
             
             //only if comments exist
-            if (eventComments != nil && eventComments?.count != 0) {
+            if (eventComments != nil && eventComments!.count != 0) {
                 print("comments exist");
                 //iterate through all snapshots and convert each .value -> dictionary -> comment and add to comments array
                 for eachComment in eventComments!{
@@ -307,12 +323,14 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if (self.event != nil) {
             //set height of collection view based on number of images
-            var height = (self.event?.getAttendees()?.count)! / 5;
-            if ((self.event?.getAttendees()?.count)! % 5 != 0) {
+            var height = (self.event!.getAttendees().count) / 5;
+            if ((self.event!.getAttendees().count) % 5 != 0) {
                 height += 1;
             }
-            self.joinedCollectionViewHeightConstraint.constant = CGFloat(height*50 + (height-1)*10);
-            return (self.event!.getAttendees()?.count)!;
+            if (height > 0) {
+                self.joinedCollectionViewHeightConstraint.constant = CGFloat(height*50 + (height-1)*10);
+            } else {self.joinedCollectionViewHeightConstraint.constant = 0;}
+            return (self.event!.getAttendees().count);
         }
         return 0;
     }
