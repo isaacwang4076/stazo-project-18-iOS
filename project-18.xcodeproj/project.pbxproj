@@ -11,7 +11,6 @@
 		2802BB621D384725006EBD15 /* NotificationCommentEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2802BB611D384725006EBD15 /* NotificationCommentEvent.swift */; };
 		282278E31D5A599400419C1F /* NotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 282278E21D5A599400419C1F /* NotificationCell.xib */; };
 		284E8E6C1D5919FB00B98592 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284E8E6B1D5919FB00B98592 /* NotificationTableViewCell.swift */; };
-		287AEA071D486633006289AC /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287AEA061D486633006289AC /* EventCell.swift */; };
 		2880FE9F1D388949009BD67B /* NotificationFriendHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2880FE9E1D388949009BD67B /* NotificationFriendHost.swift */; };
 		2880FEA11D388E5C009BD67B /* NotificationInviteEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2880FEA01D388E5C009BD67B /* NotificationInviteEvent.swift */; };
 		2880FEA31D389029009BD67B /* NotificationJoinedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2880FEA21D389029009BD67B /* NotificationJoinedEvent.swift */; };
@@ -32,7 +31,6 @@
 		E4335D284C29DFE8F42F1501 /* Pods_project_18Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92CD78F47B1A3330F98C392D /* Pods_project_18Tests.framework */; };
 		F60AB8141D3694570092AB38 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60AB8131D3694570092AB38 /* Comment.swift */; };
 		F61209F21D352FE600E5C715 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F61209F11D352FE600E5C715 /* GoogleService-Info.plist */; };
-		F61945451D3CE056006BB981 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61945441D3CE056006BB981 /* ProfileViewController.swift */; };
 		F61945471D3CE08C006BB981 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61945461D3CE08C006BB981 /* MapViewController.swift */; };
 		F619454D1D3D03EE006BB981 /* EventInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F619454C1D3D03EE006BB981 /* EventInfoViewController.swift */; };
 		F625A3F91D3DF7C6006AA3F2 /* ic_actionbar_notif.png in Resources */ = {isa = PBXBuildFile; fileRef = F625A3F51D3DF7C6006AA3F2 /* ic_actionbar_notif.png */; };
@@ -78,7 +76,6 @@
 		2802BB611D384725006EBD15 /* NotificationCommentEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCommentEvent.swift; sourceTree = "<group>"; };
 		282278E21D5A599400419C1F /* NotificationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationCell.xib; sourceTree = "<group>"; };
 		284E8E6B1D5919FB00B98592 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
-		287AEA061D486633006289AC /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		2880FE9E1D388949009BD67B /* NotificationFriendHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationFriendHost.swift; sourceTree = "<group>"; };
 		2880FEA01D388E5C009BD67B /* NotificationInviteEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationInviteEvent.swift; sourceTree = "<group>"; };
 		2880FEA21D389029009BD67B /* NotificationJoinedEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationJoinedEvent.swift; sourceTree = "<group>"; };
@@ -109,7 +106,6 @@
 		92CD78F47B1A3330F98C392D /* Pods_project_18Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_project_18Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F60AB8131D3694570092AB38 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		F61209F11D352FE600E5C715 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		F61945441D3CE056006BB981 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		F61945461D3CE08C006BB981 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		F619454C1D3D03EE006BB981 /* EventInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventInfoViewController.swift; sourceTree = "<group>"; };
 		F625A3F51D3DF7C6006AA3F2 /* ic_actionbar_notif.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_actionbar_notif.png; sourceTree = "<group>"; };
@@ -190,31 +186,26 @@
 		288EF14B1D3050C9001FBE63 /* project-18 */ = {
 			isa = PBXGroup;
 			children = (
-				288EF14C1D3050C9001FBE63 /* AppDelegate.swift */,
-				28A542F31D344CB600BE90E0 /* Globals.swift */,
-				F61945441D3CE056006BB981 /* ProfileViewController.swift */,
-				F61945461D3CE08C006BB981 /* MapViewController.swift */,
-				F6E0D4D81D411D5300ECF637 /* ListViewController.swift */,
-				28FA319F1D553D330046A80F /* NotificationViewController.swift */,
-				282278E21D5A599400419C1F /* NotificationCell.xib */,
-				284E8E6B1D5919FB00B98592 /* NotificationTableViewCell.swift */,
+				F646A70D1D4A3860008A21DA /* EventCell.xib */,
 				F646A7111D4A3965008A21DA /* EventTableViewCell.swift */,
-				F6E0D4DF1D411E4400ECF637 /* LoginViewController.swift */,
-				F66E8CA81D57340000F73470 /* JoinedCell.swift */,
-				F619454C1D3D03EE006BB981 /* EventInfoViewController.swift */,
 				F6C447891D4C907100B1D12C /* CommentCell.xib */,
 				F6C4478B1D4C915400B1D12C /* CommentTableViewCell.swift */,
-				F6D151D71D58FF0D00CF0498 /* CreateEventTable.swift */,
-				F646A70D1D4A3860008A21DA /* EventCell.xib */,
+				282278E21D5A599400419C1F /* NotificationCell.xib */,
+				284E8E6B1D5919FB00B98592 /* NotificationTableViewCell.swift */,
 				288EF1521D3050C9001FBE63 /* Main.storyboard */,
-				287AEA061D486633006289AC /* EventCell.swift */,
-				F63B3E391D44A45F00672EC9 /* CreateEventViewController.swift */,
-				288EF1551D3050C9001FBE63 /* Assets.xcassets */,
-				288EF1571D3050C9001FBE63 /* LaunchScreen.storyboard */,
-				288EF15A1D3050C9001FBE63 /* Info.plist */,
+				288EF14C1D3050C9001FBE63 /* AppDelegate.swift */,
+				28A542F31D344CB600BE90E0 /* Globals.swift */,
+				28A542F51D3455E600BE90E0 /* User.swift */,
 				288EF17C1D305B4F001FBE63 /* Event.swift */,
 				F60AB8131D3694570092AB38 /* Comment.swift */,
-				28A542F51D3455E600BE90E0 /* User.swift */,
+				F6E0D4DF1D411E4400ECF637 /* LoginViewController.swift */,
+				F61945461D3CE08C006BB981 /* MapViewController.swift */,
+				F63B3E391D44A45F00672EC9 /* CreateEventViewController.swift */,
+				F6E0D4D81D411D5300ECF637 /* ListViewController.swift */,
+				28FA319F1D553D330046A80F /* NotificationViewController.swift */,
+				F619454C1D3D03EE006BB981 /* EventInfoViewController.swift */,
+				F66E8CA81D57340000F73470 /* JoinedCell.swift */,
+				F6D151D71D58FF0D00CF0498 /* CreateEventTable.swift */,
 				28B57FF41D37455B00CE430C /* Notification.swift */,
 				28B57FF61D374B8F00CE430C /* NotificationNewFollow.swift */,
 				2880FEA21D389029009BD67B /* NotificationJoinedEvent.swift */,
@@ -222,6 +213,9 @@
 				2880FEA01D388E5C009BD67B /* NotificationInviteEvent.swift */,
 				2880FE9E1D388949009BD67B /* NotificationFriendHost.swift */,
 				2802BB611D384725006EBD15 /* NotificationCommentEvent.swift */,
+				288EF1551D3050C9001FBE63 /* Assets.xcassets */,
+				288EF1571D3050C9001FBE63 /* LaunchScreen.storyboard */,
+				288EF15A1D3050C9001FBE63 /* Info.plist */,
 				F61209F11D352FE600E5C715 /* GoogleService-Info.plist */,
 				F659BD991D41089200A08679 /* project-18-Bridging-Header.h */,
 			);
@@ -573,8 +567,6 @@
 				288EF14D1D3050C9001FBE63 /* AppDelegate.swift in Sources */,
 				F619454D1D3D03EE006BB981 /* EventInfoViewController.swift in Sources */,
 				28FA31A01D553D330046A80F /* NotificationViewController.swift in Sources */,
-				F61945451D3CE056006BB981 /* ProfileViewController.swift in Sources */,
-				287AEA071D486633006289AC /* EventCell.swift in Sources */,
 				2880FEA51D3892C2009BD67B /* NotificationWelcome.swift in Sources */,
 				28A542F41D344CB600BE90E0 /* Globals.swift in Sources */,
 				2880FEA31D389029009BD67B /* NotificationJoinedEvent.swift in Sources */,

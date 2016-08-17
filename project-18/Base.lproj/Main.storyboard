@@ -101,39 +101,6 @@
             </objects>
             <point key="canvasLocation" x="1195" y="-692"/>
         </scene>
-        <!--Profile View Controller-->
-        <scene sceneID="wg7-f3-ORb">
-            <objects>
-                <viewController id="8rJ-Kc-sve" customClass="ProfileViewController" customModule="project_18" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="L7p-HK-0SC"/>
-                        <viewControllerLayoutGuide type="bottom" id="Djb-ko-YwX"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="QS5-Rx-YEW">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Profile" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="zEq-FU-wV5">
-                                <rect key="frame" x="249" y="255" width="103" height="42"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="36"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="centerX" secondItem="zEq-FU-wV5" secondAttribute="centerX" id="qqM-NS-xev"/>
-                            <constraint firstAttribute="centerY" secondItem="zEq-FU-wV5" secondAttribute="centerY" id="qzY-Ky-pLD"/>
-                        </constraints>
-                    </view>
-                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
-                    <tabBarItem key="tabBarItem" title="" image="ic_actionbar_head.png" id="cPa-gy-q4n"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-511" y="817"/>
-        </scene>
         <!--List View Controller-->
         <scene sceneID="wnw-Yw-5Wg">
             <objects>
@@ -586,7 +553,6 @@
                     <connections>
                         <segue destination="5L5-qz-Qce" kind="relationship" relationship="viewControllers" id="MGV-7v-6gV"/>
                         <segue destination="cRl-If-U33" kind="relationship" relationship="viewControllers" id="mH6-EL-fYj"/>
-                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
                         <segue destination="b18-6n-maD" kind="relationship" relationship="viewControllers" id="zhW-9a-wHy"/>
                     </connections>
                 </tabBarController>
@@ -953,7 +919,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E5l-g1-9Ab" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1335" y="1218"/>
+            <point key="canvasLocation" x="-1321" y="968"/>
         </scene>
         <!--Notification View Controller-->
         <scene sceneID="InO-xu-Ldo">
@@ -1058,7 +1024,6 @@
     </scenes>
     <resources>
         <image name="ic_actionbar_browse2.png" width="36" height="36"/>
-        <image name="ic_actionbar_head.png" width="36" height="36"/>
         <image name="ic_actionbar_map2.png" width="36" height="36"/>
         <image name="ic_actionbar_notif.png" width="24" height="24"/>
     </resources>

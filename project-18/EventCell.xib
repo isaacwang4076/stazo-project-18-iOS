@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -12,7 +12,7 @@
             <rect key="frame" x="0.0" y="0.0" width="318" height="100"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="r4J-uK-bfz" id="9q7-i3-uCW">
-                <rect key="frame" x="0.0" y="0.0" width="318" height="99.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="318" height="99"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="69" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ePT-nC-eqf">
@@ -57,22 +57,12 @@
                     <constraint firstItem="v0g-9C-gNt" firstAttribute="leading" secondItem="9q7-i3-uCW" secondAttribute="leadingMargin" constant="12" id="JLU-dl-dMi"/>
                     <constraint firstItem="ePT-nC-eqf" firstAttribute="leading" secondItem="t1a-ul-TRh" secondAttribute="trailing" constant="7" id="Lhq-UN-s76"/>
                     <constraint firstItem="t1a-ul-TRh" firstAttribute="centerY" secondItem="9q7-i3-uCW" secondAttribute="centerY" id="PvP-Ih-pZk"/>
-                    <constraint firstItem="v0g-9C-gNt" firstAttribute="top" secondItem="9q7-i3-uCW" secondAttribute="topMargin" constant="17" id="aT6-ka-xly"/>
-                    <constraint firstItem="t1a-ul-TRh" firstAttribute="top" secondItem="9q7-i3-uCW" secondAttribute="topMargin" constant="27" id="ao1-wj-ZqZ"/>
                     <constraint firstItem="Dhe-d0-WTg" firstAttribute="top" secondItem="v0g-9C-gNt" secondAttribute="bottom" constant="10" id="dej-R2-3uY"/>
                     <constraint firstAttribute="trailingMargin" secondItem="ePT-nC-eqf" secondAttribute="trailing" constant="6" id="fgL-Xo-LAU"/>
                     <constraint firstItem="Dhe-d0-WTg" firstAttribute="leading" secondItem="9q7-i3-uCW" secondAttribute="leadingMargin" constant="42" id="fvV-gg-eTG"/>
                     <constraint firstItem="v0g-9C-gNt" firstAttribute="centerY" secondItem="9q7-i3-uCW" secondAttribute="centerY" constant="-14.5" id="kud-E8-Xug"/>
                     <constraint firstItem="ePT-nC-eqf" firstAttribute="centerY" secondItem="9q7-i3-uCW" secondAttribute="centerY" id="qYn-57-daz"/>
-                    <constraint firstItem="ePT-nC-eqf" firstAttribute="top" secondItem="9q7-i3-uCW" secondAttribute="topMargin" constant="32" id="vB1-fd-2Ae"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="aT6-ka-xly"/>
-                        <exclude reference="ao1-wj-ZqZ"/>
-                        <exclude reference="vB1-fd-2Ae"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="eventName" destination="v0g-9C-gNt" id="w9z-Uw-amG"/>
