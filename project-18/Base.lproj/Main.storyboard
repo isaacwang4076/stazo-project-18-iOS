@@ -569,7 +569,7 @@
                         <viewControllerLayoutGuide type="bottom" id="M0m-qx-S0V"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="eo3-N9-agn">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="690"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="734"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BgV-cj-DZD">
@@ -676,17 +676,11 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Eric" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pTH-CP-lYf">
                                                 <rect key="frame" x="20" y="245" width="560" height="21"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="560" id="8te-rE-tW6"/>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="gzj-gq-TEW"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
-                                                <variation key="default">
-                                                    <mask key="constraints">
-                                                        <exclude reference="8te-rE-tW6"/>
-                                                    </mask>
-                                                </variation>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="69 hrs" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VxG-dz-db9">
                                                 <rect key="frame" x="380" y="145" width="200" height="20"/>
@@ -884,24 +878,40 @@
                                     <constraint firstItem="vUJ-DA-YOw" firstAttribute="leading" secondItem="BgV-cj-DZD" secondAttribute="leading" id="jDT-1Q-mwi"/>
                                 </constraints>
                             </scrollView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gsA-eM-flz">
+                                <rect key="frame" x="0.0" y="690" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem title="Item" id="gKD-gs-uho"/>
+                                    <barButtonItem title="Post" id="IRJ-hR-EiI">
+                                        <connections>
+                                            <action selector="commentPostClick:" destination="Yjn-ES-LFB" id="5AQ-yf-Nd5"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="BgV-cj-DZD" secondAttribute="trailing" id="APy-XR-YIa"/>
+                            <constraint firstItem="gsA-eM-flz" firstAttribute="leading" secondItem="eo3-N9-agn" secondAttribute="leading" id="BIa-0c-HlK"/>
                             <constraint firstItem="BgV-cj-DZD" firstAttribute="top" secondItem="eo3-N9-agn" secondAttribute="top" id="TAI-6R-TfX"/>
-                            <constraint firstItem="M0m-qx-S0V" firstAttribute="top" secondItem="BgV-cj-DZD" secondAttribute="bottom" id="Tqf-Kj-Yeu"/>
                             <constraint firstItem="BgV-cj-DZD" firstAttribute="leading" secondItem="eo3-N9-agn" secondAttribute="leading" id="WeC-Lb-2dg"/>
                             <constraint firstItem="vUJ-DA-YOw" firstAttribute="width" secondItem="eo3-N9-agn" secondAttribute="width" id="Wyo-Jd-FBn"/>
+                            <constraint firstAttribute="trailing" secondItem="gsA-eM-flz" secondAttribute="trailing" id="XMm-1a-kI9"/>
+                            <constraint firstAttribute="bottom" secondItem="gsA-eM-flz" secondAttribute="bottom" id="hnM-S1-hfP"/>
+                            <constraint firstAttribute="bottom" secondItem="BgV-cj-DZD" secondAttribute="bottom" constant="44" id="mIF-lu-q5j"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="aVx-fl-dY5"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="600" height="690"/>
+                    <size key="freeformSize" width="600" height="734"/>
                     <connections>
                         <outlet property="commentTableHeightConstraint" destination="XE7-Dq-rOu" id="Gmk-VL-ict"/>
                         <outlet property="commentTableView" destination="y90-oP-OHf" id="chj-RG-SqM"/>
+                        <outlet property="commentToolbar" destination="gsA-eM-flz" id="ier-HB-qMU"/>
+                        <outlet property="commentWriteItem" destination="gKD-gs-uho" id="q6Q-ux-Nz5"/>
                         <outlet property="creatorImageView" destination="86C-BF-Hhf" id="NlS-2Z-GGl"/>
                         <outlet property="creatorNameLabel" destination="uf2-dZ-kVy" id="IrF-kY-p71"/>
                         <outlet property="descriptionLabel" destination="pTH-CP-lYf" id="CqW-ew-xxL"/>

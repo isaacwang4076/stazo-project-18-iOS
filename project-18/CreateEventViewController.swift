@@ -68,7 +68,7 @@ class CreateEventViewController: UIViewController, CreateEventTableProtocol {
                     if (startDateInt < endDateInt) {
                         Event.init(name: eventName,
                                    description: eventDescription,
-                                   creatorID: Globals.me.userID ,
+                                   creatorID: Globals.me.getUserID() ,
                                    startTime: startDateInt,
                                    endTime: endDateInt);
                         let alert = UIAlertController(title: "Yay!",

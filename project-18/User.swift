@@ -18,14 +18,14 @@ class User: NSObject, NSCoding {
     let DEFAULT_BIO = "This user does not have a bio."  // Used if the user does not have a bio
     
     // Variables, ALL GUARENTEED NON-NULL
-    var userID: String                 // Unique user identification
-    var userName: String               // User's name
-    var bio: String                    // User's bio
-    var myEvents: [String] = []        // A list of eventID's that this user has created
-    var attendingEvents: [String] = [] // A list of eventID's that this user has joined
+    private var userID: String                 // Unique user identification
+    private var userName: String               // User's name
+    private var bio: String                    // User's bio
+    private var myEvents: [String] = []        // A list of eventID's that this user has created
+    private var attendingEvents: [String] = [] // A list of eventID's that this user has joined
 //    var reportedEvents: [String]? = []  // A list of eventID's that this user has reported
-    var userTrails: [String] = []      // A list of userID's that this user has followed
-    var userFollowers: [String] = []   // A list of userID's that are following this user
+    private var userTrails: [String] = []      // A list of userID's that this user has followed
+    private var userFollowers: [String] = []   // A list of userID's that are following this user
 //    var friends = [String: String]()    // A Hashmap of userName to userID for this user's fb friends
     
     
@@ -304,5 +304,9 @@ class User: NSObject, NSCoding {
     // - Getters and setters
     // - Facebook friend handling
     // - Bio filtering
+    
+    func getUserID() -> String {
+        return self.userID;
+    }
     
 }

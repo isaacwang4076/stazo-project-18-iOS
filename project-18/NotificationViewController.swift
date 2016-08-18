@@ -126,7 +126,7 @@ class NotificationViewController: UIViewController {
     // - Go to corresponding event info page
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //self.selectedEventID = Globals.eventsNameToID[self.filteredEventNames[indexPath.row]];
-        notifs[indexPath.row].onNotificationClicked(self, userID: Globals.me.userID)
+        notifs[indexPath.row].onNotificationClicked(self, userID: Globals.me.getUserID())
     }
     
     // -----------------------------------------------------------------------------------------------

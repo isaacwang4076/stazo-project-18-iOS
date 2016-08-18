@@ -29,10 +29,10 @@ class Comment {
     
     //push dat shit
     func pushToFirebase() {
-        Globals.fb.child("CommentDatabase").child(self.eventID).setValue(self);
+        Globals.fb.child("CommentDatabase").child(self.eventID).child("comments").childByAutoId().setValue(self.toDictionary());
     }
     func toDictionary() -> NSDictionary {
-        return ["comment":self.comment, "userID":self.userID, "eventID":self.eventID];
+        return ["comment":self.comment, "user_ID":self.userID, "event_ID":self.eventID];
     }
     
     //getter functions that gaurentees non-null values

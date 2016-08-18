@@ -11,7 +11,7 @@ import FirebaseDatabase
 
 //Current bug: only allow back button after transaction completes, if user goes super fast, it will crash
 
-class EventInfoViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
+class EventInfoViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate {
 
     /* UI STUFF ----------------------------------------------------*/
     //Event name and join button (reference and action func)
@@ -29,7 +29,7 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
                 Globals.me.attendEvent(self.event!.getEventID(), eventName: self.event!.getName(), creatorID: self.event!.getCreatorID());
                 
                 var newAttendees = self.event!.getAttendees();
-                newAttendees.append(Globals.me.userID);
+                newAttendees.append(Globals.me.getUserID());
                 self.event!.setAttendees(newAttendees);
                 self.updateJoinedView();
             }
@@ -41,7 +41,7 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
                 Globals.me.unattendEvent(self.event!.getEventID());
                 
                 var newAttendees = self.event!.getAttendees();
-                let index = self.event!.getAttendees().indexOf(Globals.me.userID);
+                let index = self.event!.getAttendees().indexOf(Globals.me.getUserID());
                 newAttendees.removeAtIndex((newAttendees.startIndex.distanceTo(index!)));
                 self.event!.setAttendees(newAttendees);
                 self.updateJoinedView();
@@ -66,11 +66,17 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
     @IBOutlet var joinedCollectionViewHeightConstraint: NSLayoutConstraint!
     
     //Photo and comment views and buttons
-    @IBAction func viewPhotoClick(sender: AnyObject) {}
-    @IBOutlet var uploadImageView: UIImageView!
     @IBOutlet var noCommentLabel: UILabel!
     @IBOutlet var commentTableView: UITableView!
     @IBOutlet var commentTableHeightConstraint: NSLayoutConstraint!
+    
+    //Write comment toolbar items
+    @IBOutlet var commentToolbar: UIToolbar!
+    @IBOutlet var commentWriteItem: UIBarButtonItem!
+    @IBAction func commentPostClick(sender: AnyObject) {
+        self.writeComment();
+    }
+    
     /*--------------------------------------------------------------*/
     
     
@@ -84,13 +90,29 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
         super.viewDidLoad()
         
         if (eventID != nil) {
-            pullAndShowEvent(); //TODO:Hide or set everything to initial state before showing with info
-            pullAndShowComments();
+            self.pullAndShowEvent(); //TODO:Hide or set everything to initial state before showing with info
+            self.pullAndShowComments();
         }
         else {
             print("Event ID is null, WHY IS IT NULL");
         }
         
+        //Write comment text view
+        let writeCommentTextField = UITextField(frame: CGRectMake(0, 0, self.view.frame.width - 75, 28));
+        writeCommentTextField.placeholder = "Write comment...";
+        writeCommentTextField.font = UIFont.systemFontOfSize(15);
+        writeCommentTextField.borderStyle = UITextBorderStyle.RoundedRect;
+//        writeCommentTextField.autocorrectionType = UITextAutocorrectionType.No;
+        writeCommentTextField.keyboardType = UIKeyboardType.Default;
+        writeCommentTextField.returnKeyType = UIReturnKeyType.Done;
+        writeCommentTextField.clearButtonMode = UITextFieldViewMode.WhileEditing;
+        writeCommentTextField.contentVerticalAlignment = UIControlContentVerticalAlignment.Center
+        writeCommentTextField.delegate = self;
+        self.commentWriteItem.customView = writeCommentTextField;
+
+        //Keyboard listeners for writing comment
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(EventInfoViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(EventInfoViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil);
         
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(EventInfoViewController.respondToSwipeGesture(_:)))
         swipeDown.direction = UISwipeGestureRecognizerDirection.Down
@@ -121,7 +143,7 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
             self.eventNameLabel.text = self.event!.getName();
             
             //update joined bool, joined button, joined label, joined collection view
-            self.userHasJoined = (self.event!.getAttendees().contains(Globals.me.userID));
+            self.userHasJoined = (self.event!.getAttendees().contains(Globals.me.getUserID()));
             self.updateJoinedView();
             if (self.userHasJoined) {
                 self.joinButton.setTitle("Joined", forState: UIControlState.Normal);
@@ -201,21 +223,24 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
         self.joinedCollectionView.reloadData();
     }
     
+    /* 
+     * Pulls array of comments, populates self.comments array, and reloads commentTableView.
+     */
     func pullAndShowComments() {
         Globals.fb.child("CommentDatabase").child(self.eventID!).child("comments").observeSingleEventOfType(.Value, withBlock: {
             snapshot in
             let eventComments:[FIRDataSnapshot]? = snapshot.children.allObjects as? [FIRDataSnapshot];
+            self.comments = []; //clear current list
             
             //only if comments exist
             if (eventComments != nil && eventComments!.count != 0) {
-                print("comments exist");
                 //iterate through all snapshots and convert each .value -> dictionary -> comment and add to comments array
                 for eachComment in eventComments!{
-                    print("one");
                     self.comments.append(Comment.init(dictionary:eachComment.value as! [String:AnyObject]));
                 }
                 //display comments in tableview
                 print("num comments: \(self.comments.count)");
+                self.noCommentLabel.hidden = true;
                 self.commentTableView.reloadData();
             }
                 
@@ -225,6 +250,58 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
             }
         });
     }
+    
+    /*
+     * Uploads the text in self.commentWriteItem to Firebase. 
+     */
+    func writeComment() {
+        let commentText = (self.commentWriteItem.customView as! UITextField).text;
+        if (!(commentText?.isEmpty)!) {
+            let comment = Comment.init(comment: commentText!, userID: Globals.me.getUserID(), eventID: self.eventID!);
+            comment.pushToFirebase();
+            pullAndShowComments();
+            //Hide keyboard and clear textfield
+            (self.commentWriteItem.customView as! UITextField).text = "";
+            self.commentWriteItem.customView?.resignFirstResponder();
+        }
+        else {
+            print("empty");
+        }
+    }
+    
+    //Shifts the view up when keyboard shows
+    func keyboardWillShow(notifcation: NSNotification) {
+        print("keyboard will show");
+        if let keyboardSize = (notifcation.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            let offset = notifcation.userInfo?[UIKeyboardFrameEndUserInfoKey]?.CGRectValue().size;
+            //regular show
+            if (keyboardSize.height == offset!.height) {
+                self.view.frame.origin.y -= keyboardSize.height;
+            }
+            //when opening or closing assistive touch window
+            else {
+                self.view.frame.origin.y += keyboardSize.height - offset!.height;
+            }
+        }
+    }
+    
+    //Shifts view back down when keyboard hides
+    func keyboardWillHide(notifcation: NSNotification) {
+        print("keyboard will hide");
+//        if let keyboardSize = (notifcation.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+//            if (self.view.frame.origin.y != 0) {
+//                self.view.frame.origin.y += keyboardSize.height;
+//            }
+//        }
+        self.view.frame.origin.y = 0;
+    }
+    
+    //Hides keyboard and unfocuses textfield when keyboard's Done button is pressed
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder();
+        return true;
+    }
+    
     
     
     func respondToSwipeGesture(gesture: UISwipeGestureRecognizer) {
