@@ -17,8 +17,8 @@ class NotificationViewController: UIViewController {
     var notifs: [Notification] = [Notification]()
     var selectedEventID: String?
     
-    @IBOutlet weak var notificationTableView: UITableView!
-    @IBOutlet weak var notificationTableViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var notificationTableView: UITableView!
+    @IBOutlet var notificationTableViewHeightConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,7 +73,7 @@ class NotificationViewController: UIViewController {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        self.notificationTableViewHeightConstraint.constant = CGFloat(self.notifs.count) * 70;
+        self.notificationTableViewHeightConstraint.constant = CGFloat(self.notifs.count * 80);
         
         // Return number of notifications
         print("\n", self.notifs.count, " Notifications counted.")
