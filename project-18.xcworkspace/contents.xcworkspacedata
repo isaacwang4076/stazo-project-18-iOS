@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:NotificationCell.xib">
-   </FileRef>
-   <FileRef
       location = "group:project-18.xcodeproj">
    </FileRef>
    <FileRef

@@ -39,7 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         
         // PULL ALL FRIENDS
-        
+        Globals.friendsIDToName["1196215920412322"] = "Isaac Christopher Wang"
+        Globals.friendsIDToName["1184188798300386"] = "Brian Chan"
         
         // TEST EVENT PUSH
         //let e = Event(name: "First iOS event", description: "This is an iOS-generated event",

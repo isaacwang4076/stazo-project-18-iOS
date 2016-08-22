@@ -17,7 +17,6 @@ class MapViewController: UIViewController, UISearchBarDelegate,
     @IBOutlet weak var mapSearchBar: UISearchBar!   // The search bar
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     
-    var searchController: UISearchController!       // Search bar controller
     var filteredEventNames = [String]()             // Event names that fit the query
     var selectedEventID: String?                    // The eventID of the selected event
     var searchText: String?                         // Search query, used for sorting

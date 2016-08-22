@@ -103,7 +103,7 @@ class NotificationViewController: UIViewController {
     func populateCell(cell: NotificationTableViewCell, notifToShow: Notification) {
         cell.message.text = notifToShow.generateMessage()
         
-        //CREATOR IMAGE with URL request
+        //NOTIF IMAGE with URL request
         let width = "250";
         let urlString = "https://graph.facebook.com/" + notifToShow.pictureID!
             + "/picture?width=" + width;

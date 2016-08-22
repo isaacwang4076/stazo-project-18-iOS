@@ -15,7 +15,7 @@ struct Globals {
     static let eventFirebaseKeys = ["name", "description", "creator_id", "endTime", "event_id", "popularity", "reports", "startTime"]
     static var eventsNameToID: Dictionary<String, String> = [:] // HashMap from event name to event id (used for search on Map)
     static var eventsIDToEvent: Dictionary<String, Event> = [:] // HashMap from event id to Event (used for grabbing events)
-    static var friendsNameToID: Dictionary<String, String> = [:] // HashMap from friend name to friend userID (used for search on Invite)
+    static var friendsIDToName: Dictionary<String, String> = [:] // HashMap from friend name to friend userID (used for search on Invite)
     
     // Notification types
     static let TYPE_COMMENT_EVENT: Int = 0
@@ -50,6 +50,29 @@ func populateCell(cell: EventTableViewCell, eventToShow: Event) {
     let startTimeString = formatter.stringFromDate(date);
     //substringing to add "at"
     cell.eventTime.text = startTimeString.substringToIndex(startTimeString.startIndex.advancedBy(6)) + " at" + (startTimeString.substringFromIndex(startTimeString.startIndex.advancedBy(6)));
+}
+
+func populateCell(cell: UserTableViewCell, userID: String) {
+    
+    cell.userName.text = Globals.friendsIDToName[userID]!
+    
+    // FRIEND IMAGE with URL request
+    let width = "250";
+    let urlString = "https://graph.facebook.com/" + userID
+        + "/picture?width=" + width;
+    let url = NSURL(string: urlString);
+    //send request to get image
+    let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {
+        (data, response, error) in
+        //if data grabbed, update image in main thread
+        if (data != nil) {
+            dispatch_async(dispatch_get_main_queue(), {
+                cell.userImage.image = UIImage(data: data!)?.rounded;
+            });
+        }
+    };
+    task.resume();
+    
 }
 
 func stringFromDate(date: NSDate) -> String{ //TODO: Add today check and maybe tomorrow check?

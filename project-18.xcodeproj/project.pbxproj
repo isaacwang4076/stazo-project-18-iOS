@@ -28,6 +28,8 @@
 		28B57FF51D37455B00CE430C /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B57FF41D37455B00CE430C /* Notification.swift */; };
 		28B57FF71D374B8F00CE430C /* NotificationNewFollow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B57FF61D374B8F00CE430C /* NotificationNewFollow.swift */; };
 		28FA31A01D553D330046A80F /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FA319F1D553D330046A80F /* NotificationViewController.swift */; };
+		28FAF3A51D6A9AE100D4491E /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FAF3A41D6A9AE100D4491E /* UserTableViewCell.swift */; };
+		28FAF3A91D6AA3CD00D4491E /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28FAF3A81D6AA3CD00D4491E /* UserCell.xib */; };
 		BAFD470730C7EC4C8483A9A6 /* Pods_project_18.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63E2A126951744DF6EEF42C7 /* Pods_project_18.framework */; };
 		E4335D284C29DFE8F42F1501 /* Pods_project_18Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92CD78F47B1A3330F98C392D /* Pods_project_18Tests.framework */; };
 		F60AB8141D3694570092AB38 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60AB8131D3694570092AB38 /* Comment.swift */; };
@@ -100,6 +102,8 @@
 		28B57FF41D37455B00CE430C /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		28B57FF61D374B8F00CE430C /* NotificationNewFollow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationNewFollow.swift; sourceTree = "<group>"; };
 		28FA319F1D553D330046A80F /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		28FAF3A41D6A9AE100D4491E /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
+		28FAF3A81D6AA3CD00D4491E /* UserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCell.xib; sourceTree = "<group>"; };
 		3B28B73C796451B5DFA2AD62 /* Pods_project_18UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_project_18UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		602A1B38D6BA55985B35BF5B /* Pods-project-18.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-project-18.debug.xcconfig"; path = "Pods/Target Support Files/Pods-project-18/Pods-project-18.debug.xcconfig"; sourceTree = "<group>"; };
 		63E2A126951744DF6EEF42C7 /* Pods_project_18.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_project_18.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -194,6 +198,8 @@
 				F6C4478B1D4C915400B1D12C /* CommentTableViewCell.swift */,
 				282278E21D5A599400419C1F /* NotificationCell.xib */,
 				284E8E6B1D5919FB00B98592 /* NotificationTableViewCell.swift */,
+				28FAF3A81D6AA3CD00D4491E /* UserCell.xib */,
+				28FAF3A41D6A9AE100D4491E /* UserTableViewCell.swift */,
 				288EF1521D3050C9001FBE63 /* Main.storyboard */,
 				288EF14C1D3050C9001FBE63 /* AppDelegate.swift */,
 				28A542F31D344CB600BE90E0 /* Globals.swift */,
@@ -405,6 +411,7 @@
 				F625A3FA1D3DF7C6006AA3F2 /* ic_actionbar_head.png in Resources */,
 				F6C4478A1D4C907100B1D12C /* CommentCell.xib in Resources */,
 				F625A3FB1D3DF7C6006AA3F2 /* ic_actionbar_browse2.png in Resources */,
+				28FAF3A91D6AA3CD00D4491E /* UserCell.xib in Resources */,
 				288EF1561D3050C9001FBE63 /* Assets.xcassets in Resources */,
 				F646A70E1D4A3860008A21DA /* EventCell.xib in Resources */,
 				288EF1541D3050C9001FBE63 /* Main.storyboard in Resources */,
@@ -569,6 +576,7 @@
 				F61945471D3CE08C006BB981 /* MapViewController.swift in Sources */,
 				F646A7121D4A3965008A21DA /* EventTableViewCell.swift in Sources */,
 				288EF14D1D3050C9001FBE63 /* AppDelegate.swift in Sources */,
+				28FAF3A51D6A9AE100D4491E /* UserTableViewCell.swift in Sources */,
 				F619454D1D3D03EE006BB981 /* EventInfoViewController.swift in Sources */,
 				28FA31A01D553D330046A80F /* NotificationViewController.swift in Sources */,
 				2880FEA51D3892C2009BD67B /* NotificationWelcome.swift in Sources */,
