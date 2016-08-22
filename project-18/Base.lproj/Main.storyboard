@@ -955,7 +955,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GDU-rx-PoZ">
-                                <rect key="frame" x="0.0" y="64" width="600" height="128"/>
+                                <rect key="frame" x="0.0" y="92.5" width="600" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="R1E-j4-rAa"/>
@@ -964,8 +964,8 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="zXk-qO-A0d"/>
                                         <exclude reference="i3v-gd-iV3"/>
+                                        <exclude reference="zXk-qO-A0d"/>
                                     </mask>
                                 </variation>
                                 <connections>
@@ -973,15 +973,31 @@
                                     <outlet property="delegate" destination="bvs-0N-hjW" id="IOL-JG-j6e"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ryu-Du-XDu">
+                                <rect key="frame" x="237" y="352" width="127" height="30"/>
+                                <color key="backgroundColor" red="0.1450980392" green="0.46274509800000002" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="GRd-5I-50i"/>
+                                    <constraint firstAttribute="width" constant="127" id="Zp1-FU-y7H"/>
+                                </constraints>
+                                <state key="normal" title="Send Invites">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="sendInvitesClick:" destination="bvs-0N-hjW" eventType="touchUpInside" id="jb0-4O-pD7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="GDU-rx-PoZ" firstAttribute="top" secondItem="DXW-Hd-25T" secondAttribute="bottom" constant="8" id="0Md-JE-iV0"/>
                             <constraint firstItem="lDl-P3-J2K" firstAttribute="centerX" secondItem="VcP-HQ-xUt" secondAttribute="centerX" id="4Bi-R1-fcB"/>
                             <constraint firstItem="DXW-Hd-25T" firstAttribute="top" secondItem="lDl-P3-J2K" secondAttribute="bottom" id="AHm-Ta-SaS"/>
+                            <constraint firstItem="EFy-vg-4Uk" firstAttribute="top" secondItem="ryu-Du-XDu" secondAttribute="bottom" constant="40" id="DA1-yg-97U"/>
                             <constraint firstItem="GDU-rx-PoZ" firstAttribute="width" secondItem="VcP-HQ-xUt" secondAttribute="width" id="P4g-BV-Dc9"/>
                             <constraint firstItem="lDl-P3-J2K" firstAttribute="width" secondItem="VcP-HQ-xUt" secondAttribute="width" id="PS3-Z4-lDs"/>
-                            <constraint firstItem="GDU-rx-PoZ" firstAttribute="top" secondItem="lDl-P3-J2K" secondAttribute="bottom" id="QZn-88-QjP"/>
                             <constraint firstItem="DXW-Hd-25T" firstAttribute="centerX" secondItem="VcP-HQ-xUt" secondAttribute="centerX" id="W17-x4-9zP"/>
+                            <constraint firstItem="ryu-Du-XDu" firstAttribute="centerX" secondItem="VcP-HQ-xUt" secondAttribute="centerX" id="Whz-1I-J0s"/>
                             <constraint firstItem="GDU-rx-PoZ" firstAttribute="centerX" secondItem="VcP-HQ-xUt" secondAttribute="centerX" id="jRJ-pd-PEA"/>
                             <constraint firstItem="lDl-P3-J2K" firstAttribute="top" secondItem="XVx-aF-tpf" secondAttribute="bottom" id="zi1-7q-rQW"/>
                         </constraints>

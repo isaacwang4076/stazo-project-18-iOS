@@ -309,4 +309,8 @@ class User: NSObject, NSCoding {
         return self.userID;
     }
     
+    func getUserName() -> String {
+        return self.userName;
+    }
+    
 }

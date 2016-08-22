@@ -13,13 +13,24 @@ import FirebaseDatabase
 class InviteViewController: UIViewController, UISearchBarDelegate {
     
     @IBOutlet weak var inviteSearchBar: UISearchBar!
-        
+    
     @IBOutlet weak var usersTableView: UITableView!
     
     @IBOutlet weak var usersTableViewHeightConstraint: NSLayoutConstraint!
     
-    var filteredFriendIDs = [String]()
-    var searchText: String?
+    @IBAction func sendInvitesClick(sender: AnyObject) {
+        sendInvites()
+    }
+    
+    let MAX_CELLS = 7                   // The maximum number of results displayed at a time
+    
+    var searchText: String = ""         // The search query
+    var filteredFriendIDs = [String]()  // List of IDs of friends who match the query
+    var invitedFriendIDs = [String]()   // List of IDs of friends whom the user has invited
+    
+    // Info for this event
+    var eventID: String?
+    var eventName: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +45,13 @@ class InviteViewController: UIViewController, UISearchBarDelegate {
         self.usersTableView.registerNib(UINib(nibName: "UserCell", bundle: nil), forCellReuseIdentifier: "UserCell");
         
     }
+    
+    // Called in prepareForSegue in EventInfoViewController, sets the info for the event
+    func setEventInfo(event: Event) {
+        self.eventID = event.getEventID()
+        self.eventName = event.getName()
+    }
+    
     
     // SEARCH ----------------------------------------------------------------------------------------
     
@@ -63,7 +81,7 @@ class InviteViewController: UIViewController, UISearchBarDelegate {
     
     // For query "fu", prioritizes "Fundraiser" over "KungFu"
     func prefixCompare(user1ID: String, user2ID: String) -> Bool {
-        return Globals.friendsIDToName[user1ID]!.lowercaseString.hasPrefix(self.searchText!.lowercaseString)
+        return Globals.friendsIDToName[user1ID]!.lowercaseString.hasPrefix(self.searchText.lowercaseString)
     }
     
     // -----------------------------------------------------------------------------------------------
@@ -72,11 +90,12 @@ class InviteViewController: UIViewController, UISearchBarDelegate {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        self.usersTableViewHeightConstraint.constant = CGFloat(self.filteredFriendIDs.count) * 80;
+        let numCells = min(MAX_CELLS, self.filteredFriendIDs.count)
         
+        self.usersTableViewHeightConstraint.constant = CGFloat(numCells) * 80;
         
-        // Return number of matching queries
-        return self.filteredFriendIDs.count;
+        // Return number of cells
+        return numCells;
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -103,11 +122,33 @@ class InviteViewController: UIViewController, UISearchBarDelegate {
     // HANDLE CELL CLICK
     // - Go to corresponding event info page
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        /*
-        self.selectedEventID = Globals.eventsNameToID[self.filteredEventNames[indexPath.row]];
-        self.performSegueWithIdentifier("openEventInfo", sender: self);*/
+        
+        // The ID of the friend who was clicked
+        let selectedFriendID = self.filteredFriendIDs[indexPath.row]
+        
+        // If they are already in the invite list, remove them
+        if (invitedFriendIDs.contains(selectedFriendID)) {
+            invitedFriendIDs.removeAtIndex(invitedFriendIDs.indexOf(selectedFriendID)!)
+        }
+        // Otherwise, add them
+        else {
+            invitedFriendIDs.append(self.filteredFriendIDs[indexPath.row])
+        }
+        
+        print("\ninvitedFriendIDs: ", invitedFriendIDs)
     }
     
     // -----------------------------------------------------------------------------------------------
-
+    
+    
+    // Send an invite for this event from me to all the selected friends
+    func sendInvites() {
+        
+        print("\nSending invites...")
+        for friendID in invitedFriendIDs {
+            let nie: Notification = NotificationInviteEvent(type: Globals.TYPE_INVITE_EVENT, pictureID: Globals.me.getUserID(), eventID: eventID!, eventName: eventName!, userNames: [Globals.me.getUserName()])
+            nie.pushToFirebase([friendID])
+        }
+    }
+    
 }

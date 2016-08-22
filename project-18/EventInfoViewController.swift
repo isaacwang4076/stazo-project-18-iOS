@@ -434,16 +434,15 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
     
     // MARK: - Navigation
 
-    /*// In a storyboard-based application, you will often want to do a little preparation before navigation
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
         if (segue.identifier == "openInvite") {
-            (segue.destinationViewController as! EventInfoViewController).hidesBottomBarWhenPushed = true;
-            (segue.destinationViewController as! EventInfoViewController).setEventID(self.selectedEventID!);
+            (segue.destinationViewController as! InviteViewController).setEventInfo(event!)
         }
-    }*/
+    }
  
 
 }
