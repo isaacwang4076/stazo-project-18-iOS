@@ -15,6 +15,7 @@
 		2880FEA11D388E5C009BD67B /* NotificationInviteEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2880FEA01D388E5C009BD67B /* NotificationInviteEvent.swift */; };
 		2880FEA31D389029009BD67B /* NotificationJoinedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2880FEA21D389029009BD67B /* NotificationJoinedEvent.swift */; };
 		2880FEA51D3892C2009BD67B /* NotificationWelcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2880FEA41D3892C2009BD67B /* NotificationWelcome.swift */; };
+		288838EF1D651EEB0007D377 /* InviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288838EE1D651EEB0007D377 /* InviteViewController.swift */; };
 		288EF14D1D3050C9001FBE63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288EF14C1D3050C9001FBE63 /* AppDelegate.swift */; };
 		288EF1541D3050C9001FBE63 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 288EF1521D3050C9001FBE63 /* Main.storyboard */; };
 		288EF1561D3050C9001FBE63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 288EF1551D3050C9001FBE63 /* Assets.xcassets */; };
@@ -80,6 +81,7 @@
 		2880FEA01D388E5C009BD67B /* NotificationInviteEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationInviteEvent.swift; sourceTree = "<group>"; };
 		2880FEA21D389029009BD67B /* NotificationJoinedEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationJoinedEvent.swift; sourceTree = "<group>"; };
 		2880FEA41D3892C2009BD67B /* NotificationWelcome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationWelcome.swift; sourceTree = "<group>"; };
+		288838EE1D651EEB0007D377 /* InviteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteViewController.swift; sourceTree = "<group>"; };
 		288EF1491D3050C9001FBE63 /* project-18.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "project-18.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		288EF14C1D3050C9001FBE63 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		288EF1531D3050C9001FBE63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				F63B3E391D44A45F00672EC9 /* CreateEventViewController.swift */,
 				F6E0D4D81D411D5300ECF637 /* ListViewController.swift */,
 				28FA319F1D553D330046A80F /* NotificationViewController.swift */,
+				288838EE1D651EEB0007D377 /* InviteViewController.swift */,
 				F619454C1D3D03EE006BB981 /* EventInfoViewController.swift */,
 				F66E8CA81D57340000F73470 /* JoinedCell.swift */,
 				F6D151D71D58FF0D00CF0498 /* CreateEventTable.swift */,
@@ -555,6 +558,7 @@
 				2880FE9F1D388949009BD67B /* NotificationFriendHost.swift in Sources */,
 				284E8E6C1D5919FB00B98592 /* NotificationTableViewCell.swift in Sources */,
 				288EF17D1D305B4F001FBE63 /* Event.swift in Sources */,
+				288838EF1D651EEB0007D377 /* InviteViewController.swift in Sources */,
 				28B57FF71D374B8F00CE430C /* NotificationNewFollow.swift in Sources */,
 				F6E0D4E01D411E4400ECF637 /* LoginViewController.swift in Sources */,
 				28A542F61D3455E600BE90E0 /* User.swift in Sources */,

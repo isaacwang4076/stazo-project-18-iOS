@@ -38,6 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         })
         
+        // PULL ALL FRIENDS
+        
         
         // TEST EVENT PUSH
         //let e = Event(name: "First iOS event", description: "This is an iOS-generated event",

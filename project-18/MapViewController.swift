@@ -30,6 +30,8 @@ class MapViewController: UIViewController, UISearchBarDelegate,
         
         // Search setup
         mapSearchBar.delegate = self
+        
+        // TableView cell
         self.tableView.registerNib(UINib(nibName: "EventCell", bundle: nil), forCellReuseIdentifier: "EventCell");
 
     }

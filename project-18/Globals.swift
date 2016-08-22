@@ -13,8 +13,9 @@ import FirebaseDatabase
 struct Globals {
     static let fb = FIRDatabase.database().reference()    // Reference to the database
     static let eventFirebaseKeys = ["name", "description", "creator_id", "endTime", "event_id", "popularity", "reports", "startTime"]
-    static var eventsNameToID: Dictionary<String, String> = [:] // HashMap from event name to event id (used for search)
+    static var eventsNameToID: Dictionary<String, String> = [:] // HashMap from event name to event id (used for search on Map)
     static var eventsIDToEvent: Dictionary<String, Event> = [:] // HashMap from event id to Event (used for grabbing events)
+    static var friendsNameToID: Dictionary<String, String> = [:] // HashMap from friend name to friend userID (used for search on Invite)
     
     // Notification types
     static let TYPE_COMMENT_EVENT: Int = 0

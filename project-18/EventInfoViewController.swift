@@ -61,7 +61,9 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
     
     //Joined view and invite button
     @IBOutlet var joinedLabel: UILabel!
-    @IBAction func inviteClick(sender: AnyObject) {}
+    @IBAction func inviteClick(sender: AnyObject) {
+        self.performSegueWithIdentifier("openInvite", sender: self);
+    }
     @IBOutlet var joinedCollectionView: UICollectionView!
     @IBOutlet var joinedCollectionViewHeightConstraint: NSLayoutConstraint!
     
@@ -352,15 +354,20 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
         self.eventID = eventID;
     }
 
-    /*
+    
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    /*// In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-    }
-    */
+        
+        if (segue.identifier == "openInvite") {
+            (segue.destinationViewController as! EventInfoViewController).hidesBottomBarWhenPushed = true;
+            (segue.destinationViewController as! EventInfoViewController).setEventID(self.selectedEventID!);
+        }
+    }*/
+ 
 
 }
 
