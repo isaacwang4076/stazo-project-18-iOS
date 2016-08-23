@@ -125,6 +125,7 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated);
         self.navigationController?.navigationBarHidden = false;
+        self.title = "Event Info";
     }
 
     override func didReceiveMemoryWarning() {

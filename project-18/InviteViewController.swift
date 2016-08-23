@@ -20,6 +20,8 @@ class InviteViewController: UIViewController, UISearchBarDelegate {
     
     @IBAction func sendInvitesClick(sender: AnyObject) {
         sendInvites()
+        //return back to eventInfo
+        self.navigationController?.popViewControllerAnimated(true);
     }
     
     let MAX_CELLS = 7                   // The maximum number of results displayed at a time
@@ -35,8 +37,9 @@ class InviteViewController: UIViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Hide the navigation bar (included for back-navigation on segue to EventInfo)
-        self.navigationController?.navigationBarHidden = true;
+        // Show nav bar and set title
+        self.navigationController?.navigationBarHidden = false;
+        self.title = "Event Invite";
         
         // Search setup
         inviteSearchBar.delegate = self
