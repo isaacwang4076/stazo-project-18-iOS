@@ -39,13 +39,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         
         // PULL ALL FRIENDS
-        Globals.friendsIDToName["1196215920412322"] = "Isaac Christopher Wang"
+        let params = ["fields": "id, first_name, last_name, middle_name, name, email, picture"]
+        let request = FBSDKGraphRequest(graphPath: "me/friends", parameters: params)
+        request.startWithCompletionHandler { (connection : FBSDKGraphRequestConnection!, result : AnyObject!, error : NSError!) -> Void in
+            
+            if error != nil {
+                //let errorMessage = error.localizedDescription
+                /* Handle error */
+            }
+            else if result.isKindOfClass(NSDictionary){
+                /*  handle response */
+                //print("\nFriends are : \(result)")
+                let friendsArray = result["data"] as! NSArray;
+                
+                for friend in friendsArray {
+                    //print("\nfriend is: \(friend)")
+                    Globals.friendsIDToName[friend.valueForKey("id") as! String] = friend.valueForKey("name") as? String
+                }
+            }
+        }
+        /*Globals.friendsIDToName["1196215920412322"] = "Isaac Christopher Wang"
         Globals.friendsIDToName["1184188798300386"] = "Brian Chan"
         Globals.friendsIDToName["1177156832304841"] = "Ansel Blume"
         Globals.friendsIDToName["1138117392898486"] = "Matthew Ung"
         Globals.friendsIDToName["1131880253542315"] = "Luke Thomas"
         Globals.friendsIDToName["1076100269116381"] = "Eric Zhang"
-        Globals.friendsIDToName["1070949549640758"] = "Gates Zeng"
+        Globals.friendsIDToName["1070949549640758"] = "Gates Zeng"*/
 
 
         
