@@ -116,7 +116,7 @@ class InviteViewController: UIViewController, UISearchBarDelegate {
         let userID:String = self.filteredFriendIDs[indexPath.row]
         
         // Populate cell based on the Event's info
-        populateCell(cell, userID: userID)
+        populateCell(cell, userID: userID, isSelected: invitedFriendIDs.contains(userID))
         
         return cell
     }
@@ -132,12 +132,17 @@ class InviteViewController: UIViewController, UISearchBarDelegate {
         // If they are already in the invite list, remove them
         if (invitedFriendIDs.contains(selectedFriendID)) {
             invitedFriendIDs.removeAtIndex(invitedFriendIDs.indexOf(selectedFriendID)!)
+            usersTableView.cellForRowAtIndexPath(indexPath)!.backgroundColor = Globals.COLOR_UNSELECTED_CELL
         }
         // Otherwise, add them
         else {
             invitedFriendIDs.append(self.filteredFriendIDs[indexPath.row])
+            usersTableView.cellForRowAtIndexPath(indexPath)!.backgroundColor = Globals.COLOR_SELECTED_CELL
         }
         
+        // So when you click someone they aren't highlighted the default grey
+        usersTableView.deselectRowAtIndexPath(indexPath, animated: false)
+
         print("\ninvitedFriendIDs: ", invitedFriendIDs)
     }
     

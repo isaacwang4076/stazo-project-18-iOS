@@ -25,15 +25,27 @@ struct Globals {
     static let TYPE_INVITE_EVENT: Int = 4
     static let TYPE_WELCOME: Int = 5
     
-    //FB Token FROM LAST SESSION
+    // FB Token FROM LAST SESSION
     static var lastFBToken = FBSDKAccessToken.currentAccessToken();
     
-    //Current user, will crash if null, but should always be non-null after login screen
+    // Current user, will crash if null, but should always be non-null after login screen
     static var me:User = User(userID: "69", userName: "eric");
 //        NSKeyedUnarchiver.unarchiveObjectWithData(
 //        NSUserDefaults.standardUserDefaults().objectForKey("CurrentUser") as! NSData
 //    ) as! User;
 //    
+    
+    // COLORS
+    // TEMPLATE
+    
+    static let COLOR_PRIMARY = UIColor(netHex:0x0288D1)
+    static let COLOR_PRIMARY_DARK = UIColor(netHex:0x01579B)
+    static let COLOR_PRIMARY_LIGHT = UIColor(netHex:0x03A9F4)
+    static let COLOR_ACCENT = UIColor(netHex:0xFFEB3B)
+    static let COLOR_ACCENT_DARK = UIColor(netHex:0xFBC02D)
+    
+    static let COLOR_UNSELECTED_CELL = UIColor.whiteColor()
+    static let COLOR_SELECTED_CELL = COLOR_ACCENT
 }
 
 // GLOBAL FUNCTIONS
@@ -52,9 +64,14 @@ func populateCell(cell: EventTableViewCell, eventToShow: Event) {
     cell.eventTime.text = startTimeString.substringToIndex(startTimeString.startIndex.advancedBy(6)) + " at" + (startTimeString.substringFromIndex(startTimeString.startIndex.advancedBy(6)));
 }
 
-func populateCell(cell: UserTableViewCell, userID: String) {
+func populateCell(cell: UserTableViewCell, userID: String, isSelected: Bool) {
     
     cell.userName.text = Globals.friendsIDToName[userID]!
+    if (isSelected) {
+        cell.backgroundColor = Globals.COLOR_SELECTED_CELL
+    } else {
+        cell.backgroundColor = Globals.COLOR_UNSELECTED_CELL
+    }
     
     // FRIEND IMAGE with URL request
     let width = "250";
@@ -81,4 +98,18 @@ func stringFromDate(date: NSDate) -> String{ //TODO: Add today check and maybe t
     let startTimeString = formatter.stringFromDate(date);
     //substringing to add "at"
     return startTimeString.substringToIndex(startTimeString.startIndex.advancedBy(6)) + " at" + (startTimeString.substringFromIndex(startTimeString.startIndex.advancedBy(6)));
+}
+
+extension UIColor {
+    convenience init(red: Int, green: Int, blue: Int) {
+        assert(red >= 0 && red <= 255, "Invalid red component")
+        assert(green >= 0 && green <= 255, "Invalid green component")
+        assert(blue >= 0 && blue <= 255, "Invalid blue component")
+        
+        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
+    }
+    
+    convenience init(netHex:Int) {
+        self.init(red:(netHex >> 16) & 0xff, green:(netHex >> 8) & 0xff, blue:netHex & 0xff)
+    }
 }
