@@ -66,9 +66,18 @@ class MapViewController: UIViewController, UISearchBarDelegate,
         filteredEventNames = filteredEventNames.sort(prefixCompare)
     }
     
-    // For query "fu", prioritizes "Fundraiser" over "KungFu"
+    // For query "fu", prioritizes "Fundraiser" over "KungFu" and "ful" over "fulllllllll"
     func prefixCompare(eventName1: String, eventName2: String) -> Bool {
-        return eventName1.lowercaseString.hasPrefix(self.searchText!.lowercaseString)
+        let firstMatch = eventName1.lowercaseString.hasPrefix(self.searchText!.lowercaseString)
+        let secondMatch = eventName2.lowercaseString.hasPrefix(self.searchText!.lowercaseString)
+        if (firstMatch && !secondMatch) {
+            return true
+        }
+        if (secondMatch && !firstMatch) {
+            return false
+        }
+        return eventName1.endIndex < eventName2.endIndex
+
     }
     
     // -----------------------------------------------------------------------------------------------
