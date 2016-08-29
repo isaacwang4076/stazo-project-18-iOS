@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import MapKit
 
 /* Representation of an Event for the app */
 
@@ -25,6 +25,7 @@ class Event {
     private var startTime: UInt64?      // The start time of the event, an epoch-based long
     private var endTime: UInt64?        // The end time of the event, an epoch-based long
     // TODO location                    // The location of the event (coordinates)
+    private var location: CLLocationCoordinate2D
     //guarenteed NON-NULL
     private var attendees:[String] = [] // A list of User ID's for Users who have joined this event
     private var popularity: UInt = 0    // How popular the event is (equal to attendees size)
@@ -35,12 +36,13 @@ class Event {
     // - eventID not included because it is generated only
     //   just before the event is pushed to Firebase
     init(name: String, description: String, creatorID: String,
-         startTime:UInt64, endTime:UInt64) {
+         startTime:UInt64, endTime:UInt64, location:CLLocationCoordinate2D) {
         self.name = name
         self.description = description
         self.creatorID = creatorID
         self.startTime = startTime
         self.endTime = endTime
+        self.location = location
     }
     
     // FIREBASE PULL CONSTRUCTOR
@@ -60,6 +62,9 @@ class Event {
         if (((eventDict.valueForKey("attendees") as? NSDictionary)?.allValues as? [String]) != nil ){
             self.attendees = (eventDict.valueForKey("attendees") as? NSDictionary)?.allValues as! [String];
         }
+        let locationDictionary = eventDict.valueForKey("location") as! NSDictionary
+        self.location = CLLocationCoordinate2D(latitude: locationDictionary.valueForKey("latitude") as! Double,
+                                               longitude: locationDictionary.valueForKey("longitude") as! Double)
     }
     
     // TODO location constructor
@@ -196,6 +201,11 @@ class Event {
     func setReports(reports: UInt) {
         self.reports = reports
     }
-    
+    func getLocation() -> CLLocationCoordinate2D {
+        return self.location
+    }
+    func setLocation(location: CLLocationCoordinate2D) {
+        self.location = location
+    }
     
 }

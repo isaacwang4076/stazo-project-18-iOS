@@ -18,16 +18,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Map" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="KQZ-1w-vlD">
-                                <rect key="frame" x="221" y="255" width="158" height="42"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="158" id="1rl-37-ftt"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="36"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="LMd-kr-5XD">
+                                <rect key="frame" x="0.0" y="20" width="600" height="531"/>
+                                <connections>
+                                    <outlet property="delegate" destination="9pv-A4-QxB" id="kXk-uH-pom"/>
+                                </connections>
+                            </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jjU-KU-FpA">
                                 <rect key="frame" x="170" y="395" width="261" height="30"/>
                                 <constraints>
@@ -64,15 +60,17 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="KQZ-1w-vlD" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="Anv-mc-hzm"/>
+                            <constraint firstItem="LMd-kr-5XD" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" id="CXf-Wy-rQ4"/>
                             <constraint firstItem="SrR-RA-gSJ" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="KEW-Tq-aXX"/>
+                            <constraint firstItem="LMd-kr-5XD" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="NMm-sd-9PH"/>
                             <constraint firstItem="SrR-RA-gSJ" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" id="Odc-CU-qXz"/>
+                            <constraint firstItem="jjU-KU-FpA" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="U3a-z6-coa"/>
+                            <constraint firstAttribute="trailing" secondItem="LMd-kr-5XD" secondAttribute="trailing" id="VEu-7X-Zoc"/>
                             <constraint firstItem="SrR-RA-gSJ" firstAttribute="width" secondItem="tsR-hK-woN" secondAttribute="width" id="Vnb-X5-zDx"/>
                             <constraint firstItem="mwK-Ds-Ihn" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="Xkt-jz-9wS"/>
-                            <constraint firstItem="jjU-KU-FpA" firstAttribute="top" secondItem="KQZ-1w-vlD" secondAttribute="bottom" constant="98" id="ZFj-NZ-Atw"/>
-                            <constraint firstItem="KQZ-1w-vlD" firstAttribute="centerX" secondItem="jjU-KU-FpA" secondAttribute="centerX" id="ZT2-Vp-hyo"/>
                             <constraint firstItem="mwK-Ds-Ihn" firstAttribute="top" secondItem="SrR-RA-gSJ" secondAttribute="bottom" id="aOq-TP-QYb"/>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="jjU-KU-FpA" secondAttribute="bottom" constant="126" id="buh-DY-mgA"/>
+                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="LMd-kr-5XD" secondAttribute="bottom" id="dHv-OZ-EtQ"/>
                             <constraint firstAttribute="trailing" secondItem="SrR-RA-gSJ" secondAttribute="trailing" id="eIh-Bx-2sM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="mwK-Ds-Ihn" secondAttribute="trailing" constant="-20" id="hrD-a6-tvK"/>
                             <constraint firstItem="mwK-Ds-Ihn" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="-20" id="ryj-Tf-DU7"/>
@@ -83,6 +81,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="mapSearchBar" destination="SrR-RA-gSJ" id="Nce-vc-nAe"/>
+                        <outlet property="mapView" destination="LMd-kr-5XD" id="Uf7-Kn-uc4"/>
                         <outlet property="searchDisplayController" destination="Kx4-qQ-1zR" id="1MY-8g-dLg"/>
                         <outlet property="tableView" destination="mwK-Ds-Ihn" id="eJd-bO-PWd"/>
                         <outlet property="tableViewHeightConstraint" destination="93M-PW-6V6" id="tUE-TC-v6s"/>
@@ -951,7 +950,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Invite friends to this event" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DXW-Hd-25T">
                                 <rect key="frame" x="201" y="67" width="198" height="22"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GDU-rx-PoZ">

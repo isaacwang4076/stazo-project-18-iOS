@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class CreateEventViewController: UIViewController, CreateEventTableProtocol {
     
@@ -70,7 +71,8 @@ class CreateEventViewController: UIViewController, CreateEventTableProtocol {
                                    description: eventDescription,
                                    creatorID: Globals.me.getUserID() ,
                                    startTime: startDateInt,
-                                   endTime: endDateInt);
+                                   endTime: endDateInt,
+                                   location: CLLocationCoordinate2D(latitude: 69, longitude: 69));
                         let alert = UIAlertController(title: "Yay!",
                                                       message: "Event successfully made!", preferredStyle: .Alert);
                         alert.addAction(UIAlertAction(title: "Swag", style: .Default , handler: nil));
