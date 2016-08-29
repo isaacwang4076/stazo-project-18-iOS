@@ -82,3 +82,36 @@ func stringFromDate(date: NSDate) -> String{ //TODO: Add today check and maybe t
     //substringing to add "at"
     return startTimeString.substringToIndex(startTimeString.startIndex.advancedBy(6)) + " at" + (startTimeString.substringFromIndex(startTimeString.startIndex.advancedBy(6)));
 }
+
+func durationFromTimeIntervals(startTime startTime: Int, endTime: Int) -> String{
+    let length:Int = endTime - startTime
+    print(length)
+    let eventHour = length/(1000*60*60)
+    let eventMin = length/(1000*60) - eventHour*60
+    
+    var finalString = "";
+    if (eventHour > 0) {
+        finalString += "\(eventHour)"
+        if (eventHour == 1) {
+            finalString += " hr"
+        }
+        else {
+            finalString += " hrs"
+        }
+        if (eventMin > 0) {
+            finalString += " and "
+        }
+    }
+    if (eventMin > 0) {
+        if (eventMin == 1) {
+            finalString += "\(eventMin)"
+            finalString += " min"
+        }
+        else {
+            finalString += "\(eventMin)"
+            finalString += " mins"
+        }
+    }
+    return finalString
+    
+}
