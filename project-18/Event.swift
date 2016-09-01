@@ -97,7 +97,9 @@ class Event {
         "event_id" : eventID!,
         "popularity" : popularity,
         "reports" : reports,
-        "startTime": NSNumber(unsignedLongLong: startTime!)]
+        "startTime": NSNumber(unsignedLongLong: startTime!),
+        "location": NSDictionary(dictionary: ["latitude":location.latitude, "longitude":location.longitude])
+        ]
     }
     
     // EQUALS METHOD
@@ -140,7 +142,7 @@ class Event {
         print("\nEvent toString()\n\nname is: ", name, "\ndescription is: ", description, "\ncreatorID is: ", creatorID,
               "\nendTime is: ", endTime, "\neventID is: ", eventID, "\npopularity is: ",
               popularity, "\nreports is: ", reports, "\nstartTime is: ", startTime, "\nattendees is: ",
-              attendees)
+              attendees, "\nlocation is:", location)
     }
     
     

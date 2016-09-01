@@ -157,20 +157,22 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
                 self.joinButton.backgroundColor = UIColor.yellowColor();
             }
             
-            //START DATE
+            //START DATE    TODO: edit Starts vs started label
             let date = NSDate(timeIntervalSince1970: NSTimeInterval(self.event!.getStartTime())/1000);
             self.startTimeLabel.text = stringFromDate(date);
             
-            //TODO: time logic for duration/end time and location
+            //LENGTH/ENDS IN   TODO: edit the length/ends in label
             let currentTime = Int(NSDate().timeIntervalSince1970 * 1000);
-            
             //if event hasn't started yet, show event length
             if (currentTime < Int(self.event!.getStartTime())) {
-                self.lengthLabel.text = durationFromTimeIntervals(startTime: Int(self.event!.getStartTime()),
+                self.lengthPreLabel.text = "Length";
+                let startText = durationFromTimeIntervals(startTime: Int(self.event!.getStartTime()),
                     endTime: Int(self.event!.getEndTime()))
+                self.lengthLabel.text = startText;
             }
             //event has started, so show how long until end
             else {
+                self.lengthPreLabel.text = "Ends in";
                 var endText = durationFromTimeIntervals(startTime: currentTime,
                     endTime: Int(self.event!.getEndTime()))
                 if (endText.isEmpty) {

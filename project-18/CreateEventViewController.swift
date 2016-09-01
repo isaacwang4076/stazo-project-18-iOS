@@ -17,6 +17,7 @@ class CreateEventViewController: UIViewController, CreateEventTableProtocol {
     @IBAction func selectLocationClick(sender: AnyObject) {
         if (createEvent()) {
             //call segue to location select
+            self.performSegueWithIdentifier("pushLocationSelect", sender: self);
         }
     }
     @IBAction func cancelClick(sender: AnyObject) {
@@ -26,12 +27,13 @@ class CreateEventViewController: UIViewController, CreateEventTableProtocol {
     var createEventTable:CreateEventTable?;
     var startDate:NSDate?;
     var endDate:NSDate?;
+    var noLocEvent:Event?;
     
     //small setups for nav bar, date picker
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBarHidden = false;
         self.title = "Create Event";
+        self.navigationController?.navigationBarHidden = false;
         
         self.datePicker.backgroundColor = UIColor.lightGrayColor();
         let today = NSDate();
@@ -67,16 +69,12 @@ class CreateEventViewController: UIViewController, CreateEventTableProtocol {
                     let startDateInt:UInt64 = UInt64(self.startDate!.timeIntervalSince1970) * 1000;
                     let endDateInt:UInt64 = UInt64(self.endDate!.timeIntervalSince1970) * 1000;
                     if (startDateInt < endDateInt) {
-                        Event.init(name: eventName,
+                        self.noLocEvent = Event.init(name: eventName,
                                    description: eventDescription,
                                    creatorID: Globals.me.getUserID() ,
                                    startTime: startDateInt,
                                    endTime: endDateInt,
                                    location: CLLocationCoordinate2D(latitude: 69, longitude: 69));
-                        let alert = UIAlertController(title: "Yay!",
-                                                      message: "Event successfully made!", preferredStyle: .Alert);
-                        alert.addAction(UIAlertAction(title: "Swag", style: .Default , handler: nil));
-                        self.presentViewController(alert, animated: true, completion: nil);
                         return true;
                     }
                         
@@ -192,6 +190,9 @@ class CreateEventViewController: UIViewController, CreateEventTableProtocol {
         if (segue.identifier == "showCreateEventTable") {
             self.createEventTable = segue.destinationViewController as? CreateEventTable;
             self.createEventTable?.delegate = self;
+        }
+        if (segue.identifier == "pushLocationSelect") {
+            (segue.destinationViewController as! LocationSelectViewController).setNoLocEvent(self.noLocEvent!);
         }
     }
  
