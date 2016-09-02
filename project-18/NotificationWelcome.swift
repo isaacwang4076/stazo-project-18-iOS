@@ -72,6 +72,9 @@ class NotificationWelcome: Notification {
     override func onNotificationClicked(controller: NotificationViewController, userID: String) {
         // TODO do something
         self.viewed = true
+        
+        // Set the Notification on the database to viewed
+        setToViewed(userID)
     }
     
     override func generateMessage() -> String {

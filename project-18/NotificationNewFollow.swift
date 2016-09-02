@@ -93,6 +93,9 @@ class NotificationNewFollow: Notification {
     override func onNotificationClicked(controller: NotificationViewController, userID: String) {
         // TODO go to the profile of the user
         self.viewed = true
+        
+        // Set the Notification on the database to viewed
+        setToViewed(userID)
     }
     
     override func generateMessage() -> String {

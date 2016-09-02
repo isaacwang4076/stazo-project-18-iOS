@@ -36,6 +36,16 @@ struct Globals {
 //    
     
     // COLORS
+    
+    // BASE
+    /*<color name="colorTextPrimary">#212121</color>
+    <color name="colorTextSecondary">#727272</color>
+    <color name="colorDivider">#B6B6B6</color>
+    <color name="colorDividerLight">#e6e6e6</color>
+    <color name="colorDividerExtraLight">#f2f2f2</color>
+    <color name="colorDividerDark">#999999</color>(
+    <color name="colorNewNotification">#E1F5FE</color>*/
+    
     // TEMPLATE
     
     static let COLOR_PRIMARY = UIColor(netHex:0x0288D1)
@@ -44,6 +54,7 @@ struct Globals {
     static let COLOR_ACCENT = UIColor(netHex:0xFFEB3B)
     static let COLOR_ACCENT_DARK = UIColor(netHex:0xFBC02D)
     
+    static let COLOR_NEW_NOTIF = UIColor(netHex: 0xE1F5FE)
     static let COLOR_UNSELECTED_CELL = UIColor.whiteColor()
     static let COLOR_SELECTED_CELL = COLOR_ACCENT
 }
