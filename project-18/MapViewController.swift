@@ -58,6 +58,10 @@ class MapViewController: UIViewController, UISearchBarDelegate,
         //Pull events from fb and add to map
         Globals.fb.child("Events").observeSingleEventOfType(.Value, withBlock: {
             snapshot in
+            
+            //clear current events
+            self.mapView.removeAnnotations(self.mapView.annotations);
+
             for eachEventSnapshot in snapshot.children.allObjects as! [FIRDataSnapshot]{
                 //Figure out time till
                 let eventDictionary = eachEventSnapshot.value as! [String:AnyObject]

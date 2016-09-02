@@ -468,7 +468,7 @@
                                     <constraint firstAttribute="width" constant="264" id="clh-76-bic"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -724,14 +724,19 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7RG-xc-ieM">
-                                                <rect key="frame" x="20" y="175" width="200" height="20"/>
+                                                <rect key="frame" x="20" y="175" width="560" height="20"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="200" id="E7B-H4-OfE"/>
+                                                    <constraint firstAttribute="width" constant="350" id="E7B-H4-OfE"/>
                                                     <constraint firstAttribute="height" constant="20" id="tQT-dJ-lva"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="E7B-H4-OfE"/>
+                                                    </mask>
+                                                </variation>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XEa-h6-z3b">
                                                 <rect key="frame" x="20" y="205" width="70" height="20"/>
@@ -922,6 +927,7 @@
                                             <constraint firstAttribute="trailing" secondItem="jRj-Qi-1yr" secondAttribute="trailing" id="Yap-IU-5zy"/>
                                             <constraint firstItem="fKC-tl-ZlC" firstAttribute="top" secondItem="gEz-rH-N2Z" secondAttribute="top" id="cDI-xt-S3o"/>
                                             <constraint firstAttribute="trailing" secondItem="gEz-rH-N2Z" secondAttribute="trailing" constant="20" id="d3j-k2-obP"/>
+                                            <constraint firstAttribute="trailing" secondItem="7RG-xc-ieM" secondAttribute="trailing" constant="20" id="g2L-na-jM4"/>
                                             <constraint firstItem="ngF-SB-v1Z" firstAttribute="leading" secondItem="vUJ-DA-YOw" secondAttribute="leading" id="i8P-5I-N2E"/>
                                             <constraint firstItem="WuY-zx-a6K" firstAttribute="leading" secondItem="86C-BF-Hhf" secondAttribute="leading" constant="-5" id="ksg-41-zB2"/>
                                             <constraint firstItem="XEa-h6-z3b" firstAttribute="top" secondItem="7RG-xc-ieM" secondAttribute="bottom" constant="10" id="l0L-Je-y9F"/>
