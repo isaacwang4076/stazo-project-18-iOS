@@ -47,6 +47,7 @@
 		F674D6071D739B9C000A0BDE /* EventMarkerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F674D6061D739B9C000A0BDE /* EventMarkerView.xib */; };
 		F6C4478A1D4C907100B1D12C /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6C447891D4C907100B1D12C /* CommentCell.xib */; };
 		F6C4478C1D4C915400B1D12C /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C4478B1D4C915400B1D12C /* CommentTableViewCell.swift */; };
+		F6C467D51D779B510007D017 /* LocationSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C467D41D779B510007D017 /* LocationSelectViewController.swift */; };
 		F6D151D81D58FF0D00CF0498 /* CreateEventTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D151D71D58FF0D00CF0498 /* CreateEventTable.swift */; };
 		F6E0D4CD1D4110A300ECF637 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6E0D4CA1D4110A200ECF637 /* FBSDKCoreKit.framework */; };
 		F6E0D4CE1D4110A300ECF637 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6E0D4CB1D4110A200ECF637 /* FBSDKLoginKit.framework */; };
@@ -127,6 +128,7 @@
 		F674D6061D739B9C000A0BDE /* EventMarkerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventMarkerView.xib; sourceTree = "<group>"; };
 		F6C447891D4C907100B1D12C /* CommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentCell.xib; sourceTree = "<group>"; };
 		F6C4478B1D4C915400B1D12C /* CommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
+		F6C467D41D779B510007D017 /* LocationSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSelectViewController.swift; sourceTree = "<group>"; };
 		F6D151D71D58FF0D00CF0498 /* CreateEventTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventTable.swift; sourceTree = "<group>"; };
 		F6E0D4CA1D4110A200ECF637 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		F6E0D4CB1D4110A200ECF637 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 				F60AB8131D3694570092AB38 /* Comment.swift */,
 				F6E0D4DF1D411E4400ECF637 /* LoginViewController.swift */,
 				F61945461D3CE08C006BB981 /* MapViewController.swift */,
+				F6C467D41D779B510007D017 /* LocationSelectViewController.swift */,
 				F674D6061D739B9C000A0BDE /* EventMarkerView.xib */,
 				F63B3E391D44A45F00672EC9 /* CreateEventViewController.swift */,
 				F6E0D4D81D411D5300ECF637 /* ListViewController.swift */,
@@ -585,6 +588,7 @@
 				28FA31A01D553D330046A80F /* NotificationViewController.swift in Sources */,
 				2880FEA51D3892C2009BD67B /* NotificationWelcome.swift in Sources */,
 				28A542F41D344CB600BE90E0 /* Globals.swift in Sources */,
+				F6C467D51D779B510007D017 /* LocationSelectViewController.swift in Sources */,
 				2880FEA31D389029009BD67B /* NotificationJoinedEvent.swift in Sources */,
 				F6E0D4D91D411D5300ECF637 /* ListViewController.swift in Sources */,
 				2880FEA11D388E5C009BD67B /* NotificationInviteEvent.swift in Sources */,

@@ -25,10 +25,7 @@ class MapViewController: UIViewController, UISearchBarDelegate,
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Hide the navigation bar (included for back-navigation on segue to EventInfo)
-        self.navigationController?.navigationBarHidden = true;
-        
+
         // Search setup
         self.mapSearchBar.delegate = self
         
@@ -44,26 +41,57 @@ class MapViewController: UIViewController, UISearchBarDelegate,
         let dank = EventMarker(title: "Eric Zhang", subTitle: "Starts in: 69 hrs 69 m", coordinate: initialLocation.coordinate, eventID: "yooYSUWICTOWW")
         self.mapView.addAnnotation(dank)
         
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated);
+        
+        //always hide nav bar when view appearing
+        self.navigationController?.navigationBarHidden = true;
+        
+        updateEvents();
+    }
+    
+    func updateEvents() {
+        print("event refresh");
         //Pull events from fb and add to map
         Globals.fb.child("Events").observeSingleEventOfType(.Value, withBlock: {
             snapshot in
+            
+            //clear current events
+            self.mapView.removeAnnotations(self.mapView.annotations);
+
             for eachEventSnapshot in snapshot.children.allObjects as! [FIRDataSnapshot]{
+                //Figure out time till
                 let eventDictionary = eachEventSnapshot.value as! [String:AnyObject]
                 let eachEvent = Event.init(eventDict: eventDictionary)
                 let currentTime = NSDate().timeIntervalSince1970 * 1000
+                
+                //set startsIn to "x h and x min" before event starts
                 var startsIn = durationFromTimeIntervals(startTime: Int(currentTime), endTime: Int(eachEvent.getStartTime()))
                 if (startsIn.isEmpty) {
-                    startsIn = "This event has already ended."
+                    //event has either started or ended if starts in is empty, so compare with end time now
+                    startsIn = durationFromTimeIntervals(startTime: Int(currentTime), endTime: Int(eachEvent.getEndTime()))
+                    if (startsIn.isEmpty) {
+                        //still empty means event has already ended
+                        startsIn = "This event has already ended."
+                    }
+                    else {
+                        //event ends in "x h and x min"
+                        startsIn = "Ends in: " + startsIn;
+                    }
                 }
                 else {
                     startsIn = "Starts in: " + startsIn
                 }
+                
+                //add marker to the map
                 let marker = EventMarker(title: eachEvent.getName(), subTitle: startsIn,
                     coordinate: eachEvent.getLocation(), eventID: eachEvent.getEventID())
                 self.mapView.addAnnotation(marker)
             }
         })
-
     }
     
     override func didReceiveMemoryWarning() {

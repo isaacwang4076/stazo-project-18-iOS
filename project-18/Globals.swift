@@ -102,7 +102,6 @@ func stringFromDate(date: NSDate) -> String{ //TODO: Add today check and maybe t
 
 func durationFromTimeIntervals(startTime startTime: Int, endTime: Int) -> String{
     let length:Int = endTime - startTime
-    print(length)
     let eventHour = length/(1000*60*60)
     let eventMin = length/(1000*60) - eventHour*60
     

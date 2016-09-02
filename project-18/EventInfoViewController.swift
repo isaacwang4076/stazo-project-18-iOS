@@ -8,10 +8,11 @@
 
 import UIKit
 import FirebaseDatabase
+import CoreLocation
 
 //Current bug: only allow back button after transaction completes, if user goes super fast, it will crash
 
-class EventInfoViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate {
+class EventInfoViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate, CLLocationManagerDelegate {
 
     /* UI STUFF ----------------------------------------------------*/
     //Event name and join button (reference and action func)
@@ -157,20 +158,22 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
                 self.joinButton.backgroundColor = UIColor.yellowColor();
             }
             
-            //START DATE
+            //START DATE    TODO: edit Starts vs started label
             let date = NSDate(timeIntervalSince1970: NSTimeInterval(self.event!.getStartTime())/1000);
             self.startTimeLabel.text = stringFromDate(date);
             
-            //TODO: time logic for duration/end time and location
+            //LENGTH/ENDS IN   TODO: edit the length/ends in label
             let currentTime = Int(NSDate().timeIntervalSince1970 * 1000);
-            
             //if event hasn't started yet, show event length
             if (currentTime < Int(self.event!.getStartTime())) {
-                self.lengthLabel.text = durationFromTimeIntervals(startTime: Int(self.event!.getStartTime()),
+                self.lengthPreLabel.text = "Length";
+                let startText = durationFromTimeIntervals(startTime: Int(self.event!.getStartTime()),
                     endTime: Int(self.event!.getEndTime()))
+                self.lengthLabel.text = startText;
             }
             //event has started, so show how long until end
             else {
+                self.lengthPreLabel.text = "Ends in";
                 var endText = durationFromTimeIntervals(startTime: currentTime,
                     endTime: Int(self.event!.getEndTime()))
                 if (endText.isEmpty) {
@@ -181,6 +184,25 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
             
             //LOCATION
             self.locationLabel.text = "\(self.event!.getLocation().latitude), \(self.event!.getLocation().longitude)";
+            
+            let geocoder = CLGeocoder();
+            geocoder.reverseGeocodeLocation(
+                CLLocation(latitude: self.event!.getLocation().latitude, longitude: self.event!.getLocation().longitude),
+                completionHandler: {
+                    (placemarks, error) in
+                    if error != nil {
+                        print("error: " + error!.description);
+                    }
+                    else {
+                        let placemark = placemarks?.last;
+                        self.locationLabel.text = (placemark!.name);
+                    }
+            })
+//            let locationManager = CLLocationManager()
+//            locationManager.delegate = self
+//            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+//            locationManager.requestWhenInUseAuthorization()
+//            locationManager.startUpdatingLocation()
             
             //DESCRIPTION with auto-resize to fit text
             self.descriptionLabel.text = self.event!.getDescription();
@@ -240,6 +262,7 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
         self.joinedCollectionView.reloadData();
     }
     
+    /*Comments----------------------------------------------------------------------------------------------*/
     /* 
      * Pulls array of comments, populates self.comments array, and reloads commentTableView.
      */
@@ -318,6 +341,37 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
         textField.resignFirstResponder();
         return true;
     }
+    /*---------------------------------------------------------------------------------------------------------*/
+    
+//    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        CLGeocoder().reverseGeocodeLocation(manager.location!, completionHandler: {
+//            (placemarks, error) -> Void in
+//            if (error != nil) {
+//                print("Geocoder error: " + error!.description)
+//            }
+//            else {
+//                if placemarks!.count > 0 {
+//                    let pm = placemarks![0] as CLPlacemark
+//                    self.displayLocationInfo(pm)
+//                }
+//                else {
+//                    print("Something wrong with data retrieved from geocoder")
+//                }
+//            }
+//        })
+//    }
+//    
+//    func displayLocationInfo(placemark:CLPlacemark) {
+////        locationManager.stopUpdatingLocation()
+//        print(placemark.name)
+//    }
+//    
+//    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+//        print("Error when updating location: " + error.localizedDescription)
+//    }
+    
+    
+    
     
     
     
