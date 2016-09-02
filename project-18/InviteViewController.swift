@@ -16,6 +16,8 @@ class InviteViewController: UIViewController, UISearchBarDelegate {
     
     @IBOutlet weak var usersTableView: UITableView!
     
+    @IBOutlet weak var inviteLabel: UILabel!
+    
     @IBOutlet weak var usersTableViewHeightConstraint: NSLayoutConstraint!
     
     @IBAction func sendInvitesClick(sender: AnyObject) {
@@ -46,13 +48,16 @@ class InviteViewController: UIViewController, UISearchBarDelegate {
         
         // TableView cell
         self.usersTableView.registerNib(UINib(nibName: "UserCell", bundle: nil), forCellReuseIdentifier: "UserCell");
-        
+
+        // Set label text
+        self.inviteLabel.text = "Invite friends to \(self.eventName!)"
     }
     
     // Called in prepareForSegue in EventInfoViewController, sets the info for the event
     func setEventInfo(event: Event) {
         self.eventID = event.getEventID()
         self.eventName = event.getName()
+
     }
     
     

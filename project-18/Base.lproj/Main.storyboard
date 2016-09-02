@@ -1002,6 +1002,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="inviteLabel" destination="DXW-Hd-25T" id="XZR-EJ-I3u"/>
                         <outlet property="inviteSearchBar" destination="lDl-P3-J2K" id="uOg-TG-lDN"/>
                         <outlet property="usersTableView" destination="GDU-rx-PoZ" id="XzU-SA-J2d"/>
                         <outlet property="usersTableViewHeightConstraint" destination="R1E-j4-rAa" id="sZK-RM-xIU"/>
