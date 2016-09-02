@@ -528,47 +528,34 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fuM-ge-ege">
-                                <rect key="frame" x="247" y="416" width="106" height="30"/>
+                                <rect key="frame" x="235" y="416" width="130" height="30"/>
+                                <color key="backgroundColor" red="0.0078431372550000003" green="0.53333333329999999" blue="0.81960784310000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="106" id="mo7-yp-JyW"/>
+                                    <constraint firstAttribute="width" constant="130" id="mo7-yp-JyW"/>
                                     <constraint firstAttribute="height" constant="30" id="tNC-fT-jZD"/>
                                 </constraints>
+                                <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                 <state key="normal" title="Select Location">
-                                    <color key="titleColor" red="0.01176470588" green="0.66274509800000003" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="selectLocationClick:" destination="s5d-TJ-JUr" eventType="touchUpInside" id="0Qq-Hw-Fkk"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ByZ-Ft-SYa">
-                                <rect key="frame" x="150" y="479" width="300" height="30"/>
+                                <rect key="frame" x="250" y="479" width="100" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.92156862750000001" blue="0.23137254900000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="eVx-yP-fzD"/>
-                                    <constraint firstAttribute="width" constant="300" id="vTm-cU-90g"/>
+                                    <constraint firstAttribute="width" constant="100" id="vTm-cU-90g"/>
                                 </constraints>
                                 <state key="normal" title="Cancel">
-                                    <color key="titleColor" red="0.98431372549019602" green="0.75294117647058822" blue="0.1764705882352941" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="cancelClick:" destination="s5d-TJ-JUr" eventType="touchUpInside" id="iDB-lf-NNS"/>
                                 </connections>
                             </button>
-                            <datePicker hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Oz4-L1-pAh">
-                                <rect key="frame" x="0.0" y="411" width="600" height="140"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="140" id="F1X-Gz-Iny"/>
-                                </constraints>
-                                <date key="date" timeIntervalSinceReferenceDate="492709955.17637998">
-                                    <!--2016-08-12 15:52:35 +0000-->
-                                </date>
-                            </datePicker>
-                            <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yJD-E1-dD5">
-                                <rect key="frame" x="0.0" y="367" width="600" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="WLL-3W-ZVz"/>
-                                </constraints>
-                                <items/>
-                            </toolbar>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gx5-Rx-oj0">
                                 <rect key="frame" x="0.0" y="99" width="600" height="253"/>
                                 <constraints>
@@ -578,6 +565,22 @@
                                     <segue destination="Y2P-vQ-xue" kind="embed" identifier="showCreateEventTable" id="DoR-Y7-6G3"/>
                                 </connections>
                             </containerView>
+                            <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yJD-E1-dD5">
+                                <rect key="frame" x="0.0" y="367" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="WLL-3W-ZVz"/>
+                                </constraints>
+                                <items/>
+                            </toolbar>
+                            <datePicker hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Oz4-L1-pAh">
+                                <rect key="frame" x="0.0" y="411" width="600" height="140"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="140" id="F1X-Gz-Iny"/>
+                                </constraints>
+                                <date key="date" timeIntervalSinceReferenceDate="492709955.17637998">
+                                    <!--2016-08-12 15:52:35 +0000-->
+                                </date>
+                            </datePicker>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -703,7 +706,7 @@
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gEz-rH-N2Z">
                                                 <rect key="frame" x="520" y="30" width="60" height="30"/>
-                                                <color key="backgroundColor" red="1" green="0.92156862745098034" blue="0.23137254901960785" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" red="1" green="0.92156862750000001" blue="0.23137254900000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="60" id="cw8-at-rXU"/>
                                                 </constraints>

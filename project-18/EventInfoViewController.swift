@@ -26,7 +26,7 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
             //if user is now joined, change button UI, handle user attend, and upate joined view
             if (self.userHasJoined) {
                 self.joinButton.setTitle("Joined", forState: UIControlState.Normal);
-                self.joinButton.backgroundColor = UIColor.redColor();
+                self.joinButton.backgroundColor = Globals.COLOR_DIVIDER_LIGHT
                 Globals.me.attendEvent(self.event!.getEventID(), eventName: self.event!.getName(), creatorID: self.event!.getCreatorID());
                 
                 var newAttendees = self.event!.getAttendees();
@@ -38,7 +38,7 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
             //if user is now unjoined, change button UI, handle user unattend, and update joined view
             else {
                 self.joinButton.setTitle("Join", forState: UIControlState.Normal);
-                self.joinButton.backgroundColor = UIColor.yellowColor();
+                self.joinButton.backgroundColor = Globals.COLOR_ACCENT
                 Globals.me.unattendEvent(self.event!.getEventID());
                 
                 var newAttendees = self.event!.getAttendees();
@@ -151,11 +151,11 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
             self.updateJoinedView();
             if (self.userHasJoined) {
                 self.joinButton.setTitle("Joined", forState: UIControlState.Normal);
-                self.joinButton.backgroundColor = UIColor.redColor();
+                self.joinButton.backgroundColor = Globals.COLOR_DIVIDER_LIGHT
             }
             else {
                 self.joinButton.setTitle("Join", forState: UIControlState.Normal);
-                self.joinButton.backgroundColor = UIColor.yellowColor();
+                self.joinButton.backgroundColor = Globals.COLOR_ACCENT
             }
             
             //START DATE    TODO: edit Starts vs started label
