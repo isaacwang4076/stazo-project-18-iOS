@@ -471,10 +471,22 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="ecd-Ea-Cqa">
+                                <rect key="frame" x="0.0" y="81" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="iUI-9D-r0l"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="CML-pC-g4a" id="De0-uG-wva"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="xgv-Uw-6Jn" secondAttribute="trailing" id="1It-RT-5tx"/>
+                            <constraint firstItem="ecd-Ea-Cqa" firstAttribute="leading" secondItem="JfD-xo-YBW" secondAttribute="leading" id="2i6-9Y-sFC"/>
+                            <constraint firstItem="ecd-Ea-Cqa" firstAttribute="top" secondItem="bN7-3N-HIl" secondAttribute="bottom" constant="10" id="4mK-CQ-I9T"/>
                             <constraint firstItem="xgv-Uw-6Jn" firstAttribute="leading" secondItem="JfD-xo-YBW" secondAttribute="leading" id="6Tf-NO-wwZ"/>
                             <constraint firstItem="bN7-3N-HIl" firstAttribute="centerX" secondItem="JfD-xo-YBW" secondAttribute="centerX" id="7Io-9V-WV8"/>
                             <constraint firstItem="wOK-NK-zxO" firstAttribute="top" secondItem="xgv-Uw-6Jn" secondAttribute="bottom" id="RUX-2W-Nsf"/>
@@ -483,6 +495,7 @@
                             <constraint firstAttribute="trailing" secondItem="wOK-NK-zxO" secondAttribute="trailing" id="ght-Ng-O9R"/>
                             <constraint firstItem="wOK-NK-zxO" firstAttribute="leading" secondItem="JfD-xo-YBW" secondAttribute="leading" id="lAK-wQ-Ojq"/>
                             <constraint firstItem="hnD-RH-PdC" firstAttribute="top" secondItem="wOK-NK-zxO" secondAttribute="bottom" id="lj2-R6-WJX"/>
+                            <constraint firstAttribute="trailing" secondItem="ecd-Ea-Cqa" secondAttribute="trailing" id="mLD-01-vC7"/>
                             <constraint firstItem="bN7-3N-HIl" firstAttribute="top" secondItem="PI6-1G-IeR" secondAttribute="bottom" constant="10" id="ojI-ct-ccd"/>
                             <constraint firstItem="xgv-Uw-6Jn" firstAttribute="top" secondItem="bN7-3N-HIl" secondAttribute="bottom" constant="10" id="t2X-dt-mct"/>
                         </constraints>
@@ -494,6 +507,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="mapSearchBar" destination="ecd-Ea-Cqa" id="74P-tx-QUh"/>
                         <outlet property="mapView" destination="xgv-Uw-6Jn" id="ROI-cf-YqD"/>
                     </connections>
                 </viewController>

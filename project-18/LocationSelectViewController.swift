@@ -9,9 +9,10 @@
 import UIKit
 import MapKit
 
-class LocationSelectViewController: UIViewController {
+class LocationSelectViewController: UIViewController, UISearchBarDelegate {
 
     @IBOutlet var mapView: MKMapView!
+    @IBOutlet var mapSearchBar: UISearchBar!
     @IBAction func okButtonPress(sender: AnyObject) {
         if (self.selectedAnnotation != nil) {
             //set new loc and push new event
