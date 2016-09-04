@@ -103,6 +103,10 @@ class NotificationViewController: UIViewController {
     func populateCell(cell: NotificationTableViewCell, notifToShow: Notification) {
         cell.message.text = notifToShow.generateMessage()
         
+        if (notifToShow.viewed == false) {
+            cell.backgroundColor = Globals.COLOR_NEW_NOTIF
+        }
+        
         //NOTIF IMAGE with URL request
         let width = "250";
         let urlString = "https://graph.facebook.com/" + notifToShow.pictureID!
@@ -127,6 +131,9 @@ class NotificationViewController: UIViewController {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //self.selectedEventID = Globals.eventsNameToID[self.filteredEventNames[indexPath.row]];
         notifs[indexPath.row].onNotificationClicked(self, userID: Globals.me.getUserID())
+        
+        // So when you click someone they aren't highlighted the default grey
+        notificationTableView.deselectRowAtIndexPath(indexPath, animated: false)
     }
     
     // -----------------------------------------------------------------------------------------------
