@@ -9,10 +9,12 @@
 import UIKit
 import MapKit
 
-class LocationSelectViewController: UIViewController, UISearchBarDelegate {
+class LocationSelectViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var mapSearchBar: UISearchBar!
+    @IBOutlet var mapSearchTable: UITableView!
+    @IBOutlet var mapSearchTableHeightConstraint: NSLayoutConstraint!
     @IBAction func okButtonPress(sender: AnyObject) {
         if (self.selectedAnnotation != nil) {
             //set new loc and push new event
@@ -21,7 +23,10 @@ class LocationSelectViewController: UIViewController, UISearchBarDelegate {
             self.noLocEvent?.pushToFirebase();
             let alert = UIAlertController(title: "Yay!",
                                           message: "Event successfully made!", preferredStyle: .Alert);
-            alert.addAction(UIAlertAction(title: "Swag", style: .Default , handler: successCallback));
+            alert.addAction(UIAlertAction(title: "Swag", style: .Default , handler: {
+                alert in
+                self.navigationController?.popToRootViewControllerAnimated(true);
+            }));
             self.presentViewController(alert, animated: true, completion: nil);
         }
         //no loc selected
@@ -32,15 +37,20 @@ class LocationSelectViewController: UIViewController, UISearchBarDelegate {
             self.presentViewController(alert, animated: true, completion: nil);
         }
     }
-    func successCallback(alert:UIAlertAction) {self.navigationController?.popToRootViewControllerAnimated(true)}
+//    func successCallback(alert:UIAlertAction) {self.navigationController?.popToRootViewControllerAnimated(true)}
+    
+    
     private var selectedAnnotation:MKPointAnnotation?;
-    var noLocEvent:Event?
+    private var noLocEvent:Event?
+    private var locationSearchResults:[MKMapItem] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.title = "Select Location";
         self.navigationController?.navigationBarHidden = false;
+        self.mapSearchBar.returnKeyType = .Done;
+        self.mapSearchBar.enablesReturnKeyAutomatically = false;
         
         //Initial center location
         let initialLocation = CLLocation(latitude: 32.8811, longitude: -117.2370);
@@ -54,15 +64,20 @@ class LocationSelectViewController: UIViewController, UISearchBarDelegate {
         self.mapView.addGestureRecognizer(longPress);
     }
     
-    //long press callback
+    /* Long Press callback---------------------*/
     func handleLongPress(gestureRecognizer: UIGestureRecognizer) {
         if gestureRecognizer.state != .Began {
             return;
         }
         let touchPoint = gestureRecognizer.locationInView(self.mapView);
         let touchMapCoord = mapView.convertPoint(touchPoint, toCoordinateFromView: self.mapView);
+        self.addCoordinate(touchMapCoord);
+    }
+    
+    /* Adds a coordinate to map and replace last one if it exists */
+    func addCoordinate(coordinate:CLLocationCoordinate2D) {
         let annotation = MKPointAnnotation();
-        annotation.coordinate = touchMapCoord;
+        annotation.coordinate = coordinate;
         
         //remove annotation current annotation if exists and add new annotation from press
         if selectedAnnotation != nil {
@@ -71,22 +86,96 @@ class LocationSelectViewController: UIViewController, UISearchBarDelegate {
         self.selectedAnnotation = annotation;
         self.mapView.addAnnotation(self.selectedAnnotation!);
     }
+    
+    /* Search Bar delegate----------------------*/
+    /* Search for location based on text in search bar and reload mapSearchTable with locationSearchResults populated */
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        if let searchText = searchBar.text {
+            let request = MKLocalSearchRequest()
+            request.naturalLanguageQuery = searchText;
+            request.region = self.mapView.region;
+            let search = MKLocalSearch(request: request);
+            search.startWithCompletionHandler({
+                (response, error) in
+                if let mapItems = response?.mapItems {
+                    self.locationSearchResults = mapItems;
+                    self.mapSearchTable.hidden = false;
+                    self.mapSearchTable.reloadData();
+                }
+            })
+        }
+        else {
+            self.locationSearchResults = [];
+            self.mapSearchTable.hidden = true;
+        }
+    }
+    
+    /* Resign search bar first responder and hide table when done button pressed */
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        self.mapSearchTable.hidden = true;
+        searchBar.resignFirstResponder();
+    }
+    
+    /* Table View data source and delegates -----------------*/
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1;
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        self.mapSearchTableHeightConstraint.constant = CGFloat(self.locationSearchResults.count * 44);
+        print("Number: \(self.locationSearchResults.count)")
+        return self.locationSearchResults.count;
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        //show info based off of location search results in each cell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell");
+        cell!.textLabel?.text = self.locationSearchResults[indexPath.item].name;
+        cell!.detailTextLabel?.text = self.parseAddress(self.locationSearchResults[indexPath.item].placemark);
+        return cell!;
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        //add coordinate to map upon selection of a cell and also hide the table view
+        self.addCoordinate(self.locationSearchResults[indexPath.item].placemark.coordinate);
+        self.mapSearchBar.resignFirstResponder();
+        self.mapSearchTable.hidden = true;
+    }
+    
+
+    /* Returns a better formatted string from placemark for cell subtitle */
+    func parseAddress(selectedItem:MKPlacemark) -> String {
+        // put a space between "4" and "Melrose Place"
+        let firstSpace = (selectedItem.subThoroughfare != nil && selectedItem.thoroughfare != nil) ? " " : ""
+        // put a comma between street and city/state
+        let comma = (selectedItem.subThoroughfare != nil || selectedItem.thoroughfare != nil) && (selectedItem.subAdministrativeArea != nil || selectedItem.administrativeArea != nil) ? ", " : ""
+        // put a space between "Washington" and "DC"
+        let secondSpace = (selectedItem.subAdministrativeArea != nil && selectedItem.administrativeArea != nil) ? " " : ""
+        let addressLine = String(
+            format:"%@%@%@%@%@%@%@",
+            // street number
+            selectedItem.subThoroughfare ?? "",
+            firstSpace,
+            // street name
+            selectedItem.thoroughfare ?? "",
+            comma,
+            // city
+            selectedItem.locality ?? "",
+            secondSpace,
+            // state
+            selectedItem.administrativeArea ?? ""
+        )
+        return addressLine
+    }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    
     func setNoLocEvent(noLocEvent:Event) {
         self.noLocEvent = noLocEvent;
     }
-
 }

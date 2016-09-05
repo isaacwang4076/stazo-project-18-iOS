@@ -28,6 +28,8 @@ class MapViewController: UIViewController, UISearchBarDelegate,
 
         // Search setup
         self.mapSearchBar.delegate = self
+        self.mapSearchBar.returnKeyType = .Done;
+        self.mapSearchBar.enablesReturnKeyAutomatically = false;
         
         // TableView cell
         self.tableView.registerNib(UINib(nibName: "EventCell", bundle: nil), forCellReuseIdentifier: "EventCell");
@@ -116,7 +118,8 @@ class MapViewController: UIViewController, UISearchBarDelegate,
         sortFilteredEventNames(searchText)
         
         // Update search table view
-        tableView.reloadData()
+        self.tableView.hidden = false;
+        self.tableView.reloadData()
     }
     
     // Updates the order of filteredEventNames using prefixCompare
@@ -137,6 +140,16 @@ class MapViewController: UIViewController, UISearchBarDelegate,
         }
         return eventName1.endIndex < eventName2.endIndex
 
+    }
+    
+    /* Resign first responder and hide table view if "Done" button is pressed */
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder();
+        self.tableView.hidden = true;
+    }
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        self.tableView.hidden = false;
     }
     
     // -----------------------------------------------------------------------------------------------
@@ -172,6 +185,9 @@ class MapViewController: UIViewController, UISearchBarDelegate,
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.selectedEventID = Globals.eventsNameToID[self.filteredEventNames[indexPath.row]];
         self.performSegueWithIdentifier("openEventInfo", sender: self);
+        tableView.deselectRowAtIndexPath(indexPath, animated: true);
+        self.mapSearchBar.resignFirstResponder();
+        tableView.hidden = true;
     }
     
     // -----------------------------------------------------------------------------------------------

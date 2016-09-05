@@ -12,7 +12,7 @@ import CoreLocation
 
 //Current bug: only allow back button after transaction completes, if user goes super fast, it will crash
 
-class EventInfoViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate, CLLocationManagerDelegate {
+class EventInfoViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate {
 
     /* UI STUFF ----------------------------------------------------*/
     //Event name and join button (reference and action func)
