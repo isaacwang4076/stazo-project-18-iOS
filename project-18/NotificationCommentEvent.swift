@@ -13,7 +13,7 @@ import FirebaseDatabase
 
 class NotificationCommentEvent: Notification {
     
-    // Variables (unique to NewFollow)
+    // Variables (unique to CommentEvent)
     
     var eventID: String?
     var eventName: String?

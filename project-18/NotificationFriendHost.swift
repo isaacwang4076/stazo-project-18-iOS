@@ -13,7 +13,7 @@ import FirebaseDatabase
 
 class NotificationFriendHost: Notification {
     
-    // Variables (unique to NewFollow)
+    // Variables (unique to FriendHost)
     
     var hostName: String?
     var eventID: String?

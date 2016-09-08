@@ -22,7 +22,7 @@ class User: NSObject, NSCoding {
     private var userName: String               // User's name
     private var bio: String                    // User's bio
     private var myEvents: [String] = []        // A list of eventID's that this user has created
-    private var attendingEvents: [String] = [] // A list of eventID's that this user has joined
+    internal var attendingEvents: [String] = [] // A list of eventID's that this user has joined
 //    var reportedEvents: [String]? = []  // A list of eventID's that this user has reported
     private var userTrails: [String] = []      // A list of userID's that this user has followed
     private var userFollowers: [String] = []   // A list of userID's that are following this user
@@ -189,6 +189,8 @@ class User: NSObject, NSCoding {
         // ------------------------------------------------------------------------------------
         
         // TODO NotificationJoinedEvent
+        let nje: Notification = NotificationJoinedEvent(type: Globals.TYPE_JOINED_EVENT, pictureID: Globals.me.getUserID(), joinedUserName: Globals.me.getUserName(), eventID: eventID, eventName: eventName)
+        nje.pushToFirebase([creatorID])
         
         // Event successfully attended
         print("\nattendEvent() in User: now attending event with ID ", eventID)

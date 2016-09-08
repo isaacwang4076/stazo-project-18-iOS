@@ -1,35 +1,35 @@
 //
-//  NotificationJoinedEvent.swift
+//  NotificationEventToday.swift
 //  project-18
 //
-//  Created by Isaac Wang on 7/14/16.
+//  Created by Isaac Wang on 9/7/16.
 //  Copyright © 2016 stazo. All rights reserved.
 //
 
 import Foundation
 import FirebaseDatabase
 
-/* Notification for when a user joins your event */
+/* Notification for when an event is happening today */
 
-class NotificationJoinedEvent: Notification {
+class NotificationEventToday: Notification {
     
-    // Variables (unique to JoinedEvent)
+    // Variables (unique to NewFollow)
     
-    var joinedUserName: String?
     var eventID: String?
     var eventName: String?
+    var timeString: String?
     
     // NEW NOTIFICATION CONSTRUCTOR
     // - Sets all variables and generates new notifID
-    init(type: Int, pictureID: String, joinedUserName: String, eventID: String, eventName: String) {
+    init(type: Int, pictureID: String, timeString: String, eventID: String, eventName: String) {
         
         // Superclass constructor
         super.init(type: type, pictureID: pictureID)
         
         // Unique variables instantiation
-        self.joinedUserName = joinedUserName
         self.eventID = eventID
         self.eventName = eventName
+        self.timeString = timeString
     }
     
     // EXISTING NOTIFICATION CONSTRUCTOR
@@ -40,9 +40,9 @@ class NotificationJoinedEvent: Notification {
         super.init(type: notifDict.valueForKey("type") as! Int, pictureID: notifDict.valueForKey("pictureId") as! String, notifID: notifDict.valueForKey("notifID") as! String)
         
         // Unique variables instantiation
-        self.joinedUserName = notifDict.valueForKey("joinedUserName") as? String
         self.eventID = notifDict.valueForKey("eventId") as? String
         self.eventName = notifDict.valueForKey("eventName") as? String
+        self.timeString = notifDict.valueForKey("timeString") as? String
         self.viewed = notifDict.valueForKey("viewed") as! Bool
     }
     
@@ -51,7 +51,7 @@ class NotificationJoinedEvent: Notification {
     override func convertToDictionary(notif: Notification) -> NSDictionary {
         
         // Store unique variables
-        let notifDict: NSMutableDictionary = ["joinedUserName": (notif as! NotificationJoinedEvent).joinedUserName!, "eventId": (notif as! NotificationJoinedEvent).eventID!, "eventName": (notif as! NotificationJoinedEvent).eventName!]
+        let notifDict: NSMutableDictionary = ["eventId": (notif as! NotificationEventToday).eventID!, "eventName": (notif as! NotificationEventToday).eventName!, "timeString": (notif as! NotificationEventToday).timeString!]
         
         // Store common variables
         notifDict.addEntriesFromDictionary(super.convertToDictionary(notif) as [NSObject : AnyObject])
@@ -66,13 +66,13 @@ class NotificationJoinedEvent: Notification {
             let notifMap: NSDictionary = (notifSnap as! FIRDataSnapshot).value as! NSDictionary
             
             // Check Notification type
-            if (notifMap.valueForKey("type") as! Int != Globals.TYPE_JOINED_EVENT) {
+            if (notifMap.valueForKey("type") as! Int != Globals.TYPE_EVENT_TODAY) {
                 continue
             }
             
             // Check followerID
-            let nje: NotificationJoinedEvent =  NotificationJoinedEvent(notifDict: notifMap)
-            if (nje.eventID == self.eventID) {
+            let net: NotificationEventToday =  NotificationEventToday(notifDict: notifMap)
+            if (net.eventID == self.eventID) {
                 
                 // Conflict found
                 return (notifSnap as! FIRDataSnapshot, notifSnap.ref)
@@ -106,8 +106,7 @@ class NotificationJoinedEvent: Notification {
     }
     
     override func generateMessage() -> String {
-        let firstName = joinedUserName!.characters.split{$0 == " "}.map(String.init)[0]
-        return firstName + " joined your event: \"" + eventName! + "\"."
+        return eventName! + " is happening at " + timeString!
     }
     // --------------------------------------------------------------------------------------------------------
     

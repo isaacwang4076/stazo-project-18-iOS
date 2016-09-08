@@ -58,9 +58,12 @@ class NotificationViewController: UIViewController {
                 else if notifDict.valueForKey("type") as! Int == Globals.TYPE_WELCOME {
                     notif = NotificationWelcome(notifDict: notifDict)
                 }
+                else if notifDict.valueForKey("type") as! Int == Globals.TYPE_EVENT_TODAY {
+                    notif = NotificationEventToday(notifDict: notifDict)
+                }
                 
-                self.notifs.append(notif!)
-
+                self.notifs.insert(notif!, atIndex: 0)
+                
             }
             
             // DISPLAY: Once all the Notifications have been pulled, reload the table view
@@ -108,21 +111,23 @@ class NotificationViewController: UIViewController {
         }
         
         //NOTIF IMAGE with URL request
-        let width = "250";
-        let urlString = "https://graph.facebook.com/" + notifToShow.pictureID!
-            + "/picture?width=" + width;
-        let url = NSURL(string: urlString);
-        //send request to get image
-        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {
-            (data, response, error) in
-            //if data grabbed, update image in main thread
-            if (data != nil) {
-                dispatch_async(dispatch_get_main_queue(), {
-                    cell.notifImage.image = UIImage(data: data!)?.rounded;
-                });
-            }
-        };
-        task.resume();
+        if notifToShow.pictureID! != "0" {
+            let width = "250";
+            let urlString = "https://graph.facebook.com/" + notifToShow.pictureID!
+                + "/picture?width=" + width;
+            let url = NSURL(string: urlString);
+            //send request to get image
+            let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {
+                (data, response, error) in
+                //if data grabbed, update image in main thread
+                if (data != nil) {
+                    dispatch_async(dispatch_get_main_queue(), {
+                        cell.notifImage.image = UIImage(data: data!)?.rounded;
+                    });
+                }
+            };
+            task.resume();
+        }
     }
     
     
@@ -139,7 +144,7 @@ class NotificationViewController: UIViewController {
     // -----------------------------------------------------------------------------------------------
     
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         //if it's the eventinfo segue, set the event id

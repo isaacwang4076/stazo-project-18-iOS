@@ -58,6 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         }
+        
         /*Globals.friendsIDToName["1196215920412322"] = "Isaac Christopher Wang"
         Globals.friendsIDToName["1184188798300386"] = "Brian Chan"
         Globals.friendsIDToName["1177156832304841"] = "Ansel Blume"

@@ -43,6 +43,9 @@ class MapViewController: UIViewController, UISearchBarDelegate,
         let dank = EventMarker(title: "Eric Zhang", subTitle: "Starts in: 69 hrs 69 m", coordinate: initialLocation.coordinate, eventID: "yooYSUWICTOWW")
         self.mapView.addAnnotation(dank)
         
+        // Check for NotificationEventToday
+        addEventTodayNotifications()
+        
         
     }
     
@@ -53,6 +56,35 @@ class MapViewController: UIViewController, UISearchBarDelegate,
         self.navigationController?.navigationBarHidden = true;
         
         updateEvents();
+    }
+    
+    // Checks to see if there are events you've joined happening today
+    // If there are, adds those Notifications to the database
+    // Kinda jank, should be handled by script, but whatever
+    
+    func addEventTodayNotifications() {
+        
+        // ADD EVENTS TODAY NOTIFICATION
+        for eventID in Globals.me.attendingEvents {
+            // The event we are looking at
+            let event = Globals.eventsIDToEvent[eventID]
+            
+            // Event start time - current time
+            let difference = Int(event!.getStartTime()) - Int(NSDate().timeIntervalSince1970 * 1000)
+            
+            // If the event hasn't started already and is happening in less than 10 hours
+            if (difference > 0 &&
+                difference < 10 * 60 * 60 * 1000) {
+                
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.dateFormat = "h:mm a"
+                
+                let timeString = dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: NSTimeInterval(event!.getStartTime())/1000))
+                
+                let net = NotificationEventToday(type: Globals.TYPE_EVENT_TODAY, pictureID: "0", timeString: timeString, eventID: eventID, eventName: event!.getName())
+                net.pushToFirebase([Globals.me.getUserID()])
+            }
+        }
     }
     
     func updateEvents() {

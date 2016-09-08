@@ -24,6 +24,8 @@ struct Globals {
     static let TYPE_JOINED_EVENT: Int = 3
     static let TYPE_INVITE_EVENT: Int = 4
     static let TYPE_WELCOME: Int = 5
+    static let TYPE_EVENT_TODAY: Int = 6
+
     
     // FB Token FROM LAST SESSION
     static var lastFBToken = FBSDKAccessToken.currentAccessToken();

@@ -13,7 +13,7 @@ import FirebaseDatabase
 
 class NotificationWelcome: Notification {
     
-    // Variables (unique to NewFollow)
+    // Variables (unique to Welcome)
     
     var userName: String?
     
