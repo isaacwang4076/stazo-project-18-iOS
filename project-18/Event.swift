@@ -83,7 +83,15 @@ class Event {
         fb.child("Users").child(creatorID!).child("myEvents").childByAutoId().setValue(eventID!);
         
         // TODO Notification
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "EEEE, H:mm a"
+        
+        let timeString = dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: NSTimeInterval(startTime!)/1000))
+        
+        let nfh: Notification = NotificationFriendHost(type: Globals.TYPE_FRIEND_HOST, pictureID: Globals.me.getUserID(), hostName: Globals.me.getUserName(), eventID: eventID!, eventName: name!, timeString: timeString)
+        nfh.pushToFirebase(Array(Globals.friendsIDToName.keys))
     }
+    
     
     // CONVERT TO DICTIONARY
     // - Helper function for pushToFirebase, converts event into dictionary
