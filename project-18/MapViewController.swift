@@ -93,7 +93,7 @@ class MapViewController: UIViewController, UISearchBarDelegate,
         Globals.fb.child("Events").observeSingleEventOfType(.Value, withBlock: {
             snapshot in
             
-            //clear current events
+            //clear current map view pins
             self.mapView.removeAnnotations(self.mapView.annotations);
 
             for eachEventSnapshot in snapshot.children.allObjects as! [FIRDataSnapshot]{
@@ -103,27 +103,41 @@ class MapViewController: UIViewController, UISearchBarDelegate,
                 let currentTime = NSDate().timeIntervalSince1970 * 1000
                 
                 //set startsIn to "x h and x min" before event starts
-                var startsIn = durationFromTimeIntervals(startTime: Int(currentTime), endTime: Int(eachEvent.getStartTime()))
-                if (startsIn.isEmpty) {
+                var length:Int = Int(eachEvent.getStartTime()) - Int(currentTime) //length till start
+                let hoursUntilStart = length/(1000*60*60)
+                
+                var timeText = "";
+                //see if event has started
+                if (length < 0) {
                     //event has either started or ended if starts in is empty, so compare with end time now
-                    startsIn = durationFromTimeIntervals(startTime: Int(currentTime), endTime: Int(eachEvent.getEndTime()))
-                    if (startsIn.isEmpty) {
+                    length = Int(eachEvent.getEndTime()) - Int(currentTime); //length till end
+                    if (length < 0) {
                         //still empty means event has already ended
-                        startsIn = "This event has already ended."
+                        timeText = "This event has already ended."
                     }
                     else {
                         //event ends in "x h and x min"
-                        startsIn = "Ends in: " + startsIn;
+                        var text = durationFromTimeIntervals(startTime: Int(currentTime), endTime: Int(eachEvent.getEndTime()));
+                        if (text.isEmpty) {
+                            text = "Just ended!"
+                        }
+                        timeText = "Ends in: " + text
                     }
                 }
                 else {
-                    startsIn = "Starts in: " + startsIn
+                    var text = durationFromTimeIntervals(startTime: Int(currentTime), endTime: Int(eachEvent.getStartTime()))
+                    if (text.isEmpty) {
+                        text = "Starting!"
+                    }
+                    timeText = "Starts in: " + text
                 }
                 
-                //add marker to the map
-                let marker = EventMarker(title: eachEvent.getName(), subTitle: startsIn,
-                    coordinate: eachEvent.getLocation(), eventID: eachEvent.getEventID())
-                self.mapView.addAnnotation(marker)
+                //add marker to the map only if under 2 hours
+                if (hoursUntilStart < 2) {
+                    let marker = EventMarker(title: eachEvent.getName(), subTitle: timeText,
+                        coordinate: eachEvent.getLocation(), eventID: eachEvent.getEventID())
+                    self.mapView.addAnnotation(marker)
+                }
             }
         })
     }
