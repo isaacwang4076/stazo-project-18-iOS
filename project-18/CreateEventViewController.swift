@@ -184,6 +184,14 @@ class CreateEventViewController: UIViewController, CreateEventTableProtocol {
     }
     /* ---------------------------------------------------------------------------------------*/
 
+    func clearInfo() {
+        self.createEventTable!.eventName.text = nil;
+        self.createEventTable!.eventDescription.text = nil;
+        self.startDate = nil;
+        self.endDate = nil;
+        self.createEventTable!.updateStartDate(nil);
+        self.createEventTable!.updateEndDate(nil);
+    }
     
     // Subview access
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

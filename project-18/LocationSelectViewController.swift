@@ -27,6 +27,8 @@ class LocationSelectViewController: UIViewController, UISearchBarDelegate, UITab
             alert.addAction(UIAlertAction(title: "Swag", style: .Default , handler: {
                 alert in
                 self.tabBarController?.selectedIndex = 0; //go back to map
+                let createEventVC = self.navigationController?.childViewControllers[0] as! CreateEventViewController;
+                createEventVC.clearInfo();
                 self.navigationController?.popToRootViewControllerAnimated(true); //go back a view for next use
             }));
             self.presentViewController(alert, animated: true, completion: nil);

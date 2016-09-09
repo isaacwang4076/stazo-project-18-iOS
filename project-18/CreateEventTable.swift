@@ -57,11 +57,11 @@ class CreateEventTable: UITableViewController, UITextFieldDelegate {
         return true;
     }
     
-    func updateStartDate(dateText: String) {
+    func updateStartDate(dateText: String?) {
         self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0))!.detailTextLabel!.text = dateText;
     }
     
-    func updateEndDate(dateText: String) {
+    func updateEndDate(dateText: String?) {
         self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 3, inSection: 0))!.detailTextLabel!.text = dateText;
     }
 
