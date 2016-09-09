@@ -208,13 +208,13 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             //grab event from respective array
             var eventToShow:Event;
             if (tableView == self.popularTableView) {
-                eventToShow = self.popularEventArray[indexPath.item];
+                eventToShow = self.popularEventArray[indexPath.row];
             }
             else if (tableView == self.todayTableView) {
-                eventToShow = self.todayEventArray[indexPath.item];
+                eventToShow = self.todayEventArray[indexPath.row];
             }
             else {
-                eventToShow = self.laterEventArray[indexPath.item];
+                eventToShow = self.laterEventArray[indexPath.row];
             }
             
             populateCell(cell, eventToShow: eventToShow)

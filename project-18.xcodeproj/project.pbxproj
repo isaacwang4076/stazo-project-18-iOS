@@ -56,6 +56,7 @@
 		F6E0D4D11D41111400ECF637 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6E0D4D01D41111400ECF637 /* Bolts.framework */; };
 		F6E0D4D91D411D5300ECF637 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E0D4D81D411D5300ECF637 /* ListViewController.swift */; };
 		F6E0D4E01D411E4400ECF637 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E0D4DF1D411E4400ECF637 /* LoginViewController.swift */; };
+		F6FCA7A11D8132CC00F38950 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = F6FCA7A01D8132CC00F38950 /* plus.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,6 +139,7 @@
 		F6E0D4D01D41111400ECF637 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		F6E0D4D81D411D5300ECF637 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		F6E0D4DF1D411E4400ECF637 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		F6FCA7A01D8132CC00F38950 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -292,6 +294,7 @@
 				F625A3F61D3DF7C6006AA3F2 /* ic_actionbar_head.png */,
 				F625A3F71D3DF7C6006AA3F2 /* ic_actionbar_browse2.png */,
 				F625A3F81D3DF7C6006AA3F2 /* ic_actionbar_map2.png */,
+				F6FCA7A01D8132CC00F38950 /* plus.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -417,6 +420,7 @@
 				288EF1591D3050C9001FBE63 /* LaunchScreen.storyboard in Resources */,
 				F61209F21D352FE600E5C715 /* GoogleService-Info.plist in Resources */,
 				F625A3F91D3DF7C6006AA3F2 /* ic_actionbar_notif.png in Resources */,
+				F6FCA7A11D8132CC00F38950 /* plus.png in Resources */,
 				F625A3FC1D3DF7C6006AA3F2 /* ic_actionbar_map2.png in Resources */,
 				F625A3FA1D3DF7C6006AA3F2 /* ic_actionbar_head.png in Resources */,
 				F6C4478A1D4C907100B1D12C /* CommentCell.xib in Resources */,

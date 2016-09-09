@@ -414,7 +414,7 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
             cell = (tableView.dequeueReusableCellWithIdentifier("Cell") as! CommentTableViewCell);
         }
         
-        let commentUserID = self.comments[indexPath.item].getUserID();
+        let commentUserID = self.comments[indexPath.row].getUserID();
         
         //commentName from users database
         Globals.fb.child("Users").child(commentUserID).child("name").observeSingleEventOfType(.Value, withBlock: {
@@ -423,7 +423,7 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
         });
 
         //comment text
-        cell!.commentText.text = self.comments[indexPath.item].getComment();
+        cell!.commentText.text = self.comments[indexPath.row].getComment();
         
         //commentImage
         let width = "150";

@@ -35,19 +35,19 @@ class CreateEventTable: UITableViewController, UITextFieldDelegate {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //selected event name cell
-        if (indexPath.item == 0) {
+        if (indexPath.row == 0) {
             self.eventName.becomeFirstResponder();
         }
         //selected event description cell
-        if (indexPath.item == 1) {
+        if (indexPath.row == 1) {
             self.eventDescription.becomeFirstResponder();
         }
         //selected start date picker
-        if (indexPath.item == 2) {
+        if (indexPath.row == 2) {
             self.delegate?.openStartDatePicker();
         }
         //selected end date picker
-        if (indexPath.item == 3) {
+        if (indexPath.row == 3) {
             self.delegate?.openEndDatePicker();
         }
     }

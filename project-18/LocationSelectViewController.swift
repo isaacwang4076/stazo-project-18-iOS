@@ -11,6 +11,7 @@ import MapKit
 
 class LocationSelectViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
 
+    /* UI ---------------------------------------*/
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var mapSearchBar: UISearchBar!
     @IBOutlet var mapSearchTable: UITableView!
@@ -25,7 +26,8 @@ class LocationSelectViewController: UIViewController, UISearchBarDelegate, UITab
                                           message: "Event successfully made!", preferredStyle: .Alert);
             alert.addAction(UIAlertAction(title: "Swag", style: .Default , handler: {
                 alert in
-                self.navigationController?.popToRootViewControllerAnimated(true);
+                self.tabBarController?.selectedIndex = 0; //go back to map
+                self.navigationController?.popToRootViewControllerAnimated(true); //go back a view for next use
             }));
             self.presentViewController(alert, animated: true, completion: nil);
         }
@@ -37,8 +39,7 @@ class LocationSelectViewController: UIViewController, UISearchBarDelegate, UITab
             self.presentViewController(alert, animated: true, completion: nil);
         }
     }
-//    func successCallback(alert:UIAlertAction) {self.navigationController?.popToRootViewControllerAnimated(true)}
-    
+    /*---------------------------------------------*/
     
     private var selectedAnnotation:MKPointAnnotation?;
     private var noLocEvent:Event?
