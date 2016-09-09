@@ -16,8 +16,7 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
 
     /* UI STUFF ----------------------------------------------------*/
     //Elements hidden/unhidden for nonexistent events
-    @IBOutlet weak var mainView: UIView!
-    @IBOutlet weak var nonexistLabel: UILabel!
+    @IBOutlet var mainView: UIView!
 
     //Event name and join button (reference and action func)
     @IBOutlet var eventNameLabel: UILabel!
@@ -102,10 +101,16 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
             self.pullAndShowComments();
         }
         else {
-            print("Event ID is null, WHY IS IT NULL");
+            print("Event ID is null or event doesn't exist anymore");
             mainView.hidden = true
             commentToolbar.hidden = true
-            nonexistLabel.hidden = false
+            let alert = UIAlertController(title: "Ooops!",
+                                          message: "This event no longer exists.", preferredStyle: .Alert);
+            alert.addAction(UIAlertAction(title: "OK", style: .Default , handler: {
+                alert in
+                self.navigationController?.popToRootViewControllerAnimated(true); //go back a view
+            }));
+            self.presentViewController(alert, animated: true, completion: nil);
         }
         
         //Write comment text view
