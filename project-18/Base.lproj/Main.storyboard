@@ -555,7 +555,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Event info" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F5g-EA-dgz">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event info" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F5g-EA-dgz">
                                 <rect key="frame" x="251" y="48" width="99" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="FHc-K8-3YL"/>
@@ -565,7 +565,7 @@
                                 <color key="textColor" red="0.01176470588" green="0.66274509800000003" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fuM-ge-ege">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fuM-ge-ege">
                                 <rect key="frame" x="235" y="416" width="130" height="30"/>
                                 <color key="backgroundColor" red="0.0078431372550000003" green="0.53333333329999999" blue="0.81960784310000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -580,7 +580,7 @@
                                     <action selector="selectLocationClick:" destination="s5d-TJ-JUr" eventType="touchUpInside" id="0Qq-Hw-Fkk"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ByZ-Ft-SYa">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ByZ-Ft-SYa">
                                 <rect key="frame" x="250" y="479" width="100" height="30"/>
                                 <color key="backgroundColor" red="1" green="0.92156862750000001" blue="0.23137254900000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -594,7 +594,7 @@
                                     <action selector="cancelClick:" destination="s5d-TJ-JUr" eventType="touchUpInside" id="iDB-lf-NNS"/>
                                 </connections>
                             </button>
-                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gx5-Rx-oj0">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gx5-Rx-oj0">
                                 <rect key="frame" x="0.0" y="99" width="600" height="253"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="253" id="kCF-ca-BaJ"/>
@@ -650,6 +650,7 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="81e-rl-fx4"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="datePicker" destination="Oz4-L1-pAh" id="tW8-jh-lKp"/>
                         <outlet property="datePickerToolbar" destination="yJD-E1-dD5" id="Kvl-zT-NXR"/>
@@ -668,7 +669,7 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="5L5-qz-Qce" kind="relationship" relationship="viewControllers" id="MGV-7v-6gV"/>
