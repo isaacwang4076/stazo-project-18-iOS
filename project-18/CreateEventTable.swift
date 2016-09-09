@@ -18,6 +18,9 @@ class CreateEventTable: UITableViewController, UITextFieldDelegate {
     @IBOutlet var eventName: UITextField!
     @IBOutlet var eventDescription: UITextField!
     
+    let MAX_EVENT_NAME_LENGTH = 35
+    let MAX_EVENT_DESC_LENGTH = 300
+    
     var delegate: CreateEventTableProtocol?; //to register date picker clicks to parent vc
     
     override func viewDidLoad() {
@@ -71,5 +74,21 @@ class CreateEventTable: UITableViewController, UITextFieldDelegate {
         }
         return tableView.sectionHeaderHeight
     }
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange,
+                   replacementString string: String) -> Bool
+    {
+        var maxLength = 0;
+        if (textField == eventName) {
+            maxLength = MAX_EVENT_NAME_LENGTH
+        } else if (textField == eventDescription) {
+            maxLength = MAX_EVENT_DESC_LENGTH
+        }
+        let currentString: NSString = textField.text!
+        let newString: NSString =
+            currentString.stringByReplacingCharactersInRange(range, withString: string)
+        return newString.length <= maxLength
+    }
+
 
 }
