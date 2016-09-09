@@ -334,7 +334,7 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
             
             for attendee in event!.getAttendees() {
                 if (!commenters.contains(attendee)) {
-                    commenters.add(attendee)
+                    commenters.append(attendee)
                 }
             }
             
