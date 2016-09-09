@@ -34,7 +34,7 @@ class NotificationViewController: UIViewController {
     func pullAndDisplayNotifications() {
         
         // PULL: Store all the user's Notifications in the notifs array
-        fb.child("NotifDatabase").child("1196215920412322").observeSingleEventOfType(FIRDataEventType.Value, withBlock: {
+        fb.child("NotifDatabase").child(Globals.me.getUserID()).observeSingleEventOfType(FIRDataEventType.Value, withBlock: {
             (userNotifs) in
             for notifSnapshot in userNotifs.children {
                 var notif: Notification? = nil
@@ -127,6 +127,8 @@ class NotificationViewController: UIViewController {
                 }
             };
             task.resume();
+        } else {
+            cell.notifImage.image = UIImage(named: "ic_actionbar_notif")
         }
     }
     
