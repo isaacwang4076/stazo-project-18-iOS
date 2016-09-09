@@ -55,7 +55,6 @@ class MapViewController: UIViewController, UISearchBarDelegate,
         // Check for NotificationEventToday
         addEventTodayNotifications()
         
-        
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

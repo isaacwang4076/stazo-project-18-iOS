@@ -45,6 +45,9 @@ class InviteViewController: UIViewController, UISearchBarDelegate {
         
         // Search setup
         inviteSearchBar.delegate = self
+        self.inviteSearchBar.returnKeyType = .Done;
+        self.inviteSearchBar.enablesReturnKeyAutomatically = false;
+
         
         // TableView cell
         self.usersTableView.registerNib(UINib(nibName: "UserCell", bundle: nil), forCellReuseIdentifier: "UserCell");
@@ -90,6 +93,11 @@ class InviteViewController: UIViewController, UISearchBarDelegate {
     // For query "fu", prioritizes "Fundraiser" over "KungFu"
     func prefixCompare(user1ID: String, user2ID: String) -> Bool {
         return Globals.friendsIDToName[user1ID]!.lowercaseString.hasPrefix(self.searchText.lowercaseString)
+    }
+    
+    //Resign first responder if "Done" button pressed
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder();
     }
     
     // -----------------------------------------------------------------------------------------------
