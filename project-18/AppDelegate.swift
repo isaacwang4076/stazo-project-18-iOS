@@ -14,15 +14,17 @@ import FirebaseDatabase
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
         //T0PB4R C0L0R
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
+
         let statusBar: UIView = UIApplication.sharedApplication().valueForKey("statusBar") as! UIView
         if statusBar.respondsToSelector(Selector("setBackgroundColor:")) {
-            statusBar.backgroundColor = UITableView().separatorColor;
+            //statusBar.backgroundColor = UITableView().separatorColor;
+            statusBar.backgroundColor = Globals.COLOR_PRIMARY_DARK
         }
         
         // FIREBASE STARTUP
