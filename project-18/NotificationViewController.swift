@@ -104,6 +104,9 @@ class NotificationViewController: UIViewController {
     }
     
     func populateCell(cell: NotificationTableViewCell, notifToShow: Notification) {
+        cell.message.numberOfLines = 0;
+        cell.message.lineBreakMode = NSLineBreakMode.ByWordWrapping;
+        
         cell.message.text = notifToShow.generateMessage()
         
         if (notifToShow.viewed == false) {
