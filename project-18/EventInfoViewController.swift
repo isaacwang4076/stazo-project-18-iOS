@@ -154,7 +154,7 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
             //NAME
             self.eventNameLabel.text = self.event!.getName();
             
-            //update joined bool, joined button, joined label, joined collection view
+            //JOIN - update joined bool, joined button, joined label, joined collection view
             self.userHasJoined = (self.event!.getAttendees().contains(Globals.me.getUserID()));
             self.updateJoinedView();
             if (self.userHasJoined) {
@@ -170,7 +170,7 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
             let date = NSDate(timeIntervalSince1970: NSTimeInterval(self.event!.getStartTime())/1000);
             self.startTimeLabel.text = stringFromDate(date);
             
-            //LENGTH/ENDS IN   TODO: edit the length/ends in label
+            //LENGTH/ENDS IN
             let currentTime = Int(NSDate().timeIntervalSince1970 * 1000);
             //if event hasn't started yet, show event length
             if (currentTime < Int(self.event!.getStartTime())) {
@@ -191,8 +191,7 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
             }
             
             //LOCATION
-            self.locationLabel.text = "\(self.event!.getLocation().latitude), \(self.event!.getLocation().longitude)";
-            
+//            self.locationLabel.text = "\(self.event!.getLocation().latitude), \(self.event!.getLocation().longitude)";
             let geocoder = CLGeocoder();
             geocoder.reverseGeocodeLocation(
                 CLLocation(latitude: self.event!.getLocation().latitude, longitude: self.event!.getLocation().longitude),
@@ -213,7 +212,12 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
 //            locationManager.startUpdatingLocation()
             
             //DESCRIPTION with auto-resize to fit text
-            self.descriptionLabel.text = self.event!.getDescription();
+            if (self.event!.getDescription().isEmpty) {
+                self.descriptionLabel.text = "This event has no description."
+            }
+            else {
+                self.descriptionLabel.text = self.event!.getDescription();
+            }
             self.descriptionLabel.sizeToFit();
             
             //CREATOR NAME with another fb pull, non-null guarentee

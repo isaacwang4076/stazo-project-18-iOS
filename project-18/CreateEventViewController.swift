@@ -13,15 +13,11 @@ class CreateEventViewController: UIViewController, CreateEventTableProtocol {
     
     @IBOutlet var datePicker: UIDatePicker!
     @IBOutlet var datePickerToolbar: UIToolbar!
-    
     @IBAction func selectLocationClick(sender: AnyObject) {
         if (createEvent()) {
             //call segue to location select
             self.performSegueWithIdentifier("pushLocationSelect", sender: self);
         }
-    }
-    @IBAction func cancelClick(sender: AnyObject) {
-        self.navigationController?.popViewControllerAnimated(true);
     }
     
     var createEventTable:CreateEventTable?;
@@ -35,7 +31,7 @@ class CreateEventViewController: UIViewController, CreateEventTableProtocol {
         self.title = "Create Event";
         self.navigationController?.navigationBarHidden = false;
         
-        self.datePicker.backgroundColor = UIColor.lightGrayColor();
+        self.datePicker.backgroundColor = UITableView().separatorColor;
         let today = NSDate();
         self.datePicker.minimumDate = today;
         self.datePicker.maximumDate = NSCalendar.currentCalendar()
