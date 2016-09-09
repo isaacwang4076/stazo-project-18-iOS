@@ -131,7 +131,7 @@ class NotificationViewController: UIViewController {
             };
             task.resume();
         } else {
-            cell.notifImage.image = UIImage(named: "ic_actionbar_notif")
+            cell.notifImage.image = UIImage(named: "logo_nobkg")
         }
     }
     
