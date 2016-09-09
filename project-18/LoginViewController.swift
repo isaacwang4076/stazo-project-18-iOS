@@ -84,6 +84,13 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                             print("New user----");
                             Globals.me.printUserInfo();
                             me.pushToFirebase();
+                            
+                            
+                            // Send out welcome Notification
+                            let nw: Notification = NotificationWelcome(type: Globals.TYPE_WELCOME, userName: me.getUserName())
+                            nw.pushToFirebase([me.getUserID()])
+                            
+                            
                             self.performSegueWithIdentifier("mainSegue", sender: self);
                         }
                     });
