@@ -385,6 +385,7 @@
 				TargetAttributes = {
 					288EF1481D3050C9001FBE63 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 9U2WW96W28;
 					};
 					288EF15E1D3050C9001FBE63 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -766,7 +767,7 @@
 				);
 				INFOPLIST_FILE = "project-18/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "stazo.project-18";
+				PRODUCT_BUNDLE_IDENTIFIER = "wildcard.stazo.project-18";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "project-18/project-18-Bridging-Header.h";
@@ -790,7 +791,7 @@
 				);
 				INFOPLIST_FILE = "project-18/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "stazo.project-18";
+				PRODUCT_BUNDLE_IDENTIFIER = "wildcard.stazo.project-18";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "project-18/project-18-Bridging-Header.h";
