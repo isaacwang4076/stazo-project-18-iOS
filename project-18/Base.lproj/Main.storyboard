@@ -564,7 +564,7 @@
                                     <constraint firstAttribute="height" constant="21" id="FHc-K8-3YL"/>
                                     <constraint firstAttribute="width" constant="99" id="fnG-Cl-UWQ"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="0.01176470588" green="0.66274509800000003" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1279,6 +1279,6 @@
         <image name="plus.png" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XS4-OO-xqs"/>
+        <segue reference="r8t-zn-fa4"/>
     </inferredMetricsTieBreakers>
 </document>
