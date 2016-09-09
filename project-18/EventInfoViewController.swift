@@ -15,6 +15,10 @@ import CoreLocation
 class EventInfoViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate {
 
     /* UI STUFF ----------------------------------------------------*/
+    //Elements hidden/unhidden for nonexistent events
+    @IBOutlet weak var mainView: UIView!
+    @IBOutlet weak var nonexistLabel: UILabel!
+
     //Event name and join button (reference and action func)
     @IBOutlet var eventNameLabel: UILabel!
     @IBOutlet var joinButton: UIButton!
@@ -93,12 +97,15 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if (eventID != nil) {
+        if (eventID != nil && Globals.eventsIDToEvent.keys.contains(eventID!)) {
             self.pullAndShowEvent(); //TODO:Hide or set everything to initial state before showing with info
             self.pullAndShowComments();
         }
         else {
             print("Event ID is null, WHY IS IT NULL");
+            mainView.hidden = true
+            commentToolbar.hidden = true
+            nonexistLabel.hidden = false
         }
         
         //Write comment text view
