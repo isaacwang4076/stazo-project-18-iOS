@@ -76,7 +76,13 @@ class NotificationViewController: UIViewController {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        self.notificationTableViewHeightConstraint.constant = CGFloat(self.notifs.count * 80);
+        let height = CGFloat(self.notifs.count * 80);
+        if (height > self.view.frame.height) {
+            self.notificationTableViewHeightConstraint.constant = self.view.frame.height;
+        }
+        else {
+            self.notificationTableViewHeightConstraint.constant = height;
+        }
         
         // Return number of notifications
         print("\n", self.notifs.count, " Notifications counted.")
