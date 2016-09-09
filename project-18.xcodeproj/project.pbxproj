@@ -57,6 +57,7 @@
 		F6E0D4D91D411D5300ECF637 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E0D4D81D411D5300ECF637 /* ListViewController.swift */; };
 		F6E0D4E01D411E4400ECF637 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E0D4DF1D411E4400ECF637 /* LoginViewController.swift */; };
 		F6FCA7A11D8132CC00F38950 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = F6FCA7A01D8132CC00F38950 /* plus.png */; };
+		F6FCA7A61D82905000F38950 /* ic_launcher_ios.png in Resources */ = {isa = PBXBuildFile; fileRef = F6FCA7A51D82905000F38950 /* ic_launcher_ios.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -140,6 +141,7 @@
 		F6E0D4D81D411D5300ECF637 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		F6E0D4DF1D411E4400ECF637 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		F6FCA7A01D8132CC00F38950 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
+		F6FCA7A51D82905000F38950 /* ic_launcher_ios.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher_ios.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -295,6 +297,7 @@
 				F625A3F71D3DF7C6006AA3F2 /* ic_actionbar_browse2.png */,
 				F625A3F81D3DF7C6006AA3F2 /* ic_actionbar_map2.png */,
 				F6FCA7A01D8132CC00F38950 /* plus.png */,
+				F6FCA7A51D82905000F38950 /* ic_launcher_ios.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -423,6 +426,7 @@
 				F6FCA7A11D8132CC00F38950 /* plus.png in Resources */,
 				F625A3FC1D3DF7C6006AA3F2 /* ic_actionbar_map2.png in Resources */,
 				F625A3FA1D3DF7C6006AA3F2 /* ic_actionbar_head.png in Resources */,
+				F6FCA7A61D82905000F38950 /* ic_launcher_ios.png in Resources */,
 				F6C4478A1D4C907100B1D12C /* CommentCell.xib in Resources */,
 				F625A3FB1D3DF7C6006AA3F2 /* ic_actionbar_browse2.png in Resources */,
 				28FAF3A91D6AA3CD00D4491E /* UserCell.xib in Resources */,

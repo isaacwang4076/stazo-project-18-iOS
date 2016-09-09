@@ -96,6 +96,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             
             //process the events into table view categories
+            //Sort by popularity and take the top 2
             for i in 0 ..< self.eventArray.count {
                 if (self.eventArray[i].getPopularity() >= UInt(self.POPULAR_THRESHOLD)) {
                     self.popularEventArray.append(self.eventArray[i]);
@@ -107,13 +108,21 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
             self.popularEventArray.sortInPlace(sortBasedOnPopularity);
             
-            //TODO: TODAY AND LATER SORT
+            //filter list to happening today or happening later
             for i in 0 ..< self.eventArray.count {
-                self.todayEventArray.append(self.eventArray[i]);
+                //only add to array if event is occuring today
+                let eventDate = NSDate(timeIntervalSince1970: NSTimeInterval(self.eventArray[i].getStartTime())/1000);
+                if (NSCalendar.currentCalendar().isDateInToday(eventDate)) {
+                    self.todayEventArray.append(self.eventArray[i]);
+                }
+                else {
+                    self.laterEventArray.append(self.eventArray[i]);
+                }
             }
-            for i in 0 ..< self.eventArray.count {
-                self.laterEventArray.append(self.eventArray[i]);
-            }
+            
+//            for i in 0 ..< self.eventArray.count {
+//                self.laterEventArray.append(self.eventArray[i]);
+//            }
             
             //update table view accordingly
             self.updateTableViews();

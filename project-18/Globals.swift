@@ -65,54 +65,21 @@ struct Globals {
 
 // GLOBAL FUNCTIONS
 
-func populateCell(cell: EventTableViewCell, eventToShow: Event) {
-    
-    cell.eventName.text = eventToShow.getName();
-    cell.numGoing.text = "\(eventToShow.getPopularity())";
-    
-    //start date TODO:correct date formatting? I think the android one is inconsistent
-    let date = NSDate(timeIntervalSince1970: NSTimeInterval(eventToShow.getStartTime())/1000);
+func stringFromDate(date: NSDate) -> String{
     let formatter = NSDateFormatter();
-    formatter.dateFormat = "MMM dd HH:mm a";
-    let startTimeString = formatter.stringFromDate(date);
-    //substringing to add "at"
-    cell.eventTime.text = startTimeString.substringToIndex(startTimeString.startIndex.advancedBy(6)) + " at" + (startTimeString.substringFromIndex(startTimeString.startIndex.advancedBy(6)));
-}
-
-func populateCell(cell: UserTableViewCell, userID: String, isSelected: Bool) {
-    
-    cell.userName.text = Globals.friendsIDToName[userID]!
-    if (isSelected) {
-        cell.backgroundColor = Globals.COLOR_SELECTED_CELL
-    } else {
-        cell.backgroundColor = Globals.COLOR_UNSELECTED_CELL
+    //if it's today return "Today at HH:mm a"
+    if (NSCalendar.currentCalendar().isDateInToday(date)) {
+        formatter.dateFormat = "HH:mm a";
+        let startTimeString = formatter.stringFromDate(date);
+        return "Today at " + startTimeString;
     }
-    
-    // FRIEND IMAGE with URL request
-    let width = "250";
-    let urlString = "https://graph.facebook.com/" + userID
-        + "/picture?width=" + width;
-    let url = NSURL(string: urlString);
-    //send request to get image
-    let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {
-        (data, response, error) in
-        //if data grabbed, update image in main thread
-        if (data != nil) {
-            dispatch_async(dispatch_get_main_queue(), {
-                cell.userImage.image = UIImage(data: data!)?.rounded;
-            });
-        }
-    };
-    task.resume();
-    
-}
-
-func stringFromDate(date: NSDate) -> String{ //TODO: Add today check and maybe tomorrow check?
-    let formatter = NSDateFormatter();
-    formatter.dateFormat = "MMM dd HH:mm a";
-    let startTimeString = formatter.stringFromDate(date);
-    //substringing to add "at"
-    return startTimeString.substringToIndex(startTimeString.startIndex.advancedBy(6)) + " at" + (startTimeString.substringFromIndex(startTimeString.startIndex.advancedBy(6)));
+    //otherwise return "MMM dd at HH:mm a"
+    else {
+        formatter.dateFormat = "MMM dd HH:mm a";
+        let startTimeString = formatter.stringFromDate(date);
+        //substringing to add "at"
+        return startTimeString.substringToIndex(startTimeString.startIndex.advancedBy(6)) + " at" + (startTimeString.substringFromIndex(startTimeString.startIndex.advancedBy(6)));
+    }
 }
 
 func durationFromTimeIntervals(startTime startTime: Int, endTime: Int) -> String{
@@ -146,6 +113,44 @@ func durationFromTimeIntervals(startTime startTime: Int, endTime: Int) -> String
     return finalString
     
 }
+
+func populateCell(cell: EventTableViewCell, eventToShow: Event) {
+    
+    cell.eventName.text = eventToShow.getName();
+    cell.numGoing.text = "\(eventToShow.getPopularity())";
+    
+    cell.eventTime.text = stringFromDate(NSDate(timeIntervalSince1970: NSTimeInterval(eventToShow.getStartTime())/1000));
+}
+
+    
+func populateCell(cell: UserTableViewCell, userID: String, isSelected: Bool) {
+    
+    cell.userName.text = Globals.friendsIDToName[userID]!
+    if (isSelected) {
+        cell.backgroundColor = Globals.COLOR_SELECTED_CELL
+    } else {
+        cell.backgroundColor = Globals.COLOR_UNSELECTED_CELL
+    }
+    
+    // FRIEND IMAGE with URL request
+    let width = "250";
+    let urlString = "https://graph.facebook.com/" + userID
+        + "/picture?width=" + width;
+    let url = NSURL(string: urlString);
+    //send request to get image
+    let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {
+        (data, response, error) in
+        //if data grabbed, update image in main thread
+        if (data != nil) {
+            dispatch_async(dispatch_get_main_queue(), {
+                cell.userImage.image = UIImage(data: data!)?.rounded;
+            });
+        }
+    };
+    task.resume();
+    
+}
+
 
 extension UIColor {
     convenience init(red: Int, green: Int, blue: Int) {

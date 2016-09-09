@@ -13,15 +13,11 @@ class CreateEventViewController: UIViewController, CreateEventTableProtocol {
     
     @IBOutlet var datePicker: UIDatePicker!
     @IBOutlet var datePickerToolbar: UIToolbar!
-    
     @IBAction func selectLocationClick(sender: AnyObject) {
         if (createEvent()) {
             //call segue to location select
             self.performSegueWithIdentifier("pushLocationSelect", sender: self);
         }
-    }
-    @IBAction func cancelClick(sender: AnyObject) {
-        self.navigationController?.popViewControllerAnimated(true);
     }
     
     var createEventTable:CreateEventTable?;
