@@ -20,6 +20,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet var todayTableHeightConstraint: NSLayoutConstraint!
     @IBOutlet var laterTableHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var popularHeader: UILabel!
+    @IBOutlet weak var laterHeader: UILabel!
+    @IBOutlet weak var happeningTodayHeader: UILabel!
     //Two see more buttons
     @IBOutlet var seeMoreTodayButton: UIButton!
     @IBAction func seeMoreTodayClick(sender: AnyObject) {
@@ -154,6 +157,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (!self.ready) {return 1}
         if (tableView == self.popularTableView) {
+            if (self.popularEventArray.count == 0) {
+                popularHeader.hidden = true
+            }
             if (self.popularEventArray.count < self.NUM_POPULAR) {
                 self.popularTableHeightConstraint.constant = CGFloat(self.popularEventArray.count)*70;
                 return self.popularEventArray.count;
@@ -162,6 +168,11 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             return self.NUM_POPULAR;
         }
         if (tableView == self.todayTableView) {
+            
+            if (self.todayEventArray.count == 0) {
+                happeningTodayHeader.hidden = true
+            }
+            
             if (self.todayEventArray.count <= self.NUM_TODAY) {
                 self.todayTableHeightConstraint.constant = CGFloat(self.todayEventArray.count)*70;
                 return self.todayEventArray.count;
@@ -181,6 +192,11 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
         if (tableView == self.laterTableView) {
+            
+            if (self.laterEventArray.count == 0) {
+                laterHeader.hidden = true
+            }
+            
             if (self.laterEventArray.count <= self.NUM_LATER) {
                 self.laterTableHeightConstraint.constant = CGFloat(self.laterEventArray.count)*70;
                 return self.laterEventArray.count;
