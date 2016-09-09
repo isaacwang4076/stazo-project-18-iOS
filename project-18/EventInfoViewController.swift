@@ -86,6 +86,7 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
     private var eventID:String? //will null check before pulling
     private var event:Event? //guarenteed non-null after pull
     private var comments:[Comment] = [] //list of comments
+    private var commenters:[String] = [] //list of id's of users who have commented
     private var userHasJoined:Bool = false;
     private var joinedImages:[UIImage?] = []; //images of ppl who joined to be show in joinedcollectionview
     
@@ -276,7 +277,11 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
             if (eventComments != nil && eventComments!.count != 0) {
                 //iterate through all snapshots and convert each .value -> dictionary -> comment and add to comments array
                 for eachComment in eventComments!{
-                    self.comments.append(Comment.init(dictionary:eachComment.value as! [String:AnyObject]));
+                    let comment = Comment.init(dictionary:eachComment.value as! [String:AnyObject])
+                    self.comments.append(comment);
+                    if (!self.commenters.contains(comment.getUserID())) {
+                        self.commenters.append(comment.getUserID())
+                    }
                 }
                 //display comments in tableview
                 print("num comments: \(self.comments.count)");
@@ -298,9 +303,28 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
         let commentText = (self.commentWriteItem.customView as! UITextField).text;
         if (!(commentText?.isEmpty)!) {
             let comment = Comment.init(comment: commentText!, userID: Globals.me.getUserID(), eventID: self.eventID!);
+            
+            
             comment.pushToFirebase();
             pullAndShowComments();
-            //Hide keyboard and clear textfield
+            
+            // Build the NotificationCommentEvent
+            let nce: Notification = NotificationCommentEvent(type: Globals.TYPE_COMMENT_EVENT, pictureID: Globals.me.getUserID(), eventID: eventID!, eventName: Globals.eventsIDToEvent[eventID!]!.getName(), userNames: [Globals.me.getUserName()])
+            
+            // The event creator should also receive the notification
+            if (!commenters.contains(event!.getCreatorID())) {
+                commenters.append(event!.getCreatorID())
+            }
+            
+            // You should not receive a Notification for your own comment
+            if (commenters.contains(Globals.me.getUserID())) {
+                commenters.removeAtIndex(commenters.indexOf(Globals.me.getUserID())!)
+            }
+            
+            // Send out the NotificiationCommentEvent
+            nce.pushToFirebase(commenters)
+            
+            // Hide keyboard and clear textfield
             (self.commentWriteItem.customView as! UITextField).text = "";
             self.commentWriteItem.customView?.resignFirstResponder();
         }
