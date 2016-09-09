@@ -12,7 +12,7 @@ import FirebaseDatabase
 import MapKit
 
 class MapViewController: UIViewController, UISearchBarDelegate,
- UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate {
+ UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate, CLLocationManagerDelegate {
     
     @IBOutlet var tableView: UITableView!           // The table view for search results
     @IBOutlet weak var mapSearchBar: UISearchBar!   // The search bar
@@ -22,6 +22,7 @@ class MapViewController: UIViewController, UISearchBarDelegate,
     var filteredEventNames = [String]()             // Event names that fit the query
     var selectedEventID: String?                    // The eventID of the selected event
     var searchText: String?                         // Search query, used for sorting
+    let locationManager = CLLocationManager();
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,9 +37,17 @@ class MapViewController: UIViewController, UISearchBarDelegate,
         
         //Map setup
         let initialLocation = CLLocation(latitude: 32.8811, longitude: -117.2370);
+        
+        //default to UCSD for map center
         let regionRadius:CLLocationDistance = 1300;
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(initialLocation.coordinate, regionRadius*2.0, regionRadius*2.0);
         self.mapView.setRegion(coordinateRegion, animated: true);
+        
+        print(CLLocationManager.locationServicesEnabled());
+        self.locationManager.requestWhenInUseAuthorization();
+        self.locationManager.delegate = self;
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        self.locationManager.startUpdatingLocation();
         
         let dank = EventMarker(title: "Eric Zhang", subTitle: "Starts in: 69 hrs 69 m", coordinate: initialLocation.coordinate, eventID: "yooYSUWICTOWW")
         self.mapView.addAnnotation(dank)
@@ -49,8 +58,23 @@ class MapViewController: UIViewController, UISearchBarDelegate,
         
     }
     
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation = manager.location?.coordinate;
+        
+        if (userLocation != nil) {
+            let regionRadius:CLLocationDistance = 1300;
+            let coordinateRegion = MKCoordinateRegionMakeWithDistance(userLocation!, regionRadius*2.0, regionRadius*2.0);
+            self.mapView.setRegion(coordinateRegion, animated: true);
+            self.locationManager.stopUpdatingLocation();
+        }
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated);
+        
+        self.locationManager.delegate = self;
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        self.locationManager.startUpdatingLocation();
         
         //always hide nav bar when view appearing
         self.navigationController?.navigationBarHidden = true;
