@@ -84,7 +84,7 @@ class Event {
         
         // TODO Notification
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "EEEE, H:mm a"
+        dateFormatter.dateFormat = "EEEE, h:mm a"
         
         let timeString = dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: NSTimeInterval(startTime!)/1000))
         
