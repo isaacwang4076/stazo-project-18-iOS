@@ -337,6 +337,12 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
                 commenters.removeAtIndex(commenters.indexOf(Globals.me.getUserID())!)
             }
             
+            for attendee in event!.getAttendees() {
+                if (!commenters.contains(attendee)) {
+                    commenters.append(attendee)
+                }
+            }
+            
             // Send out the NotificiationCommentEvent
             nce.pushToFirebase(commenters)
             
