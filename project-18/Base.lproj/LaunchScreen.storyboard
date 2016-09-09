@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_launcher_ios.png" translatesAutoresizingMaskIntoConstraints="NO" id="dVL-AO-P72">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_nobkg.png" translatesAutoresizingMaskIntoConstraints="NO" id="dVL-AO-P72">
                                 <rect key="frame" x="240" y="240" width="120" height="120"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="Uk3-0M-jrW"/>
@@ -38,6 +38,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_launcher_ios.png" width="120" height="120"/>
+        <image name="logo_nobkg.png" width="5000" height="5000"/>
     </resources>
 </document>

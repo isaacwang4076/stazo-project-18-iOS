@@ -19,6 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
+        //T0PB4R C0L0R
+        let statusBar: UIView = UIApplication.sharedApplication().valueForKey("statusBar") as! UIView
+        if statusBar.respondsToSelector(Selector("setBackgroundColor:")) {
+            statusBar.backgroundColor = UITableView().separatorColor;
+        }
+        
         // FIREBASE STARTUP
         FIRApp.configure()
         

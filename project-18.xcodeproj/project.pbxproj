@@ -58,6 +58,7 @@
 		F6E0D4E01D411E4400ECF637 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E0D4DF1D411E4400ECF637 /* LoginViewController.swift */; };
 		F6FCA7A11D8132CC00F38950 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = F6FCA7A01D8132CC00F38950 /* plus.png */; };
 		F6FCA7A61D82905000F38950 /* ic_launcher_ios.png in Resources */ = {isa = PBXBuildFile; fileRef = F6FCA7A51D82905000F38950 /* ic_launcher_ios.png */; };
+		F6FCA7A81D82938600F38950 /* logo_nobkg.png in Resources */ = {isa = PBXBuildFile; fileRef = F6FCA7A71D82938600F38950 /* logo_nobkg.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,6 +143,7 @@
 		F6E0D4DF1D411E4400ECF637 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		F6FCA7A01D8132CC00F38950 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
 		F6FCA7A51D82905000F38950 /* ic_launcher_ios.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher_ios.png; sourceTree = "<group>"; };
+		F6FCA7A71D82938600F38950 /* logo_nobkg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_nobkg.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,6 +300,7 @@
 				F625A3F81D3DF7C6006AA3F2 /* ic_actionbar_map2.png */,
 				F6FCA7A01D8132CC00F38950 /* plus.png */,
 				F6FCA7A51D82905000F38950 /* ic_launcher_ios.png */,
+				F6FCA7A71D82938600F38950 /* logo_nobkg.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -420,6 +423,7 @@
 			files = (
 				282278E31D5A599400419C1F /* NotificationCell.xib in Resources */,
 				F674D6071D739B9C000A0BDE /* EventMarkerView.xib in Resources */,
+				F6FCA7A81D82938600F38950 /* logo_nobkg.png in Resources */,
 				288EF1591D3050C9001FBE63 /* LaunchScreen.storyboard in Resources */,
 				F61209F21D352FE600E5C715 /* GoogleService-Info.plist in Resources */,
 				F625A3F91D3DF7C6006AA3F2 /* ic_actionbar_notif.png in Resources */,

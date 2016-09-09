@@ -31,7 +31,7 @@ class CreateEventViewController: UIViewController, CreateEventTableProtocol {
         self.title = "Create Event";
         self.navigationController?.navigationBarHidden = false;
         
-        self.datePicker.backgroundColor = UIColor.lightGrayColor();
+        self.datePicker.backgroundColor = UITableView().separatorColor;
         let today = NSDate();
         self.datePicker.minimumDate = today;
         self.datePicker.maximumDate = NSCalendar.currentCalendar()
