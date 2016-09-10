@@ -10,6 +10,7 @@ import UIKit
 
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 
+    @IBOutlet var convergLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -19,6 +20,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         super.viewDidAppear(animated);
         if (FBSDKAccessToken.currentAccessToken() != nil) {
             print("User logged in");
+            self.convergLabel.hidden = true;
             handleLogin();
         }
         else {
