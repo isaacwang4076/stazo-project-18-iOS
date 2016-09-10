@@ -86,7 +86,11 @@ class Event {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "EEEE, h:mm a"
         
-        let timeString = dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: NSTimeInterval(startTime!)/1000))
+        var timeString = stringFromDate(NSDate(timeIntervalSince1970: NSTimeInterval(startTime!)/1000));
+        //change Today to today
+        if timeString.substringToIndex(timeString.startIndex.advancedBy(5)) == "Today" {
+            timeString = "today" + timeString.substringFromIndex(timeString.startIndex.advancedBy(5));
+        }
         
         let nfh: Notification = NotificationFriendHost(type: Globals.TYPE_FRIEND_HOST, pictureID: Globals.me.getUserID(), hostName: Globals.me.getUserName(), eventID: eventID!, eventName: name!, timeString: timeString)
         nfh.pushToFirebase(Array(Globals.friendsIDToName.keys))
