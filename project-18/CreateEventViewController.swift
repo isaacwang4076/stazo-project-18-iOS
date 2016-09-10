@@ -29,7 +29,6 @@ class CreateEventViewController: UIViewController, CreateEventTableProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Create Event";
-        self.navigationController?.navigationBarHidden = false;
         
         self.datePicker.backgroundColor = UITableView().separatorColor;
         let today = NSDate();
@@ -38,8 +37,8 @@ class CreateEventViewController: UIViewController, CreateEventTableProtocol {
             .dateByAddingUnit(.Day, value: 7, toDate: today, options: []);
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated);
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated);
         self.navigationController?.navigationBarHidden = true;
     }
 

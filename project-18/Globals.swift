@@ -82,8 +82,8 @@ func stringFromDate(date: NSDate) -> String{
     }
 }
 
-func durationFromTimeIntervals(startTime startTime: Int, endTime: Int) -> String{
-    let length:Int = endTime - startTime
+func durationFromTimeIntervals(startTime startTime: Int64, endTime: Int64) -> String{
+    let length:Int64 = endTime - startTime
     let eventHour = length/(1000*60*60)
     let eventMin = length/(1000*60) - eventHour*60
     

@@ -126,21 +126,24 @@ class MapViewController: UIViewController, UISearchBarDelegate,
                 let currentTime = NSDate().timeIntervalSince1970 * 1000
                 
                 //set startsIn to "x h and x min" before event starts
-                var length:Int = Int(eachEvent.getStartTime()) - Int(currentTime) //length till start
+                print(eachEvent.getName());
+                print(Int64(currentTime));
+                print(Int64(eachEvent.getStartTime()));
+                var length:Int64 = Int64(eachEvent.getStartTime()) - Int64(currentTime) //length till start
                 let hoursUntilStart = length/(1000*60*60)
                 
                 var timeText = "";
                 //see if event has started
                 if (length < 0) {
                     //event has either started or ended if starts in is empty, so compare with end time now
-                    length = Int(eachEvent.getEndTime()) - Int(currentTime); //length till end
+                    length = Int64(eachEvent.getEndTime()) - Int64(currentTime); //length till end
                     if (length < 0) {
                         //still empty means event has already ended
                         timeText = "This event has already ended."
                     }
                     else {
                         //event ends in "x h and x min"
-                        var text = durationFromTimeIntervals(startTime: Int(currentTime), endTime: Int(eachEvent.getEndTime()));
+                        var text = durationFromTimeIntervals(startTime: Int64(currentTime), endTime: Int64(eachEvent.getEndTime()));
                         if (text.isEmpty) {
                             text = "Just ended!"
                         }
@@ -148,7 +151,7 @@ class MapViewController: UIViewController, UISearchBarDelegate,
                     }
                 }
                 else {
-                    var text = durationFromTimeIntervals(startTime: Int(currentTime), endTime: Int(eachEvent.getStartTime()))
+                    var text = durationFromTimeIntervals(startTime: Int64(currentTime), endTime: Int64(eachEvent.getStartTime()))
                     if (text.isEmpty) {
                         text = "Starting!"
                     }
