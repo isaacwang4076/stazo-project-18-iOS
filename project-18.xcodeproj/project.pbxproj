@@ -91,7 +91,7 @@
 		2880FEA21D389029009BD67B /* NotificationJoinedEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationJoinedEvent.swift; sourceTree = "<group>"; };
 		2880FEA41D3892C2009BD67B /* NotificationWelcome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationWelcome.swift; sourceTree = "<group>"; };
 		288838EE1D651EEB0007D377 /* InviteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteViewController.swift; sourceTree = "<group>"; };
-		288EF1491D3050C9001FBE63 /* project-18.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "project-18.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		288EF1491D3050C9001FBE63 /* Converg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Converg.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		288EF14C1D3050C9001FBE63 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		288EF1531D3050C9001FBE63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		288EF1551D3050C9001FBE63 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -194,7 +194,7 @@
 		288EF14A1D3050C9001FBE63 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				288EF1491D3050C9001FBE63 /* project-18.app */,
+				288EF1491D3050C9001FBE63 /* Converg.app */,
 				288EF15F1D3050C9001FBE63 /* project-18Tests.xctest */,
 				288EF16A1D3050C9001FBE63 /* project-18UITests.xctest */,
 			);
@@ -308,9 +308,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		288EF1481D3050C9001FBE63 /* project-18 */ = {
+		288EF1481D3050C9001FBE63 /* Converg */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 288EF1731D3050C9001FBE63 /* Build configuration list for PBXNativeTarget "project-18" */;
+			buildConfigurationList = 288EF1731D3050C9001FBE63 /* Build configuration list for PBXNativeTarget "Converg" */;
 			buildPhases = (
 				E98045502119F1BA2D92BF50 /* [CP] Check Pods Manifest.lock */,
 				288EF1451D3050C9001FBE63 /* Sources */,
@@ -323,9 +323,9 @@
 			);
 			dependencies = (
 			);
-			name = "project-18";
+			name = Converg;
 			productName = "project-18";
-			productReference = 288EF1491D3050C9001FBE63 /* project-18.app */;
+			productReference = 288EF1491D3050C9001FBE63 /* Converg.app */;
 			productType = "com.apple.product-type.application";
 		};
 		288EF15E1D3050C9001FBE63 /* project-18Tests */ = {
@@ -410,7 +410,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				288EF1481D3050C9001FBE63 /* project-18 */,
+				288EF1481D3050C9001FBE63 /* Converg */,
 				288EF15E1D3050C9001FBE63 /* project-18Tests */,
 				288EF1691D3050C9001FBE63 /* project-18UITests */,
 			);
@@ -636,12 +636,12 @@
 /* Begin PBXTargetDependency section */
 		288EF1611D3050C9001FBE63 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 288EF1481D3050C9001FBE63 /* project-18 */;
+			target = 288EF1481D3050C9001FBE63 /* Converg */;
 			targetProxy = 288EF1601D3050C9001FBE63 /* PBXContainerItemProxy */;
 		};
 		288EF16C1D3050C9001FBE63 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 288EF1481D3050C9001FBE63 /* project-18 */;
+			target = 288EF1481D3050C9001FBE63 /* Converg */;
 			targetProxy = 288EF16B1D3050C9001FBE63 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -767,7 +767,7 @@
 				);
 				INFOPLIST_FILE = "project-18/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "wildcard.stazo.project-18";
+				PRODUCT_BUNDLE_IDENTIFIER = wildcard.stazo.Converg;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "project-18/project-18-Bridging-Header.h";
@@ -791,7 +791,7 @@
 				);
 				INFOPLIST_FILE = "project-18/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "wildcard.stazo.project-18";
+				PRODUCT_BUNDLE_IDENTIFIER = wildcard.stazo.Converg;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "project-18/project-18-Bridging-Header.h";
@@ -860,7 +860,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		288EF1731D3050C9001FBE63 /* Build configuration list for PBXNativeTarget "project-18" */ = {
+		288EF1731D3050C9001FBE63 /* Build configuration list for PBXNativeTarget "Converg" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				288EF1741D3050C9001FBE63 /* Debug */,
