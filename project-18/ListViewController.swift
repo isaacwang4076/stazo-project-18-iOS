@@ -159,7 +159,10 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         if (tableView == self.popularTableView) {
             if (self.popularEventArray.count == 0) {
                 popularHeader.hidden = true
+            } else {
+                popularHeader.hidden = false
             }
+            
             if (self.popularEventArray.count < self.NUM_POPULAR) {
                 self.popularTableHeightConstraint.constant = CGFloat(self.popularEventArray.count)*70;
                 return self.popularEventArray.count;
@@ -171,6 +174,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             if (self.todayEventArray.count == 0) {
                 happeningTodayHeader.hidden = true
+            } else {
+                happeningTodayHeader.hidden = false
             }
             
             if (self.todayEventArray.count <= self.NUM_TODAY) {
@@ -195,6 +200,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             if (self.laterEventArray.count == 0) {
                 laterHeader.hidden = true
+            } else {
+                laterHeader.hidden = false
             }
             
             if (self.laterEventArray.count <= self.NUM_LATER) {
