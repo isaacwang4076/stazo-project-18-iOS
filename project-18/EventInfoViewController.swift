@@ -130,9 +130,9 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(EventInfoViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(EventInfoViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil);
         
-        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(EventInfoViewController.respondToSwipeGesture(_:)))
-        swipeDown.direction = UISwipeGestureRecognizerDirection.Down
-        self.view.addGestureRecognizer(swipeDown)
+//        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(EventInfoViewController.respondToSwipeGesture(_:)))
+//        swipeDown.direction = UISwipeGestureRecognizerDirection.Down
+//        self.view.addGestureRecognizer(swipeDown)
 //        swipeDown.delegate = self;
     }
     
@@ -140,6 +140,13 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
         super.viewWillAppear(animated);
         self.navigationController?.navigationBarHidden = false;
         self.title = "Event Info";
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated);
+        //Remove keyboard listeners and comment listener when view disappears
+        NSNotificationCenter.defaultCenter().removeObserver(self);
+        Globals.fb.child("CommentDatabase").child(self.eventID!).child("comments").removeAllObservers();
     }
 
     override func didReceiveMemoryWarning() {
@@ -284,8 +291,10 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
      * Pulls array of comments, populates self.comments array, and reloads commentTableView.
      */
     func pullAndShowComments() {
-        Globals.fb.child("CommentDatabase").child(self.eventID!).child("comments").observeSingleEventOfType(.Value, withBlock: {
+        print("pulling and showing comments")
+        Globals.fb.child("CommentDatabase").child(self.eventID!).child("comments").observeEventType(FIRDataEventType.Value, withBlock: {
             snapshot in
+            print("comment refresh")
             let eventComments:[FIRDataSnapshot]? = snapshot.children.allObjects as? [FIRDataSnapshot];
             self.comments = []; //clear current list
             
@@ -322,7 +331,7 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
             
             
             comment.pushToFirebase();
-            pullAndShowComments();
+//            pullAndShowComments();
             
             // Build the NotificationCommentEvent
             let nce: Notification = NotificationCommentEvent(type: Globals.TYPE_COMMENT_EVENT, pictureID: Globals.me.getUserID(), eventID: eventID!, eventName: Globals.eventsIDToEvent[eventID!]!.getName(), userNames: [Globals.me.getUserName()])
@@ -418,23 +427,13 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
     
     
     
+//    func respondToSwipeGesture(gesture: UISwipeGestureRecognizer) {
+//        print("bottom swipe");
+//    }
     
-    
-    
-    func respondToSwipeGesture(gesture: UISwipeGestureRecognizer) {
-        print("bottom swipe");
-    }
-    
-    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated);
-        if ((self.navigationController) != nil) {
-            self.navigationController?.navigationBarHidden = true;
-        }
-    }
+//    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+//        return true
+//    }
     
     /* Comment table data source and delegates ---------------------------------------*/
     
