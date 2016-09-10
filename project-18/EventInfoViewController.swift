@@ -341,15 +341,15 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
                 commenters.append(event!.getCreatorID())
             }
             
-            // You should not receive a Notification for your own comment
-            if (commenters.contains(Globals.me.getUserID())) {
-                commenters.removeAtIndex(commenters.indexOf(Globals.me.getUserID())!)
-            }
-            
             for attendee in event!.getAttendees() {
                 if (!commenters.contains(attendee)) {
                     commenters.append(attendee)
                 }
+            }
+            
+            // You should not receive a Notification for your own comment
+            if (commenters.contains(Globals.me.getUserID())) {
+                commenters.removeAtIndex(commenters.indexOf(Globals.me.getUserID())!)
             }
             
             // Send out the NotificiationCommentEvent

@@ -162,6 +162,11 @@ class LocationSelectViewController: UIViewController, UISearchBarDelegate, UITab
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //add coordinate to map upon selection of a cell and also hide the table view
         self.addCoordinate(self.locationSearchResults[indexPath.item].placemark.coordinate);
+        //center map to that coordinate
+        let regionRadius:CLLocationDistance = 1300;
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(self.locationSearchResults[indexPath.item].placemark.coordinate, regionRadius*2.0, regionRadius*2.0);
+        self.mapView.setRegion(coordinateRegion, animated: true);
+        
         self.mapSearchBar.resignFirstResponder();
         self.mapSearchTable.hidden = true;
     }
