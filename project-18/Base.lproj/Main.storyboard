@@ -1257,8 +1257,8 @@
     <resources>
         <image name="ic_actionbar_browse2.png" width="36" height="36"/>
         <image name="ic_actionbar_map2.png" width="36" height="36"/>
-        <image name="ic_actionbar_notif.png" width="24" height="24"/>
-        <image name="plus.png" width="22" height="22"/>
+        <image name="ic_actionbar_notif.png" width="30" height="30"/>
+        <image name="plus.png" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="r8t-zn-fa4"/>
