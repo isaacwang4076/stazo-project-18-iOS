@@ -126,7 +126,7 @@ class MapViewController: UIViewController, UISearchBarDelegate,
                 let currentTime = NSDate().timeIntervalSince1970 * 1000
                 
                 //set startsIn to "x h and x min" before event starts
-                var length:Int = Int(eachEvent.getStartTime()) - Int(currentTime) //length till start
+                var length:Int = Int(eachEvent.getStartTime()) - Int(UInt64(currentTime)) //length till start
                 let hoursUntilStart = length/(1000*60*60)
                 
                 var timeText = "";
