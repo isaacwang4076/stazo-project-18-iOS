@@ -176,19 +176,19 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
             self.startTimeLabel.text = stringFromDate(date);
             
             //LENGTH/ENDS IN
-            let currentTime = Int(NSDate().timeIntervalSince1970 * 1000);
+            let currentTime = Int64(NSDate().timeIntervalSince1970 * 1000);
             //if event hasn't started yet, show event length
-            if (currentTime < Int(self.event!.getStartTime())) {
+            if (currentTime < Int64(self.event!.getStartTime())) {
                 self.lengthPreLabel.text = "Length";
-                let startText = durationFromTimeIntervals(startTime: Int(self.event!.getStartTime()),
-                    endTime: Int(self.event!.getEndTime()))
+                let startText = durationFromTimeIntervals(startTime: Int64(self.event!.getStartTime()),
+                    endTime: Int64(self.event!.getEndTime()))
                 self.lengthLabel.text = startText;
             }
             //event has started, so show how long until end
             else {
                 self.lengthPreLabel.text = "Ends in";
                 var endText = durationFromTimeIntervals(startTime: currentTime,
-                    endTime: Int(self.event!.getEndTime()))
+                    endTime: Int64(self.event!.getEndTime()))
                 if (endText.isEmpty) {
                     endText = "Just ended"
                 }
