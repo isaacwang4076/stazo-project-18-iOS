@@ -15,20 +15,30 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         super.viewDidLoad()
     }
     
-    //Check if user is logged in, if logged in then pull user and push next view, otherwise show login button
+        
+    /* Check if user agreed to EULA and pushes agreement if they haven't. 
+       Then check if user is logged in, if logged in then pull user and push next view, otherwise show login button */
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated);
-        if (FBSDKAccessToken.currentAccessToken() != nil) {
-            print("User logged in");
-            self.convergLabel.hidden = true;
-            handleLogin();
+        //check EULA agreement
+        let agreement = NSUserDefaults.standardUserDefaults().boolForKey("EULAAgreement");
+        if (!agreement) {
+            self.performSegueWithIdentifier("presentEULA", sender: self);
         }
         else {
-            let loginButton = FBSDKLoginButton();
-            loginButton.readPermissions = ["email"]; //lol wut else do we want
-            loginButton.center = self.view.center;
-            loginButton.delegate = self;
-            view.addSubview(loginButton); //ignore warnings
+            //check FB login
+            if (FBSDKAccessToken.currentAccessToken() != nil) {
+                print("User logged in");
+                self.convergLabel.hidden = true;
+                handleLogin();
+            }
+            else {
+                let loginButton = FBSDKLoginButton();
+                loginButton.readPermissions = ["email"]; //lol wut else do we want
+                loginButton.center = self.view.center;
+                loginButton.delegate = self;
+                view.addSubview(loginButton); //ignore warnings
+            }
         }
     }
 

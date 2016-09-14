@@ -43,6 +43,7 @@
 		F63B3E3A1D44A45F00672EC9 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63B3E391D44A45F00672EC9 /* CreateEventViewController.swift */; };
 		F646A70E1D4A3860008A21DA /* EventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F646A70D1D4A3860008A21DA /* EventCell.xib */; };
 		F646A7121D4A3965008A21DA /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F646A7111D4A3965008A21DA /* EventTableViewCell.swift */; };
+		F65DDF9C1D8A0920001C3F17 /* EULAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65DDF9B1D8A0920001C3F17 /* EULAViewController.swift */; };
 		F66E8CA91D57340000F73470 /* JoinedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66E8CA81D57340000F73470 /* JoinedCell.swift */; };
 		F674D6071D739B9C000A0BDE /* EventMarkerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F674D6061D739B9C000A0BDE /* EventMarkerView.xib */; };
 		F6C4478A1D4C907100B1D12C /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6C447891D4C907100B1D12C /* CommentCell.xib */; };
@@ -128,6 +129,7 @@
 		F646A70D1D4A3860008A21DA /* EventCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventCell.xib; sourceTree = "<group>"; };
 		F646A7111D4A3965008A21DA /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		F659BD991D41089200A08679 /* project-18-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "project-18-Bridging-Header.h"; sourceTree = "<group>"; };
+		F65DDF9B1D8A0920001C3F17 /* EULAViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EULAViewController.swift; sourceTree = "<group>"; };
 		F66E8CA81D57340000F73470 /* JoinedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinedCell.swift; sourceTree = "<group>"; };
 		F674D6061D739B9C000A0BDE /* EventMarkerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventMarkerView.xib; sourceTree = "<group>"; };
 		F6C447891D4C907100B1D12C /* CommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentCell.xib; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				28FAF3A81D6AA3CD00D4491E /* UserCell.xib */,
 				28FAF3A41D6A9AE100D4491E /* UserTableViewCell.swift */,
 				288EF1521D3050C9001FBE63 /* Main.storyboard */,
+				F65DDF9B1D8A0920001C3F17 /* EULAViewController.swift */,
 				288EF14C1D3050C9001FBE63 /* AppDelegate.swift */,
 				28A542F31D344CB600BE90E0 /* Globals.swift */,
 				28A542F51D3455E600BE90E0 /* User.swift */,
@@ -590,6 +593,7 @@
 				288EF17D1D305B4F001FBE63 /* Event.swift in Sources */,
 				288838EF1D651EEB0007D377 /* InviteViewController.swift in Sources */,
 				28B57FF71D374B8F00CE430C /* NotificationNewFollow.swift in Sources */,
+				F65DDF9C1D8A0920001C3F17 /* EULAViewController.swift in Sources */,
 				F6E0D4E01D411E4400ECF637 /* LoginViewController.swift in Sources */,
 				28A542F61D3455E600BE90E0 /* User.swift in Sources */,
 				F66E8CA91D57340000F73470 /* JoinedCell.swift in Sources */,
