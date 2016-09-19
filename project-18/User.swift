@@ -24,8 +24,9 @@ class User: NSObject, NSCoding {
     private var myEvents: [String] = []        // A list of eventID's that this user has created
     internal var attendingEvents: [String] = [] // A list of eventID's that this user has joined
 //    var reportedEvents: [String]? = []  // A list of eventID's that this user has reported
-    private var userTrails: [String] = []      // A list of userID's that this user has followed
-    private var userFollowers: [String] = []   // A list of userID's that are following this user
+    private var userTrails: [String] = []      // DEPRECATED: A list of userID's that this user has followed
+    private var userFollowers: [String] = []   // DEPRECATED: A list of userID's that are following this user
+    private var numStrikes: Int
 //    var friends = [String: String]()    // A Hashmap of userName to userID for this user's fb friends
     
     
@@ -35,6 +36,7 @@ class User: NSObject, NSCoding {
         self.userID = userID
         self.userName = userName
         self.bio = DEFAULT_BIO
+        self.numStrikes = 0
     }
     
     // FIREBASE PULL CONSTRUCTOR
@@ -44,7 +46,11 @@ class User: NSObject, NSCoding {
         self.userName = userDict.valueForKey("name") as! String
         self.userID = userDict.valueForKey("id") as! String
         self.bio = userDict.valueForKey("bio") as! String
-
+        if (userDict.valueForKey("numStrikes") != nil) {
+            self.numStrikes = userDict.valueForKey("numStrikes") as! Int
+        } else {
+            self.numStrikes = 0
+        }
         if ((userDict.valueForKey("attendingEvents") as? NSDictionary)?.allValues != nil) {
             self.attendingEvents = (userDict.valueForKey("attendingEvents") as! NSDictionary).allValues as! [String]
         }
@@ -260,6 +266,30 @@ class User: NSObject, NSCoding {
         return true;
     }
     
+    // REPORT EVENT
+    // - Handles a user reporting an event
+    func reportEvent(eventID: String) {
+        fb.child("Events").child(eventID).observeSingleEventOfType(FIRDataEventType.Value, withBlock: { (eventSnapshot) in
+            // if nobody has reported it yet
+            if (!eventSnapshot.hasChild("reporters")) {
+                self.fb.child("Events").child(eventID).child("reporters").setValue(self.userID)
+            }
+            // if somebody has reported it already
+            else {
+                self.fb.child("Events").child(eventID).child("reporters").observeSingleEventOfType(FIRDataEventType.Value, withBlock: { (reportersSnapshot) in
+                    var eventReporters = reportersSnapshot.value as! [String]
+                    
+                    // if I haven't yet reported this event, add me to the list of reporters
+                    if (!reportersSnapshot.hasChild(self.userID)) {
+                        eventReporters.append(self.userID)
+                        reportersSnapshot.ref.setValue(eventReporters)
+                    }
+                })
+            }
+        })
+    }
+    
+    
     // TOSTRING METHOD
     // - Just for checking that the user has the right info
     func toString() {
@@ -273,6 +303,7 @@ class User: NSObject, NSCoding {
         self.userID = decoder.decodeObjectForKey("userID") as! String;
         self.userName = decoder.decodeObjectForKey("userName") as! String;
         self.bio = decoder.decodeObjectForKey("bio") as! String;
+        self.numStrikes = decoder.decodeObjectForKey("numStrikes") as! Int;
         self.myEvents = decoder.decodeObjectForKey("myEvents") as! [String];
         self.attendingEvents = decoder.decodeObjectForKey("attendingEvents") as! [String];
         self.userTrails = decoder.decodeObjectForKey("userTrails") as! [String];
