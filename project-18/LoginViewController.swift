@@ -80,7 +80,24 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                     let me = User(userDict: pulledUserDict);
                     Globals.me = me;
                     Globals.me.printUserInfo();
-                    self.performSegueWithIdentifier("mainSegue", sender: self);
+                    
+                    
+                    let fb = Globals.fb
+                    
+                    // PULL ALL EVENTS
+                    fb.child("Events").observeEventType(FIRDataEventType.Value, withBlock: { (allEventsSnapshot) in
+                        for eventSnapshot in allEventsSnapshot.children.allObjects as! [FIRDataSnapshot] {
+                            let eventDict:NSDictionary = eventSnapshot.value as! [String : AnyObject]
+                            print("\n", me.blockedUserIDs)
+                            print("\n", eventDict["creator_id"] as! String)
+                            print("\n", Globals.me.blockedUserIDs.contains(eventDict["creator_id"] as! String))
+                            if (!Globals.me.blockedUserIDs.contains(eventDict["creator_id"] as! String)) {
+                                Globals.eventsNameToID[eventDict.valueForKeyPath("name") as! String] = eventDict.valueForKeyPath("event_id") as? String
+                                Globals.eventsIDToEvent[eventDict.valueForKeyPath("event_id") as! String] = Event(eventDict: eventDict)
+                            }
+                        }
+                        self.performSegueWithIdentifier("mainSegue", sender: self);
+                    })
                 }
                     
                     //TODO: TEST THIS
@@ -105,7 +122,21 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                             nw.pushToFirebase([me.getUserID()])
                             
                             
-                            self.performSegueWithIdentifier("mainSegue", sender: self);
+                            
+                            let fb = Globals.fb
+                            
+                            // PULL ALL EVENTS
+                            fb.child("Events").observeEventType(FIRDataEventType.Value, withBlock: { (allEventsSnapshot) in
+                                for eventSnapshot in allEventsSnapshot.children.allObjects as! [FIRDataSnapshot] {
+                                    let eventDict:NSDictionary = eventSnapshot.value as! [String : AnyObject]
+                                    
+                                    if (!Globals.me.blockedUserIDs.contains(eventDict["creator_id"] as! String)) {
+                                        Globals.eventsNameToID[eventDict.valueForKeyPath("name") as! String] = eventDict.valueForKeyPath("event_id") as? String
+                                        Globals.eventsIDToEvent[eventDict.valueForKeyPath("event_id") as! String] = Event(eventDict: eventDict)
+                                    }
+                                }
+                                self.performSegueWithIdentifier("mainSegue", sender: self);
+                            })
                         }
                     });
                 }
@@ -121,20 +152,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        
-        let fb = Globals.fb
-        
-        // PULL ALL EVENTS
-        fb.child("Events").observeEventType(FIRDataEventType.Value, withBlock: { (allEventsSnapshot) in
-            for eventSnapshot in allEventsSnapshot.children.allObjects as! [FIRDataSnapshot] {
-                let eventDict:NSDictionary = eventSnapshot.value as! [String : AnyObject]
-                
-                if (!Globals.me.blockedUserIDs.contains(eventDict["creator_id"] as! String)) {
-                    Globals.eventsNameToID[eventDict.valueForKeyPath("name") as! String] = eventDict.valueForKeyPath("event_id") as? String
-                    Globals.eventsIDToEvent[eventDict.valueForKeyPath("event_id") as! String] = Event(eventDict: eventDict)
-                }
-            }
-        })
     }
  
 

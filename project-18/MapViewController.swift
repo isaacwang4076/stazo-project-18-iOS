@@ -54,8 +54,6 @@ UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate, CLLocationManager
         // Check for NotificationEventToday
         addEventTodayNotifications()
         //Globals.me.blockUser("1076100269116381")
-        print("\n", Globals.eventsIDToEvent)
-        print("\n", Globals.eventsNameToID)
     }
     
     /* Call back to update user location and center map, ending location services after one update */
@@ -63,10 +61,10 @@ UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate, CLLocationManager
         let userLocation = manager.location?.coordinate;
         
         if (userLocation != nil) {
-            /*let regionRadius:CLLocationDistance = 1300;
-             let coordinateRegion = MKCoordinateRegionMakeWithDistance(userLocation!, regionRadius*2.0, regionRadius*2.0);
-             self.mapView.setRegion(coordinateRegion, animated: true);
-             self.locationManager.stopUpdatingLocation();*/
+            let regionRadius:CLLocationDistance = 1300;
+            let coordinateRegion = MKCoordinateRegionMakeWithDistance(userLocation!, regionRadius*2.0, regionRadius*2.0);
+            self.mapView.setRegion(coordinateRegion, animated: true);
+            self.locationManager.stopUpdatingLocation();
         }
     }
     
