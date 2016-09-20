@@ -173,7 +173,7 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
     func pullAndShowEvent() {
         Globals.fb.child("Events").child(self.eventID!).observeSingleEventOfType(.Value, withBlock: {
             snapshot in
-            if snapshot != NSNull() {
+            if snapshot == NSNull() {
                 print("Event ID is null or event doesn't exist anymore");
                 self.mainView.hidden = true
                 self.commentToolbar.hidden = true
@@ -186,6 +186,7 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
                 self.presentViewController(alert, animated: true, completion: nil);
                 return;
             }
+            
             self.event = Event.init(eventDict: snapshot.value as! NSDictionary);
             
             //update the view with event info -------------------------------------

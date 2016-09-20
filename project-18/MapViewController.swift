@@ -12,7 +12,7 @@ import FirebaseDatabase
 import MapKit
 
 class MapViewController: UIViewController, UISearchBarDelegate,
- UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate, CLLocationManagerDelegate {
+UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate, CLLocationManagerDelegate {
     
     @IBOutlet var tableView: UITableView!           // The table view for search results
     @IBOutlet weak var mapSearchBar: UISearchBar!   // The search bar
@@ -23,10 +23,10 @@ class MapViewController: UIViewController, UISearchBarDelegate,
     var selectedEventID: String?                    // The eventID of the selected event
     var searchText: String?                         // Search query, used for sorting
     let locationManager = CLLocationManager();      // To get user location
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Search setup
         self.mapSearchBar.delegate = self
         self.mapSearchBar.returnKeyType = .Done;
@@ -41,7 +41,7 @@ class MapViewController: UIViewController, UISearchBarDelegate,
         let regionRadius:CLLocationDistance = 1300;
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(initialLocation.coordinate, regionRadius*2.0, regionRadius*2.0);
         self.mapView.setRegion(coordinateRegion, animated: true);
-
+        
         //ask for location permission and update location if granted
         self.locationManager.requestWhenInUseAuthorization();
         self.locationManager.delegate = self;
@@ -53,7 +53,9 @@ class MapViewController: UIViewController, UISearchBarDelegate,
         
         // Check for NotificationEventToday
         addEventTodayNotifications()
-        //Globals.me.reportEvent("yooljdxkafnod")
+        //Globals.me.blockUser("1076100269116381")
+        print("\n", Globals.eventsIDToEvent)
+        print("\n", Globals.eventsNameToID)
     }
     
     /* Call back to update user location and center map, ending location services after one update */
@@ -61,10 +63,10 @@ class MapViewController: UIViewController, UISearchBarDelegate,
         let userLocation = manager.location?.coordinate;
         
         if (userLocation != nil) {
-            let regionRadius:CLLocationDistance = 1300;
-            let coordinateRegion = MKCoordinateRegionMakeWithDistance(userLocation!, regionRadius*2.0, regionRadius*2.0);
-            self.mapView.setRegion(coordinateRegion, animated: true);
-            self.locationManager.stopUpdatingLocation();
+            /*let regionRadius:CLLocationDistance = 1300;
+             let coordinateRegion = MKCoordinateRegionMakeWithDistance(userLocation!, regionRadius*2.0, regionRadius*2.0);
+             self.mapView.setRegion(coordinateRegion, animated: true);
+             self.locationManager.stopUpdatingLocation();*/
         }
     }
     
@@ -113,56 +115,50 @@ class MapViewController: UIViewController, UISearchBarDelegate,
     func updateEvents() {
         print("event refresh");
         //Pull events from fb and add to map
-        Globals.fb.child("Events").observeSingleEventOfType(.Value, withBlock: {
-            snapshot in
+        //clear current map view pins
+        self.mapView.removeAnnotations(self.mapView.annotations);
+        
+        for eachEvent in Globals.eventsIDToEvent.values {
+            //Figure out time till
+            let currentTime = NSDate().timeIntervalSince1970 * 1000
             
-            //clear current map view pins
-            self.mapView.removeAnnotations(self.mapView.annotations);
-
-            for eachEventSnapshot in snapshot.children.allObjects as! [FIRDataSnapshot]{
-                //Figure out time till
-                let eventDictionary = eachEventSnapshot.value as! [String:AnyObject]
-                let eachEvent = Event.init(eventDict: eventDictionary)
-                let currentTime = NSDate().timeIntervalSince1970 * 1000
-                
-                //set startsIn to "x h and x min" before event starts
-                var length:Int64 = Int64(eachEvent.getStartTime()) - Int64(currentTime) //length till start
-                let hoursUntilStart = length/(1000*60*60)
-                
-                var timeText = "";
-                //see if event has started
+            //set startsIn to "x h and x min" before event starts
+            var length:Int64 = Int64(eachEvent.getStartTime()) - Int64(currentTime) //length till start
+            let hoursUntilStart = length/(1000*60*60)
+            
+            var timeText = "";
+            //see if event has started
+            if (length < 0) {
+                //event has either started or ended if starts in is empty, so compare with end time now
+                length = Int64(eachEvent.getEndTime()) - Int64(currentTime); //length till end
                 if (length < 0) {
-                    //event has either started or ended if starts in is empty, so compare with end time now
-                    length = Int64(eachEvent.getEndTime()) - Int64(currentTime); //length till end
-                    if (length < 0) {
-                        //still empty means event has already ended
-                        timeText = "This event has already ended."
-                    }
-                    else {
-                        //event ends in "x h and x min"
-                        var text = durationFromTimeIntervals(startTime: Int64(currentTime), endTime: Int64(eachEvent.getEndTime()));
-                        if (text.isEmpty) {
-                            text = "Just ended!"
-                        }
-                        timeText = "Ends in: " + text
-                    }
+                    //still empty means event has already ended
+                    timeText = "This event has already ended."
                 }
                 else {
-                    var text = durationFromTimeIntervals(startTime: Int64(currentTime), endTime: Int64(eachEvent.getStartTime()))
+                    //event ends in "x h and x min"
+                    var text = durationFromTimeIntervals(startTime: Int64(currentTime), endTime: Int64(eachEvent.getEndTime()));
                     if (text.isEmpty) {
-                        text = "Starting!"
+                        text = "Just ended!"
                     }
-                    timeText = "Starts in: " + text
-                }
-                
-                //add marker to the map only if under 2 hours
-                if (hoursUntilStart < 2) {
-                    let marker = EventMarker(title: eachEvent.getName(), subTitle: timeText,
-                        coordinate: eachEvent.getLocation(), eventID: eachEvent.getEventID())
-                    self.mapView.addAnnotation(marker)
+                    timeText = "Ends in: " + text
                 }
             }
-        })
+            else {
+                var text = durationFromTimeIntervals(startTime: Int64(currentTime), endTime: Int64(eachEvent.getStartTime()))
+                if (text.isEmpty) {
+                    text = "Starting!"
+                }
+                timeText = "Starts in: " + text
+            }
+            
+            //add marker to the map only if under 2 hours
+            if (hoursUntilStart < 2) {
+                let marker = EventMarker(title: eachEvent.getName(), subTitle: timeText,
+                                         coordinate: eachEvent.getLocation(), eventID: eachEvent.getEventID())
+                self.mapView.addAnnotation(marker)
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -208,7 +204,6 @@ class MapViewController: UIViewController, UISearchBarDelegate,
             return false
         }
         return eventName1.endIndex < eventName2.endIndex
-
     }
     
     /* Resign first responder and hide table view if "Done" button is pressed */
@@ -222,7 +217,7 @@ class MapViewController: UIViewController, UISearchBarDelegate,
     }
     
     // -----------------------------------------------------------------------------------------------
-
+    
     
     
     // TABLE VIEW ------------------------------------------------------------------------------------
@@ -260,7 +255,7 @@ class MapViewController: UIViewController, UISearchBarDelegate,
     }
     
     // -----------------------------------------------------------------------------------------------
-
+    
     
     /* Map stuff-------------------------------------------------------------------------------------*/
     
@@ -297,17 +292,17 @@ class MapViewController: UIViewController, UISearchBarDelegate,
                 view.calloutOffset = CGPoint(x: -5, y: -5)
             }
             
-//            let detailView = UIView()
-//            let views = ["detailView": detailView]
-//            detailView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:[detailView(200)]", options: [], metrics: nil, views: views))
-//            detailView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[detailView(21)]", options: [], metrics: nil, views: views))
-//            let textView = UITextView(frame: CGRect(x: 0, y: -15, width: 200, height: 50))
-//            textView.text = "Starts In: 12hrs 59m"
-//            textView.sizeToFit()
-//            textView.backgroundColor = view.backgroundColor
-//            detailView.addSubview(textView)
-//            detailView.sizeToFit()
-//            view.detailCalloutAccessoryView = detailView
+            //            let detailView = UIView()
+            //            let views = ["detailView": detailView]
+            //            detailView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:[detailView(200)]", options: [], metrics: nil, views: views))
+            //            detailView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[detailView(21)]", options: [], metrics: nil, views: views))
+            //            let textView = UITextView(frame: CGRect(x: 0, y: -15, width: 200, height: 50))
+            //            textView.text = "Starts In: 12hrs 59m"
+            //            textView.sizeToFit()
+            //            textView.backgroundColor = view.backgroundColor
+            //            detailView.addSubview(textView)
+            //            detailView.sizeToFit()
+            //            view.detailCalloutAccessoryView = detailView
             view.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
             
             return view
@@ -324,7 +319,7 @@ class MapViewController: UIViewController, UISearchBarDelegate,
     /*-----------------------------------------------------------------------------------------------*/
     
     
-
+    
     //when going to eventInfo, set the VC's eventID property and hide the bottombar
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         //if it's the eventinfo segue, set the event id
@@ -334,5 +329,5 @@ class MapViewController: UIViewController, UISearchBarDelegate,
         }
     }
     
-
+    
 }
