@@ -272,15 +272,15 @@ class User: NSObject, NSCoding {
         fb.child("Events").child(eventID).observeSingleEventOfType(FIRDataEventType.Value, withBlock: { (eventSnapshot) in
             // if nobody has reported it yet
             if (!eventSnapshot.hasChild("reporters")) {
-                self.fb.child("Events").child(eventID).child("reporters").setValue(self.userID)
+                self.fb.child("Events").child(eventID).child("reporters").setValue([self.userID])
             }
             // if somebody has reported it already
             else {
                 self.fb.child("Events").child(eventID).child("reporters").observeSingleEventOfType(FIRDataEventType.Value, withBlock: { (reportersSnapshot) in
-                    var eventReporters = reportersSnapshot.value as! [String]
                     
                     // if I haven't yet reported this event, add me to the list of reporters
-                    if (!reportersSnapshot.hasChild(self.userID)) {
+                    if (reportersSnapshot.hasChild(self.userID)) {
+                        var eventReporters = reportersSnapshot.value as! [String]
                         eventReporters.append(self.userID)
                         reportersSnapshot.ref.setValue(eventReporters)
                     }

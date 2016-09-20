@@ -58,12 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "project-18/User.swift"
-            timestampString = "496005861.473631"
+            timestampString = "496005478.819703"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "283"
-            endingLineNumber = "283"
-            landmarkName = "reportEvent(_:)"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "init(userDict:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -73,13 +73,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "project-18/User.swift"
-            timestampString = "496005478.819703"
+            filePath = "project-18/EventInfoViewController.swift"
+            timestampString = "496028020.785857"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "init(userDict:)"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
+            landmarkName = "pullAndShowEvent()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
