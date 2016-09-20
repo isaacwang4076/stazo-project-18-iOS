@@ -544,6 +544,7 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
         }
         reportAlertController.addAction(reportEventAction);
         let blockUserAction = UIAlertAction(title: "Block user", style: .Default) { (action) in
+            Globals.me.blockUser(self.comments[indexPath.row].getUserID())
         }
         reportAlertController.addAction(blockUserAction);
         self.presentViewController(reportAlertController, animated: true, completion: nil);
