@@ -300,6 +300,7 @@ class User: NSObject, NSCoding {
         fb.child("Users").child(self.userID).child("blockedUserIDs").observeSingleEventOfType(FIRDataEventType.Value, withBlock: { (blockedUsersSnapshot) in
             // if blocked users is empty, just set it to a list containing the newly blocked id
             if self.blockedUserIDs.isEmpty {
+                self.blockedUserIDs.append(blockedID)
                 blockedUsersSnapshot.ref.childByAutoId().setValue(blockedID)
             }
             else {

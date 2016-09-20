@@ -89,9 +89,11 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
         }
         reportAlertController.addAction(cancelAction);
         let reportEventAction = UIAlertAction(title: "Report event", style: .Default) { (action) in
+            Globals.me.reportEvent(self.event!.getEventID())
         }
         reportAlertController.addAction(reportEventAction);
         let blockUserAction = UIAlertAction(title: "Block creator", style: .Default) { (action) in
+            Globals.me.blockUser(self.event!.getCreatorID())
         }
         reportAlertController.addAction(blockUserAction);
         self.presentViewController(reportAlertController, animated: true, completion: nil);

@@ -61,10 +61,10 @@ UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate, CLLocationManager
         let userLocation = manager.location?.coordinate;
         
         if (userLocation != nil) {
-            let regionRadius:CLLocationDistance = 1300;
+            /*let regionRadius:CLLocationDistance = 1300;
             let coordinateRegion = MKCoordinateRegionMakeWithDistance(userLocation!, regionRadius*2.0, regionRadius*2.0);
             self.mapView.setRegion(coordinateRegion, animated: true);
-            self.locationManager.stopUpdatingLocation();
+            self.locationManager.stopUpdatingLocation();*/
         }
     }
     

@@ -74,12 +74,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "project-18/EventInfoViewController.swift"
-            timestampString = "496028020.785857"
+            timestampString = "496034850.78537"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
-            landmarkName = "pullAndShowEvent()"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
+            landmarkName = "didReceiveMemoryWarning()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -97,6 +97,54 @@
             endingLineNumber = "35"
             landmarkName = "application(_:didFinishLaunchingWithOptions:)"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "project-18/EventInfoViewController.swift"
+            timestampString = "496034759.015626"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "reportEvent(_:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Converg.EventInfoViewController.reportEvent (Swift.AnyObject) -&gt; ()"
+                  moduleName = "Converg"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/isaacwang/Desktop/STAZO_iOS/project-18/project-18/EventInfoViewController.swift"
+                  timestampString = "496034759.040923"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "92"
+                  endingLineNumber = "92"
+                  offsetFromSymbolStart = "637">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Converg.EventInfoViewController.(reportEvent (Swift.AnyObject) -&gt; ()).(closure #2)"
+                  moduleName = "Converg"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/isaacwang/Desktop/STAZO_iOS/project-18/project-18/EventInfoViewController.swift"
+                  timestampString = "496034759.041376"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "92"
+                  endingLineNumber = "92"
+                  offsetFromSymbolStart = "12">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
