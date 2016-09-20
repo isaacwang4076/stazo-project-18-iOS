@@ -79,7 +79,7 @@ class NotificationWelcome: Notification {
     
     override func generateMessage() -> String {
         let firstName = userName!.characters.split{$0 == " "}.map(String.init)[0]
-        return "Welcome to Campus, " + firstName + "!"
+        return "Welcome to Converg, " + firstName + "!"
     }
     // --------------------------------------------------------------------------------------------------------
     

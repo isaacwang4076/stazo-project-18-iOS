@@ -67,15 +67,15 @@ struct Globals {
 
 func stringFromDate(date: NSDate) -> String{
     let formatter = NSDateFormatter();
-    //if it's today return "Today at HH:mm a"
+    //if it's today return "Today at h:mm a"
     if (NSCalendar.currentCalendar().isDateInToday(date)) {
-        formatter.dateFormat = "HH:mm a";
+        formatter.dateFormat = "h:mm a";
         let startTimeString = formatter.stringFromDate(date);
         return "Today at " + startTimeString;
     }
-    //otherwise return "MMM dd at HH:mm a"
+    //otherwise return "MMM dd at h:mm a"
     else {
-        formatter.dateFormat = "MMM dd HH:mm a";
+        formatter.dateFormat = "MMM dd h:mm a";
         let startTimeString = formatter.stringFromDate(date);
         //substringing to add "at"
         return startTimeString.substringToIndex(startTimeString.startIndex.advancedBy(6)) + " at" + (startTimeString.substringFromIndex(startTimeString.startIndex.advancedBy(6)));

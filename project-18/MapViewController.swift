@@ -22,7 +22,7 @@ class MapViewController: UIViewController, UISearchBarDelegate,
     var filteredEventNames = [String]()             // Event names that fit the query
     var selectedEventID: String?                    // The eventID of the selected event
     var searchText: String?                         // Search query, used for sorting
-    let locationManager = CLLocationManager();
+    let locationManager = CLLocationManager();      // To get user location
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,14 +36,13 @@ class MapViewController: UIViewController, UISearchBarDelegate,
         self.tableView.registerNib(UINib(nibName: "EventCell", bundle: nil), forCellReuseIdentifier: "EventCell");
         
         //Map setup
-        let initialLocation = CLLocation(latitude: 32.8811, longitude: -117.2370);
-        
         //default to UCSD for map center
+        let initialLocation = CLLocation(latitude: 32.8811, longitude: -117.2370);
         let regionRadius:CLLocationDistance = 1300;
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(initialLocation.coordinate, regionRadius*2.0, regionRadius*2.0);
         self.mapView.setRegion(coordinateRegion, animated: true);
-        
-        print(CLLocationManager.locationServicesEnabled());
+
+        //ask for location permission and update location if granted
         self.locationManager.requestWhenInUseAuthorization();
         self.locationManager.delegate = self;
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
@@ -57,6 +56,7 @@ class MapViewController: UIViewController, UISearchBarDelegate,
         
     }
     
+    /* Call back to update user location and center map, ending location services after one update */
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation = manager.location?.coordinate;
         
@@ -126,9 +126,6 @@ class MapViewController: UIViewController, UISearchBarDelegate,
                 let currentTime = NSDate().timeIntervalSince1970 * 1000
                 
                 //set startsIn to "x h and x min" before event starts
-                print(eachEvent.getName());
-                print(Int64(currentTime));
-                print(Int64(eachEvent.getStartTime()));
                 var length:Int64 = Int64(eachEvent.getStartTime()) - Int64(currentTime) //length till start
                 let hoursUntilStart = length/(1000*60*60)
                 

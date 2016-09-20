@@ -53,7 +53,7 @@ class InviteViewController: UIViewController, UISearchBarDelegate {
         self.usersTableView.registerNib(UINib(nibName: "UserCell", bundle: nil), forCellReuseIdentifier: "UserCell");
 
         // Set label text
-        self.inviteLabel.text = "Invite friends to \(self.eventName!)"
+        self.inviteLabel.text = "Invite friends to: \(self.eventName!)"
     }
     
     // Called in prepareForSegue in EventInfoViewController, sets the info for the event

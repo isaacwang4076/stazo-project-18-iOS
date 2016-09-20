@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class LocationSelectViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
+class LocationSelectViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate {
 
     /* UI ---------------------------------------*/
     @IBOutlet var mapView: MKMapView!
@@ -46,6 +46,7 @@ class LocationSelectViewController: UIViewController, UISearchBarDelegate, UITab
     private var selectedAnnotation:MKPointAnnotation?;
     private var noLocEvent:Event?
     private var locationSearchResults:[MKMapItem] = []
+    let locationManager = CLLocationManager();      // To get user location
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,16 +56,36 @@ class LocationSelectViewController: UIViewController, UISearchBarDelegate, UITab
         self.mapSearchBar.returnKeyType = .Done;
         self.mapSearchBar.enablesReturnKeyAutomatically = false;
         
-        //Initial center location
+        //Map setup
+        //default to UCSD for map center
         let initialLocation = CLLocation(latitude: 32.8811, longitude: -117.2370);
         let regionRadius:CLLocationDistance = 1300;
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(initialLocation.coordinate, regionRadius*2.0, regionRadius*2.0);
         self.mapView.setRegion(coordinateRegion, animated: true);
         
+        //ask for location permission and update location if granted
+        self.locationManager.requestWhenInUseAuthorization();
+        self.locationManager.delegate = self;
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        self.locationManager.startUpdatingLocation();
+
+        
         //setup long press recognizer
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(LocationSelectViewController.handleLongPress(_:)));
         longPress.minimumPressDuration = 1.0;
         self.mapView.addGestureRecognizer(longPress);
+    }
+    
+    /* Call back to update user location and center map, ending location services after one update */
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation = manager.location?.coordinate;
+        
+        if (userLocation != nil) {
+            let regionRadius:CLLocationDistance = 1300;
+            let coordinateRegion = MKCoordinateRegionMakeWithDistance(userLocation!, regionRadius*2.0, regionRadius*2.0);
+            self.mapView.setRegion(coordinateRegion, animated: true);
+            self.locationManager.stopUpdatingLocation();
+        }
     }
     
     /* Long Press callback---------------------*/
@@ -141,6 +162,11 @@ class LocationSelectViewController: UIViewController, UISearchBarDelegate, UITab
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //add coordinate to map upon selection of a cell and also hide the table view
         self.addCoordinate(self.locationSearchResults[indexPath.item].placemark.coordinate);
+        //center map to that coordinate
+        let regionRadius:CLLocationDistance = 1300;
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(self.locationSearchResults[indexPath.item].placemark.coordinate, regionRadius*2.0, regionRadius*2.0);
+        self.mapView.setRegion(coordinateRegion, animated: true);
+        
         self.mapSearchBar.resignFirstResponder();
         self.mapSearchTable.hidden = true;
     }

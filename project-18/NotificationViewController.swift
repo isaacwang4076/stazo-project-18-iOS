@@ -22,13 +22,16 @@ class NotificationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated);
         
         // Hide the navigation bar (included for back-navigation on segue to EventInfo)
         self.navigationController?.navigationBarHidden = true;
         
         self.notificationTableView.registerNib(UINib(nibName: "NotificationCell", bundle: nil), forCellReuseIdentifier: "NotificationCell");
-        
-        pullAndDisplayNotifications()
+        pullAndDisplayNotifications();
     }
     
     func pullAndDisplayNotifications() {
@@ -36,6 +39,10 @@ class NotificationViewController: UIViewController {
         // PULL: Store all the user's Notifications in the notifs array
         fb.child("NotifDatabase").child(Globals.me.getUserID()).observeSingleEventOfType(FIRDataEventType.Value, withBlock: {
             (userNotifs) in
+            //Clear current notifs
+            self.notifs = [];
+            
+            //Redisplay
             for notifSnapshot in userNotifs.children {
                 var notif: Notification? = nil
                 let notifDict:NSDictionary = (notifSnapshot as! FIRDataSnapshot).value as! NSDictionary
@@ -117,6 +124,9 @@ class NotificationViewController: UIViewController {
         
         if (notifToShow.viewed == false) {
             cell.backgroundColor = Globals.COLOR_NEW_NOTIF
+        }
+        else {
+            cell.backgroundColor = UIColor.whiteColor();
         }
         
         //NOTIF IMAGE with URL request

@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "288EF1481D3050C9001FBE63"
-               BuildableName = "Converg.app"
-               BlueprintName = "Converg"
-               ReferencedContainer = "container:project-18.xcodeproj">
+               BlueprintIdentifier = "6649C2E55132583DA57AE34B2C9B6AEE"
+               BuildableName = "Pods_project_18UITests.framework"
+               BlueprintName = "Pods-project-18UITests"
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,36 +28,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "288EF15E1D3050C9001FBE63"
-               BuildableName = "project-18Tests.xctest"
-               BlueprintName = "project-18Tests"
-               ReferencedContainer = "container:project-18.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "288EF1691D3050C9001FBE63"
-               BuildableName = "project-18UITests.xctest"
-               BlueprintName = "project-18UITests"
-               ReferencedContainer = "container:project-18.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "288EF1481D3050C9001FBE63"
-            BuildableName = "Converg.app"
-            BlueprintName = "Converg"
-            ReferencedContainer = "container:project-18.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -71,16 +42,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "288EF1481D3050C9001FBE63"
-            BuildableName = "Converg.app"
-            BlueprintName = "Converg"
-            ReferencedContainer = "container:project-18.xcodeproj">
+            BlueprintIdentifier = "6649C2E55132583DA57AE34B2C9B6AEE"
+            BuildableName = "Pods_project_18UITests.framework"
+            BlueprintName = "Pods-project-18UITests"
+            ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -90,16 +60,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "288EF1481D3050C9001FBE63"
-            BuildableName = "Converg.app"
-            BlueprintName = "Converg"
-            ReferencedContainer = "container:project-18.xcodeproj">
+            BlueprintIdentifier = "6649C2E55132583DA57AE34B2C9B6AEE"
+            BuildableName = "Pods_project_18UITests.framework"
+            BlueprintName = "Pods-project-18UITests"
+            ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
