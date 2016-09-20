@@ -26,7 +26,8 @@ class User: NSObject, NSCoding {
 //    var reportedEvents: [String]? = []  // A list of eventID's that this user has reported
     private var userTrails: [String] = []      // DEPRECATED: A list of userID's that this user has followed
     private var userFollowers: [String] = []   // DEPRECATED: A list of userID's that are following this user
-    private var numStrikes: Int
+    private var numStrikes: Int                // Number of times this user has had an event removed
+    internal var blockedUserIDs: [String] = []  // IDs that this user does not want to see events from.
 //    var friends = [String: String]()    // A Hashmap of userName to userID for this user's fb friends
     
     
@@ -63,6 +64,9 @@ class User: NSObject, NSCoding {
         if ((userDict.valueForKey("userTrails") as? NSDictionary)?.allValues != nil) {
             self.userTrails = (userDict.valueForKey("userTrails") as! NSDictionary).allValues as! [String]
         }
+        if ((userDict.valueForKey("blockedUserIDs") as? NSDictionary)?.allValues != nil) {
+            self.blockedUserIDs = (userDict.valueForKey("blockedUserIDs") as! NSDictionary).allValues as! [String]
+        }
     }
     
     // PUSH TO FIREBASE
@@ -77,6 +81,7 @@ class User: NSObject, NSCoding {
         return [
         "attendingEvents": attendingEvents,
         "bio": bio,
+        "blockedUserIDs": blockedUserIDs,
         "id": userID,
         "myEvents": myEvents,
         "name": userName,
@@ -289,6 +294,26 @@ class User: NSObject, NSCoding {
         })
     }
     
+    // BLOCK USER
+    // - Adds user to blocked users list
+    func blockUser(blockedID: String) {
+        fb.child("Users").child(self.userID).child("blockedUserIDs").observeSingleEventOfType(FIRDataEventType.Value, withBlock: { (blockedUsersSnapshot) in
+            // if blocked users is empty, just set it to a list containing the newly blocked id
+            if self.blockedUserIDs.isEmpty {
+                let newBlockedUsers = [blockedID]
+                blockedUsersSnapshot.ref.setValue(newBlockedUsers)
+            }
+            else {
+                // if this user is not already blocked, add it in
+                if (!self.blockedUserIDs.contains(blockedID)) {
+                    self.blockedUserIDs.append(blockedID)
+                    blockedUsersSnapshot.ref.setValue(self.blockedUserIDs)
+                }
+            }
+        })
+
+    }
+    
     
     // TOSTRING METHOD
     // - Just for checking that the user has the right info
@@ -308,16 +333,19 @@ class User: NSObject, NSCoding {
         self.attendingEvents = decoder.decodeObjectForKey("attendingEvents") as! [String];
         self.userTrails = decoder.decodeObjectForKey("userTrails") as! [String];
         self.userFollowers = decoder.decodeObjectForKey("userFollowers") as! [String];
+        self.blockedUserIDs = decoder.decodeObjectForKey("blockedUserIDs") as! [String];
     }
     
     func encodeWithCoder(coder: NSCoder) {
         coder.encodeObject(self.userID, forKey: "userID");
         coder.encodeObject(self.userName, forKey: "userName");
         coder.encodeObject(self.bio, forKey: "bio");
+        coder.encodeObject(self.numStrikes, forKey: "numStrikes");
         coder.encodeObject(self.myEvents, forKey: "myEvents");
         coder.encodeObject(self.attendingEvents, forKey: "attendingEvents");
         coder.encodeObject(self.userTrails, forKey: "userTrails");
         coder.encodeObject(self.userFollowers, forKey: "userFollowers");
+        coder.encodeObject(self.blockedUserIDs, forKey: "blockedUserIDs");
     }
     
     //debugging

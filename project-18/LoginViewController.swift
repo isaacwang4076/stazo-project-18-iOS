@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 
@@ -119,6 +121,20 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        let fb = Globals.fb
+        
+        // PULL ALL EVENTS
+        fb.child("Events").observeEventType(FIRDataEventType.Value, withBlock: { (allEventsSnapshot) in
+            for eventSnapshot in allEventsSnapshot.children.allObjects as! [FIRDataSnapshot] {
+                let eventDict:NSDictionary = eventSnapshot.value as! [String : AnyObject]
+                
+                if (!Globals.me.blockedUserIDs.contains(eventDict["creator_id"] as! String)) {
+                    Globals.eventsNameToID[eventDict.valueForKeyPath("name") as! String] = eventDict.valueForKeyPath("event_id") as? String
+                    Globals.eventsIDToEvent[eventDict.valueForKeyPath("event_id") as! String] = Event(eventDict: eventDict)
+                }
+            }
+        })
     }
  
 

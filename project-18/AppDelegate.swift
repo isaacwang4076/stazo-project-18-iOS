@@ -34,18 +34,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true);
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        let fb = Globals.fb
-        
-        
-        // PULL ALL EVENTS
-        fb.child("Events").observeEventType(FIRDataEventType.Value, withBlock: { (allEventsSnapshot) in
-            for eventSnapshot in allEventsSnapshot.children.allObjects as! [FIRDataSnapshot] {
-                let eventDict:NSDictionary = eventSnapshot.value as! [String : AnyObject]
-                Globals.eventsNameToID[eventDict.valueForKeyPath("name") as! String] = eventDict.valueForKeyPath("event_id") as? String
-                Globals.eventsIDToEvent[eventDict.valueForKeyPath("event_id") as! String] = Event(eventDict: eventDict)
-            }
-        })
-        
         // PULL ALL FRIENDS
         let params = ["fields": "id, first_name, last_name, middle_name, name, email, picture"]
         let request = FBSDKGraphRequest(graphPath: "me/friends", parameters: params)
