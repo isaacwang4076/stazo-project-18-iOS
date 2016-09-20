@@ -57,7 +57,7 @@ class Event {
         self.endTime = (eventDict.valueForKey("endTime") as! NSNumber).unsignedLongLongValue
         self.eventID = eventDict.valueForKey("event_id") as! String?
         self.popularity = eventDict.valueForKey("popularity") as! UInt //crashes when transactions are still going through from inc/dec
-        //self.reports = eventDict.valueForKey("reports") as! UInt
+        self.reports = eventDict.valueForKey("reports") as! UInt
         //only set reporters if it exists
         if (((eventDict.valueForKey("reporters") as? NSDictionary)?.allValues as? [String]) != nil ){
             self.reporters = (eventDict.valueForKey("reporters") as? NSDictionary)?.allValues as! [String];
