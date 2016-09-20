@@ -28,6 +28,7 @@
 		28A542F61D3455E600BE90E0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A542F51D3455E600BE90E0 /* User.swift */; };
 		28B57FF51D37455B00CE430C /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B57FF41D37455B00CE430C /* Notification.swift */; };
 		28B57FF71D374B8F00CE430C /* NotificationNewFollow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B57FF61D374B8F00CE430C /* NotificationNewFollow.swift */; };
+		28DE91141D83AEAE002AD941 /* flaticon_marker.png in Resources */ = {isa = PBXBuildFile; fileRef = 28DE91131D83AEAE002AD941 /* flaticon_marker.png */; };
 		28FA31A01D553D330046A80F /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FA319F1D553D330046A80F /* NotificationViewController.swift */; };
 		28FAF3A51D6A9AE100D4491E /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FAF3A41D6A9AE100D4491E /* UserTableViewCell.swift */; };
 		28FAF3A91D6AA3CD00D4491E /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28FAF3A81D6AA3CD00D4491E /* UserCell.xib */; };
@@ -109,6 +110,7 @@
 		28A542F51D3455E600BE90E0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		28B57FF41D37455B00CE430C /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		28B57FF61D374B8F00CE430C /* NotificationNewFollow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationNewFollow.swift; sourceTree = "<group>"; };
+		28DE91131D83AEAE002AD941 /* flaticon_marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = flaticon_marker.png; path = "../../STAZO/stazo-project-18/app/build/intermediates/res/merged/debug/drawable/flaticon_marker.png"; sourceTree = "<group>"; };
 		28FA319F1D553D330046A80F /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		28FAF3A41D6A9AE100D4491E /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		28FAF3A81D6AA3CD00D4491E /* UserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCell.xib; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 				F6FCA7A01D8132CC00F38950 /* plus.png */,
 				F6FCA7A51D82905000F38950 /* ic_launcher_ios.png */,
 				F6FCA7A71D82938600F38950 /* logo_nobkg.png */,
+				28DE91131D83AEAE002AD941 /* flaticon_marker.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -430,6 +433,8 @@
 				F6FCA7A81D82938600F38950 /* logo_nobkg.png in Resources */,
 				288EF1591D3050C9001FBE63 /* LaunchScreen.storyboard in Resources */,
 				F61209F21D352FE600E5C715 /* GoogleService-Info.plist in Resources */,
+				F625A3F91D3DF7C6006AA3F2 /* ic_actionbar_notif.png in Resources */,
+				28DE91141D83AEAE002AD941 /* flaticon_marker.png in Resources */,
 				F6FCA7A11D8132CC00F38950 /* plus.png in Resources */,
 				F6DF220B1D84A149008960ED /* ic_actionbar_notif.png in Resources */,
 				F625A3FC1D3DF7C6006AA3F2 /* ic_actionbar_map2.png in Resources */,

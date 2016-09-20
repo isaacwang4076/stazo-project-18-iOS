@@ -29,7 +29,8 @@ class Event {
     //guarenteed NON-NULL
     private var attendees:[String] = [] // A list of User ID's for Users who have joined this event
     private var popularity: UInt = 0    // How popular the event is (equal to attendees size)
-    private var reports: UInt = 0       // Number of reports the event has
+    //private var reports: UInt = 0       // Number of reports the event has
+    private var reporters:[String] = []
     
     // NO LOCATION CONSTRUCTOR
     // - Used in CreateEventAct pre-location selection
@@ -56,7 +57,11 @@ class Event {
         self.endTime = (eventDict.valueForKey("endTime") as! NSNumber).unsignedLongLongValue
         self.eventID = eventDict.valueForKey("event_id") as! String?
         self.popularity = eventDict.valueForKey("popularity") as! UInt //crashes when transactions are still going through from inc/dec
-        self.reports = eventDict.valueForKey("reports") as! UInt
+        //self.reports = eventDict.valueForKey("reports") as! UInt
+        //only set reporters if it exists
+        if (((eventDict.valueForKey("reporters") as? NSDictionary)?.allValues as? [String]) != nil ){
+            self.reporters = (eventDict.valueForKey("reporters") as? NSDictionary)?.allValues as! [String];
+        }
         self.startTime = (eventDict.valueForKey("startTime") as! NSNumber).unsignedLongLongValue
         //only set attendees if it exists
         if (((eventDict.valueForKey("attendees") as? NSDictionary)?.allValues as? [String]) != nil ){
@@ -108,7 +113,8 @@ class Event {
         "endTime" : NSNumber(unsignedLongLong: endTime!),
         "event_id" : eventID!,
         "popularity" : popularity,
-        "reports" : reports,
+        //"reports" : reports,
+            "reporters" : reporters,
         "startTime": NSNumber(unsignedLongLong: startTime!),
         "location": NSDictionary(dictionary: ["latitude":location.latitude, "longitude":location.longitude])
         ]
@@ -153,7 +159,7 @@ class Event {
     func toString() {
         print("\nEvent toString()\n\nname is: ", name, "\ndescription is: ", description, "\ncreatorID is: ", creatorID,
               "\nendTime is: ", endTime, "\neventID is: ", eventID, "\npopularity is: ",
-              popularity, "\nreports is: ", reports, "\nstartTime is: ", startTime, "\nattendees is: ",
+              popularity, /*"\nreports is: ", reports,*/ "\nreporters is: ", reporters, "\nstartTime is: ", startTime, "\nattendees is: ",
               attendees, "\nlocation is:", location)
     }
     
@@ -209,11 +215,17 @@ class Event {
     func setPopularity(popularity: UInt) {
         self.popularity = popularity
     }
-    func getReports() -> UInt {
+    /*func getReports() -> UInt {
         return reports
     }
     func setReports(reports: UInt) {
         self.reports = reports
+    }*/
+    func getReporters() -> [String] {
+        return reporters
+    }
+    func setRepoerters(reporters: [String]) {
+        self.reporters = reporters
     }
     func getLocation() -> CLLocationCoordinate2D {
         return self.location

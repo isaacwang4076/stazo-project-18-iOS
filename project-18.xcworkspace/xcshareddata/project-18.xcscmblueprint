@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "5668EDA96219062FA029529FB651ED9746E3DB31",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "F86D8AC127075DDD782063E50666B4BB7A0C2CB0" : 0,
+    "5668EDA96219062FA029529FB651ED9746E3DB31" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "0A4158A3-178B-4AD2-AE24-BC4A6F448292",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "F86D8AC127075DDD782063E50666B4BB7A0C2CB0" : "..\/STAZO\/stazo-project-18",
+    "5668EDA96219062FA029529FB651ED9746E3DB31" : "project-18\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "project-18",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "project-18.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/isaacwang4076\/stazo-project-18-iOS",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "5668EDA96219062FA029529FB651ED9746E3DB31"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/lukethomas1\/stazo-project-18",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F86D8AC127075DDD782063E50666B4BB7A0C2CB0"
+    }
+  ]
+}
