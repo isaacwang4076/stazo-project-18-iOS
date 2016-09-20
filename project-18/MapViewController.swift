@@ -53,7 +53,7 @@ class MapViewController: UIViewController, UISearchBarDelegate,
         
         // Check for NotificationEventToday
         addEventTodayNotifications()
-        
+        //Globals.me.reportEvent("yooljdxkafnod")
     }
     
     /* Call back to update user location and center map, ending location services after one update */

@@ -173,6 +173,19 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
     func pullAndShowEvent() {
         Globals.fb.child("Events").child(self.eventID!).observeSingleEventOfType(.Value, withBlock: {
             snapshot in
+            if snapshot != NSNull() {
+                print("Event ID is null or event doesn't exist anymore");
+                self.mainView.hidden = true
+                self.commentToolbar.hidden = true
+                let alert = UIAlertController(title: "Ooops!",
+                    message: "This event no longer exists.", preferredStyle: .Alert);
+                alert.addAction(UIAlertAction(title: "OK", style: .Default , handler: {
+                    alert in
+                    self.navigationController?.popToRootViewControllerAnimated(true); //go back a view
+                }));
+                self.presentViewController(alert, animated: true, completion: nil);
+                return;
+            }
             self.event = Event.init(eventDict: snapshot.value as! NSDictionary);
             
             //update the view with event info -------------------------------------
