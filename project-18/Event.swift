@@ -11,7 +11,7 @@ import MapKit
 
 /* Representation of an Event for the app */
 
-class Event { 
+class Event {
     
     // Constants
     let fb = Globals.fb                             // Reference to the app's database
