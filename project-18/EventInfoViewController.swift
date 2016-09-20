@@ -83,6 +83,19 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
         self.writeComment();
     }
     
+    @IBAction func reportEvent(sender: AnyObject) {
+        let reportAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet);
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+        }
+        reportAlertController.addAction(cancelAction);
+        let reportEventAction = UIAlertAction(title: "Report event", style: .Default) { (action) in
+        }
+        reportAlertController.addAction(reportEventAction);
+        let blockUserAction = UIAlertAction(title: "Block creator", style: .Default) { (action) in
+        }
+        reportAlertController.addAction(blockUserAction);
+        self.presentViewController(reportAlertController, animated: true, completion: nil);
+    }
     /*--------------------------------------------------------------*/
     
     
@@ -325,13 +338,13 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
                 //display comments in tableview
                 print("num comments: \(self.comments.count)");
                 self.noCommentLabel.hidden = true;
-                self.commentTableView.reloadData();
             }
                 
             //no comments so show no comments label
             else {
                 self.noCommentLabel.hidden = false;
             }
+            self.commentTableView.reloadData();
         });
     }
     
@@ -515,6 +528,24 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
     //set comment table height at each cell load
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         self.commentTableHeightConstraint.constant = self.commentTableView.contentSize.height;
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        print("show report sheet");
+        let reportAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet);
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+            print("cancel");
+        }
+        reportAlertController.addAction(cancelAction);
+        let reportEventAction = UIAlertAction(title: "Report comment", style: .Default) { (action) in
+            self.comments[indexPath.row].addReporter(Globals.me.getUserID());
+        }
+        reportAlertController.addAction(reportEventAction);
+        let blockUserAction = UIAlertAction(title: "Block user", style: .Default) { (action) in
+        }
+        reportAlertController.addAction(blockUserAction);
+        self.presentViewController(reportAlertController, animated: true, completion: nil);
+        print("showed");
     }
     
     /*--------------------------------------------------------------------------------*/

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="n5n-mX-76f">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="n5n-mX-76f">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -330,8 +330,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xde-fY-z00">
-                                <rect key="frame" x="20" y="100" width="560" height="3091"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xde-fY-z00">
+                                <rect key="frame" x="20" y="100" width="560" height="420"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">Converg iOS App
 End User License Agreement
@@ -434,7 +434,7 @@ END USER LICENSE AGREEMENT</string>
                                         <rect key="frame" x="0.0" y="35" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1Ic-Mh-gXt" id="pd1-XX-ApJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="What is your event called?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x9v-mU-6nF">
@@ -461,7 +461,7 @@ END USER LICENSE AGREEMENT</string>
                                         <rect key="frame" x="0.0" y="79" width="600" height="111"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cjt-ds-GKz" id="yae-0g-uU4">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="110.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="110"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Describe your event (optional)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fLP-mh-1cc">
@@ -482,7 +482,7 @@ END USER LICENSE AGREEMENT</string>
                                         <rect key="frame" x="0.0" y="190" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oOx-Yt-8Vc" id="erH-qN-L0A">
-                                            <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="567" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Start time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sP9-Fw-o1n">
@@ -493,7 +493,7 @@ END USER LICENSE AGREEMENT</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Add date and time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DRM-NW-x96">
-                                                    <rect key="frame" x="432.5" y="12" width="132.5" height="19.5"/>
+                                                    <rect key="frame" x="432" y="12" width="133" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
@@ -506,7 +506,7 @@ END USER LICENSE AGREEMENT</string>
                                         <rect key="frame" x="0.0" y="234" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QMT-2J-ht1" id="GTs-h7-OKe">
-                                            <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="567" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="End time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="T1J-Sg-xiU">
@@ -601,18 +601,18 @@ END USER LICENSE AGREEMENT</string>
                                         <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zge-l5-lS2" id="tDH-9J-HKR">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UdK-Zr-gc8">
-                                                    <rect key="frame" x="15" y="6" width="31.5" height="19.5"/>
+                                                    <rect key="frame" x="15" y="5" width="32" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GUY-r9-9Bb">
-                                                    <rect key="frame" x="15" y="25.5" width="40.5" height="13.5"/>
+                                                    <rect key="frame" x="15" y="25" width="41" height="14"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -798,14 +798,14 @@ END USER LICENSE AGREEMENT</string>
                         <viewControllerLayoutGuide type="bottom" id="M0m-qx-S0V"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="eo3-N9-agn">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="714"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="750"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BgV-cj-DZD">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="670"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="706"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vUJ-DA-YOw">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="670"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="706"/>
                                         <subviews>
                                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="86C-BF-Hhf">
                                                 <rect key="frame" x="255" y="291" width="90" height="90"/>
@@ -1015,7 +1015,7 @@ END USER LICENSE AGREEMENT</string>
                                                     <outlet property="delegate" destination="Yjn-ES-LFB" id="1Pb-li-7AF"/>
                                                 </connections>
                                             </collectionView>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="y90-oP-OHf">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="y90-oP-OHf">
                                                 <rect key="frame" x="0.0" y="590" width="600" height="80"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -1048,13 +1048,28 @@ END USER LICENSE AGREEMENT</string>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ah-0w-Kkq">
+                                                <rect key="frame" x="0.0" y="676" width="600" height="30"/>
+                                                <color key="backgroundColor" red="1" green="0.45968415401151608" blue="0.42678582781661722" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="uWA-nZ-2bS"/>
+                                                </constraints>
+                                                <state key="normal" title="Report">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="reportEvent:" destination="Yjn-ES-LFB" eventType="touchUpInside" id="aZq-8v-vSu"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="5ie-O4-EfL" firstAttribute="leading" secondItem="vUJ-DA-YOw" secondAttribute="leading" constant="20" id="2XS-59-SPg"/>
                                             <constraint firstItem="y90-oP-OHf" firstAttribute="leading" secondItem="vUJ-DA-YOw" secondAttribute="leading" id="2lP-mx-9h0"/>
+                                            <constraint firstItem="5Ah-0w-Kkq" firstAttribute="leading" secondItem="vUJ-DA-YOw" secondAttribute="leading" id="35X-ur-ZNf"/>
                                             <constraint firstItem="Ews-fP-sy0" firstAttribute="leading" secondItem="vUJ-DA-YOw" secondAttribute="leading" constant="20" id="3EN-v5-ZZL"/>
                                             <constraint firstItem="jRj-Qi-1yr" firstAttribute="top" secondItem="fKC-tl-ZlC" secondAttribute="bottom" constant="16" id="3Pi-Uw-2tV"/>
+                                            <constraint firstAttribute="bottom" secondItem="5Ah-0w-Kkq" secondAttribute="bottom" id="3ba-Dt-9YM"/>
                                             <constraint firstItem="5ie-O4-EfL" firstAttribute="top" secondItem="uf2-dZ-kVy" secondAttribute="top" constant="75" id="5ED-kb-BBp"/>
                                             <constraint firstItem="5ie-O4-EfL" firstAttribute="top" secondItem="cWR-XC-nnc" secondAttribute="bottom" constant="11" id="7gA-QO-SDI"/>
                                             <constraint firstItem="ZdF-qr-GVv" firstAttribute="centerX" secondItem="vUJ-DA-YOw" secondAttribute="centerX" id="7rg-1w-B3N"/>
@@ -1084,6 +1099,7 @@ END USER LICENSE AGREEMENT</string>
                                             <constraint firstItem="cWR-XC-nnc" firstAttribute="centerY" secondItem="BN0-nt-fJf" secondAttribute="centerY" id="XWy-Xs-bVx"/>
                                             <constraint firstItem="Ews-fP-sy0" firstAttribute="top" secondItem="vXz-fU-paH" secondAttribute="bottom" id="YBA-P0-emA"/>
                                             <constraint firstAttribute="trailing" secondItem="jRj-Qi-1yr" secondAttribute="trailing" id="Yap-IU-5zy"/>
+                                            <constraint firstItem="5Ah-0w-Kkq" firstAttribute="top" secondItem="y90-oP-OHf" secondAttribute="bottom" constant="6" id="a7e-7g-dbi"/>
                                             <constraint firstItem="fKC-tl-ZlC" firstAttribute="top" secondItem="gEz-rH-N2Z" secondAttribute="top" id="cDI-xt-S3o"/>
                                             <constraint firstAttribute="trailing" secondItem="gEz-rH-N2Z" secondAttribute="trailing" constant="20" id="d3j-k2-obP"/>
                                             <constraint firstAttribute="trailing" secondItem="7RG-xc-ieM" secondAttribute="trailing" constant="20" id="g2L-na-jM4"/>
@@ -1100,10 +1116,18 @@ END USER LICENSE AGREEMENT</string>
                                             <constraint firstItem="WuY-zx-a6K" firstAttribute="centerX" secondItem="vUJ-DA-YOw" secondAttribute="centerX" id="qsT-Ap-gkN"/>
                                             <constraint firstItem="NYD-j8-Gk0" firstAttribute="top" secondItem="Ews-fP-sy0" secondAttribute="bottom" constant="10" id="r09-uZ-LYd"/>
                                             <constraint firstItem="5ie-O4-EfL" firstAttribute="top" secondItem="BN0-nt-fJf" secondAttribute="bottom" constant="7" id="rar-x0-Hxk"/>
+                                            <constraint firstItem="v9i-YG-fOE" firstAttribute="top" secondItem="ngF-SB-v1Z" secondAttribute="bottom" constant="31" id="sAV-lr-sga"/>
                                             <constraint firstItem="XEa-h6-z3b" firstAttribute="leading" secondItem="vUJ-DA-YOw" secondAttribute="leading" constant="20" id="sei-3V-8td"/>
                                             <constraint firstItem="vXz-fU-paH" firstAttribute="top" secondItem="jRj-Qi-1yr" secondAttribute="bottom" constant="27" id="u1X-Pn-tMf"/>
+                                            <constraint firstAttribute="trailing" secondItem="5Ah-0w-Kkq" secondAttribute="trailing" id="vLg-We-Fmo"/>
                                             <constraint firstItem="uf2-dZ-kVy" firstAttribute="top" secondItem="86C-BF-Hhf" secondAttribute="bottom" constant="8" id="vbn-eg-S5h"/>
                                         </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="Snc-31-Tei"/>
+                                                <exclude reference="Jp7-ca-rH5"/>
+                                            </mask>
+                                        </variation>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -1114,7 +1138,7 @@ END USER LICENSE AGREEMENT</string>
                                 </constraints>
                             </scrollView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gsA-eM-flz">
-                                <rect key="frame" x="0.0" y="670" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="706" width="600" height="44"/>
                                 <items>
                                     <barButtonItem title="Item" id="gKD-gs-uho"/>
                                     <barButtonItem title="Post" id="IRJ-hR-EiI">
@@ -1142,7 +1166,7 @@ END USER LICENSE AGREEMENT</string>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="600" height="714"/>
+                    <size key="freeformSize" width="600" height="750"/>
                     <connections>
                         <outlet property="commentTableHeightConstraint" destination="XE7-Dq-rOu" id="Gmk-VL-ict"/>
                         <outlet property="commentTableView" destination="y90-oP-OHf" id="chj-RG-SqM"/>
@@ -1178,15 +1202,15 @@ END USER LICENSE AGREEMENT</string>
                         <viewControllerLayoutGuide type="bottom" id="EFy-vg-4Uk"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="VcP-HQ-xUt">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="714"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="750"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" placeholder="Search for friends to invite!" translatesAutoresizingMaskIntoConstraints="NO" id="lDl-P3-J2K">
                                 <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Invite friends to this event" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DXW-Hd-25T">
-                                <rect key="frame" x="201" y="67" width="198" height="22"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite friends to this event" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DXW-Hd-25T">
+                                <rect key="frame" x="201" y="64" width="198" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.01176470588" green="0.66274509800000003" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1210,8 +1234,8 @@ END USER LICENSE AGREEMENT</string>
                                     <outlet property="delegate" destination="bvs-0N-hjW" id="IOL-JG-j6e"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ryu-Du-XDu">
-                                <rect key="frame" x="237" y="352" width="127" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ryu-Du-XDu">
+                                <rect key="frame" x="237" y="680" width="127" height="30"/>
                                 <color key="backgroundColor" red="0.0078431372549019607" green="0.53333333333333333" blue="0.81960784313725488" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="GRd-5I-50i"/>
@@ -1378,6 +1402,6 @@ END USER LICENSE AGREEMENT</string>
         <image name="plus.png" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="r8t-zn-fa4"/>
+        <segue reference="XS4-OO-xqs"/>
     </inferredMetricsTieBreakers>
 </document>
