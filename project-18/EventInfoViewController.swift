@@ -558,7 +558,9 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
             Globals.me.blockUser(self.comments[indexPath.row].getUserID())
         }
         reportAlertController.addAction(blockUserAction);
-        self.presentViewController(reportAlertController, animated: true, completion: nil);
+        dispatch_async(dispatch_get_main_queue()) { //wierd bug fix to make it present faster
+            self.presentViewController(reportAlertController, animated: true, completion: nil);
+        }
         print("showed");
     }
     
