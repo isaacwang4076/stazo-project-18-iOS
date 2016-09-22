@@ -64,13 +64,23 @@ class CreateEventViewController: UIViewController, CreateEventTableProtocol {
                     let startDateInt:UInt64 = UInt64(self.startDate!.timeIntervalSince1970) * 1000;
                     let endDateInt:UInt64 = UInt64(self.endDate!.timeIntervalSince1970) * 1000;
                     if (startDateInt < endDateInt) {
-                        self.noLocEvent = Event.init(name: eventName,
-                                   description: eventDescription,
-                                   creatorID: Globals.me.getUserID() ,
-                                   startTime: startDateInt,
-                                   endTime: endDateInt,
-                                   location: CLLocationCoordinate2D(latitude: 69, longitude: 69));
-                        return true;
+                        //prevent users with more than 3 strikes from creating a new event and alert them
+                        if (Globals.me.getNumStrikes() < 3) {
+                            self.noLocEvent = Event.init(name: eventName,
+                                                         description: eventDescription,
+                                                         creatorID: Globals.me.getUserID() ,
+                                                         startTime: startDateInt,
+                                                         endTime: endDateInt,
+                                                         location: CLLocationCoordinate2D(latitude: 69, longitude: 69));
+                            return true;
+                        }
+                        else {
+                            let alert = UIAlertController(title: "Uh oh!",
+                                                          message: "Your events or comments have been reported too often, so you aren't allowed to make any new events anymore.", preferredStyle: .Alert);
+                            alert.addAction(UIAlertAction(title: "OK", style: .Default , handler: nil));
+                            self.presentViewController(alert, animated: true, completion: nil);
+                            return false;
+                        }
                     }
                         
                     //RESPECTIVE ALERTS

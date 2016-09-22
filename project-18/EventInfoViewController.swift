@@ -354,42 +354,51 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
      * Uploads the text in self.commentWriteItem to Firebase. 
      */
     func writeComment() {
-        let commentText = (self.commentWriteItem.customView as! UITextField).text;
-        if (!(commentText?.isEmpty)!) {
-            let comment = Comment.init(comment: commentText!, userID: Globals.me.getUserID(), eventID: self.eventID!);
-            
-            
-            comment.pushToFirebase();
-//            pullAndShowComments();
-            
-            // Build the NotificationCommentEvent
-            let nce: Notification = NotificationCommentEvent(type: Globals.TYPE_COMMENT_EVENT, pictureID: Globals.me.getUserID(), eventID: eventID!, eventName: Globals.eventsIDToEvent[eventID!]!.getName(), userNames: [Globals.me.getUserName()])
-            
-            // The event creator should also receive the notification
-            if (!commenters.contains(event!.getCreatorID())) {
-                commenters.append(event!.getCreatorID())
-            }
-            
-            for attendee in event!.getAttendees() {
-                if (!commenters.contains(attendee)) {
-                    commenters.append(attendee)
+        //prevent users with more than 3 strikes fromc commenting and alert them
+        if (Globals.me.getNumStrikes() < 3) {
+            let commentText = (self.commentWriteItem.customView as! UITextField).text;
+            if (!(commentText?.isEmpty)!) {
+                let comment = Comment.init(comment: commentText!, userID: Globals.me.getUserID(), eventID: self.eventID!);
+                
+                
+                comment.pushToFirebase();
+    //            pullAndShowComments();
+                
+                // Build the NotificationCommentEvent
+                let nce: Notification = NotificationCommentEvent(type: Globals.TYPE_COMMENT_EVENT, pictureID: Globals.me.getUserID(), eventID: eventID!, eventName: Globals.eventsIDToEvent[eventID!]!.getName(), userNames: [Globals.me.getUserName()])
+                
+                // The event creator should also receive the notification
+                if (!commenters.contains(event!.getCreatorID())) {
+                    commenters.append(event!.getCreatorID())
                 }
+                
+                for attendee in event!.getAttendees() {
+                    if (!commenters.contains(attendee)) {
+                        commenters.append(attendee)
+                    }
+                }
+                
+                // You should not receive a Notification for your own comment
+                if (commenters.contains(Globals.me.getUserID())) {
+                    commenters.removeAtIndex(commenters.indexOf(Globals.me.getUserID())!)
+                }
+                
+                // Send out the NotificiationCommentEvent
+                nce.pushToFirebase(commenters)
+                
+                // Hide keyboard and clear textfield
+                (self.commentWriteItem.customView as! UITextField).text = "";
+                self.commentWriteItem.customView?.resignFirstResponder();
             }
-            
-            // You should not receive a Notification for your own comment
-            if (commenters.contains(Globals.me.getUserID())) {
-                commenters.removeAtIndex(commenters.indexOf(Globals.me.getUserID())!)
+            else {
+                print("empty");
             }
-            
-            // Send out the NotificiationCommentEvent
-            nce.pushToFirebase(commenters)
-            
-            // Hide keyboard and clear textfield
-            (self.commentWriteItem.customView as! UITextField).text = "";
-            self.commentWriteItem.customView?.resignFirstResponder();
         }
         else {
-            print("empty");
+            let alert = UIAlertController(title: "Uh oh!",
+                                          message: "Your events or comments have been reported too often, so you aren't allowed to write any comments anymore.", preferredStyle: .Alert);
+            alert.addAction(UIAlertAction(title: "OK", style: .Default , handler: nil));
+            self.presentViewController(alert, animated: true, completion: nil);
         }
     }
     

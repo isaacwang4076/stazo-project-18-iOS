@@ -380,4 +380,7 @@ class User: NSObject, NSCoding {
         return self.userName;
     }
     
+    func getNumStrikes() -> Int {
+        return self.numStrikes;
+    }
 }
