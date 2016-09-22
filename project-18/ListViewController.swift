@@ -64,7 +64,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.popularTableView.registerNib(UINib(nibName: "EventCell", bundle: nil), forCellReuseIdentifier: "Cell");
         self.todayTableView.registerNib(UINib(nibName: "EventCell", bundle: nil), forCellReuseIdentifier: "Cell");
         self.laterTableView.registerNib(UINib(nibName: "EventCell", bundle: nil), forCellReuseIdentifier: "Cell");
-
+        
         
         
         //TODO: Add "No events are popular/today/later" signs
@@ -90,47 +90,43 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.laterEventArray = [];
         
         //Pull list of events and add to eventArray
-        Globals.fb.child("Events").observeSingleEventOfType(.Value, withBlock: {
-            (snapshot) in
-            for eachEvent in snapshot.children.allObjects as! [FIRDataSnapshot] {
-                let eventDictionary = eachEvent.value as! [String:AnyObject];
-                self.eventArray.append(Event.init(eventDict: eventDictionary));
+        
+        for event in Globals.eventsIDToEvent.values {
+            eventArray.append(event)
+        }
+        
+        //process the events into table view categories
+        //Sort by popularity and take the top 2
+        for i in 0 ..< self.eventArray.count {
+            if (self.eventArray[i].getPopularity() >= UInt(self.POPULAR_THRESHOLD)) {
+                self.popularEventArray.append(self.eventArray[i]);
             }
-            
-            
-            //process the events into table view categories
-            //Sort by popularity and take the top 2
-            for i in 0 ..< self.eventArray.count {
-                if (self.eventArray[i].getPopularity() >= UInt(self.POPULAR_THRESHOLD)) {
-                    self.popularEventArray.append(self.eventArray[i]);
-                }
+        }
+        func sortBasedOnPopularity(event1: Event, event2: Event) -> Bool{
+            if (event1.getAttendees().count > event2.getAttendees().count) {return true;}
+            else {return false;}
+        }
+        self.popularEventArray.sortInPlace(sortBasedOnPopularity);
+        
+        //filter list to happening today or happening later
+        for i in 0 ..< self.eventArray.count {
+            //only add to array if event is occuring today
+            let eventDate = NSDate(timeIntervalSince1970: NSTimeInterval(self.eventArray[i].getStartTime())/1000);
+            if (NSCalendar.currentCalendar().isDateInToday(eventDate)) {
+                self.todayEventArray.append(self.eventArray[i]);
             }
-            func sortBasedOnPopularity(event1: Event, event2: Event) -> Bool{
-                if (event1.getAttendees().count > event2.getAttendees().count) {return true;}
-                else {return false;}
+            else {
+                self.laterEventArray.append(self.eventArray[i]);
             }
-            self.popularEventArray.sortInPlace(sortBasedOnPopularity);
-            
-            //filter list to happening today or happening later
-            for i in 0 ..< self.eventArray.count {
-                //only add to array if event is occuring today
-                let eventDate = NSDate(timeIntervalSince1970: NSTimeInterval(self.eventArray[i].getStartTime())/1000);
-                if (NSCalendar.currentCalendar().isDateInToday(eventDate)) {
-                    self.todayEventArray.append(self.eventArray[i]);
-                }
-                else {
-                    self.laterEventArray.append(self.eventArray[i]);
-                }
-            }
-            
-//            for i in 0 ..< self.eventArray.count {
-//                self.laterEventArray.append(self.eventArray[i]);
-//            }
-            
-            //update table view accordingly
-            self.updateTableViews();
-        });
-
+        }
+        
+        //            for i in 0 ..< self.eventArray.count {
+        //                self.laterEventArray.append(self.eventArray[i]);
+        //            }
+        
+        //update table view accordingly
+        self.updateTableViews();
+        
     }
     
     // sets the ready boolean to true (which cellForRow checks to make sure data is ready) and calls reload data
@@ -189,7 +185,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                     self.seeMoreTodayButton.hidden = false;
                     return self.NUM_TODAY;
                 }
-                //show everything if see more tapped
+                    //show everything if see more tapped
                 else {
                     self.todayTableHeightConstraint.constant = CGFloat(self.todayEventArray.count)*70;
                     return self.todayEventArray.count;
@@ -215,7 +211,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                     self.seeMoreLaterButton.hidden = false;
                     return self.NUM_LATER;
                 }
-                //show everything if see more tapped
+                    //show everything if see more tapped
                 else {
                     self.laterTableHeightConstraint.constant = CGFloat(self.laterEventArray.count)*70;
                     return self.laterEventArray.count;

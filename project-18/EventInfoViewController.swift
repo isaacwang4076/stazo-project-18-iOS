@@ -332,7 +332,9 @@ class EventInfoViewController: UIViewController, UITableViewDataSource, UITableV
                 //iterate through all snapshots and convert each .value -> dictionary -> comment and add to comments array
                 for eachComment in eventComments!{
                     let comment = Comment.init(dictionary:eachComment.value as! [String:AnyObject])
-                    self.comments.append(comment);
+                    if (!Globals.me.blockedUserIDs.contains(comment.getUserID())) {
+                        self.comments.append(comment);
+                    }
                     if (!self.commenters.contains(comment.getUserID())) {
                         self.commenters.append(comment.getUserID())
                     }
