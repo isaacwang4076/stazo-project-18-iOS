@@ -65,7 +65,7 @@ class Comment {
     func addReporter(reporterID:String) {
         
         // can't report your own comment
-        if (reporterID == Globals.me.getUserID()) {
+        if (userID == Globals.me.getUserID()) {
             return;
         }
         
