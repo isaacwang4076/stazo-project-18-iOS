@@ -72,7 +72,7 @@ class NotificationJoinedEvent: Notification {
             
             // Check followerID
             let nje: NotificationJoinedEvent =  NotificationJoinedEvent(notifDict: notifMap)
-            if (nje.eventID == self.eventID) {
+            if (nje.eventID == self.eventID && nje.joinedUserName == self.joinedUserName) {
                 
                 // Conflict found
                 return (notifSnap as! FIRDataSnapshot, notifSnap.ref)
