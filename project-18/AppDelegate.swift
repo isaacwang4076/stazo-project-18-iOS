@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let friendsArray = result["data"] as! NSArray;
                 
                 for friend in friendsArray {
-                    //print("\nfriend is: \(friend)")
+                    print("\nfriend is: \(friend)")
                     Globals.friendsIDToName[friend.valueForKey("id") as! String] = friend.valueForKey("name") as? String
                 }
             }
